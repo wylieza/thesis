@@ -7,15 +7,28 @@ Since the discovery of infrared (IR) light by William Herschel in the 1800s \cit
 
 On the electromagnetic spectrum infrared radiation is just below visible light with a slightly longer wavelength. Being invisible to the naked eye while retaining much the same behavioural properties as visible light is one of the reasons it has so many useful applications.
 
-This study focuses on the application of IR in the recreational sport of laser tag. Although many use cases of infrared involve passive observation, this investigation seeks to understand appropriate means to generate and detect a narrow infrared beam for the purposes of unidirectional communication.
+This study focuses on the application of IR in the recreational sport of laser tag. Although many use cases of infrared involve passive observation, this investigation seeks to understand appropriate means to transmit and receive information by means of a narrow infrared beam for the purposes of unidirectional communication.
 
-Much is known about the use of infrared in remote controls, but less information is available on the specialized use of infrared in the laser tag context. This introduces several factors and constraints which are unpacked and addressed.
+When it comes to laser tag, there is commercial grade equipment that one my use at laser tag companies. However when one considers the consumer market there are noticeable gaps between the sophisticated commercial equipment and the laser tag toys available on the market. There is even less research and documentation on the creation of custom 'do it yourself' laser tag systems. 
+
+In contrast, much is known about the use of infrared in remote controls and there is a wealth of research, documentation and tutorials on the subject. But when it comes to laser tag systems less information is available on the specialized use of infrared in the laser tag context. There are several factors and constraints which are unique in this context.
 
 
 
 \section{Objectives of this study}
 \subsection{Problems to be investigated}
 %Description of the main questions to be investigated in this study...
+
+This study aims to determine the state of currently available technology in the context of constructing the fundamental components of a laser tag system. Namely the tagger and target devices. This problem can be distilled into the following:
+
+\begin{itemize}
+	\item What techniques are exist for the generation of narrow beam IR radiation?
+	\item What is a suitable protocol for the tagger/target system to utilize for detecting and identifying shots fired by opponents?
+	\item An analysis into the available light detection technology and a look into which one is the most appropriate in the context of laser tag.
+\end{itemize}
+
+-----------------------------------------------------
+
 An appropriate protocol for encoding information into an infrared beam needs to be developed. An investigation into the current industry-standard protocols will be performed and an appropriate protocol selected and modified to satisfy problem constraints.
 
 An instigation into the process of generating a narrow angle beam of IR is to be investigated. This is to ensure that a measure of skill and accuracy is required in order for the player to hit the target. Techniques will be evaluated on their cost, robustness and size.
@@ -38,24 +51,38 @@ In addition to the more toy like style of consumer grade laser tag equipment, th
 \subsection{Purpose of the study}
 %Give the significance of investigating these problems. It must be obvious why you are doing this study
 %and why it is relevant.
-Because of the niche nature of this application specific investigation, there is little to no sources of information available that formally document the development of a recreational laser tag system.
 
-The purpose of this study is therefore to investigate the critical components of such a system, with the goal of providing a comprehensive understanding of how the various block of such a system can be most efficiently brought together and optimized.
+%The purpose of this study is therefore to investigate the critical components of such a system, with the goal of providing a comprehensive understanding of how the various block of such a system can be most efficiently brought together and optimized.
 
-------------------
+%------------------
 
-The purpose of this study is to investigate the construction and components required to build the fundamental modules which form part of a laser tag system. This investigation will attempt to compare the effectiveness of different key components out of which the tagger and target units comprise.
+The purpose of this study is to investigate the design and construction of fundamental modules which form part of a laser tag system. This investigation will attempt to determine the effectiveness and measure performance of different key components from which the tagger and target units comprise.
 
+In doing so this study aims to make available insightful information in the context of laser tag systems. Because of the niche nature of this system in the field of recreational electronics, there are very few sources of information available that formally document the development of a recreational laser tag system. This study aims to broaden the information available.
 
----------------------
-Find out what components perform best for a DIY laser tag kit
-
+Finally, to bring closure, this study will measure the performance achieved by the modules under different conditions at a high level.
 
 
 \section{Scope and Limitations}
-Scope indicates to the reader what has and has not been included in the study. Limitations tell the
-reader what factors influenced the study such as sample size, time etc. It is not a section for excuses as
-to why your project may or may not have worked.
+%Scope indicates to the reader what has and has not been included in the study. Limitations tell the
+%reader what factors influenced the study such as sample size, time etc. It is not a section for excuses as
+%to why your project may or may not have worked.
+
+This investigation approaches the problems to be investigated at a functional level, this limitation is to ensure the study remains focused on the key problem questions. The purpose is to gain an understanding of the key modules and their respective components, not to design or create 'ready to play' laser tag equipment.
+
+The completion of this project will involve the design and realization of a tagger and target module for the purposes of performing tests. These modules however will not be fixed in design as their purpose is to function as prototypes which will be modified throughout the testing phase to investigate different techniques for increasing performance.
+
+Keeping in line with the limitation that this study does not set out to create a finished product, no time will be allocated to the development of aesthetic design. In the context of this study there is little benefit to be gained from designing an enclosure for the prototype components.
+
+It must be stated that throughout the investigation, there will be practical limitations on the techniques used to focus and detect the beam of IR radiation. This study aims only to investigate methods of focusing light that are suitable for being embedded inside a handheld tagger device. Likewise the target design will take into consideration that for the device to be usable it needs integrable into equipment worn by the user.
+
+This project has a budget of R1500 for the procurement of components. This limitation has ruled out the use of IR laser diodes, which although in themselves fit within the budget, would require a myriad of personal protective equipment and specialized lenses which is beyond the budget of this investigation.
+
+This study is taking place during the Covid-19 pandemic, as a consequence global markets are less accessible and there are unpredictable delays. Because of this, PCB design will be avoided and circuit realization will be done on perf-board.
+
+
+
+
 
 \section{Plan of development}
 Here you tell the reader how your report has been organised and what is included in each
