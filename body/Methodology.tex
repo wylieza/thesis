@@ -1,15 +1,68 @@
 \chapter{Methodology}
 
-This is what I did to test and confirm my hypothesis.
+%This is what I did to test and confirm my hypothesis.
 
 
-You may want to split this chapter into sub chapters depending on your design. I suggest you change
-the title to something more specific to your project.
+%You may want to split this chapter into sub chapters depending on your design. I suggest you change
+%the title to something more specific to your project.
 
-This is where you describe your design process in detail, from component/device selection to actual
-design implementation, to how you tested your system. Remember detail is important in technical
-writing. Do not just write I used a computer give the computer specifications or the oscilloscopes part
-number. Describe the system in enough detail so that someone else can replicate your design as well
-as your testing methodology.
+%This is where you describe your design process in detail, from component/device selection to actual
+%design implementation, to how you tested your system. Remember detail is important in technical
+%writing. Do not just write I used a computer give the computer specifications or the oscilloscopes part
+%number. Describe the system in enough detail so that someone else can replicate your design as well
+%as your testing methodology.
 
-If you use or design code for your system, represent it as flow diagrams in text.
+%If you use or design code for your system, represent it as flow diagrams in text.
+
+\section{Outline}
+
+This study aims to investigate the performance of readily available parts for the purposes of creating a laser tag system. The following chapter presents the methodology that was followed to test the performance of the various components and the system as a whole in the context of the intended use case (laser tag).
+
+The chapter begins with a breakdown of the literature review. Following this there is a section which covers the test and measurement equipment used during the investigation and a section on components selection and reasoning. The design work constitutes a dedicated section in this report and has been place in chapter \ref{ch_design}.
+
+Finally the testing methodology is covered. Testing was performed in two phases, the first phase involves testing of individual modules. This modular testing is analogous to unit-tests in the computer programming paradigm. The second phase of testing involves characterising the performance of the final system prototype.
+
+\section{Literature Review}
+
+Lit review
+
+Questions:
+
+\begin{itemize}
+	\item What methods exist for detection of light?
+	\item ?
+\end{itemize}
+
+\section{Test and Measurement Equipment}
+
+\subsection{Power Supply}
+Access to the university laboratory equipment is limited.
+
+A large potion of the testing will be done using a custom built power supply, created from an ATX PSU. The particular unit that was repurposed was a 280W LiteOn PSU. This unit is capable of supplying $\pm$ 12V, $\pm$ 5V, and 3.3V.
+
+On occasion when a variable power supply was required, XXX
+
+\subsection{Measurement}
+
+Experiments requiring the use of an oscilloscope used a combination of the XXX Picoscope which I had access to while at home or the XXX which I used while in the university labs.
+
+For debugging and general purpose measurements the fragram T2612 multimeter was used.
+
+
+
+\section{Hardware Components}
+
+\subsection{UCT STM32F0 Development Board}
+The STM32F051C6 microcontroller was chosen due to its combination of low cost and availability. UCT has a custom design development board centred on this microcontroller. The final prototype is centred purely on the STM32F0 microcontroller and bare-bones supporting circuity, however a vast amount of the testing was done on the development board hence its inclusion in this section.
+
+
+
+
+
+
+
+
+
+
+
+
