@@ -1,0 +1,62 @@
+\chapter{Experimentation}
+\label{ch_experimentation}
+%This is a chapter added into the template because Dr. Winberg's example reports have it.
+
+\section{Testing Methodology}
+
+Testing was performed in two phases, the first phase involves testing of individual modules. This modular testing is analogous to unit-tests in the computer programming paradigm. The second phase of testing involves characterising the performance of the final system prototype.
+
+\subsection{LED Driver}
+The following tests were performed...
+
+
+\subsection{Tests $\setminus$ Results to gather}
+\textbf{Hardware}
+\begin{itemize}
+	\item IR Power LED:
+	\begin{itemize}
+		\item Beam angle (focus vs no focus)
+		\item Beam strength (LUX)
+		\item LED Current draw
+		\item LED temperature (basic sensor or a temperature gun that I borrow from somewhere)
+		\item MOSFET temperature
+	\end{itemize}
+	\item For each photo-sensor (photodiode, phototransistor, all in one receiver module):
+	\begin{itemize}
+		\item Receiving beam-angle
+		\item Output signal strength vs light-intensity/distance
+		\item Reaction time (rise time)
+	\end{itemize}
+	\item Op-Amp:
+	\begin{itemize}
+		\item Op-amp gain performance (push to limit) (at 36kHz)
+		\item Op-amp frequency performance (at some fixed gain)
+		\item Filter performance (anti-aliasing and high pass filtering)
+	\end{itemize}
+\end{itemize}
+
+\textbf{Software}
+\begin{itemize}
+	
+	\item Transmitter
+	\begin{itemize}
+		\item Timing accuracy
+	\end{itemize}
+	
+	%\item Protocol
+	%\begin{itemize}
+	%	\item
+	%\end{itemize}
+	
+	\item Receiver
+	\begin{itemize}
+		\item Bit error rate / max receiver distance - (not sure how I will implement this yet)
+		\item Bit error correction - (not sure how I might implement this yet)
+		\item Modulation to High/Low logic value [DSP processing analysis]
+		\begin{itemize}
+			\item Latency
+			\item Testing the timing between stages of demodulating and decoding
+		\end{itemize}
+	\end{itemize}
+	
+\end{itemize}
