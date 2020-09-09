@@ -17,13 +17,23 @@
 
 \section{Outline}
 
-This study aims to investigate the performance of readily available parts for the purposes of creating a laser tag system. The following chapter presents the methodology that was followed to test the performance of the various components and the system as a whole in the context of the intended use case (laser tag).
+This study aims to investigate the performance of readily available parts for the purposes of creating a laser tag system. The following chapter presents the methodology that was followed to test the performance of the various modules and the system as a whole in the context of the intended use case (laser tag). A phased approach was taken in the method of investigation.
 
-The chapter begins with a breakdown of the literature review. Following this there is a section which covers the test and measurement equipment used during the investigation and a section on components selection and reasoning. The design work constitutes a dedicated section in this report and has been place in chapter \ref{ch_design}.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.5\textwidth]{figures/methodology/methodology}
+	\caption{Methodology Flow Diagram}
+	\label{fig:methodology_overview}
+\end{figure}
 
-Finally the testing methodology is covered. Testing was performed in two phases, the first phase involves testing of individual modules. This modular testing is analogous to unit-tests in the computer programming paradigm. The second phase of testing involves characterising the performance of the final system prototype.
 
-\section{Literature Review}
+The first phase involves investigating the relevant literature. The system design follows the literature review and chapter \ref{ch_design} has been dedicated to this phase of the investigation. The third phase is the experimental setup which covers the test and measurement equipment used during the investigation and covers component selection and reasoning. Following the third phase is an iterative stage which begins with phase 4 development and realization and leads into the experimentation phase. The experimentation phase feeds back to the development stage allowing for incremental improvement to the system design.
+
+The second last phase is the analysis of results, chapter \ref{ch_results} has been dedicated to this. The final phase comprises the discussion and closure, which has been split across chapters \ref{ch_discussion} through \ref{ch_recommendations}.
+
+%Finally the testing methodology is covered. Testing was performed in two phases, the first phase involves testing of individual modules. This modular testing is analogous to unit-tests in the computer programming paradigm. The second phase of testing involves characterising the performance of the final system prototype.
+
+\section{Phase 1 - Literature}
 
 Lit review
 
@@ -33,6 +43,25 @@ Questions:
 	\item What methods exist for detection of light?
 	\item ?
 \end{itemize}
+
+
+%%%%%%%%%%%%%%%%%%%%
+
+\section{Phase 2 - Design}
+
+The project can be divided into two subsystems. The tagger (transmitter) and the target (receiver). These subsystems can be further subdivided into their respective software and hardware modules. Chapter \ref{ch_design} goes into detail on the design of these components.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\linewidth]{figures/methodology/design_overview}
+	\caption{Design Overview}
+	\label{fig:designoverview}
+\end{figure}
+
+Figure \ref{fig:designoverview} provides a breakdown of the systems high-level design requirements.
+
+
+%%%%%%%%%%%%%%%%%%%%
 
 \section{Test and Measurement Equipment}
 
@@ -50,6 +79,8 @@ Experiments requiring the use of an oscilloscope used a combination of the XXX P
 For debugging and general purpose measurements the fragram T2612 multimeter was used.
 
 
+
+%%%%%%%%%%%%%%%%%%%%
 
 \section{Hardware Components}
 
@@ -76,6 +107,8 @@ IRLZ44NPBF N-Channel MOSFET from Infineon
 
 
 
+%%%%%%%%%%%%%%%%%%%%
+
 \section{Software Applications}
 
 \subsection{STM32 CubeIDE}
@@ -91,6 +124,10 @@ The Arduino IDE provides a very compact but elegant serial monitor which was use
 In addition, any Arduino specific software development was done using the Arduino IDE.
 
 \subsection{Git}
+
+
+
+%%%%%%%%%%%%%%%%%%%%
 
 \section{Testing Methodology}
 
