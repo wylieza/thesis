@@ -31,8 +31,6 @@ The first phase involves investigating the relevant literature. The system desig
 
 The second last phase is the analysis of results, chapter \ref{ch_results} has been dedicated to this. The final phase comprises the discussion and closure, which has been split across chapters \ref{ch_discussion} through \ref{ch_recommendations}.
 
-%Finally the testing methodology is covered. Testing was performed in two phases, the first phase involves testing of individual modules. This modular testing is analogous to unit-tests in the computer programming paradigm. The second phase of testing involves characterising the performance of the final system prototype.
-
 \section{Phase 1 - Literature}
 
 Lit review
@@ -63,7 +61,9 @@ Figure \ref{fig:designoverview} provides a breakdown of the systems high-level d
 
 %%%%%%%%%%%%%%%%%%%%
 
-\section{Test and Measurement Equipment}
+\section{Phase 3 - Experimental Setup}
+
+The investigation required various pieces of test and measurement equipment. The following section outlines the hardware and software used to develope the system and perform the experiments.
 
 \subsection{Power Supply}
 Access to the university laboratory equipment is limited.
@@ -82,26 +82,26 @@ For debugging and general purpose measurements the fragram T2612 multimeter was 
 
 %%%%%%%%%%%%%%%%%%%%
 
-\section{Hardware Components}
+\subsection{Hardware Components}
 
-\subsection{UCT STM32F0 Development Board}
+\subsubsection{UCT STM32F0 Development Board}
 The STM32F051C6 microcontroller was chosen due to its combination of low cost and availability. UCT has a custom design development board centred on this microcontroller. The final prototype is centred purely on the STM32F0 microcontroller and bare-bones supporting circuity, however a vast amount of the testing was done on the development board hence its inclusion in this section.
 
-\subsubsection{ADC Peripheral}
+%\subsubsection{ADC Peripheral}
 
-\subsubsection{ADC DMA}
+%\subsubsection{ADC DMA}
 
-\subsection{Arduino}
-The Arduino platform was used whenever for various quick prototyping where unofficial testing was required. This is because the Arduino platform has many well established libraries and a simplified development environment which allowed for faster prototyping.
+%\subsection{Arduino}
+%The Arduino platform was used whenever for various quick prototyping where unofficial testing was required. This is because the Arduino platform has many well established libraries and a simplified development environment which allowed for faster prototyping.
 
-\subsection{Power IR LED}
+\subsubsection{Power IR LED}
 
 The LZ1-10R702 high power, PCB mounted LED from LedEngin Inc. was used to produce the required 940nm wavelength infrared radiation. To ensure proper heat dissipation generic adhesive based heat-sink was attached to the module.
 
-\subsection{Operational Amplifier}
+\subsubsection{Operational Amplifier}
 xxx
 
-\subsection{LED Current Regulator}
+\subsubsection{LED Current Regulator}
 xxx
 IRLZ44NPBF N-Channel MOSFET from Infineon
 
@@ -109,83 +109,37 @@ IRLZ44NPBF N-Channel MOSFET from Infineon
 
 %%%%%%%%%%%%%%%%%%%%
 
-\section{Software Applications}
+\subsection{Software Applications}
 
-\subsection{STM32 CubeIDE}
+\subsubsection{STM32 CubeIDE}
 ST microelectronics provides a custom version of the Eclipse IDE, distributed under the name CubeIDE. This is an all in one integrated developer environment for STM32 microcontrollers. Version 1.3.0 was used for the software development in this study.
 
 CubeIDE provides a 'Device Configuration Tool' along with an official library called HAL (Hardware Abstraction Layer). The combination of the configuration tool and HAL library helped speed up the software development. The CubeIDE also includes a debug tool with direct register/memory access which assisted with debugging.
 
 XXX -talk about LCD libary
 
-\subsection{Arduino IDE}
-The Arduino IDE provides a very compact but elegant serial monitor which was used for serial communication between the STM32F0 microcontroller and the PC for the purposes of debugging.
+\subsubsection{Realterm}
+During the development and realization stage a UART communication link between the personal computer and the micro-controller was used to provide feedback and measurements. Realterm \footnote{\url{https://sourceforge.net/projects/realterm/}}, a free serial monitor which provides a rich set of features was used for these communications.
 
-In addition, any Arduino specific software development was done using the Arduino IDE.
-
-\subsection{Git}
+\subsubsection{Git}
 
 
 
 %%%%%%%%%%%%%%%%%%%%
 
-\section{Testing Methodology}
-
-\subsection{LED Driver}
-The following tests were performed...
+\section{Phase 4 - Development and Realization}
 
 
-\subsection{Tests $\setminus$ Results to gather}
-\textbf{Hardware}
-\begin{itemize}
-	\item IR Power LED:
-	\begin{itemize}
-		\item Beam angle (focus vs no focus)
-		\item Beam strength (LUX)
-		\item LED Current draw
-		\item LED temperature (basic sensor or a temperature gun that I borrow from somewhere)
-		\item MOSFET temperature
-	\end{itemize}
-	\item For each photo-sensor (photodiode, phototransistor, all in one receiver module):
-	\begin{itemize}
-		\item Receiving beam-angle
-		\item Output signal strength vs light-intensity/distance
-		\item Reaction time (rise time)
-	\end{itemize}
-	\item Op-Amp:
-	\begin{itemize}
-		\item Op-amp gain performance (push to limit) (at 36kHz)
-		\item Op-amp frequency performance (at some fixed gain)
-		\item Filter performance (anti-aliasing and high pass filtering)
-	\end{itemize}
-\end{itemize}
 
-\textbf{Software}
-\begin{itemize}
-	
-	\item Transmitter
-	\begin{itemize}
-		\item Timing accuracy
-	\end{itemize}
+\section{Phase 5 - Experimentation}
 
-	%\item Protocol
-	%\begin{itemize}
-	%	\item
-	%\end{itemize}
-	
-	\item Receiver
-	\begin{itemize}
-		\item Bit error rate / max receiver distance - (not sure how I will implement this yet)
-		\item Bit error correction - (not sure how I might implement this yet)
-		\item Modulation to High/Low logic value [DSP processing analysis]
-		\begin{itemize}
-			\item Latency
-			\item Testing the timing between stages of demodulating and decoding
-		\end{itemize}
-	\end{itemize}
 
-\end{itemize}
 
+\section{Phase 7 - Analysis of Results}
+
+
+
+\section{Phase 8 - Discussion and Closure}
 
 
 
