@@ -73,7 +73,7 @@ Manchester coding, as its name suggests, was developed at the University of Manc
 
 The principle behind Manchester code is to encode the information into transitions between two symbols. This technique makes the encoding scheme particularly useful in communication by means of inductive coupling such as in RFID. Due to its self-clocking property and simplicity it is the standard means of encoding for many IR applications. Perhaps the most common application is in the remote controls we use for various appliances.
 
-Manchester code is a special form of binary phase shift keying (BPSK). A square wave of a particular frequency is chosen as the carrier and binary information is encoding by adjusting the setting a phase off set to either 0\degree or 180\degree s. In figure \ref{fig:manchesterencoding} the process of encoding 10 bits is illustrated. Two conventions exist, their difference lies soley in the definition of which logic values are represented by each of the two transitions. The convention used throughout this investigation is in accordance to the IEEE 802.3 standard which defines a logical 1 as the transition from 0 to 1 and a zero as 1 to 0. The other convention used by inventor G.E. Thomas is the inverse of this and is also widely used.\\
+Manchester code is a special form of binary phase shift keying (BPSK). A square wave of a particular frequency is chosen as the carrier and binary information is encoding by adjusting the setting a phase off set to either 0\degree or 180\degree s. In figure \ref{fig:manchesterencoding} the process of encoding 10 bits is illustrated. Two conventions exist, their difference lies solely in the definition of which logic values are represented by each of the two transitions. The convention used throughout this investigation is in accordance to the IEEE 802.3 standard which defines a logical 1 as the transition from 0 to 1 and a zero as 1 to 0. The other convention used by inventor G.E. Thomas is the inverse of this and is also widely used.\\
 
 \begin{figure}[H]
 	\centering
@@ -86,7 +86,7 @@ Manchester code is a special form of binary phase shift keying (BPSK). A square 
 
 
 \subsubsection{Decoding Algorithm}
-Different techniques have been developed to decode Manchester encoded sequences. In his paper on methods for decoding Manchester code, R. A. Dobre discusses an elegant and widely used finite state machine approach which has been illustrated in figure \ref{fig:manchesterdecodingfsm} below.
+Different techniques have been developed to decode Manchester encoded sequences. In his paper on methods for decoding Manchester code, R. A. Dobre discusses an elegant and widely used finite state machine approach which has been illustrated in figure \ref{fig:manchesterdecodingfsm} below. \cite{Dobre2014}
 
 \begin{figure}[H]
 	\centering
@@ -97,12 +97,18 @@ Different techniques have been developed to decode Manchester encoded sequences.
 
 The state machine approach is particularly useful because it only considers the time period between the current detected edge and the previous edge. It removes the need to track samples saving on memory and reducing processing power requirements, all without introducing additional complexity.
 
-It should be noted that this FSM assumes the first bit is a logical 1. It also does not define a state to 
+It should be noted that this FSM assumes the first bit transmitted is always a logical 1. In addition does not detect the end of a sequence, so additional logic is required such as a counter to detect when a certain number of bits have been received or by means of implementing timeout detection.
 
 
+\subsection{Error Control}
 
-\subsection{Hamming Code}
-Hamming code for error detection and correction
+In information theory, error control is the field of study that concerns issues of detecting errors in digital communications and in certain instances provides the means to corrected these errors. Whenever data is transmitted over some kind of network, there is the possibility that interference can cause a bit to flip resulting in an error. Richard Hamming pioneered in the development of digital error control and is known for (amongst other things) the Hamming code.
+
+\subsubsection{Methods}
+Various ways to detect and potentially correct the presence of an error. The most trivial technique known as a 'repetition code' simply involves sending the information three times, making it possible to detect if one of the three data-streams doesn't match the others. Although repetition codes allows for both error detection and correction, it is horribly inefficient. Various techniques have been developed and each technique balances complexity and efficiency.
+
+\subsubsection{Hamming Code}
+
 
 \subsection{Demodulation}
 Need to talk about demodulating, Goertzel, DSP, tone-detectors
