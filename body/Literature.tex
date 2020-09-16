@@ -1,37 +1,6 @@
 \chapter{Literature Review}
 \label{ch_literature}
 
-Once upon a time engineers and researchers believed... In this area of research, they used the following methods... \cite{Knight2013}
-
-Write this section first as it will take you the longest. I suggest you start writing this as soon as you
-have done your initial research at the beginning of your project. You can then return to it once you
-have completed your work to edit and adjust it.
-
-A literature review forms the theoretical basis of your project. You need to read a large number of
-journal papers, sections in books, technical reports etc. relevant to your work at the start of project.
-This will give you a good idea of the field of research.
-
-When writing your review start of with the general concepts and move to the more specific aspects
-explaining the necessary theory as you go. This section is NOT a copy and paste from others work or a
-rewrite-but-change-one-word section. I suggest you read all your material, and then put it down and
-write this section, referring back to the work only when you need to check something.
-
-See your PCS textbook for more details on how to write a literature review.
-
-If you include a figure or a table in your text please see the example in Fig. \ref{fig:model} as to how to caption it.
-Please make sure that all text in your figures is readable and that you reference your figures if they are
-from another source.
-
-\begin{figure}[ht]
-	\centering
-	\includegraphics[width=0.7\textwidth]{figures/template/model.png}
-	\caption{A block diagram illustrating the connections to the IRQ pin on the MCS08GT16A microcontroller (Please
-	note that your headings should be short descriptions of what is in the diagram not simply the figure title)}
-	\label{fig:model}
-\end{figure}
-
-%%%%%%%%%%%%%%%%%%
-
 \section{Optics}
 
 \subsection{Brief History}
@@ -104,8 +73,29 @@ It should be noted that this FSM assumes the first bit transmitted is always a l
 
 In information theory, error control is the field of study that concerns issues of detecting errors in digital communications and in certain instances provides the means to corrected these errors. Whenever data is transmitted over some kind of network, there is the possibility that interference can cause a bit to flip resulting in an error. Richard Hamming pioneered in the development of digital error control and is known for (amongst other things) the Hamming code.
 
-\subsubsection{Methods}
 Various ways to detect and potentially correct the presence of an error. The most trivial technique known as a 'repetition code' simply involves sending the information three times, making it possible to detect if one of the three data-streams doesn't match the others. Although repetition codes allows for both error detection and correction, it is horribly inefficient. Various techniques have been developed and each technique balances complexity and efficiency.
+
+\subsubsection{Parity}
+Using a parity bit is the most simple means to detect an error in a bit sequence. The parity of a sequence may be defined as the result of a bit wise exclusive or (XOR) operation, this is known as 'even parity' because the parity bit value is chosen such that upon appending it to the bit-sequence there would be an even number of 1s. Conversely 'odd parity' calculates the parity bit such the number of 1s in the generated sequence is odd. Table \ref{tbl:party_examples} below provides example bit sequences and the respective even (given by the XOR operation) and odd parity values.
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{ccc}
+		\hline
+		\multicolumn{1}{l}{\textbf{Bit Sequence}} & \textbf{XOR of Bits} & \multicolumn{1}{l}{\textbf{Odd Parity Bit}} \\ \hline
+		0000000 & 0 & 1 \\ \hline
+		1111111 & 1 & 0 \\ \hline
+		1010101 & 0 & 1 \\ \hline
+		1001100 & 1 & 0 \\ \hline
+	\end{tabular}
+	\caption{Even and odd parity for example bit sequences}
+	\label{tbl:party_examples}
+\end{table}
+
+ To use parity as a method to detect errors, the sender and receiver choose to use either even or odd parity. Before transmission, the sender calculates the parity bit for the sequence to be sent, this bit is then appended to the bit-stream. Upon receiving the bit-stream, the same parity calculation is done on the sequence. If the result of this calculation is a 1 it can be said for certain that an error occurred, if the result is zero it can be said that no error occurred or an even number of errors occurred.
+
+
+
 
 \subsubsection{Hamming Code}
 
