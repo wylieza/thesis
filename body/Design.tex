@@ -24,9 +24,45 @@ The tagger system, in terms of hardware, comprises of a main processor which has
 \footnotetext{STM32F051C6}
 
 \subsubsection{Target}
-The target system comprises of many more hardware modules, this is due to the comparably higher complexity involved in detecting and processing signals. In addition, to make a comparison between a photodiode and phototransistor possible, a hardware module dedicated to each had to be designed and implemented. The target system hardware consists of three IR sensors, in addition to the two just mentions, an 'all in one' IR receiver device was used to act as a golden measure against which to test the other two receivers.
+The target system comprises many more hardware modules, this is due to the comparably higher complexity involved in detecting and processing signals. An additional module is also required to allow for a comparison between using a photodiode versus a phototransistor, as these each require a custom dedicated hardware module. The target system hardware consists of three IR sensors, in addition to the two sensors just mention, an 'all in one' IR receiver device was used to act as a golden measure against which to test the other two receivers. The output of the IR receiver module can be routed directly to the target main processor.
+
+The outputs of the photodiode and phototransistor IR detection modules are routed into a signal conditioning module. This module performs anti-alias filtering and rectification of the signal, this is to ensure the signal is within the specifications of the tone detector. The tone detection modules comprises of a digital signal processing (DSP) algorithm, implemented on an STM32 MPU. The output of the tone detection module may be routed to the target main processor. The target main processor is implemented on the UCT STM32 development board.
+
+\subsection{Software}
+
+\begin{figure}[H]
+	\centering
+	%\includegraphics[width=0.9\textwidth]{figures/design/system_overview_hardware}
+	\caption{Block Diagram of Software Modules}
+	\label{fig:system_overview_software}
+\end{figure}
+
+
 
 \section{Hardware Modules}
+
+\subsection{Photodiode IR Detector}
+The photodiode IR detector module is designed to detect changes in infrared radiation and convert these fluctuations into a voltage signal.
+
+\subsection{Signal Conditioning Module}
+Before the voltage signal from the photodiode IR detector can be processed by the tone detector, it must be conditioned. The module can be broken into two stages separated by the unity buffer (U4). The first stage of the module performs filtering, this is prevent aliasing during the digital signal processing, which occurs when frequencies greater than half the sampling frequency are present in the sampled waveform. The second stage performs precision rectification, the signal is rectified to ensure a negative voltage is not placed on the input pin of the tone detector which is only tolerant of positive voltages between 0V and 3.3V.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{figures/design/filter_and_rectify}
+	\caption{Signal Conditioning Module Schematic}
+	\label{fig:schematic_filter_and_rectify}
+\end{figure}
+
+Often the incoming signal is a square wave with an amplitude of 4.5V which saturates the op-amps, to prevent saturation a voltage divider is formed using R1 and R2 to reduce the signal magnitude under these circumstances.
+
+The filter circuit used is a second order voltage controlled voltage source (VCVS) active low pass filter in a Chebyshev configuration. The component values where chosen in acordances to the filter design table found on page 274 of the book 'The art of electronics'\cite{Horowitz1995}.
+
+The precision rectifier is also a circuit design taken from the book and can be found on page 188, it is an improved version of the basic precision rectifier because it reduces the output swing of the op-amp during operation\cite{Horowitz1995}.
+
+\subsection{Tone Decoder Module}
+
+
 
 
 \section{Software Modules}
