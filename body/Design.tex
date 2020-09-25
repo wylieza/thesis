@@ -3,7 +3,7 @@
 
 This chapter is dedicated to the various modules which comprise the laser tag system being investigated. The system is complex and comprises of many modules both in hardware and software. An overview of the entire system is given followed by the design of the individual modules.
 
-It is important to reiterate at this point the aim of this investigation. This study aims determine the core components of a laser tag module with respect to the tagger and target system. The goal is not to design a ready to play 'user friendly' kit, but rather to determine what modules are required in such a system and how these components perform through the execution of various experiments.
+It is important to reiterate at this point that this study aims determine the core components of a laser tag module with respect to the tagger and target system. The goal is not to design a ready to play 'user friendly' kit, but rather to determine what modules are required in such a system and how these components perform through the execution of various experiments.
 
 \section{System Overview}
 
@@ -47,6 +47,37 @@ The outputs of the photodiode and phototransistor IR detection modules are route
 The laser tag systems has two main processors. One for the tagger and another for the target. The hardware used for main processor in each case is the UCT development board built around the STM32F051C6 microcontroller.
 
 The development board provides break-out pins for the microcontroller, 4 input buttons, an array of 8 LEDs, an LCD display and a built-in st-link v2 for debugging and programming the processor. 
+
+
+\subsection{Carrier Frequency Generator}
+%Missing
+% - Calculations and chosen values
+To generate the 36kHz carrier waveform the LM555 timer IC was used. The module is designed to receive a 3.3V logic control signal. The LED driver modules were designed to operate using an open-drain control signal, therefore a transistor was used to convert the push-pull output to an open-drain output. Figure \ref{fig:schematic_carrier_generation} shows the schematic for the module.
+
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=.8\textwidth]{figures/design/carrier_waveform_generator_555.JPG}
+	\caption{Carrier Generation Module Schematic}
+	\label{fig:schematic_carrier_generation}
+\end{figure}
+
+
+\subsection{Power LED Driver}
+%Missing:
+
+To operate the 3W high power IR LED a constant current driver module needed to be implemented. Because the LED needs to be modulated at 36kHz, standard LED drivers that use a switching regulator are not viable because the switching frequency requirements exceed those available in standard ICs.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=.8\textwidth]{figures/design/power_led_driver.JPG}
+	\caption{Power LED Driver Module Schematic}
+	\label{fig:schematic_power_led_driver}
+\end{figure}
+
+Instead a linear regulator was designed. Figure \ref{fig:schematic_power_led_driver} shows the design of a high power linear regulator, built around the IRLZ44 enhancement PMOSFET. Heat-sinks where attached to both the high power LED and the IRLZ44 power MOSFET. However because the LED is only on for short bursts spread over sufficiently long time intervals it is likely that the heat-sinks are unnecessary.
+
+
 
 
 \subsection{Photodiode IR Detector}
