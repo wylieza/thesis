@@ -42,9 +42,47 @@ The outputs of the photodiode and phototransistor IR detection modules are route
 \section{Hardware Modules}
 
 \subsection{Photodiode IR Detector}
+%Missing:
+% - Schematic and explaination
+
 The photodiode IR detector module is designed to detect changes in infrared radiation and convert these fluctuations into a voltage signal.
 
+\subsection{Phototransistor IR Detector}
+%Missing:
+% - Schematic and explaination
+
+The phototransistor IR detector module is designed to detect changes in infrared radiation and convert these fluctuations into a voltage signal.
+
+\subsection{IR Detector}
+%Missing:
+% - Schematic and explaination
+
+The IR receiver is an 'all in one package' detector IC designed to detect the presences of a carrier signal in the IR light incident on the detector.
+
+\begin{figure}[H]
+	\centering
+	\begin{minipage}{.5\textwidth}
+		\centering
+		\includegraphics[width=.8\linewidth]{figures/design/TSOP382_block_diagram}
+		\captionof{figure}{TSOP382 Functional Diagram}
+		\label{fig:tsop382_block_diagram}
+	\end{minipage}%
+	\begin{minipage}{.5\textwidth}
+		\centering
+		\includegraphics[width=.8\linewidth]{figures/design/over_voltage_protection}
+		\captionof{figure}{Voltage Clamp}
+		\label{fig:schematic_voltage_clamp}
+	\end{minipage}
+\end{figure}
+
+The IR receiver used in this investigation is the TSOP382 from Vishay. The \href{https://www.vishay.com/docs/82491/tsop382.pdf}{datasheet} contains a block diagram (shown in figure \ref{fig:tsop382_block_diagram}) which gives a functional overview of the IC.
+
+Figure \ref{fig:schematic_voltage_clamp} shows the circuity used to clamp the output of the IR receiver at 3V. This is to protect the GPIO from an over-voltage. The TSOP382 may be powered off 3.3V which would remove the voltage clamp requirement, however it has been included to ensure the module can be powered with a range of supply voltages and still be logically compatible with the STM32.
+
 \subsection{Signal Conditioning Module}
+%Missing:
+% - Choosing freq cut off and what is expected gain
+
 Before the voltage signal from the photodiode IR detector can be processed by the tone detector, it must be conditioned. The module can be broken into two stages separated by the unity buffer (U4). The first stage of the module performs filtering, this is prevent aliasing during the digital signal processing, which occurs when frequencies greater than half the sampling frequency are present in the sampled waveform. The second stage performs precision rectification, the signal is rectified to ensure a negative voltage is not placed on the input pin of the tone detector which is only tolerant of positive voltages between 0V and 3.3V.
 
 \begin{figure}[H]
@@ -61,8 +99,19 @@ The filter circuit used is a second order voltage controlled voltage source (VCV
 The precision rectifier is also a circuit design taken from the book and can be found on page 188, it is an improved version of the basic precision rectifier because it reduces the output swing of the op-amp during operation\cite{Horowitz1995}.
 
 \subsection{Tone Decoder Module}
+%Missing:
+% - Is a schematic worth the bother?
+
+The tone decoder module's hardware consists of an STM32F051C6 breakout PCB which is mounted on a strip-board along with supporting circuity (external crystal and voltage regulation). In addition to the supporting circuitry, an over-voltage protection clamp (see figure \ref{fig:schematic_voltage_clamp}) was placed on pin 17 which is connected internally to PA7 which is configured as an analog input. Three signal LED's where wired to pins 18, 19 and 20 to act as status indicators.
+
+The DSP algorithm is discussed in subsection \ref{tone_decoder_software} from the following section on software modules.
+
+
 
 
 
 
 \section{Software Modules}
+
+\subsection{Tone Decoder Module}
+\label{tone_decoder_software}
