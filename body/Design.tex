@@ -46,6 +46,13 @@ The outputs of the photodiode and phototransistor IR detection modules are route
 % - Schematic and the like in the appendix
 The laser tag systems has two main processors. One for the tagger and another for the target. The hardware used for main processor in each case is the UCT development board built around the STM32F051C6 microcontroller.
 
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=.5\textwidth]{figures/design/dev_board_image.jpg}
+	\caption{UCT STM32 Development Board}
+	\label{fig:stm32_dev_board}
+\end{figure}
+
 The development board provides break-out pins for the microcontroller, 4 input buttons, an array of 8 LEDs, an LCD display and a built-in st-link v2 for debugging and programming the processor. 
 
 
@@ -65,6 +72,7 @@ To generate the 36kHz carrier waveform the LM555 timer IC was used. The module i
 
 \subsection{Power LED Driver}
 %Missing:
+% - Specs and component choice etc.
 
 To operate the 3W high power IR LED a constant current driver module needed to be implemented. Because the LED needs to be modulated at 36kHz, standard LED drivers that use a switching regulator are not viable because the switching frequency requirements exceed those available in standard ICs.
 
@@ -77,18 +85,43 @@ To operate the 3W high power IR LED a constant current driver module needed to b
 
 Instead a linear regulator was designed. Figure \ref{fig:schematic_power_led_driver} shows the design of a high power linear regulator, built around the IRLZ44 enhancement PMOSFET. Heat-sinks where attached to both the high power LED and the IRLZ44 power MOSFET. However because the LED is only on for short bursts spread over sufficiently long time intervals it is likely that the heat-sinks are unnecessary.
 
+The module is designed to be driven by an open-drain configured GPIO pin. By pulling the control signal low, the LED is powered and when the control signal is left floating the LED is powered off.
 
+\subsection{LED Driver}
+%Missing:
+% - Specs and component choice etc.
 
+Due to the high power demands of the 3W IR LED, it is much more appropriate to perform test and develop the communication protocol using a low power IR led. A driver module was designed for this specific purpose.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=.6\textwidth]{figures/design/low_power_led_driver.JPG}
+	\caption{Low-Power LED Driver Module Schematic}
+	\label{fig:schematic_low_power_led_driver}
+\end{figure}
+
+Figure \ref{fig:schematic_low_power_led_driver} shows the schematic for this driver module. The module is designed to be driven using an open-drain configured GPIO pin so that it is 'drop-in' compatible with the high power driver module.
 
 \subsection{Photodiode IR Detector}
 %Missing:
 % - Schematic and explaination
+% - Talk about MCP6022 and important specs
 
 The photodiode IR detector module is designed to detect changes in infrared radiation and convert these fluctuations into a voltage signal.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=.8\textwidth]{figures/design/photodiode_transimpedance.JPG}
+	\caption{Photodiode IR Detector Module Schematic}
+	\label{fig:schematic_photodiode_transimpedance}
+\end{figure}
+
+The circuit shown in figure \ref{fig:schematic_photodiode_transimpedance} is designed to produce a voltage in proportion to the current flowing through the photodiode. The circuit is inspired by S. Schrires 'Infrared Radio Link' circuit which is found in the EEE3071 course notes\cite{Schrire2007}.
 
 \subsection{Phototransistor IR Detector}
 %Missing:
 % - Schematic and explaination
+
 
 The phototransistor IR detector module is designed to detect changes in infrared radiation and convert these fluctuations into a voltage signal.
 
