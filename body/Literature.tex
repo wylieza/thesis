@@ -68,7 +68,7 @@ The state machine approach is particularly useful because it only considers the 
 
 It should be noted that this FSM assumes the first bit transmitted is always a logical 1. In addition does not detect the end of a sequence, so additional logic is required such as a counter to detect when a certain number of bits have been received or by means of implementing timeout detection.
 
-
+\iffalse
 \subsection{Error Control}
 
 In information theory, error control is the field of study that concerns issues of detecting errors in digital communications and in certain instances provides the means to corrected these errors. Whenever data is transmitted over some kind of network, there is the possibility that interference can cause a bit to flip resulting in an error. Richard Hamming pioneered in the development of digital error control and is known for (amongst other things) the Hamming code.
@@ -96,9 +96,61 @@ Using a parity bit is the most simple means to detect an error in a bit sequence
 
 \subsubsection{Hamming Code}
 
+\fi
+
 
 \subsection{Demodulation}
 Need to talk about demodulating, Goertzel, DSP, tone-detectors
+
+
+%%%%%%%%%%%%%%%%%%
+\section{Digital Signal Processing}
+In the age of micro-controllers and micro-processors, it has become far more effective to use digital signal processing to manipulate and processes signals.
+
+Part of the IR decoding process requires detecting the presence of a particular frequency (commonly referred to as a tone). The natural tool to turn to when examining the frequency content of a signal is the discrete Fourier transform (DFT). The DFT is well established and there exist a variety of algorithms which compute its values, perhaps the most well known being the FFT. However, for the purposes of detecting a single tone of a predetermined frequency, the DFT is not the most efficient method, even when optimized algorithms such as the FFT are implemented.
+
+The FFT provides a very efficient means for determining all the DFT coefficients, but in a use case only a few of the coefficients are used and the rest discarded it is not the most efficient technique. By using a less efficient process for calculating individual coefficients of the DFT it is possible to greatly reduce program complexity and processing time relative to an implementation that uses the FFT.
+
+\subsection{Goertzel Algorithm}
+
+The algorithm which computes individual DFT coefficients is known as the Goertzel algorithm (or Goertzel Filter) and was developed by G. Goertzel in 1958. \cite{Goertzel1958} A common application of the Goertzel algorithm is in the decoding of DTMF\footnotemark{} signals.
+\footnotetext{Duel Tone Multiple Frequency}
+
+\subsubsection{Derivation}
+The goertzel algorithm may be derived from the formula for the DFT. In the derivation \(W_N = e^{-j\frac{2\pi}{N}}\).
+
+\begin{equation}
+	\label{eqn:dft_defn}
+	X[k] = \sum_{n=0}^{N-1}x[n]W_{N}^{nk}
+\end{equation}
+
+Multipling the right side of equation \ref{eqn:dft_defn} by \(W_{N}^{-Nk} = e^{j\frac{2\pi N k}{N}} = 1\) we get
+
+\begin{equation}
+X[k] = W_{N}^{-Nk}\sum_{n=0}^{N-1}x[n]W_{N}^{nk}
+\end{equation}
+
+Rearranging we get
+
+\begin{equation}
+\label{eqn:dft_conv}
+X[k] = \sum_{n=0}^{N-1}x[n]W_{N}^{k(n-N)}
+\end{equation}
+
+Notice that if we consider the signal \(h_k[l] = W_N^{-kl}\), then equation \ref{eqn:dft_conv} is the convolution of $h_k[l]$ with $x[l]$. Substituting these signals into equation \ref{eqn:dconv} (formula for discrete convolution) below, we can rearrange the result to arrive at equation \ref{eqn:dconv_sub}.
+
+\begin{equation}
+	\label{eqn:dconv}
+	y_k[l] = \sum_{m=0}^{N-1}x[m]h_k[l - m]
+\end{equation}
+
+\begin{equation}
+	\label{eqn:dconv_sub}
+y_k[l] = \sum_{m=0}^{N-1}x[m]W_N^{k(m-l)}
+\end{equation}
+
+Comparing equation \ref{eqn:dft_conv} with equation \ref{eqn:dconv_sub}, it becomes clear that from the convolution $y_k[n] = x[n] * h_k[n]$ $\rightarrow$ $y_k[n] = X[k]$ for $n = N$.
+
 
 
 %%%%%%%%%%%%%%%%%%
