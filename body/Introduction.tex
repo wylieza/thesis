@@ -10,26 +10,41 @@ On the electromagnetic spectrum infrared radiation is just below visible light w
 
 This study focuses on the application of IR in the recreational sport of laser tag. Although many use cases of infrared involve passive observation, this investigation seeks to understand appropriate means to transmit and receive information by means of a narrow infrared beam for the purposes of unidirectional communication.
 
-When it comes to laser tag, there is commercial grade equipment that one my use at laser tag companies. However when one considers the consumer market there are noticeable gaps between the sophisticated commercial equipment and the laser tag toys available on the market. There is even less research and documentation on the creation of custom 'do it yourself' laser tag systems. 
+When it comes to laser tag, there is commercial grade equipment that one my use at laser tag companies. However when one considers the consumer market there are noticeable differences between the more sophisticated commercial equipment and the cheaper laser tag toys available on the market. There is very little research and documentation on the creation of these laser tag systems.
 
-In contrast, much is known about the use of infrared in remote controls and there is a wealth of research, documentation and tutorials on the subject. But when it comes to laser tag systems less information is available on the specialized use of infrared in the laser tag context. There are several factors and constraints which are unique in this context.
+There laser tag systems operate on many of the same principles as television remote controls. A topic on which much is known about the use of infrared in remote controls and there is a wealth of research, documentation and tutorials on the subject. Laser tag systems is in essence a specialized form of the television remote and much less information is available on the specialized use of infrared in the laser tag context. There are several factors and constraints which are unique in this context.
 
 
 
 \section{Objectives of this study}
+
+The primary objective of this study is to develop the modules for the uni-directional link (UDL) between a tagger and a target in a laser tag system. There are a vast number of techniques that could be employed to achieve this goal. This study aims to select appropriate techniques and implement these to allow their performance to be empirically tested. This study aims to serve as a platform for further research by performing an initial investigation of a UDL system in the context of laser tag.
+
+The uni-directional link system (UDLS) is complex, comprising of many independent functional components. For the purposes of this investigation, these functional components will be separated into modules. Modular design enables more fine grained testing and experimentation which allows the performance of individual components to be evaluated.
+
+In addition to the primary objective, which is to develop a practical UDL in the context. This study also aims to compare the effectiveness of different substitute modules. Specifically, this study aims to compare the use of a photodiode and phototransistor for the purposes of detecting IR light.
+
 \subsection{Problems to be investigated}
 %Description of the main questions to be investigated in this study...
 
-This study aims to determine the state of currently available technology in the context of constructing the fundamental components of a laser tag system. Namely the tagger and target devices. This problem can be distilled into the following:
+This study aims to develop a system that may be further sub-divided into two distinct subsystems, namely the tagger subsystem and target subsystem. These two subsystems require a uni-directional transfer of data that should only occur when the tagger is precisely aimed toward the target.
+
+This investigation may be summarised through the following three research questions:
 
 \begin{itemize}
-	\item What techniques are exist for the generation of narrow beam IR radiation?
-	\item What is a suitable protocol for the tagger/target system to utilize for detecting and identifying shots fired by opponents?
-	\item What light detection technology is the most appropriate in the context of laser tag?
-	\item What kind of performance does one expect from such a system?
+	\item What functional blocks are required to implement the tagger-target system?
+	\item What techniques are appropriate for the purposes of implementing these functional blocks?
+	\item What is the measured performance of the individual components and overall system after implementation?
+%	
+%	\item What techniques are exist for the generation of narrow beam IR radiation?
+%	\item What is a suitable protocol for the tagger/target system to utilize for detecting and identifying shots fired by opponents?
+%	\item What light detection technology is the most appropriate in the context of laser tag?
+%	\item What kind of performance does one expect from such a system?
 \end{itemize}
 
 -----------------------------------------------------
+
+This study must briefly map out the various functional blocks required for a laser tag system. Following this functional blocks should be realised, each theoretical block will translate to a single module. Modules will consist of some combination of software and hardware components. This combination will be based of the appropriate technique decided on.
 
 An appropriate protocol for encoding information into an infrared beam needs to be developed. An investigation into the current industry-standard protocols will be performed and an appropriate protocol selected and modified to satisfy problem constraints.
 
