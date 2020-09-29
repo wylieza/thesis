@@ -149,7 +149,36 @@ Notice that if we consider the signal \(h_k[l] = W_N^{-kl}\), then equation \ref
 y_k[l] = \sum_{m=0}^{N-1}x[m]W_N^{k(m-l)}
 \end{equation}
 
-Comparing equation \ref{eqn:dft_conv} with equation \ref{eqn:dconv_sub}, it becomes clear that from the convolution $y_k[n] = x[n] * h_k[n]$ $\rightarrow$ $y_k[n] = X[k]$ for $n = N$.
+Comparing equation \ref{eqn:dft_conv} with equation \ref{eqn:dconv_sub}, it becomes clear that from the convolution $y_k[n] = x[n] * h_k[n]$ we can find the value of $X[k]$ by substituding N into $y_k[n]$. Thus the following relationship exists
+
+\begin{equation}
+\label{eqn:goertzel_relationship}
+X[k] = y_k[N]
+\end{equation}
+
+%%%%
+%Now deriving the filter
+%%%%
+
+In their paper on generalizing the Goertzel algorithm for non-integer multiples of the the fundamental frequency, P. Sysel and P. Rajmic show how the function $h_k[n]$ may be transformed to the Z-domain and optimized to reduce the amount of computational power required to compute the DFT coefficient \cite{Sysel2012}. The results are given by the following equations.
+
+%The following equations are taken from the paper - check if thats okay with Simon...
+\[h_k[n] \xRightarrow{\text{Z}} H_k(z)\]
+
+\begin{equation}
+W_N^{-kl}u[n] \xRightarrow{\text{Z}} \frac{1}{1 - W_N^{-k}z^{-1}} = \frac{1}{1 - e^{j\frac{2\pi k}{N}}z^{-1}}
+\end{equation}
+
+$H_k(z)$ can then be manipulated to give
+
+\begin{equation}
+\label{eqn:g_optimized_ir}
+H_k(z) = \frac{1 - e^{-j\frac{2\pi k}{N}}z^{-1}}{1 - 2cos(\frac{2\pi k}{N})z^{-1} + z^{-2}}
+\end{equation}
+
+Finally, equation \ref{eqn:g_optimized_ir} can be converted to state variable form to yeild the following
+
+\[here\]
 
 
 
