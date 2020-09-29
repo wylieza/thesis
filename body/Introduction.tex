@@ -18,29 +18,42 @@ There laser tag systems operate on many of the same principles as television rem
 
 \section{Objectives of this study}
 
-The primary objective of this study is to develop the modules for the uni-directional link (UDL) between a tagger and a target in a laser tag system. There are a vast number of techniques that could be employed to achieve this goal. This study aims to select appropriate techniques and implement these to allow their performance to be empirically tested. This study aims to serve as a platform for further research by performing an initial investigation of a UDL system in the context of laser tag.
+The primary objective of this study is to develop the modules for a uni-directional data link (UDDL) between a tagger and a target in a laser tag system. There are a vast number of techniques that could be employed to achieve this goal. This study aims to select appropriate techniques and implement these to allow their performance to be empirically tested. This study aims to serve as a platform for further research by performing an initial investigation into a UDDL system in the context of laser tag.
 
-The uni-directional link system (UDLS) is complex, comprising of many independent functional components. For the purposes of this investigation, these functional components will be separated into modules. Modular design enables more fine grained testing and experimentation which allows the performance of individual components to be evaluated.
+The uni-directional data link system (UDDLS) is complex, comprising of many independent functional components. For the purposes of this investigation, these functional components will be separated into modules. Modular design allows for more fine grained testing and experimentation which in turn allows the performance of individual components to be evaluated.
 
-In addition to the primary objective, which is to develop a practical UDL in the context. This study also aims to compare the effectiveness of different substitute modules. Specifically, this study aims to compare the use of a photodiode and phototransistor for the purposes of detecting IR light.
+In addition to the primary objective, which is to develop a practical UDDL in the context of laser tag. This study also aims to compare the effectiveness of different substitute modules. Specifically, this study aims to compare the use of a photodiode and phototransistor for the purposes of detecting IR light.
+
+Finally, there exist IR receiver chips (used in standard IR remote control applications) which perform a large portion of the work done by the receiver side of such a laser tag system inside a single package. As a control for the investigation, this study will use one of these as a golden measure with which to compare the full system.
 
 \subsection{Problems to be investigated}
 %Description of the main questions to be investigated in this study...
 
-This study aims to develop a system that may be further sub-divided into two distinct subsystems, namely the tagger subsystem and target subsystem. These two subsystems require a uni-directional transfer of data that should only occur when the tagger is precisely aimed toward the target.
+At the highest abstraction level, the first step of this investigation is to determine what modules are required to develop the UDDLS. This will require a breakdown of the fundamental system requirements into functional blocks.
 
-This investigation may be summarised through the following three research questions:
+After the system has been effectively sub-divided into appropriate functional blocks, techniques for implementing each block in the form of an independent module must be decided. The technique used to implement the functional block is determined based on the available equipment and resources and should be in line with standard practices.
+
+Once a module has been designed and implemented, various tests specific to that modules function should be performed to determine that the module is able to perform its function and to test the limits to the modules functionality.
+
+As hilighted in the objectives of this study, certain modules with the same function will be designed to provide a comparison between the performance of a photodiode and a phototransistor for the purposes of incident IR light measurements.
+
+This investigation may be summarised through the following questions:
 
 \begin{itemize}
 	\item What functional blocks are required to implement the tagger-target system?
-	\item What techniques are appropriate for the purposes of implementing these functional blocks?
-	\item What is the measured performance of the individual components and overall system after implementation?
+	\item How might these functional blocks be realized?
+	\item What is the predicted performance of these designs?
+	\item What is the measured performance of the individual modules and how does the system perform as a whole?
+	\item How do the different modules for the detection of incident IR light compare?
 %	
 %	\item What techniques are exist for the generation of narrow beam IR radiation?
 %	\item What is a suitable protocol for the tagger/target system to utilize for detecting and identifying shots fired by opponents?
 %	\item What light detection technology is the most appropriate in the context of laser tag?
 %	\item What kind of performance does one expect from such a system?
 \end{itemize}
+
+
+\iffalse
 
 -----------------------------------------------------
 
@@ -65,6 +78,9 @@ Commercial grade laser tag systems consist of elaborate vests which provide ampl
 
 In addition to the more toy like style of consumer grade laser tag equipment, there are  Of course over the years there have been consumer grade toys that enter the market, these are much more available in the overseas markets such as the USA.
 
+
+\fi
+
 \subsection{Purpose of the study}
 %Give the significance of investigating these problems. It must be obvious why you are doing this study
 %and why it is relevant.
@@ -73,11 +89,19 @@ In addition to the more toy like style of consumer grade laser tag equipment, th
 
 %------------------
 
-The purpose of this study is to investigate the design and construction of fundamental modules which form part of a laser tag system. This investigation will attempt to determine the effectiveness and measure performance of different key components from which the tagger and target units comprise.
+The purpose of this study is to investigate the design and construction of a uni-directional data link in the context of laser tag system. This investigation will attempt to determine the effectiveness and measure performance of different key components from which the tagger and target units comprise.
 
-In doing so this study aims to make available insightful information in the context of laser tag systems. Because of the niche nature of this system in the field of recreational electronics, there are very few sources of information available that formally document the development of a recreational laser tag system. This study aims to broaden the information available.
+In doing so this study aims to make available insightful information in the context of laser tag systems. Because of the niche nature of this system in the field of recreational electronics, there are very few sources of information available that formally document the development of a recreational laser tag system.
 
-Finally, to bring closure, this study will measure the performance achieved by the modules under different conditions at a high level. Performance will be measured for both the hardware components and software protocols being implemented.
+By performing a detailed investigation into the performance of the individual modules of the UDDL system, this study hopes to provide a foundation for further research into the individual modules and over-all system in an effort to overcome any short-comings and improve on the results obtained in this study.
+
+In summary, this study aims to achieve the following:
+
+\begin{itemize}
+	\item Demonstrate how one might create the UDDL system in the context of a laser tag system
+	\item Provide insight into the complications and limitations of such a system
+	\item Provide a foundation for further research and development of such a system or particular subsystems.
+\end{itemize}
 
 
 \section{Scope and Limitations}
@@ -85,17 +109,13 @@ Finally, to bring closure, this study will measure the performance achieved by t
 %reader what factors influenced the study such as sample size, time etc. It is not a section for excuses as
 %to why your project may or may not have worked.
 
-This investigation approaches the problems to be investigated at a functional level, this limitation is to ensure the study remains focused on the key problem questions. The purpose is to gain an understanding of the key modules and their respective components, not to design or create 'ready to play' laser tag equipment.
+This investigation approaches the problems to be investigated at a functional level and therefore does not concern the design of any casing or aesthetic assembly. This limitation is to ensure the study remains focused. As highlighted in the previous section, the purpose is to gain an understanding of the key modules and their respective performance, not to design or create 'ready to play' laser tag equipment.
 
-The completion of this project will involve the design and realization of a tagger and target module for the purposes of performing tests. These modules however will not be fixed in design as their purpose is to function as prototypes which will be modified throughout the testing phase to investigate different techniques for increasing performance.
+The completion of this project will involve the design and realization of a tagger and target module for the purposes of performing tests. All final implementations will be done on strip-board as opposed to PCB, this is due to the Covid-19 pandemic which has made global markets less accessible and time constraints do not allow for the possibility of unpredictable delays.
 
-Keeping in line with the limitation that this study does not set out to create a finished product, no time will be allocated to the development of aesthetic design. In the context of this study there is little benefit to be gained from designing an enclosure for the prototype components.
+Although no time will be allocated to the design aesthetics or 'form' component of the laser tag system that this investigation is focused around. Consideration will be taken with regard to the constraints such a system puts on the engineering design decisions. That is to say that all modules will be designed with size, weight and power constraints in mind, even though such constraints do not directly influence what is possible during the course of this investigation.
 
-It must be stated that throughout the investigation, there will be practical limitations on the techniques used to focus and detect the beam of IR radiation. This study aims only to investigate methods of focusing light that are suitable for being embedded inside a handheld tagger device. Likewise the target design will take into consideration that for the device to be usable it needs integrable into equipment worn by the user.
-
-This project has a budget of R1500 for the procurement of components. This limitation has ruled out the use of IR laser diodes, which although in themselves fit within the budget, would require a myriad of personal protective equipment and specialized lenses which is beyond the budget of this investigation.
-
-This study is taking place during the Covid-19 pandemic, as a consequence global markets are less accessible and there may be unpredictable delays. Because of this, PCB design will be avoided and circuit realization will be completed on perf-board.
+This project has a budget of R1500 for the procurement of components. In addition to the limited amount of time allocated to this investigation, this constraint has limited the number of components that can be compared. This limitation has also ruled out the use of IR laser diodes, which although in themselves fit within the budget, would require a myriad of personal protective equipment and specialized lenses which is beyond the budget of this investigation.
 
 
 
