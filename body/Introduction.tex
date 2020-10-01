@@ -8,28 +8,28 @@ Since the discovery of infrared (IR) light by William Herschel in the 1800s \cit
 
 On the electromagnetic spectrum infrared radiation is just below visible light with a slightly longer wavelength. Being invisible to the naked eye while retaining much the same behavioural properties as visible light is one of the reasons it has so many useful applications.
 
-This study focuses on the application of IR in the recreational sport of laser tag. Although many use cases of infrared involve passive observation, this investigation seeks to understand appropriate means to transmit and receive information by means of a narrow infrared beam for the purposes of unidirectional communication.
+This study focuses on the application of IR in the recreational sport of laser tag. Although many use cases of infrared involve passive observation, this investigation seeks to understand appropriate means to transmit and receive data by means of a narrow infrared beam for the purposes of unidirectional communication.
 
-When it comes to laser tag, there is commercial grade equipment that one my use at laser tag companies. However when one considers the consumer market there are noticeable differences between the more sophisticated commercial equipment and the cheaper laser tag toys available on the market. There is very little research and documentation on the creation of these laser tag systems.
+In the sport of laser tag, there are both commercial grade equipment that one may use at laser tag facilities and lower cost consumer grade laser tag toys. When one considers the consumer market there is a noticeable differences between the more sophisticated commercial equipment and the cheaper laser tag toys available on the market. There is very little research and documentation on the creation of these laser tag systems.
 
-There laser tag systems operate on many of the same principles as television remote controls. A topic on which much is known about the use of infrared in remote controls and there is a wealth of research, documentation and tutorials on the subject. Laser tag systems is in essence a specialized form of the television remote and much less information is available on the specialized use of infrared in the laser tag context. There are several factors and constraints which are unique in this context.
+Laser tag systems operate on many of the same principles as television remote controls. A topic which spans a wealth of research and documentation exists. Laser tag systems is in essence a specialized form of the television remote and much less information is available on the specialized use of infrared in the laser tag context. There are several factors and constraints which are unique in this context.
 
 
 
 \section{Objectives of this study}
 
-The primary objective of this study is to develop the modules for a uni-directional data link (UDDL) between a tagger and a target in a laser tag system. There are a vast number of techniques that could be employed to achieve this goal. This study aims to select appropriate techniques and implement these to allow their performance to be empirically tested. This study aims to serve as a platform for further research by performing an initial investigation into a UDDL system in the context of laser tag.
+The primary objective of this study is to develop the modules for a uni-directional data link (UDDL) between a tagger and a target in a laser tag system. There are a vast number of techniques that could be employed to achieve this goal. This study aims to select a few appropriate techniques and implement these for the purpose of empirically analysing their performance. This study aims to serve as a platform for further research by performing an initial investigation into a UDDL system in the context of laser tag.
 
-The uni-directional data link system (UDDLS) is complex, comprising of many independent functional components. For the purposes of this investigation, these functional components will be separated into modules. Modular design allows for more fine grained testing and experimentation which in turn allows the performance of individual components to be evaluated.
+The uni-directional data link system is complex, comprising of many independent functional components. For the purposes of this investigation, these functional components will be separated into modules. Modular design allows for more fine grained testing and experimentation which in turn allows the performance of individual components to be evaluated.
 
-In addition to the primary objective, which is to develop a practical UDDL in the context of laser tag. This study also aims to compare the effectiveness of different substitute modules. Specifically, this study aims to compare the use of a photodiode and phototransistor for the purposes of detecting IR light.
+In addition to the primary objective, which is to develop a practical data link in the context of laser tag. This study also aims to compare the effectiveness of different substitute modules. Specifically, this study aims to compare the use of a photodiode and phototransistor for the purposes of detecting IR light.
 
 Finally, there exist IR receiver chips (used in standard IR remote control applications) which perform a large portion of the work done by the receiver side of such a laser tag system inside a single package. As a control for the investigation, this study will use one of these as a golden measure with which to compare the full system.
 
 \subsection{Problems to be investigated}
 %Description of the main questions to be investigated in this study...
 
-At the highest abstraction level, the first step of this investigation is to determine what modules are required to develop the UDDLS. This will require a breakdown of the fundamental system requirements into functional blocks.
+At the highest abstraction level, the first step of this investigation is to determine what modules are required to develop the UDDL. This will require a breakdown of the fundamental system requirements into functional blocks.
 
 After the system has been effectively sub-divided into appropriate functional blocks, techniques for implementing each block in the form of an independent module must be decided. The technique used to implement the functional block is determined based on the available equipment and resources and should be in line with standard practices.
 
@@ -45,6 +45,7 @@ This investigation may be summarised through the following questions:
 	\item What is the predicted performance of these designs?
 	\item What is the measured performance of the individual modules and how does the system perform as a whole?
 	\item How do the different modules for the detection of incident IR light compare?
+	\item How does this system compare to all in one IR receiver devices
 %	
 %	\item What techniques are exist for the generation of narrow beam IR radiation?
 %	\item What is a suitable protocol for the tagger/target system to utilize for detecting and identifying shots fired by opponents?
@@ -117,9 +118,9 @@ Although no time will be allocated to the design aesthetics or 'form' component 
 
 This project has a budget of R1500 for the procurement of components. In addition to the limited amount of time allocated to this investigation, this constraint has limited the number of components that can be compared. This limitation has also ruled out the use of IR laser diodes, which although in themselves fit within the budget, would require a myriad of personal protective equipment and specialized lenses which is beyond the budget of this investigation.
 
-No automatic gain control considered
+No automatic gain control considered (todo: elaborate)
 
-No error correction
+No error correction but basic error detection (todo: elaborate)
 
 
 
