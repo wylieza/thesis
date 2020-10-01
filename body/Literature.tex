@@ -19,29 +19,36 @@ TBC.
 Optical communication concerns all manors of communicating information from one party to another through the medium of light. This investigation focuses on the use of light as a means of communication between electronic systems, however it is worth noting that optical communication certainly exist outside of this category.
 
 \subsection{Lenses}
-This projects requires the use of a convex lens to focus a source of light into a narrow beam. 
+%todo: work on the image presentation format (subfigures)
+This projects requires the use of a convex lens to focus a source of light into a narrow beam. The following subsection covers the theory behind focusing a point source using an ideal convex lens. For the purposes of this investigation, the light coming from an LED may be approximated as a point source and the lens approximated as ideal.
+
+Lenses work on the principle of refraction. When light enters a medium with a different refractive index at an angle offset from the perpendicular (normal), the light is bent toward or away from the normal, behaviour described by Snell's law. Using lenses it is possible to concentrate light into a beam.
 
 \begin{figure}[H]
 	\centering
 	\begin{minipage}{.3\textwidth}
 		\centering
-		\includegraphics[width=.8\linewidth]{figures/litreview/lens_divergent_beam.JPG}
+		\includegraphics[width=.9\linewidth]{figures/litreview/lens_divergent_beam.JPG}
 		\captionof{figure}{Divergent}
 		\label{fig:lens_divergent}
 	\end{minipage}%
 	\begin{minipage}{.3\textwidth}
 		\centering
-		\includegraphics[width=.8\linewidth]{figures/litreview/lens_parallel_beam.JPG}
+		\includegraphics[width=.9\linewidth]{figures/litreview/lens_parallel_beam.JPG}
 		\captionof{figure}{Parallel}
 		\label{fig:lens_parallel}
 	\end{minipage}
 	\begin{minipage}{.3\textwidth}
-	\centering
-	\includegraphics[width=.8\linewidth]{figures/litreview/lens_focus_beam.JPG}
-	\captionof{figure}{Convergent}
-	\label{fig:lens_convergent}
-\end{minipage}
+		\centering
+		\includegraphics[width=.9\linewidth]{figures/litreview/lens_focus_beam.JPG}
+		\captionof{figure}{Convergent}
+		\label{fig:lens_convergent}
+	\end{minipage}
+	\caption*{Images showing the different behaviours of light interacting with a lens}
 \end{figure}
+
+Figures \ref{fig:lens_divergent} to \ref{fig:lens_convergent} illustrate\footnotemark the three behaviours that may be achieved using a single point source of light and an ideal lens. Figure \ref{fig:lens_divergent} is an illustration of the light source exist between the near focal point and the lens, the resulting behaviour is a beam of light which diverges. Figure \ref{fig:lens_parallel} shows that for a light source placed at the focal point, the rays of light will emerge from the lens parallel, this is the definition of a focal point. Finally \ref{fig:lens_convergent} illustrates that for a point source of light placed further beyond the near focal point (on the opposite side to the lens) results in a beam that initially converges to a point and then diverges.
+\footnotetext{Created using \href{https://ricktu288.github.io/ray-optics/simulator/}{Ray-Optics Simulator}}
 
 
 
