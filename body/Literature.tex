@@ -113,7 +113,7 @@ The state machine approach is particularly useful because it only considers the 
 
 It should be noted that this FSM assumes the first bit transmitted is always a logical 1. In addition does not detect the end of a sequence, so additional logic is required such as a counter to detect when a certain number of bits have been received or by means of implementing timeout detection.
 
-\iffalse
+%\iffalse
 \subsection{Error Control}
 
 In information theory, error control is the field of study that concerns issues of detecting errors in digital communications and in certain instances provides the means to corrected these errors. Whenever data is transmitted over some kind of network, there is the possibility that interference can cause a bit to flip resulting in an error. Richard Hamming pioneered in the development of digital error control and is known for (amongst other things) the Hamming code.
@@ -139,9 +139,9 @@ Using a parity bit is the most simple means to detect an error in a bit sequence
 
  To use parity as a method to detect errors, the sender and receiver choose to use either even or odd parity. Before transmission, the sender calculates the parity bit for the sequence to be sent, this bit is then appended to the bit-stream. Upon receiving the bit-stream, the same parity calculation is done on the sequence. If the result of this calculation is a 1 it can be said for certain that an error occurred, if the result is zero it can be said that no error occurred or an even number of errors occurred.
 
-\subsubsection{Hamming Code}
+%\subsubsection{Hamming Code}
 
-\fi
+%\fi
 
 
 \subsection{Demodulation}
