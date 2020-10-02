@@ -20,9 +20,20 @@ Optical communication concerns all manors of communicating information from one 
 
 \subsection{Lenses}
 %todo: work on the image presentation format (subfigures)
-This projects requires the use of a convex lens to focus a source of light into a narrow beam. The following subsection covers the theory behind focusing a point source using an ideal convex lens. For the purposes of this investigation, the light coming from an LED may be approximated as a point source and the lens approximated as ideal.
+This projects requires the use of a lens to focus a source of light into a narrow beam. Lenses work on the principle of refraction. When light enters a medium with a different refractive index at an angle offset from the perpendicular (normal), the light is bent toward or away from the normal, behaviour described by Snell's law.
 
-Lenses work on the principle of refraction. When light enters a medium with a different refractive index at an angle offset from the perpendicular (normal), the light is bent toward or away from the normal, behaviour described by Snell's law. Using lenses it is possible to concentrate light into a beam.
+When working with lenses, the lens equation may be used to determine how an object might form a real image or virtual image when viewed through a lens \cite{Knight2013}, however for the purposes of our investigation the definition of the focal length is sufficient.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\linewidth]{figures/litreview/lens_diagram.png}
+	\caption{Focal Point Illustration}
+	\label{fig:lens_diagram}
+\end{figure}
+
+Figure \ref{fig:lens_diagram} above shows the near and far focal points for a lens. The diagram illustrates the behaviour of light rays produced by a theoretical parallel light source and passing through a bi-convex lens. The focal point is the common location through which parallel beams of light passing through a lens will pass. The near focal point is the apparent point location from which diverging beams produced by instead passing the parallel beams through a bi-concave lens would appear to have emanated from, should the rays be traced back along the divergent path.
+
+In is in the interest of this investigation to consider the use of a lens to produce a beam of parallel light rays. This is essentially reversing the process illustrated in figure \ref{fig:lens_diagram}.
 
 \begin{figure}[H]
 	\centering
@@ -47,9 +58,10 @@ Lenses work on the principle of refraction. When light enters a medium with a di
 	\caption*{Images showing the different behaviours of light interacting with a lens}
 \end{figure}
 
-Figures \ref{fig:lens_divergent} to \ref{fig:lens_convergent} illustrate\footnotemark the three behaviours that may be achieved using a single point source of light and an ideal lens. Figure \ref{fig:lens_divergent} is an illustration of the light source exist between the near focal point and the lens, the resulting behaviour is a beam of light which diverges. Figure \ref{fig:lens_parallel} shows that for a light source placed at the focal point, the rays of light will emerge from the lens parallel, this is the definition of a focal point. Finally \ref{fig:lens_convergent} illustrates that for a point source of light placed further beyond the near focal point (on the opposite side to the lens) results in a beam that initially converges to a point and then diverges.
+Figures \ref{fig:lens_divergent} to \ref{fig:lens_convergent} illustrate\footnotemark the three behaviours that may be achieved using a single point source of light and an ideal lens. Behavious in figure \ref{fig:lens_divergent} occurs when a point light source exists between the near focal point and the lens, the resulting beam of light diverges after passing through the lens. Figure \ref{fig:lens_parallel} shows that for a light source placed at the focal point, the rays of light will emerge from the lens parallel. Finally \ref{fig:lens_convergent} illustrates that for a point source of light placed further beyond the near focal point (on the opposite side to the lens) results in a beam that initially converges, focusing to some point and then diverges.
 \footnotetext{Created using \href{https://ricktu288.github.io/ray-optics/simulator/}{Ray-Optics Simulator}}
 
+In may cases including this investigation, the light coming from an LED may be approximated as a point source and the lens approximated as ideal.
 
 
 \subsection{IR Communication}
