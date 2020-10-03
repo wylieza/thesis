@@ -91,7 +91,23 @@ The module is designed to be driven by an open-drain configured GPIO pin. By pul
 %Missing:
 % - ...
 
-The high power IR LED has a wide beam angle, as it is designed for large area illumination. This is the opposite effect that is desired for a laser tag system. To fix this, a focus system in the form of a casing was designed. This prevents light from spilling out the side and it focuses the beam to minimize dispersion over long distances.
+The high power IR LED has a wide beam angle, as it is designed for large area illumination. This is the opposite effect that is desired for a laser tag system. To rectify this, a focus system in the form of a light focusing tube was designed. This prevents light from spilling out the side and it focuses the beam to minimize dispersion over long distances.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=.8\textwidth]{figures/design/beam_tube.png}
+	\caption{Exploded View - Light Focusing Tube}
+	\label{fig:light_focusing_tube}
+\end{figure}
+
+Figure \ref{fig:light_focusing_tube} above shows the components used to construct the light focusing tube. The length $l_{pipe}$ was determined by summing the experimentally calculated focal length of the lens with the length $l_{lens}$. Included in the calculation of the pipe length was the none-zero thickness of the light-seal (made out of 3mm hard-board) and the 3mm length of lens that remained external to the PVC piping.
+
+The 40mm PVC piping used had a wall thickness of 2.3mm resulting in an inner diameter of 37.7mm. The magnifying lens had a length of 30mm and the lens is in-set by 1mm. The experimental result from section \ref{exp:focal_length} showed the focal length of the magnifying lens to be 53mm.
+
+The length $l_{pipe}$ was calculated as follows
+
+\[l_{pipe} = l_{lens} - l_{lens\_external} + l_{focal} - l_{light\_seal\_thickness} + l_{lens\_in-set\_distance}\]
+\[l_{pipe} = 30mm - 3mm + 53mm - 3mm + 1mm = 78mm\]
 
 \subsection{LED Driver}
 %Missing:
