@@ -209,3 +209,11 @@ The DSP algorithm is discussed in subsection \ref{tone_decoder_software} from th
 
 \subsection{Tone Decoder Module}
 \label{tone_decoder_software}
+
+In section \ref{sec:goertzel_implementation} the goertzel algorithm is given. The parameters k (the DFT frequency bin) and N (the number of samples per frequency bin coefficient calculation) determine the value of omega which in turn affects the value of 'cosval', 'sinval' and 'coeff'. The value of k is also affected by the ratio of the frequency of the k\textsuperscript{th} DFT frequency bin to the sampling frequency (f\textsubscript{sampling}).
+
+The above is important because by carefully engineering the values of the configurable parameters it is possible to reduce the computation time of the algorithm.
+
+
+
+
