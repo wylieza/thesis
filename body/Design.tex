@@ -212,7 +212,19 @@ The DSP algorithm is discussed in subsection \ref{tone_decoder_software} from th
 
 In section \ref{sec:goertzel_implementation} the goertzel algorithm is given. The parameters k (the DFT frequency bin) and N (the number of samples per frequency bin coefficient calculation) determine the value of omega which in turn affects the value of 'cosval', 'sinval' and 'coeff'. The value of k is also affected by the ratio of the frequency of the k\textsuperscript{th} DFT frequency bin to the sampling frequency (f\textsubscript{sampling}).
 
-The above is important because by carefully engineering the values of the configurable parameters it is possible to reduce the computation time of the algorithm.
+The STM32F0 is designed to be low cost 32-bit microcontroller and utilizes the ARM Cortex-M0 CPU core. To reduce costs, this microcontroller does not contain any dedicated DSP peripherals nor does it contain any hardware dedicated to floating point arithmetic. Therefore careful consideration must be taken during design to optimize the performance of the goertzel filter implementation.
+
+\subsubsection{Sampling Frequency}
+The sampling frequency determines the highest frequency that may be present in the sampled waveform before aliasing will occur. The higher the sampling rate, the wider the bandwidth of the goertzel filter. A higher sampling frequency also results in relaxed requirements for the antialiasing filter.
+
+The sampling frequency is limited however by the speed of the microcontroller. This limitation influences the sampling frequency directly by acting as an upper bound to the rate at which the ADC can process and store each analog reading, however more critically, the sampling frequency is directly proportional to the number of samples that must be processed per period. Therefore it is necessary to keep the sampling frequency as low as possible.
+
+\subsubsection{Filter Optimization}
+By carefully engineering the configurable parameters in the goertzel algorithm (listing \ref{lst:goertzel_algorithm}) it is possible to reduce the computation time of the algorithm by removing the multiplication requirement for each new sample (line 13). This is achieved be choosing parameters that result in omega having a value of \(\frac{\pi}{2}\) and as a consequence make 'cosval' and 'coeff' equal to zero.
+
+
+
+
 
 
 
