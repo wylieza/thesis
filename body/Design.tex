@@ -212,15 +212,25 @@ The DSP algorithm is discussed in subsection \ref{tone_decoder_software} from th
 
 In section \ref{sec:goertzel_implementation} the goertzel algorithm is given. The parameters k (the DFT frequency bin) and N (the number of samples per frequency bin coefficient calculation) determine the value of omega which in turn affects the value of 'cosval', 'sinval' and 'coeff'. The value of k is also affected by the ratio of the frequency of the k\textsuperscript{th} DFT frequency bin to the sampling frequency (f\textsubscript{sampling}).
 
-The STM32F0 is designed to be low cost 32-bit microcontroller and utilizes the ARM Cortex-M0 CPU core. To reduce costs, this microcontroller does not contain any dedicated DSP peripherals nor does it contain any hardware dedicated to floating point arithmetic. Therefore careful consideration must be taken during design to optimize the performance of the goertzel filter implementation.
+The STM32F0 is designed to be low cost 32-bit microcontroller and utilizes the ARM Cortex-M0 CPU core. To reduce costs, this microcontroller does not contain any dedicated DSP peripherals nor does it contain any hardware dedicated to floating point arithmetic. Therefore careful consideration must be taken during design to optimize the performance of the goertzel filter implementation. The STM32F0 is equipped with several timers, a DMA peripheral and an advanced interrupt controller, these peripherals are indispensable for the implementation of the real-time digital filter. Figure \ref{fig:goertzel_functional_diagram} shows the functional blocks for the goertzel filter, the flow of data and clock signals.
 
-\subsubsection{Sampling Frequency}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=.8\textwidth]{figures/design/goertzel_filter_functional.png}
+	\caption{Goertzel Filter Functional Block Diagram}
+	\label{fig:goertzel_functional_diagram}
+\end{figure}
+
+\subsubsection{Sampling Frequency Constraints}
+\label{sec:sampling_frequency_constraints}
 The sampling frequency determines the highest frequency that may be present in the sampled waveform before aliasing will occur. The higher the sampling rate, the wider the bandwidth of the goertzel filter. A higher sampling frequency also results in relaxed requirements for the antialiasing filter.
 
 The sampling frequency is limited however by the speed of the microcontroller. This limitation influences the sampling frequency directly by acting as an upper bound to the rate at which the ADC can process and store each analog reading, however more critically, the sampling frequency is directly proportional to the number of samples that must be processed per period. Therefore it is necessary to keep the sampling frequency as low as possible.
 
 \subsubsection{Filter Optimization}
-By carefully engineering the configurable parameters in the goertzel algorithm (listing \ref{lst:goertzel_algorithm}) it is possible to reduce the computation time of the algorithm by removing the multiplication requirement for each new sample (line 13). This is achieved be choosing parameters that result in omega having a value of \(\frac{\pi}{2} + 2\pi m,\; m\epsilon \mathbb{Z}\) and as a consequence make 'cosval' and 'coeff' equal to zero.
+As outlined at the beginning of this section, the most critical means of optimization for this filter is the full utilization of available peripherals. After reset, the main processor configures the timer, ADC and DMA to continuously sample the incoming signal and store the conversion results in a circular buffer. After this configuration, the main processor is freed from this process and all processing cycles are dedicated to processing the data being stored in the circular buffer.
+
+The second means of optimization was realised after examination of the goertzel algorithm. By carefully engineering the configurable parameters in the goertzel algorithm (listing \ref{lst:goertzel_algorithm}) it is possible to reduce the computation time of the algorithm by removing the multiplication requirement for each new sample (line 13). This is achieved be choosing parameters that result in omega having a value of \(\frac{\pi}{2} + 2\pi m,\; m\epsilon \mathbb{Z}\) and as a consequence make 'cosval' and 'coeff' equal to zero.
 
 Line 4 of the algorithm provides the relationship between k, N and $\omega$
 
@@ -246,9 +256,22 @@ If only integer values for k, N, $f_{sampling}$ and $f_{bin}$ are considered, li
 Equation \ref{eqn:k_N_and_fb_fs} shows that the ratio of $f_{bin}$ to $f_{sampling}$ must be equal to that of k to N. This relationship reveals that the only realisable value for m is zero. Any value of m greater than zero requires a sampling frequency lower than the bin frequency which violates the Nyquist criteria and a negative value of m would require (for $f_{bin} \approx 36kHz$) a negative sampling frequency which is nonsensical. Therefore the final relationship between the ratios may be summarised in the following equation
 
 \begin{equation}
-\label{eqn:k_N_and_fb_fs}
+\label{eqn:k_N_and_fb_fs_ratio}
 \frac{k}{N} = \frac{f_{bin}}{f_{sampling}} = \frac{1}{4}
 \end{equation}
+
+Even after the above two means of optimizing the goertzel algorithm, the STM32F0 was not fast enough to process every sample. %HERE
+
+\subsubsection{Practical Implementation}
+
+The desired bin frequency is 36kHz, according to equation \ref{eqn:k_N_and_fb_fs_ratio} this requires a sampling frequency of 144kHz. This is within the constraints set out in section \ref{sec:sampling_frequency_constraints}.
+
+The ADC conversions are triggered by timer 3, a general purpose 16-bit timer. The timer accepts a pre-scalar and counter period value. The frequency of the timer's output and as a result the sampling frequency is given by \(f_{sampling} = \frac{f_{system\_clock}}{prescaler \times cperiod}\). Substituting our system clock frequency, desired sampling frequency and rearranging the equation we find the product of the pre-scalar and clock period values.
+
+\[prescaler \times cperiod = \frac{48 \times 10^6}{144 \times 10^3} = 333.\dot{3}\]
+
+The result, $333.\dot{3}$ cannot be written as the product of two integer values, therefore it is chose that the pre-scalar was set to one and the clock period was set to 333. Therefore the actual sampling frequency is $144.\dot{1}4\dot{4}$ kHz. Returning to equation \ref{eqn:k_N_and_fb_fs_ratio}, we see that we must choose $f_{bin} = 36.036$kHz to preserve the ratio.
+
 
 
 
