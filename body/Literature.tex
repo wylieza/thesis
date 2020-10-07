@@ -241,7 +241,7 @@ Finally, equation \ref{eqn:g_optimized_ir} can be converted to state variable fo
 \label{sec:goertzel_implementation}
 Using the state variable equations \ref{eqn:g_ss} and \ref{eqn:g_ssoutput} we can implement the goertzel filter digitally. The following code in listing \ref{lst:goertzel_algorithm} shows a Goertzel filter implemented in the Octave environment.
 
-\begin{lstlisting}[caption={Goertzel Algorithm - Octave Implementation},label={lst:goertzel_algorithm}]
+\begin{lstlisting}[caption={Goertzel Algorithm - Octave Implementation\label{lst:goertzel_algorithm}}]
 function magnitudesqd = calculate_goertzel (N, bin_frequency, sampling_frequency, samples)
 
 	k = round(N*bin_frequency/sampling_frequency);

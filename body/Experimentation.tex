@@ -37,13 +37,24 @@ In both cases, the focus system was setup a specific distance from a flat surfac
 %todo: Give distances for measuredments taken
 Figure \ref{fig:focus_system_experiemnt} above shows the experimental setup. The experiment was performed for distances of x, y, z.
 
-\subsection{Goertzel Filter}
+\subsection{Goertzel Filter Optimization}
+
+To understand the benefits to be gained from optimization and to understand the effectiveness of the two optimization methods the following experiment were performed to give insight into the effect of increasing the number of samples (N) and optimizing the algorithm by reducing the number of multiplications.
+
+First, the goertzel algorithm as given in listing \ref{lst:goertzel_algorithm} was converted to C and implemented inside the circular buffer's callback functions. This implementation is referred to as the unoptimized algorithm. As a consequence of using a circular buffer with two segments, there are two callback functions. The goertzel implementation inside both callback functions were the same, with the only exception being the location in the buffer from which samples were read.
+
+The timing was measured externally using an oscilloscope, to achieve this, just before the goertzel algorithm began executing an LED was turned on using one of the GPIO pins. This LED was turned off as soon as the algorithm finished calculating the result. Each of the two callback functions used a unique GPIO pin to toggle separate LEDs.
+
+The independent variable in this experiment was the number of samples being processed (N). N was initially set to 4 and doubled for each iteration, the final iteration used a value of 64 for N.
 
 Design experiments
 \begin{itemize}
 	\item Impact of multiplication in algorithm
 	\item Impact of N
 \end{itemize}
+
+\subsubsection{Pre-Optimization}
+Before optimizing the algorithm, the computation rate per sample was calculated by running the Goertzel algorithm for a set of N samples and dividing the total processing time by N.
 
 
 
