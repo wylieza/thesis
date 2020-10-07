@@ -43,9 +43,18 @@ To understand the benefits to be gained from optimization and to understand the 
 
 First, the goertzel algorithm as given in listing \ref{lst:goertzel_algorithm} was converted to C and implemented inside the circular buffer's callback functions. This implementation is referred to as the unoptimized algorithm. As a consequence of using a circular buffer with two segments, there are two callback functions. The goertzel implementation inside both callback functions were the same, with the only exception being the location in the buffer from which samples were read.
 
-The timing was measured externally using an oscilloscope, to achieve this, just before the goertzel algorithm began executing an LED was turned on using one of the GPIO pins. This LED was turned off as soon as the algorithm finished calculating the result. Each of the two callback functions used a unique GPIO pin to toggle separate LEDs.
+The timing was measured externally using an oscilloscope, to achieve this, just before the goertzel algorithm began executing an LED was turned on using one of the GPIO pins. This LED was turned off as soon as the algorithm finished calculating the result. Each of the two callback functions used a unique GPIO pin to toggle separate LEDs. Figure \ref{fig:goertzel_optimization_experiemnt} below illustrates the experimental setup in the form of a block diagram.
 
-The independent variable in this experiment was the number of samples being processed (N). N was initially set to 4 and doubled for each iteration, the final iteration used a value of 64 for N.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=.9\linewidth]{figures/experimentation/goertzel_speed_test_diagram.png}
+	\captionof{figure}{Goertzel Optimization Experimental Setup}
+	\label{fig:goertzel_optimization_experiemnt}
+\end{figure}
+
+A signal generator was used to produce a 36kHz sine waveform with an amplitude of 1V and an offset of 1V. Using a signal generator ensured that a known waveform was present at the input to the goertzel filter, in addition, by using a 36kHz waveform the filter is forced to deal large sample values which gives insight into performance under the most demanding circumstances.
+
+The independent variable in this experiment was the number of samples being processed (N). N was initially set to 4 and doubled for each iteration, the final iteration used a value of 64 for N. An iteration involved configuring 
 
 Design experiments
 \begin{itemize}
