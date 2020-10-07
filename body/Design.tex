@@ -233,6 +233,8 @@ As outlined at the beginning of this section, the most critical means of optimiz
 
 The second means of optimization was realised after examination of the goertzel algorithm. By carefully engineering the configurable parameters in the goertzel algorithm (listing \ref{lst:goertzel_algorithm}) it is possible to reduce the computation time of the algorithm by removing the multiplication requirement for each new sample (line 13). This is achieved be choosing parameters that result in omega having a value of \(\frac{\pi}{2} + 2\pi m,\; m\epsilon \mathbb{Z}\) and as a consequence make 'cosval' and 'coeff' equal to zero.
 
+It is important to note, this optimization does not improve the time complexity of the algorithm, in both cases the algorithm has a time complexity of O(N). However for real-time algorithms such as in the case of a goertzel filter, every possibly time saving is valuable and can be the difference between a working and failed implementation.
+
 Line 4 of the algorithm provides the relationship between k, N and $\omega$
 
 \begin{equation}
