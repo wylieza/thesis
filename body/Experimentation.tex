@@ -54,17 +54,23 @@ The timing was measured externally using an oscilloscope, to achieve this, just 
 
 A signal generator was used to produce a 36kHz sine waveform with an amplitude of 1V and an offset of 1V. Using a signal generator ensured that a known waveform was present at the input to the goertzel filter, in addition, by using a 36kHz waveform the filter is forced to deal large sample values which gives insight into performance under the most demanding circumstances.
 
-The independent variable in this experiment was the number of samples being processed (N). N was initially set to 4 and doubled for each iteration, the final iteration used a value of 64 for N. An iteration involved configuring 
+The experiment was broken into iterations, each iteration began by setting N to the desired number of samples, following this the code was compiled and executed on the development board. The signal generator was attached and enabled and the scope probes were attached to the GPIO pins responsible for indicating timing. The scope was then adjusted so that between 20 and 30 pulses could be seen. 
 
-Design experiments
-\begin{itemize}
-	\item Impact of multiplication in algorithm
-	\item Impact of N
-\end{itemize}
+The independent variable N (number of samples to process) was set to 4 for the first iteration and doubled for each consecutive iteration until a value of 64 was reached. These five values of N were chosen because they preserve the ratio given in equation \ref{eqn:k_N_and_fb_fs_ratio} which is a requirement for the optimization to work.
 
-\subsubsection{Pre-Optimization}
-Before optimizing the algorithm, the computation rate per sample was calculated by running the Goertzel algorithm for a set of N samples and dividing the total processing time by N.
+Using the measurement tools built into the Picoscope software the 'high pulse width' for both GPIO pin outputs was measured, along with the duty cycle of those waveforms. The average of all pulses was recorded.
 
+For the purposes of this experiment only the 'high pulse width' of the callback responsible for the first half of the circular buffer being full was necessary to draw conclusions regarding the algorithms performance. The timing for the second half of the buffer being full was used only as a sanity check, both the callback functions should run for the same amount of time as each is executing the same algorithm therefore the average high pulse width for each should be the same.
+
+After the experiment was run for all 5 iterations, the goertzel implementation was modified by removing the unnecessary multiplications (as discussed in section \ref{sec:filter_optimization_design}) and the above experiment repeated following the same method.
+
+
+%Filter performance experiment:
+% - Impact of multiplication in algorithm
+% - Impact of N
+
+
+\subsection{Goertzel Filter Performance}
 
 
 \begin{itemize}
