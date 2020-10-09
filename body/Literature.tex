@@ -65,7 +65,43 @@ In may cases including this investigation, the light coming from an LED may be a
 
 
 \subsection{IR Communication}
-This is where I talk about different IR protocols
+%This is where I talk about different IR protocols
+
+IR has is used in many applications, this is because it is cheap, efficient and simple to use. A basic implementation can be done using an IR LED, IR receiver IC and a pair of microcontrollers.
+
+There are several IR communication protocols in existence. Of the extensive list of available protocols the following are quite popular
+
+\begin{itemize}
+	\item RC-5
+	\item RC-6
+	\item NEC
+	\item SIRC
+\end{itemize}
+
+Practically all the IR protocols for remote control applications follow the exact same principles for encoding and transmitting information through IR radiation. To transmit information, an IR LED is modulated at a particular carrier frequency (usually around 36kHz). Modulation is necessary because there are many sources of IR radiation and it would be otherwise impossible to distinguish the user generated IR signal from surrounding noise sources. Each protocol defines specific timing conditions for how long the IR radiation should be modulated to portray a specific symbol. This is where the various protocol differ.
+
+Some protocols use a technique known as pulse width encoding. This technique involves modulating the IR LED for a different period of time depending on whether a 1 or 0 is to be transmitted, while maintaining a constant period of time between transmissions. This is the technique is incorporated into Sony's SIRC protocol.
+
+Other protocols use pulse distance encoding, such as the NEC protocol by Renesas. This protocol involves modulating the IR LED for a fixed period of time and the time period between each modulation is used to indicate either a 1 or 0.
+
+Finally, some of the IR protocols use Manchester Encoding to embed information, such as in the case of the very popular RC-5 protocol and its successor the RC-6 protocol. Due to its wide adoption and popularity, as well as incorporation of the elegant Manchester Encoding technique, it was decided to use an adaption of the RC-5 protocol in this project. A review of Manchester Encoding is detailed in section \ref{sec:manchester_encoding} below.
+
+\subsubsection{RC-5 Protocol}
+This project uses a slightly modified version of the RC-5 transmission protocol. The the original RC-5 protocol is illustrated in figure \ref{fig:rc_5_protocol}. The bits are encoded using the IEEE 802.3 convention for Manchester Encoding. The modulation frequency of the carrier is 36kHz and the length of one bit period is 64 cycles or 1.778mS.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\linewidth]{figures/litreview/rc5_protocol.png}
+	\caption{RC-5 IR Protocol}
+	\label{fig:rc_5_protocol}
+\end{figure}
+
+Every transmission begins with two start bits, these bits always have a value of 1. Following the start bits is a 'toggle' bit. In remote control applications it is sometimes important to distinguish between a button remaining depressed and a button being repeatedly pressed.
+
+This is achieved through the toggle bit, which remains constant
+
+When a button is depressed, the message is transmitted repeatedly with a 114ms gap between transmissions.
+
 
 \subsection{Materials Interaction}
 This is where I talk about materials that block visible light but let IR through
@@ -81,6 +117,7 @@ Talk about interference and noise due to ambient light
 Talk about modulation to allow for easy detection
 
 \subsection{Manchester Encoding}
+\label{sec:manchester_encoding}
 Manchester Code is a type of phase encoding. It is classified as a line code and is produced by generating patterns through some measurable phenomena. The commonly used mediums to represent a Manchester encoded signal would be voltage, current and light (electromagnetic radiation).
 
 Manchester coding, as its name suggests, was developed at the University of Manchester and it was first published in 1949 \cite{Jameel2019}. Manchester encoding is a protocol for integrating the clock and data into a single sequence consisting of only two symbols. It does not require clock synchronization, only that a predefined bit-width is known by both the receiver and transmitter. 
