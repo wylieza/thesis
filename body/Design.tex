@@ -277,9 +277,22 @@ The result, $333.\dot{3}$ cannot be formed as the product of two integer values,
 
 
 \subsection{Tagger Software}
-%HERE
 
+For the purposes of this investigation, a tagger needed to be created that can encode a gun ID and possibly some additional bits for other information. It was chosen to use a 16-bit packet size. In this initial implementation a single bit is reserved for error detection, however further development of this system would likely include hamming codes which would require a few additional reserved bits.
 
+\subsubsection{Modified RC-5 Protocol}
+The RC-5 protocol was used as the basis for the design of the modified transmission protocol. The Manchester Encoding technique and all timing specifications are preserved. However the structure of the bits transmitted has been modified. 
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\linewidth]{figures/design/modified_rc5_protocol.png}
+	\caption{Modified RC-5 IR Protocol}
+	\label{fig:modified_rc_5_protocol}
+\end{figure}
+
+Figure \ref{fig:modified_rc_5_protocol} shows the modified structure for a single transmission. The two start bits are preserved. Following this, the toggle bit, address bits and command bits have been merged into a single set of data bits with an additional 4 bits having been included to increase the number of bits to 16. Finally in the modified protocol the bit order of has been reversed. It should be noted that data bit D15 is used for the parity checksum.
+
+\subsubsection{Realization}
 
 
 
