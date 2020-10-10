@@ -72,11 +72,23 @@ After the experiment was run for all 5 iterations, the goertzel implementation w
 
 \subsection{Goertzel Filter Performance}
 
+Digital signal processing has the advantage of being very easy to simulate. This is due to it's digital nature which results in perfect reproducibility. To test the performance of the goertzel filter the following experiments where performed.
 
 \begin{itemize}
-	\item Trigger Frequency vs amplitude
-	\item Frequency vs goertzel value (compare to simulation)
+	\item Simulated Frequency Response
+	\item Measured Frequency Response
+	\item Trigger Frequency vs amplitude | Trigger frequency
 \end{itemize}
+
+\subsubsection{Simulated Frequency Response}
+Simulated frequency response was performed using Octave\footnote{Open-source alternative to Matlab}. This was achieved by creating a goertzel filter with the exact same optimized algorithm as the one implemented on the STM32. The octave function for this is found in listing \ref{label}. This function is optimized according to the design outlined in section \ref{sec:filter_optimization_design} and the value returned by the function is the magnitude of the DFT coefficient squared.
+
+Following this a second Octave script was written to find the filter response. This script generated a range of frequencies in the form of sampled sin waves over the range of 0Hz to 71.7kHz with an interval of 100Hz. To simulate the behaviour of the filter, the test frequencies were scaled, off-set and sampled to precisely match the conversion values that would be returned by the ADC. After generating each frequency, the above mentioned octave implementation of the Goertzel filter was called and the computation result stored.
+
+The frequency response was plotted to provide an insight into the expected performance of the digital filter.
+
+\subsubsection{Measured Frequency Response}
+
 
 
 
