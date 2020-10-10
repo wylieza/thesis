@@ -74,4 +74,16 @@ The gradient of the unoptimized curve is $16\mu S/sample$ and the gradient of th
 
 The final observation is that the implemented optimization has two implications for the algorithms performance. The first implication is a small but non-zero constant timer saving, this comes as a result of removing the need for the multiplications to find the real and imaginary components of the k\textsubscript{th} DFT coefficient (see lines 18 and 19 of listing \ref{lst:goertzel_algorithm}). The second implication is a time difference which is directly proportional to the number of samples N, as indicated by the different gradients highlighted in the above paragraph.
 
+\subsection{Goertzel Filter Performance}
+
+An example, sampled sinusoid waveform is given in the appendix, figure \ref{fig:sampled_36khz_sinusoid}.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{figures/results/goertzel_filter_simulation_wide.png}
+	\caption{Frequency Response - Optimized Goertzel Algorithm}
+	\label{fig:goertzel_filter_response}
+\end{figure}
+
+
 
