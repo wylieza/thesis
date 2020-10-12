@@ -1,10 +1,9 @@
 \chapter{Results}
 \label{ch_results}
 
-These are the results I found from my investigation.
+%These are the results I found from my investigation.
 
-Present your results in a suitable format using tables and graphs where necessary. Remember to refer
-to them in text and caption them properly.
+%Present your results in a suitable format using tables and graphs where necessary. Remember to refer to them in text and caption them properly.
 
 
 \section{Simulation Results}
@@ -28,7 +27,32 @@ The measured focal length of the lens was measured to be 53mm. Figure \ref{fig:f
 
 Table \ref{label} below shows the beam spot size vs distance for the IR and warm-white power LEDs.
 
-%table here
+\begin{figure}[H]
+	\centering
+	\begin{minipage}{.4\textwidth}
+		%todo: make image higher quality after zoom
+		\centering
+		\includegraphics[width=0.9\linewidth]{figures/results/goertzel_filter_speed/16nu.JPG}
+		\captionof{figure}{Spot diameter V.S Distance}
+		\label{fig:spot_size_vs_distance}
+	\end{minipage}%
+	\hspace{.1\textwidth}
+	\begin{minipage}{.4\textwidth}
+		\begin{table}[H]
+			\begin{tabular}{cc}
+				\hline
+				\textbf{\begin{tabular}[c]{@{}c@{}}Distance\\ (m)\end{tabular}} & \textbf{\begin{tabular}[c]{@{}c@{}}Spot Diameter\\ (mm)\end{tabular}} \\ \hline
+				1 & 96.46 \\ \hline
+				2 & 160.3 \\ \hline
+				4 & 287.5 \\ \hline
+				8 & 547.2 \\ \hline
+				16 & 1059
+			\end{tabular}
+			\captionof{table}{Tabulation of Spot Diameter V.S. Distance}
+			\label{tbl:spot_size_vs_distance}
+		\end{table}
+	\end{minipage}
+\end{figure}
 
 \subsection{Goertzel Filter Optimization}
 
@@ -91,6 +115,8 @@ It is clear from the plot that the filter is highly sensitive to the magnitude o
 
 
 \subsubsection{Measured Frequency Response}
+
+The following plot in figure \ref{fig:goertzel_filter_response_empirical} show the actually values returned by the Goertzel filter module.
 
 \begin{figure}[H]
 	\centering

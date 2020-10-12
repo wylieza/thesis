@@ -59,7 +59,7 @@ The development board provides break-out pins for the microcontroller, 4 input b
 \subsection{Carrier Frequency Generator}
 %Missing
 % - Calculations and chosen values
-To generate the 36kHz carrier waveform the LM555 timer IC was used. The module is designed to receive a 3.3V logic control signal. The LED driver modules were designed to operate using an open-drain control signal, therefore a transistor was used to convert the push-pull output to an open-drain output. Figure \ref{fig:schematic_carrier_generation} shows the schematic for the module.
+To generate the 36kHz carrier waveform the LM555 timer IC was used. The module is designed to receive a 3.3V logic control signal. The LED driver modules were designed to operate using an open-drain control signal, therefore a transistor was used to convert the push-pull output to an open-drain output. In addition, transistors were used to convert the 3.3V control signal to a 5V input for the RST pin. Figure \ref{fig:schematic_carrier_generation} shows the schematic for the module.
 
 
 \begin{figure}[H]
@@ -68,6 +68,11 @@ To generate the 36kHz carrier waveform the LM555 timer IC was used. The module i
 	\caption{Carrier Generation Module Schematic}
 	\label{fig:schematic_carrier_generation}
 \end{figure}
+
+According to the data sheet the period my be calculated as \(T = 0.693 (R_2 + 2R_3) C1\). A capacitor value of 10nF was chosen. Therefore, to generate a waveform with the desired period of $27.7\mu S$ the required theoretical value of $(R_2 + 2R_3)$ is $4k\Omega$.
+
+%After testing
+The above design was implemented on a breadboard to test the 
 
 
 \subsection{Power LED Driver}
