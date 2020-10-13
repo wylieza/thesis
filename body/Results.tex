@@ -125,3 +125,41 @@ The following plot in figure \ref{fig:goertzel_filter_response_empirical} show t
 	\label{fig:goertzel_filter_response_empirical}
 \end{figure}
 
+
+\subsection{Power LED Driver}
+
+The following screenshots shown in figures \ref{fig:pwr_led_6k} through \ref{fig:pwr_led_96k} show the results captured by the oscilloscope. The red trace shows the output of the function generator and the blue trace shows the voltage across the shunt resistor R1\footnote{see schematic in figure \ref{fig:schematic_power_led_driver}}.
+
+\begin{figure}[H]
+	\centering
+	\begin{minipage}{.399\linewidth}
+		\centering
+		\includegraphics[width=\textwidth]{figures/results/power_led_driver/6khz.JPG}
+		\captionof{figure}{6kHz Driving Frequency}
+		\label{fig:pwr_led_6k}
+	\end{minipage}%
+	\hspace{.1\linewidth}
+	\begin{minipage}{.399\linewidth}
+		\centering
+		\includegraphics[width=\textwidth]{figures/results/power_led_driver/36khz.JPG}
+		\captionof{figure}{36kHz Driving Frequency}
+		\label{fig:pwr_led_36k}
+	\end{minipage}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\begin{minipage}{.4\linewidth}
+		\centering
+		\includegraphics[width=\textwidth]{figures/results/power_led_driver/66khz.JPG}
+		\captionof{figure}{66kHz Driving Frequency}
+		\label{fig:pwr_led_66k}
+	\end{minipage}
+	\hspace{.1\linewidth}
+	\begin{minipage}{.4\linewidth}
+		\centering
+		\includegraphics[width=\textwidth]{figures/results/power_led_driver/96khz.JPG}
+		\captionof{figure}{96kHz Driving Frequency}
+		\label{fig:pwr_led_96k}
+	\end{minipage}
+\end{figure}
