@@ -113,10 +113,11 @@ The simulation results shown in figure \ref{fig:goertzel_filter_response_simulat
 
 It is clear from the plot that the filter is highly sensitive to the magnitude of the sampled waveform. A decrease in amplitude by a factor of two results in a four fold decrease in the amplitude of the filters response.
 
+%todo: from here onwards I need to write an analysis of results
 
 \subsubsection{Measured Frequency Response}
 
-The following plot in figure \ref{fig:goertzel_filter_response_empirical} show the actually values returned by the Goertzel filter module.
+The following plot in figure \ref{fig:goertzel_filter_response_empirical} show the values returned by the Goertzel filter module and shows the expected frequency response curve.
 
 \begin{figure}[H]
 	\centering
@@ -163,3 +164,17 @@ The following screenshots shown in figures \ref{fig:pwr_led_6k} through \ref{fig
 		\label{fig:pwr_led_96k}
 	\end{minipage}
 \end{figure}
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{ccc}
+		\hline
+		\textbf{\begin{tabular}[c]{@{}c@{}}Frequency\\ (kHz)\end{tabular}} & \textbf{\begin{tabular}[c]{@{}c@{}}LED Current\\ (mA)\end{tabular}} & \textbf{\begin{tabular}[c]{@{}c@{}}Duty Cycle\\ (\%)\end{tabular}} \\ \hline
+		6 & 908 & 48.2 \\ \hline
+		36 & 908 & 45.5 \\ \hline
+		66 & 908 & 44.7 \\ \hline
+		96 & 908 & 40.8 \\ \hline
+	\end{tabular}
+	\caption{Frequency V.S. Current and Pulse Width}
+	\label{tbl:led_driver_tabulated_results}
+\end{table}
