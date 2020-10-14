@@ -107,25 +107,28 @@ To test the high-level functionality of the Goertzel
 
 The LED driver module must be capable of modulating a high-power IR led at a frequency of 36kHz.
 
-To verify that the power LED driver module operates as expected and to evaluate the modules performance, a set of test driving frequencies were injected and the response recorded. Figure \ref{fig:power_led_driver_experiemnt_setup} illustrates the experimental setup.
+To verify that the power LED driver module operates as expected and to evaluate the modules performance, a set of test driving frequencies were injected and the response recorded. Figure \ref{fig:power_led_driver_experiemnet_setup} illustrates the experimental setup.
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=.9\linewidth]{figures/experimentation/power_led_driver_experimental_setup.png}
 	\captionof{figure}{Power LED Driver Experimental Setup}
-	\label{fig:power_led_driver_experiemnt_setup}
+	\label{fig:power_led_driver_experiemnet_setup}
 \end{figure}
 
 The test signal is a square wave generated using a function generator. This signal is converted to an open-drain signal before being injected into the driver module. To precisely monitor the LED's state, an oscilloscope was connected across the shunt resistor R1 (see schematic in figure \ref{fig:schematic_power_led_driver}). Monitoring the resistor provides insight into both the state of the LED and the current through the LED. The current through the power LED can be calculated as \(I_{led} = \frac{V_{R1}}{0.7}\).
 
 
-\subsection{Photodiode Detector Module}
+\subsection{Detector Module Directivity}
 
-\subsection{Phototransistor Detector Module}
+To characterise the directivity of each detector module, the following experiment was performed.
 
-\subsection{Signal Conditioning Module}
-
-\subsection{IR Receiver Module}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=.9\linewidth]{figures/experimentation/beam_angle_of_receiver.png}
+	\captionof{figure}{Directivity Experimental Setup}
+	\label{fig:directivity_experiement_setup}
+\end{figure}
 
 
 
