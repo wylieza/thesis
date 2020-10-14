@@ -121,7 +121,7 @@ The test signal is a square wave generated using a function generator. This sign
 
 \subsection{Detector Module Directivity}
 
-To characterise the directivity of each detector module, the following experiment was performed.
+To characterise the directivity of the photodiode and phototransistor detector modules, the following experiment was performed.
 
 \begin{figure}[H]
 	\centering
@@ -130,6 +130,15 @@ To characterise the directivity of each detector module, the following experimen
 	\label{fig:directivity_experiement_setup}
 \end{figure}
 
+The light focus system was connected to the LED driver module which was modulated at 36kHz by the carrier waveform generator module. The modulated beam was then aimed at the sensor module, placed 230cm away. The output of the detector module was connected to an oscilloscope to trace the output waveform.
+
+The IR beam was positioned off centre so that when the module was adjusted to have an indecent angle of 0\textdegree the output of the sensor module was only just saturating, this ensured the sensitivity could be accurately tracked. Figure \ref{fig:begin_saturation_of_photodiode} in the appendix illustrates the waveform at the output of the photodiode module just after saturation.
+
+Starting with an incidence angle of 0\textdegree, the module was incrementally rotated until a the angle of incidence was equal to 90\textdegree. Each increment involved performing a 10\textdegree rotation and following the rotation the output waveform was exported for processing in Octave.
+
+Octave was used to calculate the RMS\footnote{root mean square} voltages for the recorded output waveforms. In addition, the RMS values were normalized and plotted to provide insight into the detector modules directivity.
+
+The IR receiver module was also tested following the above experimental method, however the output from this module is a logic level indicating the presence of a modulated waveform so it would be non-nonsensical to consider the RMS value, instead the binary state was tracked.
 
 
 
