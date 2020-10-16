@@ -302,16 +302,13 @@ Figure \ref{fig:modified_rc_5_protocol} shows the modified structure for a singl
 
 The tagger software comprises a set of functions dedicated to the encoding of a 15-bit data packet. Implementation of the Manchester Encoding is done purely using timers and interrupts ensuring precise timing and freeing the main processor loop for handling lower priority tasks such as managing player data.
 
-The following functions relating to the generation of a Manchester bit-stream on the pre-defined output GPIO pin were created
+The following functions relating to the generation of a Manchester waveform on the pre-defined output GPIO pin were created
 
-\begin{itemize}
-	\item get\_parity\_15
-	\subitem Processes a 15-bit long data packet and returns the even parity
-	\item wrap\_data\_15
-	\subitem Processes a 15-bit long data packet and returns 18-bit bitstream for transmission
-	\item generate\_manchester
-	\subitem Generate Manchester Encoded output on the pre-define GPIO based on the provided bitstream
-\end{itemize} 
+\begin{lstlisting}[style=cstyle, caption=Transmission Related Functions\label{transmission_related_functions}]
+	uint8_t get_parity_15(uint16_t packet); //processes a 15-bit long data packet and returns the even parity
+	uint32_t wrap_data_15(uint16_t data); //processes a 15-bit long data packet and returns 18-bit bitstream for transmission
+	generate_manchester(uint32_t buffer, uint8_t num_bits); //starts Manchester encoded output generation on the pre-define GPIO based on the provided bitstream
+\end{lstlisting}
 
 Using a dedicated timer peripheral and interrupts for the process of generating the Manchester encoded output required the use of global variables to track the status of an on-going transmission. The following listing shows the global variables along with a brief descriptor comment.
 
@@ -324,9 +321,19 @@ Using a dedicated timer peripheral and interrupts for the process of generating 
 	volatile int manchester_timeout_counter; //counts half bit-periods elapsed since last bit was transmitted
 \end{lstlisting}
 
-Using interrupts and global variables opens up the possibility for the data corruption to occur. Although the STM32F0 is inherently a serial processor, the main-loop process (responsible for, among other things, initiating transmissions) and the transmission process (the timer interrupt routine) from a high level execute as parallel processes. Therefore it is critical to provide a mechanism to prevent one process from modifying any of the variable given in list \ref{lst:transmission_status_tracking_variables} while another process is using them.
+Using interrupts and global variables opens up the possibility for the data corruption to occur. Although the STM32F0 is inherently a serial processor, the main-loop process (responsible for, among other things, initiating transmissions) and the transmission process (the timer interrupt routine) from a high level execute as parallel processes. Figure \ref{fig:parallel_process_abstraction} illustrates how the operations during transmission may be abstracted as two parallel processes. Therefore it is critical to provide a mechanism to prevent one process from modifying any of the variable given in list \ref{lst:transmission_status_tracking_variables} while another process is using them.
 
-line 8 from code listing \ref{lst:manchester_generate_interrupt_routine}.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\linewidth]{figures/design/parallel_process_transmission.png}
+	\caption{Parallel Process High-Level Abstraction}
+	\label{fig:parallel_process_abstraction}
+\end{figure}
+
+The purpose of the variable \textit{fire\_in\_progress} is to operate as a synchronization lock. Priority is given to the interrupt process, therefore, in the implementation of the function \textit{generate\_manchester} there is a loop which stalls the processor until any current transmissions complete (see line 4, listing \ref{lst:generate_manchester_implementation}).
+
+Finally, during the transmission process, the logic used to determine the pin state for the purpose of generating the Manchester waveform is given in line 8 of listing \ref{lst:manchester_generate_interrupt_routine}. The pin state for a given half bit-period can be determined as \[pin\_state = \overline{tx\_bit} \;\; \widehat{} \;\; bit\_period\] where tx\_bit is the value of the bit currently being transmitted and bit\_period is as defined in listing \ref{lst:transmission_status_tracking_variables} above.
 
 
 

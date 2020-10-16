@@ -48,3 +48,22 @@
 		}
 	}
 \end{lstlisting}
+
+
+
+\begin{lstlisting}[style=cstyle, caption=Generate Manchester Function Implementation\label{lst:generate_manchester_implementation}]
+	generate_manchester(uint32_t buffer, uint8_t num_bits){
+		//generates a manchester waveform on pin PB10 according to the bits in the buffer
+		
+		while(fire_in_progress == 1); //wait for any current transmission to end
+		
+		HAL_TIM_Base_Stop_IT(&htim17); //stop the timer during setup
+		fire_in_progress = 1; //set fire in progress to indicate
+		bit_stream = buffer & ((1 << num_bits) - 1); //set all bits higher than number of bits to send to zero
+		bit_num_transmit = num_bits; //set the final index based on number of bits to transmit
+		bit_index = 0; //reset index pointer to beginning of buffer
+		bit_period = 0; //reset the bit period tracker
+		manchester_timeout_counter = 0; // reset the timer out counter
+		HAL_TIM_Base_Start_IT(&htim17); //begin the timer (starts the transmission process)
+	}
+\end{lstlisting}
