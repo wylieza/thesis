@@ -284,15 +284,15 @@ The result, $333.\dot{3}$ cannot be formed as the product of two integer values,
 
 \subsection{Tagger Software}
 
-For the purposes of this investigation, a tagger needed to be created that can encode a gun ID and possibly some additional bits for other information. It was chosen to use a 16-bit packet size. In this initial implementation a single bit is reserved for error detection, however further development of this system would likely include hamming codes which would require a few additional reserved bits.
+For the purposes of this investigation, a tagger needed to be created that can encode a gun ID and possibly some additional bits for other information. It was chosen to use a 16-bit packet size. In this initial implementation a single bit is reserved for error detection, however further development of this system might explore the use of hamming codes which would require a few additional reserved bits.
 
 \subsubsection{Modified RC-5 Protocol}
-The RC-5 protocol was used as the basis for the design of the modified transmission protocol. The Manchester Encoding technique and all timing specifications are preserved. However the structure of the bits transmitted has been modified. 
+The RC-5 protocol was used as the basis for the design of the modified transmission protocol. A detailed breakdown of the protocol is given in the literature review in section \ref{sec:rc_5_protocol}. In this modified version of the RC-5 protocol, the Manchester Encoding technique and all timing specifications are preserved. However the structure of the bits transmitted has been modified. 
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.8\linewidth]{figures/design/modified_rc5_protocol.png}
-	\caption{Modified RC-5 IR Protocol}
+	\caption{Modified Bit Structure of RC-5 IR Protocol}
 	\label{fig:modified_rc_5_protocol}
 \end{figure}
 
@@ -300,6 +300,32 @@ Figure \ref{fig:modified_rc_5_protocol} shows the modified structure for a singl
 
 \subsubsection{Realization}
 
+The tagger software comprises a set of functions dedicated to the encoding of a 15-bit data packet. Implementation of the Manchester Encoding is done purely using timers and interrupts ensuring precise timing and freeing the main processor loop for handling lower priority tasks such as managing player data.
+
+The following functions relating to the generation of a Manchester bit-stream on the pre-defined output GPIO pin were created
+
+\begin{itemize}
+	\item get\_parity\_15
+	\subitem Processes a 15-bit long data packet and returns the even parity
+	\item wrap\_data\_15
+	\subitem Processes a 15-bit long data packet and returns 18-bit bitstream for transmission
+	\item generate\_manchester
+	\subitem Generate Manchester Encoded output on the pre-define GPIO based on the provided bitstream
+\end{itemize} 
+
+Using a dedicated timer peripheral and interrupts for the process of generating the Manchester encoded output required the use of global variables to track the status of an on-going transmission. The following listing shows the global variables along with a brief descriptor comment.
+
+\begin{lstlisting}[style=cstyle, caption=Transmission Status Tracking Variables\label{lst:transmission_status_tracking_variables}]
+	volatile uint32_t bit_stream; //bit-stream to be transmitted
+	volatile int bit_index; //index of bit currently being transmitted
+	volatile int bit_num_transmit; //number of bits from bit-stream to transmit
+	volatile int bit_period; //stores current bit period state (0 - first, 1 - second)
+	volatile int fire_in_progress; //global indicator of a transmission in progress
+	volatile int manchester_timeout_counter; //counts half bit-periods elapsed since last bit was transmitted
+\end{lstlisting}
+
+
+line 8 from code listing \ref{lst:manchester_generate_interrupt_routine}.
 
 
 

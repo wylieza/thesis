@@ -22,3 +22,29 @@
 	\caption{Output of photodiode module prior to full saturation}
 	\label{fig:begin_saturation_of_photodiode}
 \end{figure}
+
+\begin{lstlisting}[style=cstyle, caption=Timer Interrupt Handler Implementation\label{lst:manchester_generate_interrupt_routine}]
+	if(htim == &htim17){
+	
+		if(bit_index == bit_num_transmit){
+			HAL_GPIO_WritePin(GPIOB, GPIO_PIN_10, GPIO_PIN_RESET);
+			manchester_timeout_counter++;
+		
+		}else if(fire_in_progress){
+			if(bit_period ^ ((~bit_stream >> bit_index) & 1)){
+				HAL_GPIO_WritePin(GPIOB, GPIO_PIN_10, GPIO_PIN_SET);
+			}else{
+				HAL_GPIO_WritePin(GPIOB, GPIO_PIN_10, GPIO_PIN_RESET);
+			}
+			
+		bit_index += bit_period;
+		bit_period = !bit_period;
+		
+		}
+		
+		if(manchester_timeout_counter == TIMEOUT_BIT_PERIODS){
+			fire_in_progress = 0;
+			HAL_TIM_Base_Stop_IT(&htim17);
+		}
+	}
+\end{lstlisting}
