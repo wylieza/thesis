@@ -324,6 +324,7 @@ Using a dedicated timer peripheral and interrupts for the process of generating 
 	volatile int manchester_timeout_counter; //counts half bit-periods elapsed since last bit was transmitted
 \end{lstlisting}
 
+Using interrupts and global variables opens up the possibility for the data corruption to occur. Although the STM32F0 is inherently a serial processor, the main-loop process (responsible for, among other things, initiating transmissions) and the transmission process (the timer interrupt routine) from a high level execute as parallel processes. Therefore it is critical to provide a mechanism to prevent one process from modifying any of the variable given in list \ref{lst:transmission_status_tracking_variables} while another process is using them.
 
 line 8 from code listing \ref{lst:manchester_generate_interrupt_routine}.
 
