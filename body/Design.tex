@@ -281,6 +281,9 @@ The ADC conversions are triggered by timer 3, a general purpose 16-bit timer. Th
 
 The result, $333.\dot{3}$ cannot be formed as the product of two integer values, instead the closest integer value of 333 is used. Because this is well below the maximum value of the 16-bit counter period register, the pre-scalar is set to one. The resulting sampling frequency is $144.\dot{1}4\dot{4}$ kHz. Returning to equation \ref{eqn:k_N_and_fb_fs_ratio}, we see that we must choose $f_{bin} = 36.036$kHz to preserve the ratio required for optimization.
 
+\subsubsection{Triggering}
+%todo: smitz trigger and such - did i do that yet??
+
 
 \subsection{Tagger Software}
 
@@ -338,6 +341,15 @@ Finally, during the transmission process, the logic used to determine the pin st
 
 
 \subsection{Target Software}
+
+In laser tag it is optimal to have multiple IR detectors placed on various parts of the player. It is therefore important that the tagger software be extendable to process input from multiple input signals simultaneously. To achieve this, the input capture and output capture functions of the STM32 timer peripherals were used.
+
+
+\subsubsection{Timing Constraints}
+
+During transmission various factors can influence the timing between edges, such as variations in the carrier frequency and signal amplitude. The timing variations are introduced during the Goertzel filtering stage, as variations infrequency or amplitude will shift the point at which the filter output will change. In addition, it is best practise to ensure the receiver is made tolerant to timing deviations where possible.
+
+The state machine approach to decoding Manchester coded signals is an appropriate technique as it allows for large timing tolerances through the specification of a delay threshold. Given some threshold, 
 
 
 
