@@ -204,3 +204,26 @@ Figure \ref{fig:vrms_vs_angle_of_incidence} shows the RMS voltage value of the m
 \end{figure}
 
 The IR receiver module registered the signal between angles of 0\textdegree and 70\textdegree and registered an absence of a signal for angles greater than 80\textdegree. Between 70\textdegree and 80\textdegree the output would toggle sporadically.
+
+
+\subsection{Target MCU}
+
+\subsubsection{Processing Time}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=.8\textwidth]{figures/results/receiver_software/arbitrary_11111_timing_test.JPG}
+	\caption{Oscilloscope Trace for Transmission of 11111}
+	\label{fig:arbitrary_11111_timing_test}
+\end{figure}
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{cccc}
+		\hline
+		\textbf{\begin{tabular}[c]{@{}c@{}}15-Bit Data\\ (Decimal)\end{tabular}} & \textbf{Number of Edges} & \textbf{\begin{tabular}[c]{@{}c@{}}Timeout Delay\\ (ms)\end{tabular}} & \textbf{\begin{tabular}[c]{@{}c@{}}Decoding Time\\ (ms)\end{tabular}} \\ \hline
+		10922 & 20 & 3.56 & 29.7 \\ \hline
+		11111 & 26 & 3.56 & 29.8 \\ \hline
+		32767 & 36 & 3.56 & 29.9 \\ \hline
+	\end{tabular}
+\end{table}

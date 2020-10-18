@@ -141,6 +141,30 @@ Octave was used to calculate the RMS\footnote{root mean square} voltages for the
 The IR receiver module was also tested following the above experimental method, however the output from this module is a logic level indicating the presence of a modulated waveform so it would be non-nonsensical to consider the RMS value, instead the binary state was tracked.
 
 
+\subsection{Target MCU}
+
+\subsubsection{Processing Time}
+
+The time it takes the receiver to process an incoming IR transmission must be measured to ensure the devices meets the requirements of the RC-5 protocol. The processor should be able to decode incoming transmissions within the 114mS, however this experiment aims to determine if it viable to decrease this interval period.
+
+The receiver algorithm was modified to set an output pin high at the beginning of the Manchester decoding function and reset the pin after the decoding completes. The tagger MCU was then wired directly to the target MCU to remove any external factors that might be introduced by the various intermediate stages.
+
+Three transmissions where then tested to measure the effects the number of edges has on the processing time. Three data packets were chosen, based on the resulting number of edges in the Manchester encoded sequence. The lowest possible number of edges in a valid message is 20 while the highest is 36. The middle message was chosen arbitrarily and contains a number of edges in between the limits.
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{ccc}
+		\hline
+		\textbf{\begin{tabular}[c]{@{}c@{}}15-Bit Data\\ (Decimal)\end{tabular}} & \textbf{\begin{tabular}[c]{@{}c@{}}18-bit Transmission\\ (Hexadecimal)\end{tabular}} & \textbf{Number of Edges} \\ \hline
+		10922 & 0x2AAAB & 20 \\ \hline
+		11111 & 0x2AD9F & 26 \\ \hline
+		32767 & 0x3FFFF & 36 \\ \hline
+	\end{tabular}
+\end{table}
+
+%todo: complete this experiment description by adding timeout period
+An oscilloscope was used to trace the incoming Manchester waveform and the state of the GPIO being toggled before and after the processing function. This allowed measurement of both the length of the computation time and the length of the timeout period, which was set to be ???mS.
+
 
 \newpage
 \subsection{Tests $\setminus$ Results to gather}
