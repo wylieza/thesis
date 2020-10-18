@@ -290,7 +290,7 @@ The result, $333.\dot{3}$ cannot be formed as the product of two integer values,
 For the purposes of this investigation, a tagger needed to be created that can encode a gun ID and possibly some additional bits for other information. It was chosen to use a 16-bit packet size. In this initial implementation a single bit is reserved for error detection, however further development of this system might explore the use of hamming codes which would require a few additional reserved bits.
 
 \subsubsection{Modified RC-5 Protocol}
-The RC-5 protocol was used as the basis for the design of the modified transmission protocol. A detailed breakdown of the protocol is given in the literature review in section \ref{sec:rc_5_protocol}. In this modified version of the RC-5 protocol, the Manchester Encoding technique and all timing specifications are preserved. However the structure of the bits transmitted has been modified. 
+The RC-5 protocol was used as the basis for the design of the modified transmission protocol. A detailed breakdown of the protocol is given in the literature review in section \ref{sec:rc_5_protocol}. In this modified version of the RC-5 protocol, the Manchester Encoding technique and bit-period timing specifications are preserved. However the structure of the bits transmitted has been modified and the period between messages was decreased.
 
 \begin{figure}[H]
 	\centering
@@ -299,7 +299,10 @@ The RC-5 protocol was used as the basis for the design of the modified transmiss
 	\label{fig:modified_rc_5_protocol}
 \end{figure}
 
-Figure \ref{fig:modified_rc_5_protocol} shows the modified structure for a single transmission. The two start bits are preserved. Following this, the toggle bit, address bits and command bits have been merged into a single set of data bits with an additional 4 bits having been included to increase the number of bits to 16. Finally in the modified protocol the bit order of has been reversed. It should be noted that data bit D15 is used for the parity checksum.
+Figure \ref{fig:modified_rc_5_protocol} shows the modified structure for a single transmission. The two start bits are preserved. Following this, the toggle bit, address bits and command bits have been merged into a single set of data bits with an additional 4 bits having been included to increase the number of bits to 16. In the modified protocol the bit order of has been reversed. It should be noted that data bit D15 is used for the parity checksum.
+
+%todo: ref the experiement below
+The original RC-5 protocol specifies a period of 114mS between transmissions, however this gap is longer than necessary and following the experiment performed in section \ref{label} it was determined that this period could be reduced to XXXmS.
 
 \subsubsection{Realization}
 
@@ -313,7 +316,7 @@ The following functions relating to the generation of a Manchester waveform on t
 	generate_manchester(uint32_t buffer, uint8_t num_bits); //starts Manchester encoded output generation on the pre-define GPIO based on the provided bitstream
 \end{lstlisting}
 
-Using a dedicated timer peripheral and interrupts for the process of generating the Manchester encoded output required the use of global variables to track the status of an on-going transmission. The following listing shows the global variables along with a brief descriptor comment.
+Using one of the dedicated timer peripherals (timer 17) and interrupts for the process of generating the Manchester encoded output required the use of global variables to track the status of an on-going transmission. The following listing shows the global variables along with a brief descriptor comment.
 
 \begin{lstlisting}[style=cstyle, caption=Transmission Status Tracking Variables\label{lst:transmission_status_tracking_variables}]
 	volatile uint32_t bit_stream; //bit-stream to be transmitted
@@ -325,7 +328,6 @@ Using a dedicated timer peripheral and interrupts for the process of generating 
 \end{lstlisting}
 
 Using interrupts and global variables opens up the possibility for the data corruption to occur. Although the STM32F0 is inherently a serial processor, the main-loop process (responsible for, among other things, initiating transmissions) and the transmission process (the timer interrupt routine) from a high level execute as parallel processes. Figure \ref{fig:parallel_process_abstraction} illustrates how the operations during transmission may be abstracted as two parallel processes. Therefore it is critical to provide a mechanism to prevent one process from modifying any of the variable given in list \ref{lst:transmission_status_tracking_variables} while another process is using them.
-
 
 \begin{figure}[H]
 	\centering
