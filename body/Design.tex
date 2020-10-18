@@ -363,9 +363,12 @@ In laser tag it is optimal to have multiple IR detectors placed on various parts
 
 \subsubsection{Timing Constraints}
 
-During transmission various factors can influence the timing between edges, such as variations in the carrier frequency and signal amplitude. The timing variations are introduced during the Goertzel filtering stage, as variations infrequency or amplitude will shift the point at which the filter output will change. In addition, it is best practise to ensure the receiver is made tolerant to timing deviations where possible.
+During transmission various factors can influence the timing between edges, due to variations in the carrier frequency or the received signal amplitude. These variations are introduced during the Goertzel filtering stage by changing the point at which the filter output will trigger. Therefore the receiver should be designed to be tolerant to small timing deviations.
 
-The state machine approach to decoding Manchester coded signals is an appropriate technique as it allows for large timing tolerances through the specification of a delay threshold. Given some threshold, 
+The state machine approach process for decoding as outlined in figure \ref{fig:manchesterdecodingfsm} incorporates large timing tolerances by design. The state machine as shown is incomplete, there is no action associated with a long delay while in either the \textit{start of 'zero'} or \textit{start of 'one'} states. In the event of this condition, an error has occured. %here
+
+
+The time-out period is the %hereee
 
 
 
