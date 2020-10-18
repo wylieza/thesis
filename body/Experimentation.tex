@@ -145,11 +145,11 @@ The IR receiver module was also tested following the above experimental method, 
 
 \subsubsection{Processing Time}
 
-The time it takes the receiver to process an incoming IR transmission must be measured to ensure the devices meets the requirements of the RC-5 protocol. The processor should be able to decode incoming transmissions within the 114mS, however this experiment aims to determine if it viable to decrease this interval period.
+To determine if it is possible to reduce the dead-time between transmissions, the following experiment was performed to measure the time it takes the processor to decode Manchester encoded transmissions. In addition to determining if the dead-time may be reduced, the experiment also aims to determine if the number of edges in a given transmission has any effect on the processing time.
 
 The receiver algorithm was modified to set an output pin high at the beginning of the Manchester decoding function and reset the pin after the decoding completes. The tagger MCU was then wired directly to the target MCU to remove any external factors that might be introduced by the various intermediate stages.
 
-Three transmissions where then tested to measure the effects the number of edges has on the processing time. Three data packets were chosen, based on the resulting number of edges in the Manchester encoded sequence. The lowest possible number of edges in a valid message is 20 while the highest is 36. The middle message was chosen arbitrarily and contains a number of edges in between the limits.
+Three data packets were chosen, based on the corresponding number of edges in the Manchester encoded sequence. The lowest possible number of edges in a valid message is 20 while the highest is 36. The message with the data value 11111 was chosen arbitrarily and contains a number of edges in between the limits.
 
 \begin{table}[H]
 	\centering
@@ -163,7 +163,7 @@ Three transmissions where then tested to measure the effects the number of edges
 \end{table}
 
 %todo: complete this experiment description by adding timeout period
-An oscilloscope was used to trace the incoming Manchester waveform and the state of the GPIO being toggled before and after the processing function. This allowed measurement of both the length of the computation time and the length of the timeout period, which was set to be ???mS.
+An oscilloscope was used to trace the incoming Manchester waveform and the state of the GPIO being toggled before and after the processing function. This allowed measurement of both the length of the computation time and the length of the timeout period.
 
 
 
