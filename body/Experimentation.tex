@@ -166,59 +166,16 @@ Three transmissions where then tested to measure the effects the number of edges
 An oscilloscope was used to trace the incoming Manchester waveform and the state of the GPIO being toggled before and after the processing function. This allowed measurement of both the length of the computation time and the length of the timeout period, which was set to be ???mS.
 
 
-\newpage
-\subsection{Tests $\setminus$ Results to gather}
 
-\textbf{Hardware}
-\begin{itemize}
-	\item IR Power LED:
-	\begin{itemize}
-		\item Beam angle (focus vs no focus)
-		\item Beam strength (LUX)
-		\item LED Current draw
-		\item LED temperature (basic sensor or a temperature gun that I borrow from somewhere)
-		\item MOSFET temperature
-	\end{itemize}
-	\item For each photo-sensor (photodiode, phototransistor, all in one receiver module):
-	\begin{itemize}
-		\item Receiving beam-angle
-		\item Output signal strength vs light-intensity/distance
-		\item Reaction time (rise time)
-		\item multipath/picking up reflections
-		\item Signal to noise ration
-	\end{itemize}
-	\item Op-Amp:
-	\begin{itemize}
-		\item Op-amp gain performance (push to limit) (at 36kHz)
-		\item Op-amp frequency performance (at some fixed gain)
-		\item Filter performance (anti-aliasing and high pass filtering)
-	\end{itemize}
 
-	\item compare different frequencies to determine if interference causes any issues...
-\end{itemize}
+\subsection{System Performance}
 
-\textbf{Software}
-\begin{itemize}
-	
-	\item Transmitter
-	\begin{itemize}
-		\item Timing accuracy
-	\end{itemize}
-	
-	%\item Protocol
-	%\begin{itemize}
-	%	\item
-	%\end{itemize}
-	
-	\item Receiver
-	\begin{itemize}
-		\item Bit error rate / max receiver distance - (not sure how I will implement this yet)
-		\item Bit error correction - (not sure how I might implement this yet)
-		\item Modulation to High/Low logic value [DSP processing analysis]
-		\begin{itemize}
-			\item Latency
-			\item Testing the timing between stages of demodulating and decoding
-		\end{itemize}
-	\end{itemize}
-	
-\end{itemize}
+\subsubsection{Signal To Noise Ratio}
+%todo: note - this might already be 'done' by the goertzel filter experiemnt...
+The laser tag system in its current form does not utilize any automatic gain control. This places
+
+%An automatic gain control system, either implemented digitally or as an additional module would automatically
+
+\subsubsection{Range Test}
+
+To test the range of the 
