@@ -24,9 +24,10 @@ The measured focal length of the lens was measured to be 53mm. Figure \ref{fig:f
 
 
 \subsection{Light Focus System}
-
+%todo: ref this table
 Table \ref{label} below shows the beam spot size vs distance for the IR and warm-white power LEDs.
 
+%todo: update these images
 \begin{figure}[H]
 	\centering
 	\begin{minipage}{.4\textwidth}
@@ -56,6 +57,8 @@ Table \ref{label} below shows the beam spot size vs distance for the IR and warm
 
 \subsection{Goertzel Filter Optimization}
 
+The results from the goertzel algorithm optimization experiment are tabulated in table \ref{tbl:goertzel_speed_results}, the adjacent screenshot shown in figure \ref{fig:goertzel_speed_scope_screenshot} illustrates the output recorded by the oscilloscope software during a single iteration of the experiment. 
+
 \begin{figure}[H]
 	\centering
 	\begin{minipage}{.4\textwidth}
@@ -83,7 +86,7 @@ Table \ref{label} below shows the beam spot size vs distance for the IR and warm
 	\end{minipage}
 \end{figure}
 
-The results from the goertzel algorithm optimization experiment are tabulated in table \ref{tbl:goertzel_speed_results}, the adjacent screenshot shown in figure \ref{fig:goertzel_speed_scope_screenshot} illustrates the output recorded by the oscilloscope software during an iteration of the experiment. The recorded results are plotted in figure \ref{fig:goertzel_computation_plot} to provide graphical insight.
+The recorded results are plotted in figure \ref{fig:goertzel_computation_plot} to provide graphical insight.
 
 \begin{figure}[H]
 	\centering
@@ -92,17 +95,13 @@ The results from the goertzel algorithm optimization experiment are tabulated in
 	\label{fig:goertzel_computation_plot}
 \end{figure}
 
-Figure \ref{fig:goertzel_computation_plot} provides two important insights to the nature of the goertzel algorithm. The first observation may be found in the linearity of both plots, this confirms that both implementations of the algorithm have a time complexity of O(N) as noted in section \ref{sec:filter_optimization_design}. The practically perfect linearity in the results makes it possible to predict the timing requirements and make accurate theoretical predictions.
-
-The gradient of the unoptimized curve is $16\mu S/sample$ and the gradient of the optimized curve is $9.3\mu S/sample$. The sampling rate used was $f_{sampling} \approx 144$kHz or $6.9\mu S/sample$. This indicates that even after optimizing the algorithm by simplifying out the multiplication step required for each new sample, the processor is still not fast enough to keep up with the rate of incoming samples.
-
-The final observation is that the implemented optimization has two implications for the algorithms performance. The first implication is a small but non-zero constant timer saving, this comes as a result of removing the need for the multiplications to find the real and imaginary components of the k\textsubscript{th} DFT coefficient (see lines 18 and 19 of listing \ref{lst:goertzel_algorithm}). The second implication is a time difference which is directly proportional to the number of samples N, as indicated by the different gradients highlighted in the above paragraph.
+%disc. removed
 
 \subsection{Goertzel Filter Performance}
 
 \subsubsection{Simulated Frequency Response}
 
-The simulation results shown in figure \ref{fig:goertzel_filter_response_simulated} reveal the familiar sinc function embedded in the frequency response curves. The form of these curves can be characterised by the $sinc^2(x)$ function which is to be expected because the filter returns the square of the magnitude.
+%disc. removed
 
 \begin{figure}[H]
 	\centering
@@ -111,9 +110,7 @@ The simulation results shown in figure \ref{fig:goertzel_filter_response_simulat
 	\label{fig:goertzel_filter_response_simulated}
 \end{figure}
 
-It is clear from the plot that the filter is highly sensitive to the magnitude of the sampled waveform. A decrease in amplitude by a factor of two results in a four fold decrease in the amplitude of the filters response.
-
-%todo: from here onwards I need to write an analysis of results
+%disc. removed
 
 \subsubsection{Measured Frequency Response}
 

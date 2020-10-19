@@ -72,9 +72,17 @@ To generate the 36kHz carrier waveform the LM555 timer IC was used. The module i
 According to the data sheet the period my be calculated as \(T = 0.693 (R_2 + 2R_3) C1\). A capacitor value of 10nF was chosen. Therefore, to generate a waveform with the desired period of $27.7\mu S$ the required theoretical value of $(R_2 + 2R_3)$ is $4k\Omega$.
 %todo: finnish explaining resistor choice
 
+%todo: finnish this paragraph
 %After testing
 The above design was implemented on a breadboard to test the
 
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=.6\textwidth]{figures/modules/carrier_generator.jpg}
+	\caption{Carrier Generation Module}
+	\label{fig:module_carrier_generation}
+\end{figure}
 
 \subsection{Power LED Driver}
 %Missing:
@@ -92,6 +100,13 @@ To operate the 3W high power IR LED a constant current driver module needed to b
 Instead a linear regulator was designed. Figure \ref{fig:schematic_power_led_driver} shows the design of a high power linear regulator, built around the IRLZ44 enhancement PMOSFET. Heat-sinks where attached to both the high power LED and the IRLZ44 power MOSFET. However because the LED is only on for short bursts spread over sufficiently long time intervals it is likely that the heat-sinks are unnecessary.
 
 The module is designed to be driven by an open-drain configured GPIO pin. By pulling the control signal low, the LED is powered and when the control signal is left floating the LED is powered off.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=.6\textwidth]{figures/modules/power_led_driver.jpg}
+	\caption{Power LED Driver Module}
+	\label{fig:module_power_led_driver}
+\end{figure}
 
 \subsection{Power LED Focus System}
 %Missing:
@@ -115,6 +130,14 @@ The length $l_{pipe}$ was calculated as follows
 \[l_{pipe} = l_{lens} - l_{lens\_external} + l_{focal} - l_{light\_seal\_thickness} + l_{lens\_in-set\_distance}\]
 \[l_{pipe} = 30mm - 3mm + 53mm - 3mm + 1mm = 78mm\]
 
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=.6\textwidth]{figures/modules/light_focus_tube_lens.jpg}
+	\caption{Light Focus System}
+	\label{fig:module_light_focus}
+\end{figure}
+
 \subsection{LED Driver}
 %Missing:
 % - Specs and component choice etc.
@@ -129,6 +152,14 @@ Due to the high power demands of the 3W IR LED, it is much more appropriate to p
 \end{figure}
 
 Figure \ref{fig:schematic_low_power_led_driver} shows the schematic for this driver module. The module is designed to be driven using an open-drain configured GPIO pin so that it is 'drop-in' compatible with the high power driver module.
+
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=.6\textwidth]{figures/modules/led_driver.jpg}
+	\caption{LED Driver Module}
+	\label{fig:module_led_driver}
+\end{figure}
 
 \subsection{Photodiode IR Detector}
 %Missing:
@@ -146,12 +177,27 @@ The photodiode IR detector module is designed to detect changes in infrared radi
 
 The circuit shown in figure \ref{fig:schematic_photodiode_transimpedance} is designed to produce a voltage in proportion to the current flowing through the photodiode. The circuit is inspired by S. Schrires 'Infrared Radio Link' circuit which is found in the EEE3071 course notes\cite{Schrire2007}.
 
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=.6\textwidth]{figures/modules/photodiode_receiver.jpg}
+	\caption{Photodiode IR Receiver Module}
+	\label{fig:module_photodiode_receiver}
+\end{figure}
+
 \subsection{Phototransistor IR Detector}
-%Missing:
+%todo:
 % - Schematic and explaination
 
 
 The phototransistor IR detector module is designed to detect changes in infrared radiation and convert these fluctuations into a voltage signal.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=.6\textwidth]{figures/modules/phototransistor_receiver.jpg}
+	\caption{Phototransistor IR Detector Module}
+	\label{fig:module_phototransistor_detector}
+\end{figure}
 
 \subsection{IR Detector}
 %Missing:
@@ -179,6 +225,13 @@ The IR receiver used in this investigation is the TSOP382 from Vishay. The \href
 
 Figure \ref{fig:schematic_voltage_clamp} shows the circuity used to clamp the output of the IR receiver at 3V. This is to protect the GPIO from an over-voltage. The TSOP382 may be powered off 3.3V which would remove the voltage clamp requirement, however it has been included to ensure the module can be powered with a range of supply voltages and still be logically compatible with the STM32.
 
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=.6\textwidth]{figures/modules/ir_receiver.jpg}
+	\caption{IR Receiver Module}
+	\label{fig:module_ir_receiver}
+\end{figure}
+
 \subsection{Signal Conditioning Module}
 %Missing:
 % - Choosing freq cut off and what is expected gain
@@ -198,6 +251,13 @@ The filter circuit used is a second order voltage controlled voltage source (VCV
 
 The precision rectifier is also a circuit design taken from the book and can be found on page 188, it is an improved version of the basic precision rectifier because it reduces the output swing of the op-amp during operation\cite{Horowitz1995}.
 
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=.6\textwidth]{figures/modules/filtering_conditioning.jpg}
+	\caption{Signal Conditioning Module}
+	\label{fig:module_filtering_conditioning}
+\end{figure}
+
 \subsection{Tone Decoder Module}
 %Missing:
 % - Is a schematic worth the bother?
@@ -207,7 +267,12 @@ The tone decoder module's hardware consists of an STM32F051C6 breakout PCB which
 The DSP algorithm is discussed in subsection \ref{tone_decoder_software} from the following section on software modules.
 
 
-
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=.6\textwidth]{figures/modules/goertzel_filter.jpg}
+	\caption{Tone Decoder Module}
+	\label{fig:module_tone_decoder}
+\end{figure}
 
 
 
