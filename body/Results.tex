@@ -24,30 +24,44 @@ The measured focal length of the lens was measured to be 53mm. Figure \ref{fig:f
 
 
 \subsection{Light Focus System}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{figures/results/beam_width_vs_distance.png}
+	\captionof{figure}{Beam Width vs Distance}
+	\label{fig:beam_width_vs_distance}
+\end{figure}
+
+
+
 %todo: ref this table
-Table \ref{label} below shows the beam spot size vs distance for the IR and warm-white power LEDs.
+Table \ref{tbl:spot_size_vs_distance} below shows the beam spot size vs distance for the IR and white power LEDs.
 
 %todo: update these images
 \begin{figure}[H]
 	\centering
 	\begin{minipage}{.4\textwidth}
 		%todo: make image higher quality after zoom
-		\centering
-		\includegraphics[width=0.9\linewidth]{figures/results/goertzel_filter_speed/16nu.JPG}
-		\captionof{figure}{Spot diameter V.S Distance}
-		\label{fig:spot_size_vs_distance}
+		\textbf{Linear Interpolation Equations}
+		
+		\[width_{ir\: beam} = 0.03 + 0.032 \times d_{beam}\]
+		
+		\[width_{visible\: beam} = 0.00526 + 0.0587 \times d_{beam}\]
+		
+		
 	\end{minipage}%
 	\hspace{.1\textwidth}
 	\begin{minipage}{.4\textwidth}
 		\begin{table}[H]
-			\begin{tabular}{cc}
+			\begin{tabular}{ccc}
 				\hline
-				\textbf{\begin{tabular}[c]{@{}c@{}}Distance\\ (m)\end{tabular}} & \textbf{\begin{tabular}[c]{@{}c@{}}Spot Diameter\\ (mm)\end{tabular}} \\ \hline
-				1 & 96.46 \\ \hline
-				2 & 160.3 \\ \hline
-				4 & 287.5 \\ \hline
-				8 & 547.2 \\ \hline
-				16 & 1059
+				\textbf{\begin{tabular}[c]{@{}c@{}}Distance\\ (m)\end{tabular}} & \textbf{\begin{tabular}[c]{@{}c@{}}IR Beam\\ Width\\ (cm)\end{tabular}} & \textbf{\begin{tabular}[c]{@{}c@{}}Visible Beam\\ Width\\ (cm)\end{tabular}} \\ \hline
+				1 & 7 & 6.5 \\ \hline
+				2 & 8 & 12.5 \\ \hline
+				3 & 13 & 17.5 \\ \hline
+				4 & 16 & - \\ \hline
+				4.28 & - & 26 \\ \hline
+				5 & 19 & - \\ \hline
 			\end{tabular}
 			\captionof{table}{Tabulation of Spot Diameter V.S. Distance}
 			\label{tbl:spot_size_vs_distance}
@@ -224,3 +238,5 @@ The IR receiver module registered the signal between angles of 0\textdegree and 
 		32767 & 36 & 3.56 & 29.9 \\ \hline
 	\end{tabular}
 \end{table}
+
+Combining the timeout delay and decoding time gives a maximum period of 33.46ms in the worst case, before a new message may be received.

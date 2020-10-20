@@ -121,7 +121,7 @@ The high power IR LED has a wide beam angle, as it is designed for large area il
 	\label{fig:light_focusing_tube}
 \end{figure}
 
-Figure \ref{fig:light_focusing_tube} above shows the components used to construct the light focusing tube. The length $l_{pipe}$ was determined by summing the experimentally calculated focal length of the lens with the length $l_{lens}$. Included in the calculation of the pipe length was the none-zero thickness of the light-seal (made out of 3mm hard-board) and the 3mm length of lens that remained external to the PVC piping.
+Figure \ref{fig:light_focusing_tube} above shows the components used to construct the light focusing tube. The length $l_{pipe}$ was determined by summing the experimentally calculated focal length of the lens with the length $l_{lens}$. Included in the calculation of the pipe length was the non-zero thickness of the light-seal (made out of 3mm hard-board) and the 3mm length of lens that remained external to the PVC piping.
 
 The 40mm PVC piping used had a wall thickness of 2.3mm resulting in an inner diameter of 37.7mm. The magnifying lens had a length of 30mm and the lens is in-set by 1mm. The experimental result from section \ref{exp:focal_length} showed the focal length of the magnifying lens to be 53mm.
 
@@ -366,7 +366,7 @@ Figure \ref{fig:schmit_simulation_wide} illustrates the activation and shut-off 
 
 \subsection{Tagger Software}
 
-For the purposes of this investigation, a tagger needed to be created that can encode a gun ID and possibly some additional bits for other information. It was chosen to use a 16-bit packet size. In this initial implementation a single bit is reserved for error detection, however further development of this system might explore the use of hamming codes which would require a few additional reserved bits.
+For the purposes of this investigation, a tagger needed to be created that can encode a gun ID and possibly some additional bits for other information. It was chosen to use a 16-bit packet size. In this initial implementation a single bit is reserved for error detection, however further development of this system might explore the use of hamming codes which would require an additional four bits to be reserved for error correction.
 
 \subsubsection{Modified RC-5 Protocol}
 The RC-5 protocol was used as the basis for the design of the modified transmission protocol. A detailed breakdown of the protocol is given in the literature review in section \ref{sec:rc_5_protocol}. In this modified version of the RC-5 protocol, the Manchester Encoding technique and bit-period timing specifications are preserved. However the structure of the bits transmitted has been modified and the period between messages was decreased.
@@ -423,14 +423,15 @@ Finally, during the transmission process, the logic used to determine the pin st
 
 \subsection{Target Software}
 
-In laser tag it is optimal to have multiple IR detectors placed on various parts of the player. It is therefore important that the tagger software be extendable to process input from multiple input signals simultaneously. To achieve this, the input capture and output capture functions of the STM32 timer peripherals were used.
+In laser tag it is optimal to have multiple IR detectors placed on various parts of the player. It is therefore important that the tagger software be extendable to process input from multiple input signals simultaneously. To achieve this, the input capture and output capture functions of the STM32 timer peripherals were used. For the purposes of this investigation, the system was developed to only capture a single incoming signal, however the design allows this to be easily expanded to capture multiple incoming signals.
 
 
 \subsubsection{Timing Constraints}
 
-During transmission various factors can influence the timing between edges, due to variations in the carrier frequency or the received signal amplitude. These variations are introduced during the Goertzel filtering stage by changing the point at which the filter output will trigger. Therefore the receiver should be designed to be tolerant to small timing deviations.
+%todo: tidy this paragraph up a tad
+During transmission various factors can influence the timing between edges, due to variations in the carrier frequency or the received signal amplitude. These variations are introduced by the Goertzel filter which is sensitive to these changes. Therefore the receiver should be designed to be tolerant to small timing deviations.
 
-The state machine approach process for decoding as outlined in figure \ref{fig:manchesterdecodingfsm} incorporates large timing tolerances by design. The state machine as shown is incomplete, there is no action associated with a long delay while in either the \textit{start of 'zero'} or \textit{start of 'one'} states. In the event of this condition, an error has occured. %here
+The state machine approach for decoding as outlined in figure \ref{fig:manchesterdecodingfsm} was used. Because this appeach does not  incorporates large timing tolerances by design. The state machine as shown is incomplete, there is no action associated with a long delay while in either the \textit{start of 'zero'} or \textit{start of 'one'} states. In the event of this condition, an error has occured. %here
 
 
 The time-out period is the %hereee
