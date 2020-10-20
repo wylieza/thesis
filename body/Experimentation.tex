@@ -145,9 +145,9 @@ The IR receiver module was also tested following the above experimental method, 
 
 \subsubsection{Processing Time}
 
-To determine if it is possible to reduce the dead-time between transmissions, the following experiment was performed to measure the time it takes the processor to decode Manchester encoded transmissions. In addition to determining if the dead-time may be reduced, the experiment also aims to determine if the number of edges in a given transmission has any effect on the processing time.
+To measure the time it takes the processor to decode Manchester encoded transmissions and determine if it is possible to reduce the dead-time between transmissions, the following experiment was performed. This is achieved by decoding messages with differing lengths in terms of the number of edges in the encoded Manchester sequence.
 
-The receiver algorithm was modified to set an output pin high at the beginning of the Manchester decoding function and reset the pin after the decoding completes. The tagger MCU was then wired directly to the target MCU to remove any external factors that might be introduced by the various intermediate stages.
+The receiver algorithm was modified to set a GPIO pin high at the beginning of the Manchester decoding function and reset the pin after the decoding completes. The tagger MCU was then wired directly to the target MCU to remove any external factors that might be introduced by the various intermediate stages.
 
 Three data packets were chosen, based on the corresponding number of edges in the Manchester encoded sequence. The lowest possible number of edges in a valid message is 20 while the highest is 36. The message with the data value 11111 was chosen arbitrarily and contains a number of edges in between the limits.
 

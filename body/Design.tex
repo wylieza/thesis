@@ -428,14 +428,19 @@ In laser tag it is optimal to have multiple IR detectors placed on various parts
 
 \subsubsection{Timing Constraints}
 
-%todo: tidy this paragraph up a tad
+%todo: tidy this paragraph up a tad - verify the assertions....
 During transmission various factors can influence the timing between edges, due to variations in the carrier frequency or the received signal amplitude. These variations are introduced by the Goertzel filter which is sensitive to these changes. Therefore the receiver should be designed to be tolerant to small timing deviations.
 
 The state machine approach for decoding as outlined in figure \ref{fig:manchesterdecodingfsm} was used. Because this appeach does not  incorporates large timing tolerances by design. The state machine as shown is incomplete, there is no action associated with a long delay while in either the \textit{start of 'zero'} or \textit{start of 'one'} states. In the event of this condition, an error has occured. %here
 
+%choosing a time out
+The state machine approach does not specify an end of transmission condition, therefore it is necessary to define one. It is not possible to simply count the cumulative number of bits as the input capture stage and decoding stages are independent. Therefore a timeout timer will be implemented to trigger the decoding and reset the \textit{array of edge time} differences. In addition to a timeout a maximum number of edges is defined which will also trigger the start of a decoding sequence and reset the state machine.
 
-The time-out period is the %hereee
+The timeout period was chosen to be a length of two bit-periods, this was chosen because future inclusion of hamming codes would allow for the correction of a flipped or missing bit. The timeout period of 3.556ms must be converted into a number of ticks before being used by the output compare functionality of the timer.
 
+\(TIMEOUT\_TICKS = f_{timer} \times T_{timeout} = 8 \times 10^6 \times 3.556 \times 10^{-3} = 28448\)
+
+%here
 
 
 
