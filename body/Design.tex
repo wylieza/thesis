@@ -451,6 +451,8 @@ The timeout period was chosen to be a length of two bit-periods, this was chosen
 
 The maximum number of edges in a valid message occurs when all 16-bits are 1's which results in a Manchester sequence containing 36 edges. Therefore the edge detection process will automatically begin the decoding process if 36 edges are recorded.
 
+The implementation of the Manchester decoding algorithm may be found in the appendix, listing \ref{lst:decode_manchester_implementation}. Decoding requires a time period which defines the difference between a long and short period. This is the \textit{THRESHOLD\_TICKS} constant, in addition a second threshold constant \textit{BITMISS\_TICKS} was defined and is used to determine if a bit in the Manchester sequence was undetected.
+
 
 
 
