@@ -420,35 +420,36 @@ The purpose of the variable \textit{fire\_in\_progress} is to operate as a synch
 Finally, during the transmission process, the logic used to determine the pin state for the purpose of generating the Manchester waveform is given in line 8 of listing \ref{lst:manchester_generate_interrupt_routine}. The pin state for a given half bit-period can be determined as \[pin\_state = \overline{tx\_bit} \;\; \widehat{} \;\; bit\_period\] where tx\_bit is the value of the bit currently being transmitted and bit\_period is as defined in listing \ref{lst:transmission_status_tracking_variables} above.
 
 
-
 \subsection{Target Software}
 
 In laser tag it is optimal to have multiple IR detectors placed on various parts of the player. It is therefore important that the tagger software be extendable to process input from multiple input signals simultaneously. To achieve this, the input capture and output compare functions of the STM32 timer peripherals were used. For the purposes of this investigation, the system was developed to only capture a single incoming signal, however the process may be easily expanded to capture multiple incoming signals with little modification.
 
-The target MCU software was separated into three independent processes for the purposes of this investigation.
+The target MCU software was separated into four independent processes, these are outlined in figure \ref{fig:target_software_overview} below.
 
-\begin{itemize}
-	\item Main Loop
-	\item Edge detection
-	\item Decoding
-\end{itemize}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\linewidth]{figures/design/target_software_overview.png}
+	\caption{Target MCU Processes}
+	\label{fig:target_software_overview}
+\end{figure}
 
 The main loop process runs continually and may be used to perform routine tasks.
 
 The edge detection is an interrupt based process which monitors continuously for any rising or falling edges on the input GPIO pin. Each edge is recorded as a time stamp which measures the period elapsed since the previous edge was detected. To reduce unnecessary computation, this value was stored in \textit{ticks} rather than converted into seconds.
 
-The decoding process is an interrupt triggered processes which may be started by software. This process decodes the time stamps recorded by the edge detection process and returns the recovered data. The decoding process uses the state machine approach illustrated in figure \ref{fig:manchesterdecodingfsm}.
+The timeout monitoring process is executed by via an interrupt when the output compare register matches the timer's count value. Each time an edge is registered by the edge detection process, the output compare register value is adjusted to allow up to one timeout period before the interrupt is triggered.
+
+The decoding process is an interrupt triggered processes which may also be triggered by software (when the maximum number of edges are recorded). This process decodes the time stamps recorded by the edge detection process and returns the recovered data. The decoding process uses the state machine approach illustrated in figure \ref{fig:manchesterdecodingfsm}.
 
 \subsubsection{Decoding Strategy}
 
-%choosing a time out
 The state machine approach does not specify an end of transmission condition, therefore it is necessary to define one. It is not possible to simply count the cumulative number of bits as the input capture stage and decoding stages are independent. Therefore a timeout timer will be implemented to trigger the decoding and reset the \textit{array of edge time} differences. In addition to a timeout a maximum number of edges is defined which will also trigger the start of a decoding sequence and reset the state machine.
 
 The timeout period was chosen to be a length of two bit-periods, this was chosen because future inclusion of hamming codes would allow for the correction of a single flipped or missing bit. The timeout period of 3.556ms must be converted into a number of ticks before being used by the output compare functionality of the timer.
 
 \[TIMEOUT\_TICKS = f_{timer} \times T_{timeout} = 8 \times 10^6 \times 3.556 \times 10^{-3} = 28448\]
 
-The maximum number of edges in a valid message occurs when all 16-bits are 1's. The resulting Manchester sequence contains 36 edges. %here
+The maximum number of edges in a valid message occurs when all 16-bits are 1's which results in a Manchester sequence containing 36 edges. Therefore the edge detection process will automatically begin the decoding process if 36 edges are recorded.
 
 
 
