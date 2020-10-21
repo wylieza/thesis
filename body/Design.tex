@@ -423,24 +423,32 @@ Finally, during the transmission process, the logic used to determine the pin st
 
 \subsection{Target Software}
 
-In laser tag it is optimal to have multiple IR detectors placed on various parts of the player. It is therefore important that the tagger software be extendable to process input from multiple input signals simultaneously. To achieve this, the input capture and output capture functions of the STM32 timer peripherals were used. For the purposes of this investigation, the system was developed to only capture a single incoming signal, however the design allows this to be easily expanded to capture multiple incoming signals.
+In laser tag it is optimal to have multiple IR detectors placed on various parts of the player. It is therefore important that the tagger software be extendable to process input from multiple input signals simultaneously. To achieve this, the input capture and output compare functions of the STM32 timer peripherals were used. For the purposes of this investigation, the system was developed to only capture a single incoming signal, however the process may be easily expanded to capture multiple incoming signals with little modification.
 
+The target MCU software was separated into three independent processes for the purposes of this investigation.
 
-\subsubsection{Timing Constraints}
+\begin{itemize}
+	\item Main Loop
+	\item Edge detection
+	\item Decoding
+\end{itemize}
 
-%todo: tidy this paragraph up a tad - verify the assertions....
-During transmission various factors can influence the timing between edges, due to variations in the carrier frequency or the received signal amplitude. These variations are introduced by the Goertzel filter which is sensitive to these changes. Therefore the receiver should be designed to be tolerant to small timing deviations.
+The main loop process runs continually and may be used to perform routine tasks.
 
-The state machine approach for decoding as outlined in figure \ref{fig:manchesterdecodingfsm} was used. Because this appeach does not  incorporates large timing tolerances by design. The state machine as shown is incomplete, there is no action associated with a long delay while in either the \textit{start of 'zero'} or \textit{start of 'one'} states. In the event of this condition, an error has occured. %here
+The edge detection is an interrupt based process which monitors continuously for any rising or falling edges on the input GPIO pin. Each edge is recorded as a time stamp which measures the period elapsed since the previous edge was detected. To reduce unnecessary computation, this value was stored in \textit{ticks} rather than converted into seconds.
+
+The decoding process is an interrupt triggered processes which may be started by software. This process decodes the time stamps recorded by the edge detection process and returns the recovered data. The decoding process uses the state machine approach illustrated in figure \ref{fig:manchesterdecodingfsm}.
+
+\subsubsection{Decoding Strategy}
 
 %choosing a time out
 The state machine approach does not specify an end of transmission condition, therefore it is necessary to define one. It is not possible to simply count the cumulative number of bits as the input capture stage and decoding stages are independent. Therefore a timeout timer will be implemented to trigger the decoding and reset the \textit{array of edge time} differences. In addition to a timeout a maximum number of edges is defined which will also trigger the start of a decoding sequence and reset the state machine.
 
-The timeout period was chosen to be a length of two bit-periods, this was chosen because future inclusion of hamming codes would allow for the correction of a flipped or missing bit. The timeout period of 3.556ms must be converted into a number of ticks before being used by the output compare functionality of the timer.
+The timeout period was chosen to be a length of two bit-periods, this was chosen because future inclusion of hamming codes would allow for the correction of a single flipped or missing bit. The timeout period of 3.556ms must be converted into a number of ticks before being used by the output compare functionality of the timer.
 
-\(TIMEOUT\_TICKS = f_{timer} \times T_{timeout} = 8 \times 10^6 \times 3.556 \times 10^{-3} = 28448\)
+\[TIMEOUT\_TICKS = f_{timer} \times T_{timeout} = 8 \times 10^6 \times 3.556 \times 10^{-3} = 28448\]
 
-%here
+The maximum number of edges in a valid message occurs when all 16-bits are 1's. The resulting Manchester sequence contains 36 edges. %here
 
 
 
