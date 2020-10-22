@@ -5,11 +5,11 @@ This chapter is dedicated to the various modules which comprise the laser tag sy
 
 It is important to reiterate at this point that this study aims determine the core components of a laser tag module with respect to the tagger and target system. The goal is not to design a ready to play 'user friendly' kit, but rather to determine what modules are required in such a system and how these components perform through the execution of various experiments.
 
+The system overview is sub-divided into two subsystems, the tagger subsystem and target subsystem. These two subsystems further divide into the modular components and the design of these is covered later in this chapter.
+
 \section{System Overview}
 
-The hardware and software modules of the system will be addressed separately. Figure \ref{fig:system_overview_hardware} gives an overview of the hardware modules required to create a functional laser tag system.
-
-\subsection{Hardware}
+Figure \ref{fig:system_overview_hardware} gives an overview of the modules that make up the laser tag data link system.
 
 \begin{figure}[H]
 	\centering
@@ -18,13 +18,20 @@ The hardware and software modules of the system will be addressed separately. Fi
 	\label{fig:system_overview_hardware}
 \end{figure}
 
-\subsubsection{Tagger}
-The tagger system, in terms of hardware, comprises of a main processor which has been realised on the UCT STM32\footnotemark{} development board. The main processor communicates with the carrier frequency generation module which is responsible for producing the 36kHz square waveform which feeds into the final hardware module of the tagger, the LED driver. Two led driver modules have been design, they both accept the same input signal and are identical in their purpose. The difference between the two modules is in the rated output power, the low power module is designed to drive a typical IR led while the high power module has been designed to drive a high power 3W IR led.
+\subsection{Subsystems}
+
+Two subsystems may be derived from figure \ref{fig:system_overview_hardware}. The tagger subsystem responsible for generating and transmitting a message and the target subsystem responsible for receiving and decoding an incoming message.
+
+\subsubsection{Tagger Subsystem}
+The tagger subsystem comprises a main processor, carrier frequency generation module and two LED driver modules. For the purposes of this investigation the UCT STM32\footnotemark{} development board has been used as the processor. The development board communicates with the carrier frequency generation module (responsible for producing the 36kHz square waveform), this moduel is connected to an LED driver module which in turn drives an IR LED. Two led driver modules have been design and both operate on the same input signal. The difference between the two modules is in the rated output power, the low power module is designed to drive a typical IR led while the high power module has been designed to drive a high power 3W IR led.
+
+Not shown on the system overview is the light focus hardware module. This module is a passive optical component designed to focus the IR light.
 
 \footnotetext{STM32F051C6}
 
-\subsubsection{Target}
-The target system comprises many more hardware modules, this is due to the comparably higher complexity involved in detecting and processing signals. An additional module is also required to allow for a comparison between using a photodiode versus a phototransistor, as these each require a custom dedicated hardware module. The target system hardware consists of three IR sensors, in addition to the two sensors just mention, an 'all in one' IR receiver device was used to act as a golden measure against which to test the other two receivers. The output of the IR receiver module can be routed directly to the target main processor.
+\subsubsection{Target Subsystem}
+The target system comprises a number of modules due to the comparably higher complexity involved in detecting and processing incoming signals. The first stage of this subsystem concerns detecting incoming IR light, three modules exist to perform this operation to allow for comparison between them to be performed. %heree
+The target system hardware consists of three IR sensors, in addition to the two sensors just mention, an 'all in one' IR receiver device was used to act as a golden measure against which to test the other two receivers. The output of the IR receiver module can be routed directly to the target main processor.
 
 The outputs of the photodiode and phototransistor IR detection modules are routed into a signal conditioning module. This module performs anti-alias filtering and rectification of the signal, this is to ensure the signal is within the specifications of the tone detector. The tone detection modules comprises of a digital signal processing (DSP) algorithm, implemented on an STM32 MPU. The output of the tone detection module may be routed to the target main processor. The target main processor is implemented on the UCT STM32 development board.
 
