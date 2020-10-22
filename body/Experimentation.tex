@@ -97,7 +97,17 @@ The first frequency tested was 1kHz, this frequency was incremented by 3kHz per 
 
 \subsubsection{Trigger Conditions}
 %Trigger Frequency vs amplitude | Trigger frequency
-To test the high-level functionality of the Goertzel
+To evaluate the high-level functionality of the Goertzel, an experiment was performed to determine the amplitude and frequency boundary pairs which cause the goertzel filter to trigger.
+
+This provides insight into the minimum amplitude required to trigger the filter and how that amplitude changes as the frequency moves away from the centre frequency of 36kHz.
+
+A function generator was connected to the input of the Goertzel filter module and an oscilloscope was connected to the output and also used to monitor the generated waveform. Throughout the experiment the generated sinusoidal waveform was offset by 1V to ensure the input voltage remained positive.
+
+By way of manually adjusting the amplitude, the function generator was used to determine the approximate voltage which would trigger the Goertzel filter for an input frequency of 36kHz. This occurs at around 297mV. For the purposes of experimentation this value was rounded to 300mV.
+
+Starting from 300mV and increasing by increments of 50mV, the amplitude of the generated sinusoid was set. Each time the amplitude was set, the function generator was configured to sweep though all frequencies between 28kHz and 38kHz. The oscilloscope was used to find the frequency which caused the output of the Goertzel filter to go high.
+
+These results were then tabulated and plotted using Octave.
 
 
 \subsection{Carrier Waveform Generation Module}
@@ -177,5 +187,7 @@ The laser tag system in its current form does not utilize any automatic gain con
 %An automatic gain control system, either implemented digitally or as an additional module would automatically
 
 \subsubsection{Range Test}
+
+%Max and minimum range (min due to over saturation)
 
 To test the range of the 
