@@ -5,10 +5,6 @@
 
 %Present your results in a suitable format using tables and graphs where necessary. Remember to refer to them in text and caption them properly.
 
-
-\section{Simulation Results}
-
-
 \section{Experimental Results}
 
 \subsection{Focal Length of Lens}
@@ -23,7 +19,7 @@ The measured focal length of the lens was measured to be 53mm. Figure \ref{fig:f
 \end{figure}
 
 
-\subsection{Light Focus System}
+\subsection{IR Beam Dispersion}
 
 \begin{figure}[H]
 	\centering
@@ -69,7 +65,7 @@ Table \ref{tbl:spot_size_vs_distance} below shows the beam spot size vs distance
 	\end{minipage}
 \end{figure}
 
-\subsection{Goertzel Filter Optimization}
+\subsection{Goertzel Filter Benchmark}
 
 The results from the goertzel algorithm optimization experiment are tabulated in table \ref{tbl:goertzel_speed_results}, the adjacent screenshot shown in figure \ref{fig:goertzel_speed_scope_screenshot} illustrates the output recorded by the oscilloscope software during a single iteration of the experiment. 
 
@@ -162,7 +158,7 @@ The following plot in figure \ref{fig:goertzel_filter_response_empirical} show t
 	\label{fig:goertzel_amplitude_frequency_pairs}
 \end{figure}
 
-\subsection{Power LED Driver}
+\subsection{Power LED Driver Performance}
 
 The following screenshots shown in figures \ref{fig:pwr_led_6k} through \ref{fig:pwr_led_96k} show the results captured by the oscilloscope. The red trace shows the output of the function generator and the blue trace shows the voltage across the shunt resistor R1\footnote{see schematic in figure \ref{fig:schematic_power_led_driver}}.
 
@@ -216,7 +212,7 @@ The following screenshots shown in figures \ref{fig:pwr_led_6k} through \ref{fig
 
 
 
-\subsection{Detector Module Directivity}
+\subsection{Directivity of IR Modules}
 
 Figure \ref{fig:vrms_vs_angle_of_incidence} shows the RMS voltage value of the modules output with respect to the angle of incidence. Figure \ref{fig:beam_pattern} shows the normalized RMS voltage value and mirrors the image about the vertical to provide an illustration of the beam pattern.
 
@@ -241,7 +237,7 @@ Figure \ref{fig:vrms_vs_angle_of_incidence} shows the RMS voltage value of the m
 The IR receiver module registered the signal between angles of 0\textdegree and 70\textdegree and registered an absence of a signal for angles greater than 80\textdegree. Between 70\textdegree and 80\textdegree the output would toggle sporadically.
 
 
-\subsection{Target MCU}
+\subsection{Target MCU Performance}
 
 \subsubsection{Processing Time}
 
@@ -264,3 +260,5 @@ The IR receiver module registered the signal between angles of 0\textdegree and 
 \end{table}
 
 Combining the timeout delay and decoding time gives a maximum period of 33.46ms in the worst case, before a new message may be received.
+
+\subsection{System Performance}
