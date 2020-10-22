@@ -441,6 +441,8 @@ The timeout monitoring process is executed by via an interrupt when the output c
 
 The decoding process is an interrupt triggered processes which may also be triggered by software (when the maximum number of edges are recorded). This process decodes the time stamps recorded by the edge detection process and returns the recovered data. The decoding process uses the state machine approach illustrated in figure \ref{fig:manchesterdecodingfsm}.
 
+During the decoding process, the edge detection process responsible for triggering the process is prevented from recording any further edges until the decoding is finished.
+
 \subsubsection{Decoding Strategy}
 
 The state machine approach does not specify an end of transmission condition, therefore it is necessary to define one. It is not possible to simply count the cumulative number of bits as the input capture stage and decoding stages are independent. Therefore a timeout timer will be implemented to trigger the decoding and reset the \textit{array of edge time} differences. In addition to a timeout a maximum number of edges is defined which will also trigger the start of a decoding sequence and reset the state machine.
@@ -451,7 +453,7 @@ The timeout period was chosen to be a length of two bit-periods, this was chosen
 
 The maximum number of edges in a valid message occurs when all 16-bits are 1's which results in a Manchester sequence containing 36 edges. Therefore the edge detection process will automatically begin the decoding process if 36 edges are recorded.
 
-The implementation of the Manchester decoding algorithm may be found in the appendix, listing \ref{lst:decode_manchester_implementation}. Decoding requires a time period which defines the difference between a long and short period. This is the \textit{THRESHOLD\_TICKS} constant, in addition a second threshold constant \textit{BITMISS\_TICKS} was defined and is used to determine if a bit in the Manchester sequence was undetected.
+The implementation of the Manchester decoding algorithm may be found in the appendix, listing \ref{lst:decode_manchester_implementation}. Decoding requires a time period which defines the difference between a long and short period. This is the \textit{THRESHOLD\_TICKS} constant, in addition a second constant \textit{BITMISS\_TICKS} was defined and is used as a threshold to determine if a bit in the message has been was undetected.
 
 
 
