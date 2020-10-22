@@ -99,13 +99,13 @@ The first frequency tested was 1kHz, this frequency was incremented by 3kHz per 
 %Trigger Frequency vs amplitude | Trigger frequency
 To evaluate the high-level functionality of the Goertzel, an experiment was performed to determine the amplitude and frequency boundary pairs which cause the goertzel filter to trigger.
 
-This provides insight into the minimum amplitude required to trigger the filter and how that amplitude changes as the frequency moves away from the centre frequency of 36kHz.
+Because no automatic gain control has been implemented in the Goertzel algorithm, there is a minimum signal  amplitude required to trigger the output. This provides insight into this minimum amplitude and how that amplitude changes as the frequency moves away from the centre frequency of 36kHz.
 
 A function generator was connected to the input of the Goertzel filter module and an oscilloscope was connected to the output and also used to monitor the generated waveform. Throughout the experiment the generated sinusoidal waveform was offset by 1V to ensure the input voltage remained positive.
 
 By way of manually adjusting the amplitude, the function generator was used to determine the approximate voltage which would trigger the Goertzel filter for an input frequency of 36kHz. This occurs at around 297mV. For the purposes of experimentation this value was rounded to 300mV.
 
-Starting from 300mV and increasing by increments of 50mV, the amplitude of the generated sinusoid was set. Each time the amplitude was set, the function generator was configured to sweep though all frequencies between 28kHz and 38kHz. The oscilloscope was used to find the frequency which caused the output of the Goertzel filter to go high.
+Starting from 300mV and increasing by increments of 50mV, the amplitude of the generated sinusoid was set. Each time the amplitude was set, the function generator was configured to sweep though all frequencies between 28kHz and 44kHz. The oscilloscope was used to find the frequencies which caused the output of the Goertzel filter to go high. For each amplitude value there are two boundaries, a lower and upper frequency.
 
 These results were then tabulated and plotted using Octave.
 
