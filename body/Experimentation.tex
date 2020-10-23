@@ -150,6 +150,21 @@ Octave was used to calculate the RMS\footnote{root mean square} voltages for the
 
 The IR receiver module was also tested following the above experimental method, however the output from this module is a logic level indicating the presence of a modulated waveform so it would be non-nonsensical to consider the RMS value, instead the binary state was tracked.
 
+\subsection{Signal Conditioning Performance}
+
+\subsubsection{Anti-alias Filtering}
+%todo: experiment here
+
+\subsubsection{Precision Rectification}
+%todo: experiement here
+
+
+\subsection{Tagger MCU Performance}
+
+\subsubsection{Manchester Encoding}
+
+An oscilloscope was connected to the output of the tagger MCU. The Manchester encoded waveform produced was traced and evaluated %todo: evaluteate what?
+
 
 \subsection{Target MCU Performance}
 
@@ -174,6 +189,7 @@ Three data packets were chosen, based on the corresponding number of edges in th
 
 %todo: complete this experiment description by adding timeout period
 An oscilloscope was used to trace the incoming Manchester waveform and the state of the GPIO being toggled before and after the processing function. This allowed measurement of both the length of the computation time and the length of the timeout period.
+
 
 
 
