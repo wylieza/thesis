@@ -242,6 +242,28 @@ Figure \ref{fig:vrms_vs_angle_of_incidence} shows the RMS voltage value of the m
 
 The IR receiver module registered the signal between angles of 0\textdegree and 70\textdegree and registered an absence of a signal for angles greater than 80\textdegree. Between 70\textdegree and 80\textdegree the output would toggle sporadically.
 
+\subsection{Signal Conditioning Performance}
+
+\subsubsection{Anti-alias Filtering}
+%todo: experiment here
+
+\subsubsection{Precision Rectification}
+
+Figure \ref{fig:precision_rectification} below shows the oscilloscope trace of the signal being fed into the precision rectifier (blue) and the resulting rectified signal (red).
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{figures/results/rectification/36kHz.JPG}
+	\captionof{figure}{Osciliscope output showing signal before and after rectification}
+	\label{fig:precision_rectification}
+\end{figure}
+
+\paragraph{Discussion}
+The precision rectifier stage operates as expected. The precision rectification technique can be seen by the complete rectification of half the waveform, with cross-over dead time due to the forward voltage drop of the diode.
+
+It should be noted that the slew-rate of the op-amp and the efficiency in the design of the module results in very little distortion at a frequency of 36kHz. Only a small amount of deformation occurs in the output when the input signal goes negative.
+
+
 
 \subsection{Tagger MCU Performance}
 
