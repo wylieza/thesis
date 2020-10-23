@@ -247,7 +247,7 @@ Figure \ref{fig:schematic_voltage_clamp} shows the circuity used to clamp the ou
 %Missing:
 % - Choosing freq cut off and what is expected gain
 
-Before the voltage signal from the photodiode IR detector can be processed digitally, it must be conditioned. The module can be broken into two stages separated by a unity buffer (U4). The first stage of the module performs filtering, this is prevent aliasing during the digital signal processing, which occurs when frequencies greater than half the sampling frequency are present in the sampled waveform. This is especially important considering the incoming waveform is square. The second stage performs precision rectification, the signal is rectified to ensure a negative voltage is not placed on the input pin of the tone detector which is only tolerant of positive voltages between 0V and 3.3V.
+The signal conditioning module can be broken into two stages. The first stage of the module performs filtering, this is prevent aliasing during the digital signal processing, which is caused by frequencies greater than half the sampling frequency being present in the sampled waveform. The second stage performs precision rectification, which is necessary to ensure a negative voltage is not placed on the input pin of the tone detector which has a tolerance range from 0V to 3.3V.
 
 \begin{figure}[H]
 	\centering
@@ -256,9 +256,9 @@ Before the voltage signal from the photodiode IR detector can be processed digit
 	\label{fig:schematic_filter_and_rectify}
 \end{figure}
 
-In most cases the incoming signal is a square wave with an amplitude of 4.5V which has arisen due to the gain of the IR detector module causing it to saturate. This high voltage exceeds the tolerance of the ADC, therefore a voltage divider formed by R1 and R2 prior to the filter is used to reduce the signal to an acceptable value.
+In most cases the incoming signal is a square wave which has formed due to the amplification stage of the detector module saturating at $\pm 4.5V$. To ensure the output signal is within the tolerance of the ADC, a voltage divider formed by R1 and R2 filter is place prior to the filter.
 
-The filter circuit used is a second order voltage controlled voltage source (VCVS) active low pass filter in a Chebyshev configuration\footnote{0.5dB passband ripple}. A Chebyshev configuration was chosen because a sharp roll of is desired and because passband ripple will not affect the ability of the Goertzel filter to detect the target frequency. The component values where chosen in accordance to the filter design table found on page 274 of the book \textit{The art of electronics - 2nd Edition}\cite{Horowitz1995}.
+The filter circuit used is a second order voltage controlled voltage source (VCVS) active low pass filter in a Chebyshev configuration\footnote{0.5dB passband ripple}. The Chebyshev configuration was chosen because a sharp roll of is desired and because passband ripple will not affect the ability of the Goertzel filter to detect the target frequency. The component values where chosen in accordance to the filter design table found on page 274 of the book \textit{The art of electronics - 2nd Edition}\cite{Horowitz1995}.
 
 The precision rectifier is also a circuit design taken from the book and can be found on page 188, it is an improved version of the basic precision rectifier because it reduces the output swing of the op-amp during operation\cite{Horowitz1995}.
 
@@ -273,7 +273,7 @@ The precision rectifier is also a circuit design taken from the book and can be 
 %todo: desired freq cutoff and calculations
 
 
-The desired cut-off frequency is \(f_{c} = 48kHz\), this defines the end of the passband\footnote{Unlike in the case of a Bessel filter, this is not the same as the -3dB point}.
+The desired cut-off frequency is \(f_{c} = 48kHz\), this defines the end of the passband\footnote{Unlike in the case of a Bessel filter, this is not necessarily the -3dB point}.
 
 With reference to the schematic (figure \ref{fig:module_filtering_conditioning}), resistors and capacitors hold the following relations ships: \(R_3 = R_4 = R\) and \(C_1 = C_2 = C\).
 
@@ -284,8 +284,7 @@ The gain is set by choosing $R_5$ and $R_6$ such that \(R_5 = (K - 1) \times R_6
 
 \[RC = \frac{1}{2\pi f_n f_c}\]
 
-Substituting into the above equation we note $RC = 2.6935\times 10^{-6}$. It is recommended that the resistance value is between $10k$ and $100k$, the value of $39k\Omega$ was selected. The corresponding capacitance value is calculated to be $69pF$, and the E12 series capacitance value of $68pF$ was used.
-
+Substituting into the above equation we find $RC = 2.6935\times 10^{-6}$. It is recommended that the resistance value is between $10k$ and $100k$, the value of $39k\Omega$ was selected. The corresponding capacitance value is calculated to be $69pF$, and the E12 series capacitance value of $68pF$ was used.
 
 
 \subsection{Tone Decoder Module}
