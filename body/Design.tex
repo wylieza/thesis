@@ -8,6 +8,8 @@ This chapter is dedicated to the various modules which comprise the laser tag sy
 
 The system overview is sub-divided into two subsystems, the tagger subsystem and target subsystem. These two subsystems further divide into modules. The designed of each module is presented, along with an image of the final implementation.
 
+%todo: explain why designs are so ellaborate... This investigation is centred on the creation and evaluation of system modules, therefore the design descriptions have been written 
+
 \section{System Overview}
 
 Figure \ref{fig:system_overview_hardware} gives an overview of the modules that make up the laser tag data link system.
@@ -245,7 +247,7 @@ Figure \ref{fig:schematic_voltage_clamp} shows the circuity used to clamp the ou
 %Missing:
 % - Choosing freq cut off and what is expected gain
 
-Before the voltage signal from the photodiode IR detector can be processed by the tone detector, it must be conditioned. The module can be broken into two stages separated by the unity buffer (U4). The first stage of the module performs filtering, this is prevent aliasing during the digital signal processing, which occurs when frequencies greater than half the sampling frequency are present in the sampled waveform. The second stage performs precision rectification, the signal is rectified to ensure a negative voltage is not placed on the input pin of the tone detector which is only tolerant of positive voltages between 0V and 3.3V.
+Before the voltage signal from the photodiode IR detector can be processed digitally, it must be conditioned. The module can be broken into two stages separated by a unity buffer (U4). The first stage of the module performs filtering, this is prevent aliasing during the digital signal processing, which occurs when frequencies greater than half the sampling frequency are present in the sampled waveform. This is especially important considering the incoming waveform is square. The second stage performs precision rectification, the signal is rectified to ensure a negative voltage is not placed on the input pin of the tone detector which is only tolerant of positive voltages between 0V and 3.3V.
 
 \begin{figure}[H]
 	\centering
@@ -254,9 +256,9 @@ Before the voltage signal from the photodiode IR detector can be processed by th
 	\label{fig:schematic_filter_and_rectify}
 \end{figure}
 
-Often the incoming signal is a square wave with an amplitude of 4.5V which saturates the op-amps, to prevent saturation a voltage divider is formed using R1 and R2 to reduce the signal magnitude under these circumstances.
+In most cases the incoming signal is a square wave with an amplitude of 4.5V which has arisen due to the gain of the IR detector module causing it to saturate. This high voltage exceeds the tolerance of the ADC, therefore a voltage divider formed by R1 and R2 prior to the filter is used to reduce the signal to an acceptable value.
 
-The filter circuit used is a second order voltage controlled voltage source (VCVS) active low pass filter in a Chebyshev configuration. The component values where chosen in acordances to the filter design table found on page 274 of the book 'The art of electronics'\cite{Horowitz1995}.
+The filter circuit used is a second order voltage controlled voltage source (VCVS) active low pass filter in a Chebyshev configuration. The component values where chosen in accordance to the filter design table found on page 274 of the book \textit{The art of electronics - 2nd Edition}\cite{Horowitz1995}.
 
 The precision rectifier is also a circuit design taken from the book and can be found on page 188, it is an improved version of the basic precision rectifier because it reduces the output swing of the op-amp during operation\cite{Horowitz1995}.
 
@@ -266,6 +268,9 @@ The precision rectifier is also a circuit design taken from the book and can be 
 	\caption{Signal Conditioning Module}
 	\label{fig:module_filtering_conditioning}
 \end{figure}
+
+\subsubsection{Filter Design}
+%todo: desired freq cutoff and calculations
 
 \subsection{Tone Decoder Module}
 %Missing:
