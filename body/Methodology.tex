@@ -75,8 +75,6 @@ Throughout the design phase, various simulations were used to predict the behavi
 
 \section{Phase 3 - Development and Realization}
 
-%The development and realization phase forms part of the iteration stage. The laser tag system will be developed in a progressive fashion. After each module is realized, a set of experiments will be undertaken to assess the module's performance. This phase involves the creation of both hardware and software modules.
-
 The third phase concerns the development of the individual modules. During this phase each module was realized according its design.
 
 Modules were first implemented on a breadboard to confirm valid behaviour. In the case of a failed implementation due to a design oversight the design was reworked, this is illustrated using a dotted feedback path from phase 3 to phase 2 in figure \ref{fig:methodology_overview}. Only the final module design and implementation has been documented in the body of this report.
@@ -88,68 +86,9 @@ With the exception of the STM32 development boards, all the module designs were 
 
 \section{Phase 4 - Experimental Setup}
 
-The investigation required various pieces of test and measurement equipment. The following section outlines the hardware and software used to develope the system and perform the experiments.
+The fourth phase is the experimental set-up. This phase outlines the procedure followed using test and measurement equipment along with a module or collection of modules for the purposes of gathering performance data.
 
-\subsection{Power Supply}
-Access to the university laboratory equipment is limited.
-
-A large potion of the testing will be done using a custom built power supply, created from an ATX PSU. The particular unit that was repurposed was a 280W LiteOn PSU. This unit is capable of supplying $\pm$ 12V, $\pm$ 5V, and 3.3V.
-
-On occasion when a variable power supply was required, XXX
-
-\subsection{Measurement}
-
-Various experiments required the use of an oscilloscope, the oscilloscope used was the PicoScope 2205A by Pico Technology.
-
-For general purpose measurements of voltages, current and resistance the Fragram T2612 digital multimeter was used.
-
-A large portion of the project is centred around invisible IR radiation. To measure the characteristics such as the beam angle produced by the IR, the Sony Handycam DCR-HC26 was used. To maximize the visibility of the IR beam, the camera was operated in 'Nightshot' mode and the built in IR LEDs covered up.
-
-
-
-%%%
-
-\subsection{Hardware Components}
-
-\subsubsection{UCT STM32F0 Development Board}
-The STM32F051C6 microcontroller was chosen due to its combination of low cost and availability. UCT has a custom design development board centred on this microcontroller. The final prototype is centred purely on the STM32F0 microcontroller and bare-bones supporting circuity, however a vast amount of the testing was done on the development board hence its inclusion in this section.
-
-%\subsubsection{ADC Peripheral}
-
-%\subsubsection{ADC DMA}
-
-%\subsection{Arduino}
-%The Arduino platform was used whenever for various quick prototyping where unofficial testing was required. This is because the Arduino platform has many well established libraries and a simplified development environment which allowed for faster prototyping.
-
-\subsubsection{Power IR LED}
-
-The LZ1-10R702 high power, PCB mounted LED from LedEngin Inc. was used to produce the required 940nm wavelength infrared radiation. To ensure proper heat dissipation generic adhesive based heat-sink was attached to the module.
-
-\subsubsection{Operational Amplifier}
-xxx
-
-\subsubsection{LED Current Regulator}
-xxx
-IRLZ44NPBF N-Channel MOSFET from Infineon
-
-
-
-%%%
-
-\subsection{Software Applications}
-
-\subsubsection{STM32 CubeIDE}
-ST microelectronics provides a custom version of the Eclipse IDE, distributed under the name CubeIDE. This is an all in one integrated developer environment for STM32 microcontrollers. Version 1.3.0 was used for the software development in this study.
-
-CubeIDE provides a 'Device Configuration Tool' along with an official library called HAL (Hardware Abstraction Layer). The combination of the configuration tool and HAL library helped speed up the software development. The CubeIDE also includes a debug tool with direct register/memory access which assisted with debugging.
-
-XXX -talk about LCD libary
-
-\subsubsection{Realterm}
-During the development and realization stage a UART communication link between the personal computer and the micro-controller was used to provide feedback and measurements. Realterm \footnote{\url{https://sourceforge.net/projects/realterm/}}, a free serial monitor which provides a rich set of features was used for these communications.
-
-\subsubsection{Git}
-
+Due to the unique functionality of each module, it is necessary to use different experimental setups to evaluate different modules. Hence phase four forms part of an \textit{iterative stage} which is used to illustrate that for various phases of experimentation, a unique experimental setup has been devised.
 
 
 %%%%%%%%%%%%%%%%%%%%
