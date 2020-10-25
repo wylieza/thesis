@@ -77,11 +77,9 @@ Many techniques have been developed optical wireless communication. These range 
 
 Multiple-subcarrier modulation sums numerous sub-carrier signals and uses the result to modulate the light source. As a consequence of using a multiple low frequency sub-carriers it is possible to achieve a high total bit rate with little distortion, removing the need for equalization \cite{Ohtsuki2003}.
 
-Notable tradeoffs for increasing bit-rate are diminishing range, resistance to ambient noise and an increase in system complexity. For the purposes of communicating between a tagger and target in laser tag, there are low bandwidth requirements and long range with minimal system complexity is desired.
+Notable tradeoffs for techniques that increase the bit-rate are diminishing range, lower resistance to ambient noise and an increase in system complexity. For the purposes of communicating between a tagger and target in laser tag, a high bandwidth is not required. It is therefore advantageous to utilize a more robust technique with a lower bit-rate such as on-off keying.
 
-%todo: transition here
-
-There are several IR communication protocols in existence. Of the extensive list of available protocols the following are quite popular
+OOK is utilized in many systems, for example, in remote control applications. As a result there are several IR communication protocols based around this technique. The following are a few of the popular options
 
 \begin{itemize}
 	\item RC-5
@@ -90,13 +88,13 @@ There are several IR communication protocols in existence. Of the extensive list
 	\item SIRC
 \end{itemize}
 
-Practically all the IR protocols for remote control applications follow the exact same principles for encoding and transmitting information through IR radiation. To transmit information, an IR LED is modulated at a particular carrier frequency (usually around 36kHz). Modulation is necessary because there are many sources of IR radiation and it would be otherwise impossible to distinguish the user generated IR signal from surrounding noise sources. Each protocol defines specific timing conditions for how long the IR radiation should be modulated to portray a specific symbol. This is where the various protocol differ.
+Each of these protocols are based on OOK, but differ in how they define symbols. To represent two different states, an IR source is modulated at a chosen carrier frequency (usually around 36kHz). When the light source is modulating the signal is \textit{on} and when the source is not modulating the signal is \textit{off}.  Modulation makes it possible to distinguish between a generated IR signal and ambient IR radiation from noise sources.
 
-Some protocols use a technique known as pulse width encoding. This technique involves modulating the IR LED for a different period of time depending on whether a 1 or 0 is to be transmitted, while maintaining a constant period of time between transmissions. This is the technique is incorporated into Sony's SIRC protocol.
+Protocols such as Sony's SIRC use a technique known as pulse width encoding. This technique involves modulating the IR LED for a different period of time depending on whether a 1 or 0 is to be transmitted, while maintaining a constant period of time between transmissions.
 
-Other protocols use pulse distance encoding, such as the NEC protocol by Renesas. This protocol involves modulating the IR LED for a fixed period of time and the time period between each modulation is used to indicate either a 1 or 0.
+Protocols such as the NEC protocol by Renesas use pulse distance encoding. This protocol specifies an different off period between on pulses to distinguish between a logical 1 and 0.
 
-Finally, some of the IR protocols use Manchester Encoding to embed information, such as in the case of the very popular RC-5 protocol and its successor the RC-6 protocol. Due to its wide adoption and popularity \cite{rudrappa2009}, as well as incorporation of the elegant Manchester Encoding technique, it was decided to use an adaption of the RC-5 protocol in this project. A review of Manchester Encoding is detailed in section \ref{sec:manchester_encoding} below.
+The RC-5 protocol and its successor the RC-6 protocol use Manchester Encoding to transfer binary information. Due to its wide adoption and popularity \cite{rudrappa2009}, an adaption the RC-5 protocol will be used in this project. Manchester Encoding is reviewed in section \ref{sec:manchester_encoding} below.
 
 \subsubsection{RC-5 Protocol}
 \label{sec:rc_5_protocol}
