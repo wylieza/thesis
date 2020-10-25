@@ -98,7 +98,7 @@ The RC-5 protocol and its successor the RC-6 protocol use Manchester Encoding to
 
 \subsubsection{RC-5 Protocol}
 \label{sec:rc_5_protocol}
-This project incorporates a modified version of the RC-5 transmission protocol. The the original RC-5 protocol is illustrated in figure \ref{fig:rc_5_protocol}. The bits are encoded using the IEEE 802.3 convention for Manchester Encoding. The modulation frequency of the carrier is 36kHz and the length of one bit period is 64 cycles or 1.778mS\cite{Perme2007}.
+The the RC-5 protocol is illustrated in figure \ref{fig:rc_5_protocol}. The bits are encoded using the IEEE 802.3 convention for Manchester Encoding. The modulation frequency of the carrier is 36kHz and the length of one bit period is 64 cycles or 1.778mS\cite{Perme2007}.
 
 \begin{figure}[H]
 	\centering
@@ -107,18 +107,29 @@ This project incorporates a modified version of the RC-5 transmission protocol. 
 	\label{fig:rc_5_protocol}
 \end{figure}
 
-Every transmission begins with two start bits, these bits always have a value of 1. Following the start bits is a 'toggle' bit. When a button is depressed, the message is transmitted repeatedly with a 114ms gap between transmissions. In remote control applications it is useful to distinguish between a button which remains depressed and a button being repeatedly pressed. This is achieved through the toggle bit which is flipped each time a button is released. Finally the RC-5 protocol first transmits a 5-bit address followed by a 6 bit command.
+Every transmission begins with two start bits, these bits always have a value of 1. Following the start bits is the `toggle' bit. In remote control applications it is useful to distinguish between a button which remains depressed and a button being repeatedly pressed. This is achieved through the toggle bit which is flipped each time a button is released. When a button remains depressed, the message is transmitted repeatedly with a 114ms gap between transmissions. Finally the RC-5 protocol data is structured such that it first transmits a 5-bit address followed by a 6-bit command.
 
 
-\subsection{Materials Interaction}
+%\subsection{Materials Interaction}
 %Talk briefly about materials and the interation of different materials with IR. Mention the difficulty of aquiring these resources and therefore the exclusion of them during experiementation
 
 %%%%%%%%%%%%%%%%%%
 
 \section{Reliable Communication}
 
-\subsection{Noise}
+\subsection{Noise \& Interference}
 %Talk about interference and noise, sources and narrow down to IR in particular... Also note noise in components and power supplies etc.
+
+Optical wireless communication is susceptible to interference and noise produced by most lighting technologies. Light sources such as incandescent light bulbs and the sun produce white noise in the infrared region, while light sources such as the florescent light produce cyclostationary noise due to 
+%todo: here
+
+%the sun
+%incadecent light sources
+%fluoresent (cyclostationary noise)
+%multi-path distortion for high bit-rate signals
+
+%saturation of receiver and noisy input
+
 
 \subsection{Modulation}
 %Talk about modulation techniques 
