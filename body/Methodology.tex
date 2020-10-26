@@ -17,7 +17,7 @@
 
 \section{Outline}
 
-This study set out to investigate the performance of modules created for a uni-directional data link in the context of laser tag systems. The following chapter presents the methodology that was followed throughout the investigation. A phased approach was taken and the following chapter gives a break down of those phases.
+This study set out to investigate the performance of modules created for a uni-directional data link in the context of laser tag systems. The following chapter presents the methodology that was followed throughout the investigation. A phased approach was taken and has been illustrated in figure \ref{fig:methodology_overview}.
 
 \begin{figure}[H]
 	\centering
@@ -27,9 +27,15 @@ This study set out to investigate the performance of modules created for a uni-d
 \end{figure}
 
 %todo: this will need re-wroking after finilized the flow diagram
-The first phase involves investigating the relevant literature. The second phase involves identifying and designing the modular subsystems, this phase of the project incorporates a portion of feedback from the incremental stage. The third phase is the experimental setup during which experiments are devised and test/measurement equipment selected. Following the experimental setup is an iterative stage which comprises phase four and five. During phase four the modules are developed according to the designs produced in the second phase. Phase five then involves performing the experiments devised in the third phase to evaluate the modules.
+The first phase constitutes a survey of the the relevant literature. The second phase involves identification and design of the modular subsystems. This is followed by the third phase during which the modules are implemented according to their design.
 
-The experimentation phase loops back to the development stage illustrating that some experiments were performed progressively as modules are realized. Following the design paradigm of the spiral model, a feedback path from the incremental stage back to the design exists to illustrated that certain design choices were made based on the experimental results.
+Following the design paradigm of the spiral model, a feedback path from the development and realization stage back to the system design phase exists. This illustrates that the system design was updated in accordance to new information generated during the third phase. %here
+
+This phase of the project allows for insight gathered during the development and realization stage to be feedback to the design phase.
+
+Following the experimental setup is an iterative stage which encapsulates the experimental setup (phase 4) and the experimentation (phase 5).
+
+The experimentation phase loops back to the development stage illustrating that some experiments were performed progressively as modules are realized. 
 
 During phase 7 the results are compiled and analysed. During the 8\textsuperscript{th} phase these results are interpreted and conclusions are drawn bringing closure to the research project.
 
@@ -130,12 +136,31 @@ Discussion is bought to a close with a comment on the  proposals for further res
 
 %%%%%%%%%%%%%%%%%%%%
 
-\section{Test and Measurement Equipment}
+\section{Equipment}
 \label{sec:test_and_measurement_equipment}
+The following section outlines the equipment used during the development as well as test and measurement phases of the project.
 
-%todo: HEREEE
+\subsection{Oscilloscope and Function Generator}
+To perform electrical measurements, the Picoscope 2205A by Pico Technology was used. The Picoscope has two input channels and a dedicated function generator. The function generator was used to inject waveforms in various experiments.
 
+\subsection{Microcontroller Development}
+The CubeIDE developer environment by STMicroelectronics was used to develop the firmware for the tagger, target and tone decoder's central processor.
 
+\subsection{Signal Processing and Data Presentation}
+The Octave mathematical programming language was used to develop and predict the behaviour of the digital signal processing algorithm as well as generate plots of the data collected in various experiments.
+
+\subsection{Serial Communication}
+Serial communication between the STM32 microcontrollers and personal computer were handled by Realterm \footnote{\url{https://sourceforge.net/projects/realterm/}}, a free serial monitor available for Windows.
+
+\subsection{Circuit Simulation}
+The LTSpice SPICE simulation environment by Linear Technology\footnote{LT corporation is owned by Analog Devices} was used to test and develop the circuit modules.
+
+\subsection{Test and Measurement}
+For general purpose measurements of voltages, current and resistance the Fragram T2612 digital multimeter was used.
+
+The Sony Handycam DCR-HC26 video camera was used to \textit{see} the invisible beam spot produced by the LED focus system.
+
+Measurements less than 300mm were performed using a digital caliper, measurements longer than 300mm we taken using a measuring tape.
 
 
 
