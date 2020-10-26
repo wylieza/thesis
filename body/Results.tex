@@ -268,7 +268,15 @@ It should be noted that the slew-rate of the op-amp and the efficiency in the de
 \subsection{Tagger MCU Performance}
 
 \subsubsection{Manchester Encoding}
-%todo: screenshots here
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=.8\textwidth]{figures/results/receiver_software/transmission_too_fast_crop.JPG}
+	\caption{Incoming Transmission During Decoding}
+	\label{fig:transmission_too_fast}
+\end{figure}
+
+
 
 
 \subsection{Target MCU Performance}
@@ -277,7 +285,7 @@ It should be noted that the slew-rate of the op-amp and the efficiency in the de
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=.9\textwidth]{figures/results/receiver_software/arbitrary_11111_timing_test.JPG}
+	\includegraphics[width=.9\textwidth]{figures/results/receiver_software/arbitrary_11111_timing_test_crop.JPG}
 	\caption{Oscilloscope Trace for Transmission of 11111}
 	\label{fig:arbitrary_11111_timing_test}
 \end{figure}
@@ -294,5 +302,23 @@ It should be noted that the slew-rate of the op-amp and the efficiency in the de
 \end{table}
 
 Combining the timeout delay and decoding time gives a maximum period of 33.46ms in the worst case, before a new message may be received.
+
+\subsubsection{Error Handling}
+%todo: comment on this
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=.8\textwidth]{figures/results/receiver_software/transmission_too_fast_crop.JPG}
+	\caption{Incoming Transmission During Decoding}
+	\label{fig:transmission_too_fast}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=.8\textwidth]{figures/results/receiver_software/transmission_too_many_edges_crop.JPG}
+	\caption{Continuous Transmission Terminated after Maximum Number of Edges}
+	\label{fig:transmission_too_many_edges}
+\end{figure}
+
 
 \subsection{System Performance}
