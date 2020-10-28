@@ -396,7 +396,19 @@ The strip-board implementation of the module is shown in figure \ref{fig:module_
 %Missing:
 % - Choosing freq cut off and what is expected gain
 
-The signal conditioning module can be broken into two stages. The first stage of the module performs filtering, this is prevent aliasing during the digital signal processing, which is caused by frequencies greater than half the sampling frequency being present in the sampled waveform. The second stage performs precision rectification, which is necessary to ensure a negative voltage is not placed on the input pin of the tone detector which has a tolerance range from 0V to 3.3V.
+\subsubsection{Functional Design}
+The signal conditioning module is designed to process the output of either the photodiode detector module or phototransistor detector module.
+
+The output of this module is a signal that can processed by the Goertzel filter. This involves ensuring the output voltage is within the filter's input tolerance and removing any frequencies above the Nyquist sampling rate.
+
+This is performed in three steps. The amplitude of the incoming waveform is reduced, the waveform is filtered and finally a precision half-wave rectifier is used to rectify the signal.
+
+\subsubsection{Schematic}
+Figure \ref{fig:schematic_filter_and_rectify} below shows the schematic for the module.
+
+The module can be broken into two stages as indicated by figure \ref{fig:system_overview_hardware}. The first stage of the module performs filtering and amplitude adjustment. The second stage performs precision rectification.
+
+To prevent the signal conditioning module from interfering with the detector module, the input is passed through a unity buffer. Internally the filtering and rectification stages are also separated by a unity buffer.
 
 \begin{figure}[H]
 	\centering
@@ -405,25 +417,16 @@ The signal conditioning module can be broken into two stages. The first stage of
 	\label{fig:schematic_filter_and_rectify}
 \end{figure}
 
-In most cases the incoming signal is a square wave which has formed due to the amplification stage of the detector module saturating at $\pm 4.5V$. To ensure the output signal is within the tolerance of the ADC, a voltage divider formed by R1 and R2 filter is place prior to the filter.
+The filter implemented is a second order voltage controlled voltage source (VCVS) active low pass filter in a Chebyshev configuration\footnote{0.5dB passband ripple}. The Chebyshev configuration was chosen because a sharp roll of is desired and because passband ripple will not affect the ability of the Goertzel filter to detect the target frequency. The component values where chosen in accordance to the filter design table found on page 274 of the book \textit{The art of electronics - 2nd Edition}\cite{Horowitz1995}.
 
-The filter circuit used is a second order voltage controlled voltage source (VCVS) active low pass filter in a Chebyshev configuration\footnote{0.5dB passband ripple}. The Chebyshev configuration was chosen because a sharp roll of is desired and because passband ripple will not affect the ability of the Goertzel filter to detect the target frequency. The component values where chosen in accordance to the filter design table found on page 274 of the book \textit{The art of electronics - 2nd Edition}\cite{Horowitz1995}.
+%up to here looking decent
+
+\subsubsection{Amplitude Adjustment}
+In the worst case the incoming signal is a square wave which has formed due to the amplification stage of the detector module saturating at $\pm 4.5V$. To ensure the output signal is within the tolerance of the ADC in this worst case, a voltage divider formed by R1 and R2 filter is place prior to the filter. This divider network halves the amplitude of the incoming signal.
+
+\subsubsection{Precision Rectification}
 
 The precision rectifier is also a circuit design taken from the book and can be found on page 188, it is an improved version of the basic precision rectifier because it reduces the output swing of the op-amp during operation\cite{Horowitz1995}.
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=.6\textwidth]{figures/modules/filtering_conditioning.jpg}
-	\caption{Signal Conditioning Module}
-	\label{fig:module_filtering_conditioning}
-\end{figure}
-
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
 
 \subsubsection{Filter Design}
 %todo: desired freq cutoff and calculations
@@ -443,7 +446,15 @@ The gain is set by choosing $R_5$ and $R_6$ such that \(R_5 = (K - 1) \times R_6
 Substituting into the above equation we find $RC = 2.6935\times 10^{-6}$. It is recommended that the resistance value is between $10k$ and $100k$, the value of $39k\Omega$ was selected. The corresponding capacitance value is calculated to be $69pF$, and the E12 series capacitance value of $68pF$ was used.
 
 
+\subsubsection{Module Realization}
+The strip-board implementation of the module is shown in figure \ref{fig:module_filtering_conditioning} below.
 
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=.6\textwidth]{figures/modules/filtering_conditioning.jpg}
+	\caption{Signal Conditioning Module}
+	\label{fig:module_filtering_conditioning}
+\end{figure}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
