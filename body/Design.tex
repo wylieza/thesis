@@ -72,6 +72,11 @@ The STM32F051C6 was chosen partly because of its integration into the UCT develo
 \end{itemize}
 
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
 \subsection{Carrier Frequency Generator}
 %Missing
 % - Calculations and chosen values
@@ -93,6 +98,8 @@ Figure \ref{fig:schematic_carrier_generation} below shows the schematic for the 
 \end{figure}
 
 \subsubsection{Frequency Generation}
+%todo: this needs to be completed
+
 According to the data sheet the period my be calculated as \(T = 0.693 (R_2 + 2R_3) C1\). A capacitor value of 10nF was chosen. Therefore, to generate a waveform with the desired period of $27.7\mu S$ the required theoretical value of $(R_2 + 2R_3)$ is $4k\Omega$.
 %todo: finnish explaining resistor choice
 
@@ -110,11 +117,19 @@ The strip-board implementation of the module is shown in figure \ref{fig:module_
 	\label{fig:module_carrier_generation}
 \end{figure}
 
-\subsection{Power LED Driver}
-%Missing:
-% - Specs and component choice etc.
 
-To operate the 3W high power IR LED a constant current driver module needed to be implemented. Because the LED needs to be modulated at 36kHz, standard LED drivers that use a switching regulator are not viable because the switching frequency requirements exceed those available in standard ICs.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+\subsection{Power LED Driver}
+
+\subsubsection{Functional Design}
+To operate the 3W high power IR LED a constant current driver module needed to be implemented. The module is designed to be controlled by an open-collector control signal such that when the control signal is pulled low the led is illuminated. The output of this module is a constant current designed to drive a power LED.
+
+\subsubsection{Schematic}
+Figure \ref{fig:schematic_power_led_driver} shows the design of a high power linear regulator, built around the IRLZ44 enhancement PMOSFET. Heat-sinks where attached to both the high power LED and the IRLZ44 power MOSFET.
 
 \begin{figure}[H]
 	\centering
@@ -123,9 +138,16 @@ To operate the 3W high power IR LED a constant current driver module needed to b
 	\label{fig:schematic_power_led_driver}
 \end{figure}
 
-Instead a linear regulator was designed. Figure \ref{fig:schematic_power_led_driver} shows the design of a high power linear regulator, built around the IRLZ44 enhancement PMOSFET. Heat-sinks where attached to both the high power LED and the IRLZ44 power MOSFET. However because the LED is only on for short bursts spread over sufficiently long time intervals it is likely that the heat-sinks are unnecessary.
+\subsubsection{Constant Current Control}
+%todo: Specs and component choice etc.
 
-The module is designed to be driven by an open-drain configured GPIO pin. By pulling the control signal low, the LED is powered and when the control signal is left floating the LED is powered off.
+Because the LED needs to be modulated at 36kHz, standard LED driver ICs that use a switching regulator are not viable. This is because the switching frequency used in commonly available constant current switching regulators is not high enough. Instead a linear regulator was designed using discrete components.
+
+%todo: explain how the circuit works
+
+
+\subsubsection{Module Realization}
+The strip-board implementation of the module is shown in figure \ref{fig:module_power_led_driver} below.
 
 \begin{figure}[H]
 	\centering
@@ -133,6 +155,12 @@ The module is designed to be driven by an open-drain configured GPIO pin. By pul
 	\caption{Power LED Driver Module}
 	\label{fig:module_power_led_driver}
 \end{figure}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
 
 \subsection{Power LED Focus System}
 %Missing:
@@ -187,6 +215,14 @@ Figure \ref{fig:schematic_low_power_led_driver} shows the schematic for this dri
 	\label{fig:module_led_driver}
 \end{figure}
 
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
 \subsection{Photodiode IR Detector}
 %Missing:
 % - Schematic and explaination
@@ -225,6 +261,14 @@ The phototransistor IR detector module is designed to detect changes in infrared
 	\label{fig:module_phototransistor_detector}
 \end{figure}
 
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
 \subsection{IR Receiver}
 %Missing:
 % - Schematic and explaination
@@ -258,6 +302,12 @@ Figure \ref{fig:schematic_voltage_clamp} shows the circuity used to clamp the ou
 	\label{fig:module_ir_receiver}
 \end{figure}
 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
 \subsection{Signal Conditioning Module}
 %Missing:
 % - Choosing freq cut off and what is expected gain
@@ -284,6 +334,13 @@ The precision rectifier is also a circuit design taken from the book and can be 
 	\label{fig:module_filtering_conditioning}
 \end{figure}
 
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
 \subsubsection{Filter Design}
 %todo: desired freq cutoff and calculations
 
@@ -302,6 +359,13 @@ The gain is set by choosing $R_5$ and $R_6$ such that \(R_5 = (K - 1) \times R_6
 Substituting into the above equation we find $RC = 2.6935\times 10^{-6}$. It is recommended that the resistance value is between $10k$ and $100k$, the value of $39k\Omega$ was selected. The corresponding capacitance value is calculated to be $69pF$, and the E12 series capacitance value of $68pF$ was used.
 
 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
 \subsection{Tone Decoder Module}
 %Missing:
 % - Is a schematic worth the bother?
@@ -317,6 +381,12 @@ The DSP algorithm is discussed in subsection \ref{tone_decoder_software} from th
 	\caption{Tone Decoder Module}
 	\label{fig:module_tone_decoder}
 \end{figure}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 
@@ -408,6 +478,11 @@ Figure \ref{fig:schmit_simulation_wide} illustrates the activation and shut-off 
 
 
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
 \subsection{Tagger Software}
 
 For the purposes of this investigation, a tagger needed to be created that can encode a gun ID and possibly some additional bits for other information. It was chosen to use a 16-bit packet size. In this initial implementation a single bit is reserved for error detection, however further development of this system might explore the use of hamming codes which would require an additional four bits to be reserved for error correction.
@@ -462,6 +537,13 @@ Using interrupts and global variables opens up the possibility for the data corr
 The purpose of the variable \textit{fire\_in\_progress} is to operate as a synchronization lock. Priority is given to the interrupt process, therefore, in the implementation of the function \textit{generate\_manchester} there is a loop which stalls the processor until any current transmissions complete (see line 4, listing \ref{lst:generate_manchester_implementation}).
 
 Finally, during the transmission process, the logic used to determine the pin state for the purpose of generating the Manchester waveform is given in line 8 of listing \ref{lst:manchester_generate_interrupt_routine}. The pin state for a given half bit-period can be determined as \[pin\_state = \overline{tx\_bit} \;\; \widehat{} \;\; bit\_period\] where tx\_bit is the value of the bit currently being transmitted and bit\_period is as defined in listing \ref{lst:transmission_status_tracking_variables} above.
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
 
 
 \subsection{Target Software}
