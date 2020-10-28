@@ -393,8 +393,6 @@ The strip-board implementation of the module is shown in figure \ref{fig:module_
 
 
 \subsection{Signal Conditioning Module}
-%Missing:
-% - Choosing freq cut off and what is expected gain
 
 \subsubsection{Functional Design}
 The signal conditioning module is designed to process the output of either the photodiode detector module or phototransistor detector module.
@@ -467,10 +465,27 @@ The strip-board implementation of the module is shown in figure \ref{fig:module_
 %Missing:
 % - Is a schematic worth the bother?
 
-The tone decoder module's hardware consists of an STM32F051C6 breakout PCB which is mounted on a strip-board along with supporting circuity (external crystal and voltage regulation). In addition to the supporting circuitry, an over-voltage protection clamp (see figure \ref{fig:schematic_voltage_clamp}) was placed on pin 17 which is connected internally to PA7 which is configured as an analog input. Three signal LED's where wired to pins 18, 19 and 20 to act as status indicators.
+\subsubsection{Functional Design}
+The tone decoder module is designed to indicate the presence of a target frequency in an incoming signal. The input signal is an analog waveform between 0V and 3.3V with no frequency components above half the filters sampling rate of 144kHz.
 
-The DSP algorithm is discussed in subsection \ref{tone_decoder_software} from the following section on software modules.
+The filter achieves this functionality by calculating the DFT coefficient of the frequency bin associated with 36kHz for an incoming signal and outputting a high logic level while the value of the coefficient exceeds a particular threshold.
 
+\subsubsection{Schematic}
+The tone decoder module's hardware consists of an STM32F051C6 breakout PCB which is mounted on a strip-board along with supporting circuity (external crystal and voltage regulation). An over-voltage protection clamp (see figure \ref{fig:schematic_voltage_clamp}) was placed on pin 17, the analog input. Three signal LED's were wired to pins 18, 19 and 20 to act as status indicators. The filters output is produced on pin 19.
+
+Figure \ref{fig:goertzel_schematic_block_form} summarizes the hardware components of the Goertzel module.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=.8\textwidth]{figures/design/goertzel_schematic_block_form.png}
+	\caption{Tone Decoder Module - Hardware Breakdown}
+	\label{fig:goertzel_schematic_block_form}
+\end{figure}
+
+The DSP algorithm is discussed in the software section and can be found in subsection \ref{tone_decoder_software}.
+
+\subsubsection{Module Realization}
+The strip-board implementation of the module is shown in figure \ref{fig:module_tone_decoder} below.
 
 \begin{figure}[H]
 	\centering
@@ -478,8 +493,6 @@ The DSP algorithm is discussed in subsection \ref{tone_decoder_software} from th
 	\caption{Tone Decoder Module}
 	\label{fig:module_tone_decoder}
 \end{figure}
-
-
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
