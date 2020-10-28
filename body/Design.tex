@@ -305,8 +305,6 @@ The strip-board implementation of the module is shown in figure \ref{fig:module_
 
 
 \subsection{Phototransistor IR Detector}
-%todo:
-% - Schematic and explaination
 
 \subsubsection{Functional Design}
 The phototransistor IR detector module, like the photodiode IR detector module, is designed to convert fluctuation in infrared radiation into a voltage signal. The circuit is designed to produce an output voltage proportional to changes in the current flowing through the phototransistor.
@@ -348,7 +346,14 @@ The strip-board implementation of the module is shown in figure \ref{fig:module_
 %Missing:
 % - Schematic and explaination
 
-The IR receiver is an 'all in one package' detector IC designed to detect the presences of a carrier signal in the IR light incident on the detector.
+\subsubsection{Functional Design}
+The IR receiver is an 'all in one package' detector IC designed to detect the presence of a carrier signal in the IR light incident on the detector. The output of the module is high when no modulation is detected and pulled low when modulation is detected.
+
+The module is designed to be powered by a 5V supply, however the output voltage has been clamped down to 3V to be compatible with the STM32 GPIO.
+
+\subsubsection{Schematic}
+Figure \ref{fig:schematic_voltage_clamp} below shows the schematic for the voltage clamp used to regulate the output of the TSOP382. The \href{https://www.vishay.com/docs/82491/tsop382.pdf}{datasheet} contains a block diagram (shown in figure \ref{fig:tsop382_block_diagram}) which gives a functional overview of the internal circuitry for this IC.
+
 
 \begin{figure}[H]
 	\centering
@@ -366,9 +371,13 @@ The IR receiver is an 'all in one package' detector IC designed to detect the pr
 	\end{minipage}
 \end{figure}
 
-The IR receiver used in this investigation is the TSOP382 from Vishay. The \href{https://www.vishay.com/docs/82491/tsop382.pdf}{datasheet} contains a block diagram (shown in figure \ref{fig:tsop382_block_diagram}) which gives a functional overview of the IC.
+\subsubsection{TSOP382}
 
-Figure \ref{fig:schematic_voltage_clamp} shows the circuity used to clamp the output of the IR receiver at 3V. This is to protect the GPIO from an over-voltage. The TSOP382 may be powered off 3.3V which would remove the voltage clamp requirement, however it has been included to ensure the module can be powered with a range of supply voltages and still be logically compatible with the STM32.
+The TSOP382 IR receiver was chosen due to it's low cost, availability and wide range of angles from which it can detect IR radiation. The purpose of this device is to act as a comparison with which to compare the photodiode and phototransistor IR detector modules.
+
+
+\subsubsection{Module Realization}
+The strip-board implementation of the module is shown in figure \ref{fig:module_ir_receiver} below.
 
 \begin{figure}[H]
 	\centering
