@@ -3,7 +3,21 @@
 %todo: needs a lead-in / intro
 %		and more structuring
 
-\section{Optics and Communication}
+This chapter concerns a review of the literature in the fields of study related to digital communication systems and optics.
+Each section presents a review of the relevant the theory for a particular field of study. %todo: improve this line
+The literature review has been structured such that for each topic a brief introduction to the broader theory is presented after which the details of specific theories and concepts are reviewed.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{figures/litreview/litreview_overview.png}
+	\caption{Structure of Literature Review}
+	\label{fig:litreview_overview}
+\end{figure}
+
+%structure overview
+The review begins with a brief history of optics and the use of optics in digital communication. 
+
+\section{Optics in Communication}
 
 \subsection{Brief History}
 %The branch of physics that deals with the properties and phenomena of visible light (and by extension other forms of electromagnetic radiation), sometimes esp. in relation to sight.
@@ -20,10 +34,21 @@ It did not take long for the infrared LED to be integrated into consumer devices
 
 With the decrease in costs associated with LEDs, transistors and microcontrollers recreational games such as laser tag become possible and the idea was first patented in 1987 \cite{Carter1986}.
 
-\subsection{Optical Communication}
+\subsection{Optical Communication Theory} %todo: better name for this 'catergories of techniques' 
 
-Optical communication concerns all manors of communicating information from one party to another through the medium of light. This investigation focuses on the use of light as a means of communication between electronic systems, categorized as optical wireless or OW.
+%Optical communication concerns all manors of communicating information from one party to another through the medium of light. This investigation focuses on the use of light as a means of communication between electronic systems, categorized as optical wireless or OW.
 %todo: either expand or remove this
+
+Most light based communication methods are classified as \textit{free-space optical communication} techniques. These techniques do not require a physical medium between the receiver and transmitter. Not all light based communication is performed in free space, fibre optic communication is among the fastest growing communication techniques of our time.
+
+Fibre optic communication uses a physical cable designed to guide a beam of light using the principles of total internal reflection. Fibre optic communication systems may utilize an LED or laser diode to produce a optically encoded digital signal. Recent developments in vertical cavity surface emitting lasers (VCSEL) have resulted in more fibre optic systems turning to this technology.
+
+%todo: finnishe this section
+
+
+
+
+
 
 \subsection{Lenses}
 %todo: work on the image presentation format (subfigures)
@@ -71,50 +96,7 @@ Figures \ref{fig:lens_divergent} to \ref{fig:lens_convergent} illustrate\footnot
 In may cases including this investigation, the light coming from an LED may be approximated as a point source and the lens approximated as ideal.
 
 
-\subsection{IR Communication}
-%This is where I talk about different IR protocols
 
-IR has is used in many applications, this is because it is cheap, efficient and simple to use. A basic implementation can be done using an IR LED, IR receiver IC and a pair of microcontrollers. The most appropriate band of IR radiation is between 780nm and 950nm, this is as a result of the availability of low cost LEDs and quality photodiodes that operate in this frequency band \cite{Elgala2011}.
-
-Many techniques have been developed optical wireless communication. These range from advanced techniques such as multiple-subcarrier modulation (MSM) to basic techniques such as on-off keying (OOK) and pulse-position modulation (PPM).
-
-Multiple-subcarrier modulation sums numerous sub-carrier signals and uses the result to modulate the light source. As a consequence of using a multiple low frequency sub-carriers it is possible to achieve a high total bit rate with little distortion, removing the need for equalization \cite{Ohtsuki2003}.
-
-Notable tradeoffs for techniques that increase the bit-rate are diminishing range, lower resistance to ambient noise and an increase in system complexity. For the purposes of communicating between a tagger and target in laser tag, a high bandwidth is not required. It is therefore advantageous to utilize a more robust technique with a lower bit-rate such as on-off keying.
-
-OOK is utilized in many systems, for example, in remote control applications. As a result there are several IR communication protocols based around this technique. The following are a few of the popular options
-
-\begin{itemize}
-	\item RC-5
-	\item RC-6
-	\item NEC
-	\item SIRC
-\end{itemize}
-
-Each of these protocols are based on OOK, but differ in how they define symbols. To represent two different states, an IR source is modulated at a chosen carrier frequency (usually around 36kHz). When the light source is modulating the signal is \textit{on} and when the source is not modulating the signal is \textit{off}.  Modulation makes it possible to distinguish between a generated IR signal and ambient IR radiation from noise sources.
-
-Protocols such as Sony's SIRC use a technique known as pulse width encoding. This technique involves modulating the IR LED for a different period of time depending on whether a 1 or 0 is to be transmitted, while maintaining a constant period of time between transmissions.
-
-Protocols such as the NEC protocol by Renesas use pulse distance encoding. This protocol specifies an different off period between on pulses to distinguish between a logical 1 and 0.
-
-The RC-5 protocol and its successor the RC-6 protocol use Manchester Encoding to transfer binary information. Due to its wide adoption and popularity \cite{rudrappa2009}, an adaption the RC-5 protocol will be used in this project. Manchester Encoding is reviewed in section \ref{sec:manchester_encoding} below.
-
-\subsubsection{RC-5 Protocol}
-\label{sec:rc_5_protocol}
-The the RC-5 protocol is illustrated in figure \ref{fig:rc_5_protocol}. The bits are encoded using the IEEE 802.3 convention for Manchester Encoding. The modulation frequency of the carrier is 36kHz and the length of one bit period is 64 cycles or 1.778mS\cite{Perme2007}.
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.8\linewidth]{figures/litreview/rc5_protocol.png}
-	\caption{RC-5 IR Protocol}
-	\label{fig:rc_5_protocol}
-\end{figure}
-
-Every transmission begins with two start bits, these bits always have a value of 1. Following the start bits is the `toggle' bit. In remote control applications it is useful to distinguish between a button which remains depressed and a button being repeatedly pressed. This is achieved through the toggle bit which is flipped each time a button is released. When a button remains depressed, the message is transmitted repeatedly with a 114ms gap between transmissions. Finally the RC-5 protocol data is structured such that it first transmits a 5-bit address followed by a 6-bit command.
-
-
-%\subsection{Materials Interaction}
-%Talk briefly about materials and the interation of different materials with IR. Mention the difficulty of aquiring these resources and therefore the exclusion of them during experiementation
 
 %%%%%%%%%%%%%%%%%%
 
@@ -134,8 +116,7 @@ Optical wireless communication is susceptible to interference and noise produced
 %saturation of receiver and noisy input
 
 
-\subsection{Modulation}
-%Talk about modulation techniques 
+
 
 \subsection{Manchester Encoding}
 \label{sec:manchester_encoding}
@@ -156,7 +137,7 @@ Manchester code is a special form of binary phase shift keying (BPSK). A square 
 
 \subsubsection{Encoding Algorithm}
 
-%here breifly go over the simple manchester encoding tecnique
+%todo: here breifly go over the simple manchester encoding tecnique
 
 
 \subsubsection{Decoding Algorithm}
@@ -204,8 +185,7 @@ Using a parity bit is the most simple means to detect an error in a bit sequence
 %\fi
 
 
-\subsection{Demodulation}
-%Give an overview of demodulating and what techniques exist: Goertzel, DFT, tone-detectors, next sections hilights details
+
 
 
 %%%%%%%%%%%%%%%%%%
@@ -215,6 +195,12 @@ In the age of micro-controllers and micro-processors, in many situations it has 
 Part of the IR decoding process requires detecting the presence of a particular frequency (commonly referred to as a tone). The natural tool to turn to when examining the frequency content of a signal is the discrete Fourier transform (DFT). The DFT is well established and there exist a variety of algorithms which compute its values, perhaps the most well known being the FFT. However, for the purposes of detecting a single tone of a predetermined frequency, the DFT is not the most efficient method, even when optimized algorithms such as the FFT are implemented.
 
 The FFT provides a very efficient means for determining all the DFT coefficients, but in a use case only a few of the coefficients are used and the rest discarded it is not the most efficient technique. By using a less efficient process for calculating individual coefficients of the DFT it is possible to greatly reduce program complexity and processing time relative to an implementation that uses the FFT.
+
+
+\subsection{Modulation}
+%Talk about modulation (and demodulation) techniques 
+% no seperate \subsection{Demodulation}
+%Give an overview of demodulating and what techniques exist: Goertzel, DFT, tone-detectors, next sections hilights details
 
 \subsection{Goertzel Algorithm}
 
@@ -351,6 +337,51 @@ This is where I talk about the section of the EM spectrum that is IR
 \subsection{IR Radiation Detection}
 
 %Explain how photodiodes and phototransistors work
+
+\subsection{IR Communication}
+%This is where I talk about different IR protocols
+
+IR has is used in many applications, this is because it is cheap, efficient and simple to use. A basic implementation can be done using an IR LED, IR receiver IC and a pair of microcontrollers. The most appropriate band of IR radiation is between 780nm and 950nm, this is as a result of the availability of low cost LEDs and quality photodiodes that operate in this frequency band \cite{Elgala2011}.
+
+Many techniques have been developed optical wireless communication. These range from advanced techniques such as multiple-subcarrier modulation (MSM) to basic techniques such as on-off keying (OOK) and pulse-position modulation (PPM).
+
+Multiple-subcarrier modulation sums numerous sub-carrier signals and uses the result to modulate the light source. As a consequence of using a multiple low frequency sub-carriers it is possible to achieve a high total bit rate with little distortion, removing the need for equalization \cite{Ohtsuki2003}.
+
+Notable tradeoffs for techniques that increase the bit-rate are diminishing range, lower resistance to ambient noise and an increase in system complexity. For the purposes of communicating between a tagger and target in laser tag, a high bandwidth is not required. It is therefore advantageous to utilize a more robust technique with a lower bit-rate such as on-off keying.
+
+OOK is utilized in many systems, for example, in remote control applications. As a result there are several IR communication protocols based around this technique. The following are a few of the popular options
+
+\begin{itemize}
+	\item RC-5
+	\item RC-6
+	\item NEC
+	\item SIRC
+\end{itemize}
+
+Each of these protocols are based on OOK, but differ in how they define symbols. To represent two different states, an IR source is modulated at a chosen carrier frequency (usually around 36kHz). When the light source is modulating the signal is \textit{on} and when the source is not modulating the signal is \textit{off}.  Modulation makes it possible to distinguish between a generated IR signal and ambient IR radiation from noise sources.
+
+Protocols such as Sony's SIRC use a technique known as pulse width encoding. This technique involves modulating the IR LED for a different period of time depending on whether a 1 or 0 is to be transmitted, while maintaining a constant period of time between transmissions.
+
+Protocols such as the NEC protocol by Renesas use pulse distance encoding. This protocol specifies an different off period between on pulses to distinguish between a logical 1 and 0.
+
+The RC-5 protocol and its successor the RC-6 protocol use Manchester Encoding to transfer binary information. Due to its wide adoption and popularity \cite{rudrappa2009}, an adaption the RC-5 protocol will be used in this project. Manchester Encoding is reviewed in section \ref{sec:manchester_encoding} below.
+
+\subsubsection{RC-5 Protocol}
+\label{sec:rc_5_protocol}
+The the RC-5 protocol is illustrated in figure \ref{fig:rc_5_protocol}. The bits are encoded using the IEEE 802.3 convention for Manchester Encoding. The modulation frequency of the carrier is 36kHz and the length of one bit period is 64 cycles or 1.778mS\cite{Perme2007}.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\linewidth]{figures/litreview/rc5_protocol.png}
+	\caption{RC-5 IR Protocol}
+	\label{fig:rc_5_protocol}
+\end{figure}
+
+Every transmission begins with two start bits, these bits always have a value of 1. Following the start bits is the `toggle' bit. In remote control applications it is useful to distinguish between a button which remains depressed and a button being repeatedly pressed. This is achieved through the toggle bit which is flipped each time a button is released. When a button remains depressed, the message is transmitted repeatedly with a 114ms gap between transmissions. Finally the RC-5 protocol data is structured such that it first transmits a 5-bit address followed by a 6-bit command.
+
+
+%\subsection{Materials Interaction}
+%Talk briefly about materials and the interation of different materials with IR. Mention the difficulty of aquiring these resources and therefore the exclusion of them during experiementation
 
 
 
