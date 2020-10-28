@@ -7,6 +7,8 @@ The system overview covers the two main subsystems, the tagger subsystem and tar
 
 %todo: possibly explain why designs are so ellaborate... This investigation is centred on the creation and evaluation of system modules, therefore the design descriptions have been written 
 
+%todo: give an explaination as to how the module design has been brocken down into subsubsections
+
 \section{System Overview}
 
 Figure \ref{fig:system_overview_hardware} gives an overview of the modules that make up the laser tag data link system.
@@ -268,7 +270,13 @@ The implementation of the light focus system is shown in figure \ref{fig:module_
 % - Schematic and explaination
 % - Talk about MCP6022 and important specs
 
-The photodiode IR detector module is designed to detect changes in infrared radiation and convert these fluctuations into a voltage signal.
+\subsubsection{Functional Design}
+The photodiode IR detector module is designed to convert fluctuations in infrared radiation into a voltage signal. The circuit is designed to produce an output voltage proportional to changes in the current flowing through the photodiode.
+
+
+\subsubsection{Schematic}
+Figure \ref{fig:schematic_photodiode_transimpedance} below shows the schematic for the module. The circuit is inspired by S. Schrires 'Infrared Radio Link' circuit which is found in the EEE3071 course notes \cite{Schrire2007}.
+
 
 \begin{figure}[H]
 	\centering
@@ -277,8 +285,12 @@ The photodiode IR detector module is designed to detect changes in infrared radi
 	\label{fig:schematic_photodiode_transimpedance}
 \end{figure}
 
-The circuit shown in figure \ref{fig:schematic_photodiode_transimpedance} is designed to produce a voltage in proportion to the current flowing through the photodiode. The circuit is inspired by S. Schrires 'Infrared Radio Link' circuit which is found in the EEE3071 course notes\cite{Schrire2007}.
+\subsubsection{Trans-impedance Amplifier}
+%todo: this needs to be completed
 
+
+\subsubsection{Module Realization}
+The strip-board implementation of the module is shown in figure \ref{fig:module_photodiode_receiver} below.
 
 \begin{figure}[H]
 	\centering
@@ -287,12 +299,35 @@ The circuit shown in figure \ref{fig:schematic_photodiode_transimpedance} is des
 	\label{fig:module_photodiode_receiver}
 \end{figure}
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
 \subsection{Phototransistor IR Detector}
 %todo:
 % - Schematic and explaination
 
+\subsubsection{Functional Design}
+The phototransistor IR detector module, like the photodiode IR detector module, is designed to convert fluctuation in infrared radiation into a voltage signal. The circuit is designed to produce an output voltage proportional to changes in the current flowing through the phototransistor.
 
-The phototransistor IR detector module is designed to detect changes in infrared radiation and convert these fluctuations into a voltage signal.
+\subsubsection{Schematic}
+Figure \ref{fig:schematic_phototransistor_detector} below shows the schematic for the module.
+
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=.9\textwidth]{figures/design/phototransistor_detector.JPG}
+	\caption{Phototransistor IR Detector Module Schematic}
+	\label{fig:schematic_phototransistor_detector}
+\end{figure}
+
+\subsubsection{Trans-impedance Amplifier}
+%todo: this needs to be completed
+
+
+\subsubsection{Module Realization}
+The strip-board implementation of the module is shown in figure \ref{fig:module_photodiode_receiver} below.
 
 \begin{figure}[H]
 	\centering
