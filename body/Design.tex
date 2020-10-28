@@ -3,12 +3,9 @@
 
 This chapter is dedicated to the various modules which comprise the laser tag system being investigated. The system is complex and comprises of many modules both in hardware and software. An overview of the entire system is given followed by the design of the individual modules.
 
-% - Maybe dont include paragraph:
-%It is important to reiterate at this point that the goal of this investigation is not to design a ready to play system, but rather develop modules based on a breakdown of the system and then evaluate how these modules perform.
+The system overview covers the two main subsystems, the tagger subsystem and target subsystem. Following the system overview these two subsystems are divided into modules and categorized into either hardware or software. The design of each module is presented, along with an image of the final implementation.
 
-The system overview is sub-divided into two subsystems, the tagger subsystem and target subsystem. These two subsystems further divide into modules. The designed of each module is presented, along with an image of the final implementation.
-
-%todo: explain why designs are so ellaborate... This investigation is centred on the creation and evaluation of system modules, therefore the design descriptions have been written 
+%todo: possibly explain why designs are so ellaborate... This investigation is centred on the creation and evaluation of system modules, therefore the design descriptions have been written 
 
 \section{System Overview}
 
@@ -26,7 +23,7 @@ Figure \ref{fig:system_overview_hardware} gives an overview of the modules that 
 Two subsystems may be derived from figure \ref{fig:system_overview_hardware}. The tagger subsystem responsible for generating and transmitting a message and the target subsystem responsible for receiving and decoding an incoming message.
 
 \subsubsection{Tagger Subsystem}
-The tagger subsystem comprises a main processor, carrier frequency generation module and two LED driver modules. For the purposes of this investigation the UCT STM32\footnotemark{} development board has been used as the processor. The development board communicates with the carrier frequency generation module (responsible for producing the 36kHz square waveform), this module is connected to an LED driver module which in turn drives an IR LED. Two led driver modules have been design and both operate on the same input signal. The difference between the two modules is in the rated output power, the low power module is designed to drive a typical IR led while the high power module has been designed to drive a high power 3W IR led.
+The tagger subsystem comprises a main processor, carrier frequency generation module and two LED driver modules. For the purposes of this investigation the UCT STM32\footnotemark{} development board has been used as the main processor. The development board communicates with the carrier frequency generation module (responsible for producing the 36kHz square waveform), this module is connected to an LED driver module which in turn drives an IR LED. Two led driver modules have been design and both operate on the same input signal. The difference between the two modules is in the rated output power, the low power module is designed to drive a standard low power IR led while the high power module has been designed to drive a high power 3W IR led.
 
 Not shown on the system overview is the light focus hardware module. This module is a passive optical component designed to focus the IR light.
 
@@ -37,7 +34,7 @@ The target system comprises more modules than the tagger due to the comparably h
 
 These additional modules perform anti-alias filtering and rectification of the signal as well as indicate when a 36kHz tone is present in the conditioned signal. This tone detection is performed by a digital signal processing (DSP) algorithm and is implemented on the STM32 MPU.
 
-The final module of the target subsystem is the main processor which is implemented on the UCT STM32 development board.
+The final module of the target subsystem is the main processor which is implemented on a second UCT STM32 development board.
 
 \subsubsection{Software}
 
@@ -47,7 +44,6 @@ There are three main software components to the overall system.
 	\item The software responsible for receiving and decoding the Manchester sequence on the target main processor.
 	\item  The DSP algorithm operating on the tone detection module.
 \end{itemize}
-
 
 
 \section{Hardware Design}
@@ -64,14 +60,30 @@ The laser tag systems has two main processors. One for the tagger and another fo
 	\label{fig:stm32_dev_board}
 \end{figure}
 
-The development board provides break-out pins for the microcontroller, 4 input buttons, an array of 8 LEDs, an LCD display and a built-in st-link v2 for debugging and programming the processor. 
+The development board provides break-out pins for the microcontroller, 4 input buttons, an array of 8 LEDs, an LCD display and a built-in st-link v2 for debugging and programming the processor.
+
+The STM32F051C6 was chosen partly because of its integration into the UCT development board making it easily obtainable at a low price and because of the following features
+
+\begin{itemize}
+	\item Analog to digital converter (ADC) peripheral
+	\item Direct memory access (DMA) peripheral
+	\item Timer peripherals with multiple interrupt channels
+	\item Nested vectored interrupt controller (NVIC)
+\end{itemize}
 
 
 \subsection{Carrier Frequency Generator}
 %Missing
 % - Calculations and chosen values
-To generate the 36kHz carrier waveform the LM555 timer IC was used. The module is designed to receive a 3.3V logic control signal. The LED driver modules were designed to operate using an open-drain control signal, therefore a transistor was used to convert the push-pull output to an open-drain output. In addition, transistors were used to convert the 3.3V control signal to a 5V input for the RST pin. Figure \ref{fig:schematic_carrier_generation} shows the schematic for the module.
+\subsubsection{Functional Design}
+To generate the 36kHz carrier waveform the LM555 timer IC was used. The module is designed to receive a 3.3V control signal. When a high logic level is received, the module switches the output at 36kHz to produce a square waveform.
 
+The LED driver modules designed to be controlled by an open-collector, therefore a transistor was used to convert the push-pull output of the 555 timer to an open-collector output.
+
+The 555 timer operates on the 5V supply connected to the module, therefore transistors were used to convert the 3.3V control signal to a 5V input for the RST pin.
+
+\subsubsection{Schematic}
+Figure \ref{fig:schematic_carrier_generation} below shows the schematic for the module.
 
 \begin{figure}[H]
 	\centering
@@ -80,6 +92,7 @@ To generate the 36kHz carrier waveform the LM555 timer IC was used. The module i
 	\label{fig:schematic_carrier_generation}
 \end{figure}
 
+\subsubsection{Frequency Generation}
 According to the data sheet the period my be calculated as \(T = 0.693 (R_2 + 2R_3) C1\). A capacitor value of 10nF was chosen. Therefore, to generate a waveform with the desired period of $27.7\mu S$ the required theoretical value of $(R_2 + 2R_3)$ is $4k\Omega$.
 %todo: finnish explaining resistor choice
 
@@ -87,6 +100,8 @@ According to the data sheet the period my be calculated as \(T = 0.693 (R_2 + 2R
 %After testing
 The above design was implemented on a breadboard to test the
 
+\subsubsection{Module Realization}
+The strip-board implementation of the module is shown in figure \ref{fig:module_carrier_generation} below.
 
 \begin{figure}[H]
 	\centering
@@ -210,7 +225,7 @@ The phototransistor IR detector module is designed to detect changes in infrared
 	\label{fig:module_phototransistor_detector}
 \end{figure}
 
-\subsection{IR Detector}
+\subsection{IR Receiver}
 %Missing:
 % - Schematic and explaination
 
