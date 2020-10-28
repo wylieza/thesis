@@ -162,41 +162,18 @@ The strip-board implementation of the module is shown in figure \ref{fig:module_
 
 
 
-\subsection{Power LED Focus System}
-%Missing:
-% - ...
-
-The high power IR LED has a wide beam angle, as it is designed for large area illumination. This is the opposite effect that is desired for a laser tag system. To rectify this, a focus system in the form of a light focusing tube was designed. This prevents light from spilling out the side and it focuses the beam to minimize dispersion over long distances.
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=.8\textwidth]{figures/design/beam_tube.png}
-	\caption{Exploded View - Light Focusing Tube}
-	\label{fig:light_focusing_tube}
-\end{figure}
-
-Figure \ref{fig:light_focusing_tube} above shows the components used to construct the light focusing tube. The length $l_{pipe}$ was determined by summing the experimentally calculated focal length of the lens with the length $l_{lens}$. Included in the calculation of the pipe length was the non-zero thickness of the light-seal (made out of 3mm hard-board) and the 3mm length of lens that remained external to the PVC piping.
-
-The 40mm PVC piping used had a wall thickness of 2.3mm resulting in an inner diameter of 37.7mm. The magnifying lens had a length of 30mm and the lens is in-set by 1mm. The experimental result from section \ref{exp:focal_length} showed the focal length of the magnifying lens to be 53mm.
-
-The length $l_{pipe}$ was calculated as follows
-
-\[l_{pipe} = l_{lens} - l_{lens\_external} + l_{focal} - l_{light\_seal\_thickness} + l_{lens\_in-set\_distance}\]
-\[l_{pipe} = 30mm - 3mm + 53mm - 3mm + 1mm = 78mm\]
-
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=.6\textwidth]{figures/modules/light_focus_tube_lens.jpg}
-	\caption{Light Focus System}
-	\label{fig:module_light_focus}
-\end{figure}
 
 \subsection{LED Driver}
-%Missing:
-% - Specs and component choice etc.
 
-Due to the high power demands of the 3W IR LED, it is much more appropriate to perform test and develop the communication protocol using a low power IR led. A driver module was designed for this specific purpose.
+\subsubsection{Functional Design}
+Due to the high power demands of the 3W IR LED, it is more appropriate to perform test and develop the communication protocol using a low power IR led. A separate low power LED driver module was designed for this specific purpose.
+
+The module is designed to be pin-to-pin compatible with the power LED driver module, operating on the same input signal produced by an open-collector driven pin. Pulling the input low causes the LED to illuminate.
+
+
+
+\subsubsection{Schematic}
+Figure \ref{fig:schematic_low_power_led_driver} shows the schematic for this driver module.
 
 \begin{figure}[H]
 	\centering
@@ -205,8 +182,13 @@ Due to the high power demands of the 3W IR LED, it is much more appropriate to p
 	\label{fig:schematic_low_power_led_driver}
 \end{figure}
 
-Figure \ref{fig:schematic_low_power_led_driver} shows the schematic for this driver module. The module is designed to be driven using an open-drain configured GPIO pin so that it is 'drop-in' compatible with the high power driver module.
+\subsubsection{Constant Current Control}
+%todo: explain how constant current is created
 
+
+
+\subsubsection{Module Realization}
+The strip-board implementation of the module is shown in figure \ref{fig:module_led_driver} below.
 
 \begin{figure}[H]
 	\centering
@@ -215,6 +197,64 @@ Figure \ref{fig:schematic_low_power_led_driver} shows the schematic for this dri
 	\label{fig:module_led_driver}
 \end{figure}
 
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+\subsection{Power LED Focus System}
+
+\subsubsection{Functional Design}
+The high power IR LED has a nominally wide beam angle. The function of the LED focus system is to efficiently generate a narrow beam of IR from this light source. This was achieved by using a lens to focus the light into a parallel beam and using a tube to prevent the light not passing through the lens from spilling into the surrounding environment.
+
+
+\subsubsection{Construction}
+Figure \ref{fig:light_focusing_tube} below shows an exploded view of this hardware module. The diagram lists the components used to construct the light focusing tube.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=.8\textwidth]{figures/design/beam_tube.png}
+	\caption{Exploded View - Light Focusing Tube}
+	\label{fig:light_focusing_tube}
+\end{figure}
+
+\paragraph{Component Dimensions}
+The magnifying lens casing had a length of 30mm, the lens is in-set by 1mm and 3mm of the casing remains external to the tube. The experimental result from section \ref{exp:focal_length} calculated the focal length to be 53mm.
+
+\subsubsection{Light Focusing}
+
+A narrow beam of parallel rays of light may be formed using a point source and ideal lens. Approximating the LED as a point source and the magnifying lens as ideal, a narrow beam may be generated by positioning the light source one focal length away from the lens.
+
+The distance between the light source and lens can be calculated according to equation \ref{eqn:tube_length}.
+
+\begin{equation}
+	d_{source-lens} = l_{tube} - l_{lens\_casing} + (l_{lens\_inset\_distance} + l_{lens\_external}) + l_{light\_seal\_thickness}
+	\label{eqn:tube_length}
+\end{equation}
+
+$d_{source-lens}$ is the distance between the light source and the lens. $l_{tube}$ is the length of the tube. $l_{lens\_casing}$ is the length of the magnifying lens casing as illustrated in figure \ref{fig:light_focusing_tube}, $l_{lens\_inset\_distance}$ is the amount by which the lens is in-set inside the casing and $l_{lens\_external}$ is a measure of the length of casing that remains external to the tube. $l_{light\_seal\_thickness}$ is a measure of the thickness of the hard-board used to form the light seal.
+
+The length $l_{tube}$ was calculated by substituting the experimentally determined focal length into the equation as the length $d_{source-lens}$.
+
+Substituting these values into equation \ref{eqn:tube_length}, the length $l_{tube}$ was calculated
+
+\[l_{tube} = d_{source-lens} + l_{lens\_casing} - (l_{lens\_inset\_distance} + l_{lens\_external}) - l_{light\_seal\_thickness}\]
+
+\[l_{tube} = 53mm + 30mm - (1mm + 3mm) - 3mm = 76mm\]
+
+
+\subsubsection{Module Realization}
+The implementation of the light focus system is shown in figure \ref{fig:module_light_focus} below. Excluded from this image is the IR led and heat-sink.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=.6\textwidth]{figures/modules/light_focus_tube_lens.jpg}
+	\caption{Light Focus System}
+	\label{fig:module_light_focus}
+\end{figure}
 
 
 
