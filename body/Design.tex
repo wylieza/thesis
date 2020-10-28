@@ -417,33 +417,35 @@ To prevent the signal conditioning module from interfering with the detector mod
 	\label{fig:schematic_filter_and_rectify}
 \end{figure}
 
-The filter implemented is a second order voltage controlled voltage source (VCVS) active low pass filter in a Chebyshev configuration\footnote{0.5dB passband ripple}. The Chebyshev configuration was chosen because a sharp roll of is desired and because passband ripple will not affect the ability of the Goertzel filter to detect the target frequency. The component values where chosen in accordance to the filter design table found on page 274 of the book \textit{The art of electronics - 2nd Edition}\cite{Horowitz1995}.
+The filter implemented is a second order voltage controlled voltage source (VCVS) active low pass filter in a Chebyshev configuration\footnote{0.5dB passband ripple}. The Chebyshev configuration was chosen because a sharp roll of is desired and because passband ripple will not affect the ability of the Goertzel filter to detect the target frequency.
 
-%up to here looking decent
 
 \subsubsection{Amplitude Adjustment}
-In the worst case the incoming signal is a square wave which has formed due to the amplification stage of the detector module saturating at $\pm 4.5V$. To ensure the output signal is within the tolerance of the ADC in this worst case, a voltage divider formed by R1 and R2 filter is place prior to the filter. This divider network halves the amplitude of the incoming signal.
+The highest amplitude possible for the incoming signal is a square wave with peak-to-peak value of just under 9V (formed as a result of the amplification stage of the detector module saturating). To ensure the output signal is within the tolerance of the ADC in this worst case, a voltage divider formed by R1 and R2 filter is place prior to the filter. This divider network halves the amplitude of the incoming signal.
+
+The amplitude is increased slightly due to the gain stage of the filter and this is accounted for by the voltage divider.
 
 \subsubsection{Precision Rectification}
 
-The precision rectifier is also a circuit design taken from the book and can be found on page 188, it is an improved version of the basic precision rectifier because it reduces the output swing of the op-amp during operation\cite{Horowitz1995}.
+The precision rectifier is taken from the \textit{The art of electronics - 2nd Edition} and can be found on page 188, it is an improved version of the basic precision rectifier because it reduces the output swing of the op-amp during operation \cite{Horowitz1995}.
 
 \subsubsection{Filter Design}
-%todo: desired freq cutoff and calculations
 
+The component values where chosen in accordance to the filter design table found on page 274 of the book \textit{The art of electronics - 2nd Edition}\cite{Horowitz1995}. With reference to the schematic (figure \ref{fig:module_filtering_conditioning}), the following relationships hold: \(R_3 = R_4 = R\) and \(C_1 = C_2 = C\).
 
 The desired cut-off frequency is \(f_{c} = 48kHz\), this defines the end of the passband\footnote{Unlike in the case of a Bessel filter, this is not necessarily the -3dB point}.
 
-With reference to the schematic (figure \ref{fig:module_filtering_conditioning}), resistors and capacitors hold the following relations ships: \(R_3 = R_4 = R\) and \(C_1 = C_2 = C\).
+To achieve a Chebyshev response, the normalization factor and gain are \(f_n = 1.231\) and \(K = 1.842\) respectively.
 
-According to the lookup table, to achieve a Chebyshev response, the following values should be used as the normalization factor and gain: \(f_n = 1.231\), \(K = 1.842\).
+The gain is set according to the relationship
 
-The gain is set by choosing $R_5$ and $R_6$ such that \(R_5 = (K - 1) \times R_6\) holds. The values of $R$ and $C$ are determined by the following equation
+\[R_5 = (K - 1) \times R_6\].
 
+The values of $R$ and $C$ are determined by the following equation
 
 \[RC = \frac{1}{2\pi f_n f_c}\]
 
-Substituting into the above equation we find $RC = 2.6935\times 10^{-6}$. It is recommended that the resistance value is between $10k$ and $100k$, the value of $39k\Omega$ was selected. The corresponding capacitance value is calculated to be $69pF$, and the E12 series capacitance value of $68pF$ was used.
+Substituting $f_n$ and $f_c$ we find $RC = 2.6935\times 10^{-6}$. It is good practice to select a resistance value between $10k$ and $100k$, the E12 value of $39k\Omega$ was chosen. The corresponding capacitance value is $69pF$, the closest E12 series capacitance value of $68pF$ was used.
 
 
 \subsubsection{Module Realization}
