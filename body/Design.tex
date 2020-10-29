@@ -1,17 +1,14 @@
 \chapter{Design}
 \label{ch_design}
 
-This chapter is dedicated to the various modules which comprise the laser tag system being investigated. The system is complex and comprises of many modules both in hardware and software. An overview of the entire system is given followed by the design of the individual modules.
-
-The system overview covers the two main subsystems, the tagger subsystem and target subsystem. Following the system overview these two subsystems are divided into modules and categorized into either hardware or software. The design of each module is presented, along with an image of the final implementation.
+This chapter presents the design of the various modules forming the laser tag system. An overview of the entire system is given in the \textit{system overview} section. The following sections, \textit{hardware design} and \textit{software design}, present the design of each module and the software components of the system respectively.
 
 %todo: possibly explain why designs are so ellaborate... This investigation is centred on the creation and evaluation of system modules, therefore the design descriptions have been written 
 
-%todo: give an explaination as to how the module design has been brocken down into subsubsections
-
 \section{System Overview}
+The system overview introduces the two main subsystems, the tagger and the target.
 
-Figure \ref{fig:system_overview_hardware} gives an overview of the modules that make up the laser tag data link system.
+The tagger subsystem is responsible for generating and transmitting data and the target subsystem responsible for receiving and decoding the transmitted data. The modules comprising these subsystems can be seen in figure \ref{fig:system_overview_hardware}, the dashed line shows the flow of information from the tagger subsystem to the target subsystem.
 
 \begin{figure}[H]
 	\centering
@@ -22,14 +19,12 @@ Figure \ref{fig:system_overview_hardware} gives an overview of the modules that 
 
 \subsection{Subsystems}
 
-Two subsystems may be derived from figure \ref{fig:system_overview_hardware}. The tagger subsystem responsible for generating and transmitting a message and the target subsystem responsible for receiving and decoding an incoming message.
-
 \subsubsection{Tagger Subsystem}
-The tagger subsystem comprises a main processor, carrier frequency generation module and two LED driver modules. For the purposes of this investigation the UCT STM32\footnotemark{} development board has been used as the main processor. The development board communicates with the carrier frequency generation module (responsible for producing the 36kHz square waveform), this module is connected to an LED driver module which in turn drives an IR LED. Two led driver modules have been design and both operate on the same input signal. The difference between the two modules is in the rated output power, the low power module is designed to drive a standard low power IR led while the high power module has been designed to drive a high power 3W IR led.
 
-Not shown on the system overview is the light focus hardware module. This module is a passive optical component designed to focus the IR light.
+The tagger subsystem comprises a main processor, carrier frequency generation module and two LED driver modules. It also includes the light focusing module which is not included in figure \ref{fig:system_overview_hardware}.
 
-\footnotetext{STM32F051C6}
+The function of the tagger subsystem is to transmit data message via an infrared beam using a modified version of the RC-5 protocol (detailed in section \ref{sec:modified_rc5_protocol}). This operation is performed each time the user presses the designated `fire' button and the details of the transmission are presented on the LCD display.
+
 
 \subsubsection{Target Subsystem}
 The target system comprises more modules than the tagger due to the comparably higher complexity involved in detecting and processing incoming signals. The first stage of this subsystem concerns detecting incoming IR light, three different modules have been designed to perform this operation to allow for comparison between these separate approaches. As outlined in the overview shown in figure \ref{fig:system_overview_hardware} the IR receiver demodulates the detected IR light directly, however the remaining two detectors required additional modules to condition and demodulate the Manchester sequence.
@@ -48,11 +43,15 @@ There are three main software components to the overall system.
 \end{itemize}
 
 
+
+
+
+
 \section{Hardware Design}
+The hardware design section presents the design of each hardware module. For each module the \textit{functional design} header precedes a short overview of the high level functionality of the hardware module, including the inputs and outputs. A design schematic is provided under the \textit{schematic} heading. With reference to this schematic, various design processes are presented under relevant headings. Finally, under the \textit{module realization} header, an image of the final implementation is given.
+
 
 \subsection{Tagger \& Target MCUs}
-%Missing
-% - Schematic and the like in the appendix
 
 \subsubsection{Functional Design}
 The tagger and target microcontroller units handle signal encoding and decoding respectively. In the greater context of laser tag the MCUs must perform many functions, however in keeping with the scope of this investigation these have not been implemented.
@@ -63,7 +62,7 @@ The tagger is triggered by pulling pin 10 low, the Manchester encoded output is 
 The schematic is available online at \href{https://gofile.io/d/Hldp7z}{https://gofile.io/d/Hldp7z}.
 
 
-\subsubsection{Board Features}
+\subsubsection{Notable Features}
 
 The development board provides break-out pins for the microcontroller, 4 input buttons, an array of 8 LEDs, an LCD display and a built-in st-link v2 for debugging and programming the processor.
 
@@ -612,6 +611,7 @@ Figure \ref{fig:schmit_simulation_wide} illustrates the activation and shut-off 
 For the purposes of this investigation, a tagger needed to be created that can encode a gun ID and possibly some additional bits for other information. It was chosen to use a 16-bit packet size. In this initial implementation a single bit is reserved for error detection, however further development of this system might explore the use of hamming codes which would require an additional four bits to be reserved for error correction.
 
 \subsubsection{Modified RC-5 Protocol}
+\label{sec:modified_rc5_protocol}
 The RC-5 protocol was used as the basis for the design of the modified transmission protocol. A detailed breakdown of the protocol is given in the literature review in section \ref{sec:rc_5_protocol}. In this modified version of the RC-5 protocol, the Manchester Encoding technique and bit-period timing specifications are preserved. However the structure of the bits transmitted has been modified and the period between messages was decreased.
 
 \begin{figure}[H]
