@@ -53,14 +53,17 @@ There are three main software components to the overall system.
 \subsection{Tagger \& Target MCUs}
 %Missing
 % - Schematic and the like in the appendix
-The laser tag systems has two main processors. One for the tagger and another for the target. The hardware used for main processor in each case is the UCT development board built around the STM32F051C6 microcontroller.
 
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=.5\textwidth]{figures/design/dev_board_image.jpg}
-	\caption{UCT STM32 Development Board}
-	\label{fig:stm32_dev_board}
-\end{figure}
+\subsubsection{Functional Design}
+The tagger and target microcontroller units handle signal encoding and decoding respectively. In the greater context of laser tag the MCUs must perform many functions, however in keeping with the scope of this investigation these have not been implemented.
+
+The tagger is triggered by pulling pin 10 low, the Manchester encoded output is generated on pin 21. The target continuously monitors pin 17 for an incoming Manchester sequence.
+
+\subsubsection{Schematic}
+The schematic is available online at \href{https://gofile.io/d/Hldp7z}{https://gofile.io/d/Hldp7z}.
+
+
+\subsubsection{Board Features}
 
 The development board provides break-out pins for the microcontroller, 4 input buttons, an array of 8 LEDs, an LCD display and a built-in st-link v2 for debugging and programming the processor.
 
@@ -72,6 +75,17 @@ The STM32F051C6 was chosen partly because of its integration into the UCT develo
 	\item Timer peripherals with multiple interrupt channels
 	\item Nested vectored interrupt controller (NVIC)
 \end{itemize}
+
+
+\subsubsection{Module Realization}
+An image of the UCT development board is shown in figure \ref{fig:module_carrier_generation}. The board is built around the STM32F051C6 microcontroller.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=.5\textwidth]{figures/design/dev_board_image.jpg}
+	\caption{UCT STM32 Development Board}
+	\label{fig:stm32_dev_board}
+\end{figure}
 
 
 
