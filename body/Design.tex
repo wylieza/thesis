@@ -27,13 +27,14 @@ The function of the tagger subsystem is to transmit data message via an infrared
 
 
 \subsubsection{Target Subsystem}
-The target system comprises more modules than the tagger due to the comparably higher complexity involved in detecting and processing incoming signals. The first stage of this subsystem concerns detecting incoming IR light, three different modules have been designed to perform this operation to allow for comparison between these separate approaches. As outlined in the overview shown in figure \ref{fig:system_overview_hardware} the IR receiver demodulates the detected IR light directly, however the remaining two detectors required additional modules to condition and demodulate the Manchester sequence.
 
-These additional modules perform anti-alias filtering and rectification of the signal as well as indicate when a 36kHz tone is present in the conditioned signal. This tone detection is performed by a digital signal processing (DSP) algorithm and is implemented on the STM32 MPU.
+The tagger subsystem comprises a main processor, digital tone decoder, analog signal conditioning module, and three IR detector modules.
 
-The final module of the target subsystem is the main processor which is implemented on a second UCT STM32 development board.
+The function of the target subsystem is to detect an incoming transmissions encoded in an infrared light beam and decode the message data. While active the system continuously monitors the incoming IR light and in real time updates the LCD with received messages.
 
-\subsubsection{Software}
+This process can be broken into 4 stages: IR detection and conversion to an analog waveform, conditioning of the analog waveform for digital signal processing, digitally processing the waveform to detect the presence of a carrier and finally decoding and displaying the encoded message. Each stage is implemented on a separate module.
+
+\subsection{Software}
 
 There are three main software components to the overall system.
 \begin{itemize}
