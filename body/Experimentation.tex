@@ -48,9 +48,7 @@ After setting up the experiment, the lens was slowly adjusted along the vertical
 
 \subsubsection{IR Beam Dispersion}
 
-To test the light focusing tube, two power LEDs where used. Initially, a 3W warm white (visible light) power LED was used to confirm the functionality of the system. Following this, the 3W IR power LED was used.
-
-In both cases, the focus system was setup a specific distance from a flat surface. The light was then powered and the edge of the beam spot was marked and the diameter taken. To determine the location of the IR beam spot edge, a video camera in 'night shot' mode was used.
+To test the light focusing tube, two different power LEDs where used, a 3W white (visible light) power LED and a 3W IR power LED. Performing the experiment with a white LED allowed a set of measurements to be taken without the use of a intermediary tool, as was necessary when measuring the IR beam spot diameter.
 
 \begin{figure}[H]
 	\centering
@@ -59,8 +57,11 @@ In both cases, the focus system was setup a specific distance from a flat surfac
 	\label{fig:focus_system_experiemnt}
 \end{figure}
 
-%todo: Give distances for measuredments taken
-Figure \ref{fig:focus_system_experiemnt} above shows the experimental setup. The experiment was performed for distances of x, y, z.
+Figure \ref{fig:focus_system_experiemnt} above shows the experimental setup.
+
+In both cases, the focus system was setup a specific distance from a flat surface. The light was then powered and the edge of the beam spot was marked and the diameter taken.
+
+To measure the diameter of the IR beam, a video camera in 'night shot' mode was used to mark the edges of the beam spot. To measure the diameter of the visible light beam, the edges of the beam spot could be seen by the naked eye.
 
 
 
@@ -226,10 +227,29 @@ An oscilloscope was used to trace the incoming Manchester waveform and the state
 
 \subsection{System Range}
 
-To determine the range of the laser tag system, the system was setup on a large field and the distance between the tagger and target modules gradually increased until errors in the incoming transmission began to occur.
+To determine the range of the laser tag system, the system was setup on a large open space. The tagger and target were setup on two small tables. The target subsystem was moved relative to the tagger subsystem to adjust the transmission range. To measure the impact of ambient lighting  on the system the experiment was performed during the afternoon several hours before sunset and several hours after sunset.
 
-The maximum distance was defined to be the distant at which practically all transmissions were received successfully, but occasionally a bit error would occur. This distance was measured using a tape measure.
+\begin{figure}[H]
+	\centering
+	\begin{minipage}{.48\textwidth}
+		\centering
+		\includegraphics[width=.9\linewidth]{figures/experimentation/transmitter_setup_irl_crop.jpg}
+		\captionof{figure}{Tagger Subsystem Experimental Setup}
+		\label{fig:transmitter_setup_irl}
+	\end{minipage}%
+	\hfill
+	\begin{minipage}{.48\textwidth}
+		\centering
+		\includegraphics[width=.9\linewidth]{figures/experimentation/receiver_setup_irl_crop.jpg}
+		\captionof{figure}{Target Subsystem Experimental Setup}
+		\label{fig:receiver_setup_irl}
+	\end{minipage}
+\end{figure}
 
-The three different detector modules were tested in turn and the experiment was performed both at night and during the day. This allowed a comparison between the range and effects of ambient sunlight of the three detectors.
+Figure \ref{fig:transmitter_setup_irl} and \ref{fig:receiver_setup_irl} show the experimental setup of the tagger and target subsystems respectively.
 
-The Picoscope oscilloscope was used to capture the waveform at the input and output of the goertzel filter for inspection.
+The range of the system was determined by moving the target subsystem away from the tagger while monitoring the incoming transmissions, the target subsystem was moved until errors began to occur. This was repeated for each of the three detector modules.
+
+The target MCU provided a breakdown of each received transmission and an indicator LED which turned on whenever a transmission was being decoded. When a transmission contained an error the LED indicator would light up but no new transmission data would be displayed. The maximum distance was defined to be the point at which errors would occur, regardless of attempts to align the detector module with the IR beam.
+
+A portable oscilloscope was used to capture waveforms at different locations of the target subsystem. These waveforms where used to determine investigate the behaviour of the subsystem at the maximum transmission distance.
