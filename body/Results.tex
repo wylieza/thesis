@@ -116,6 +116,14 @@ The recorded results are plotted in figure \ref{fig:goertzel_computation_plot} t
 
 %disc. removed
 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+
 \subsection{Goertzel Filter Performance}
 
 \subsubsection{Simulated Frequency Response}
@@ -168,8 +176,26 @@ The following plot in figure \ref{fig:goertzel_filter_response_empirical} show t
 \end{figure}
 
 
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
 \subsection{Carrier Waveform Generation Performance}
 %todo: this
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
 
 
 
@@ -227,6 +253,15 @@ The following screenshots shown in figures \ref{fig:pwr_led_6k} through \ref{fig
 
 
 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+
+
 \subsection{Directivity of IR Modules}
 
 Figure \ref{fig:vrms_vs_angle_of_incidence} shows the RMS voltage value of the modules output with respect to the angle of incidence. Figure \ref{fig:beam_pattern} shows the normalized RMS voltage value and mirrors the image about the vertical to provide an illustration of the beam pattern.
@@ -251,6 +286,17 @@ Figure \ref{fig:vrms_vs_angle_of_incidence} shows the RMS voltage value of the m
 
 The IR receiver module registered the signal between angles of 0\textdegree and 70\textdegree and registered an absence of a signal for angles greater than 80\textdegree. Between 70\textdegree and 80\textdegree the output would toggle sporadically.
 
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+
+
+
 \subsection{Signal Conditioning Performance}
 
 \subsubsection{Anti-alias Filtering}
@@ -271,6 +317,14 @@ Figure \ref{fig:precision_rectification} below shows the oscilloscope trace of t
 The precision rectifier stage operates as expected. The precision rectification technique can be seen by the complete rectification of half the waveform, with cross-over dead time due to the forward voltage drop of the diode.
 
 It should be noted that the slew-rate of the op-amp and the efficiency in the design of the module results in very little distortion at a frequency of 36kHz. Only a small amount of deformation occurs in the output when the input signal goes negative.
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
 
 
 
@@ -330,6 +384,17 @@ Combining the timeout delay and decoding time gives a maximum period of 33.46ms 
 \end{figure}
 
 
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+
+
+
 \subsection{System Range}
 
 Table \ref{tbl:max_distances_system} below shows the maximum ranges of the system as a consequence of using the different detector modules and the ambient lighting conditions.
@@ -339,9 +404,9 @@ Table \ref{tbl:max_distances_system} below shows the maximum ranges of the syste
 	\begin{tabular}{ccc}
 		\hline
 		Module & \begin{tabular}[c]{@{}c@{}}Maximum Distance\\ Dark Environment\\ (m)\end{tabular} & \begin{tabular}[c]{@{}c@{}}Maximum Distance\\ Bright Environment\\ (m)\end{tabular} \\ \hline
-		Phototransistor & 13.25 & 36.79 \\ \hline
-		Photodiode & 17.5 & 37.23 \\ \hline
-		IR Receiver & 47 \textgreater{} & 39.27 \\ \hline
+		Phototransistor & 17 & 36 \\ \hline
+		Photodiode & 17.5 & SAT \\ \hline
+		IR Receiver & 47 \textgreater{} & 47 \textgreater{} \\ \hline
 	\end{tabular}
 	\caption{Maximum Receiver Distances}
 	\label{tbl:max_distances_system}
@@ -381,6 +446,20 @@ Table \ref{tbl:max_distances_system} below shows the maximum ranges of the syste
 	\caption{Oscilloscope trace showing input of Goertzel filter at a range of ?m - Phototransistor Detector in a ? environment}
 	\label{fig:phototransistor2}
 \end{figure}
+
+
+\subsubsection{IR Receiver Observations}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=.9\textwidth]{figures/results/system_test/36m_phototranaistoroutput_vs_receiveroutput.JPG}
+	\caption{Oscilloscope trace showing the output of the IR receiver and the conditioned output of the phototransistor detector}
+	\label{fig:36m_phototranaistoroutput_vs_receiveroutput}
+\end{figure}
+
+During the day time range test, it was observed that the output of the IR receiver contained blips. It can be seen in figure \ref{fig:36m_phototranaistoroutput_vs_receiveroutput} that while the incident IR radiation was modulating the output of the IR receiver would occasionally indicate for a brief period that no incident radiation was present. These blips produced errors in the decoded bit-stream.
+
+These blips only presented themselves when the IR receiver was centred in the incoming beam, if the beam was slightly off centre the behaviour ceased.
 
 
 
