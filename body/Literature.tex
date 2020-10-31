@@ -97,19 +97,47 @@ In may cases including this investigation, the light coming from an LED may be a
 
 
 
-\subsection{Trans-Impedance Amplifiers} %electronic sensing
+\subsection{Optical Sensing} %electronic sensing
 %todo: maybe rename this and finnish it
-
+\subsubsection{Optical Detectors}
 In his paper on optical detectors, Forrest highlights the three main contenders for converting light to an electrical signal. These are the PIN diode, avalanche photodiode and photoconductor \cite{Forrest1986}.
 
-The photoconductor is constructed out of an intrinsic semi-conductor material. This un-doped material changes resistance in proportion to incident light of a particular wavelength. Unlike extrinsic semiconductor materials, no current is induced in a photoconductor as the photoelectric effect does not apply. Properties such as the sensitivity to different wavelengths of light depend solely on the semiconducting material of the photoconductor \cite{Kingston2003}.
+\textbf{Photoconductor}\\
+The photoconductor is a optical sensor constructed from intrinsic semi-conductor material. This un-doped material changes resistance in proportion to incident light of a particular wavelength. Unlike extrinsic semiconductor devices, no current is induced in a photoconductor as the photoelectric effect does not apply. Properties such as the sensitivity to different wavelengths of light depend solely on the semiconducting material of the photoconductor \cite{Kingston2003}.
 
-Photodiode theory of operation %here
+\textbf{PIN Photodiode}\\
+The PIN diode is constructed out of a semiconductor material with two doped regions. As the name implies PIN diodes are constructed by separating a positively doped (P-region) and negatively doped (N-region) with an intrinsic region.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\linewidth]{figures/litreview/pin_diode_diagram.png}
+	\caption{PIN Diode Construction and Operation as an Optical Sensor}
+	\label{fig:pin_diode_diagram}
+\end{figure}
+
+Figure \ref{fig:pin_diode_diagram} above illustrates the working principle of the PIN photodiode.
+When photons with a high enough energy are absorbed by the depletion region of the diode, an electron is freed. This free electron accelerates due to the electric field which induces a current.
+
+Typically the diode is reverse biased to increase the strength of the electric field between the two doped regions. Under reverse bias conditions a small current flows independent of whether light is shone on the depletion zone, this current is known as dark current.
+
+\textbf{Avalanche Photodiode}\\
+The avalanche photodiode is a modification to the structure of the PIN diode. In the case of the avalanche photodiode an additional P-region is place adjacent to the N-region. This additional P-region forms the avalanche region. The avalanche photodiode can be made sensitive enough to allow the detection of individual photons \cite{Perenzoni2018}.
 
 
-Circuits to amplify the small changes in current through a photodiode are known as trans-impedance amplifiers (TIA).
+\subsubsection{Amplification}
 
-Trans-impedance amplifiers can take various forms to achieve different levels of performance. In their paper on developing a lock-in amplifier for optical sensors, Ferreira and Petraglia use a constant current source rather than a fixed reverse bias to minimize the shot noise cause by dark current \cite{Ferreira2017}.
+Circuits which convert small current into voltages are known as trans-impedance amplifiers (TIA). They are used in applications where the current response through the device is much more linear than the voltage.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.6\linewidth]{figures/litreview/transimpedance_amplifier.png}
+	\caption{Fundamental Trans-impedance Amplifier}
+	\label{fig:transimpedance_amplifier}
+\end{figure}
+
+Trans-impedance amplifiers can take various forms to achieve different levels of performance. For example in their paper on developing a lock-in amplifier for optical sensors, Ferreira and Petraglia use a constant current source rather than a fixed reverse bias voltage to minimize the shot noise cause by dark current \cite{Ferreira2017}.
+
+
 
 %%%%%%%%%%%%%%%%%%
 
