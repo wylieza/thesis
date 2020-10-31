@@ -7,6 +7,7 @@ This chapter concerns a review of the literature in the fields of study related 
 Each section presents a review of the relevant the theory for a particular field of study. %todo: improve this line
 The literature review has been structured such that for each topic a brief introduction to the broader theory is presented after which the details of specific theories and concepts are reviewed.
 
+%todo: update this to include latest sections
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\linewidth]{figures/litreview/litreview_overview.png}
@@ -365,10 +366,19 @@ BW < f_{Nyquist}
 \end{equation}
 
 
-\subsubsection{Anti-alias Filtering}
+\subsubsection{Analog Preprocessing} %Anti-alias Filtering
 %todo: chat a bit about designing an anti-aliassing filter
 
+Any time an analog signal is sampled for the purpose of digital signal processing, it must filtered to remove any frequencies above the Nyquist frequency. If frequencies higher than the Nyquist frequency are present in the sampled waveform, aliasing will occur. Naturally this filtering stage cannot be performed digitally and therefore an analog filter must be implemented.
 
+In addition to filtering, it is sometimes necessary to perform other operations on analog signals before they are sampled, such as rectification or adding a positive offset to ensure the signal is within the input range of the ADC.
+
+\textbf{Low Pass Filtering}\\
+Different approaches to filtering exist. The most basic filter is a passive RC network as shown in figure \ref{fig}. Filters with a sharper cut-off can be created by using an operational amplifier as shown in figure \ref{label}. Finally IC's containing customizable second order filtering stages can be purchased such as the \href{https://www.maximintegrated.com/en/products/analog/analog-filters/MAX275.html/tb_tab0}{MAX275} series by maximum integrated.
+
+%todo: figures of the two filters
+
+Dedicated filtering IC's are useful in precision applications where reproducibility and consistency of filter performance is a priority. They also allow for the construction of digitally controllable analog filters \cite{Huijing2010}.
 
 %%%%%%%%%%%%%%%%%%
 
