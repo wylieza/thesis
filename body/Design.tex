@@ -358,13 +358,11 @@ The strip-board implementation of the module is shown in figure \ref{fig:module_
 
 
 \subsection{IR Receiver}
-%Missing:
-% - Schematic and explaination
 
 \subsubsection{Functional Design}
 The IR receiver is an 'all in one package' detector IC designed to detect the presence of a carrier signal in the IR light incident on the detector. The output of the module is high when no modulation is detected and pulled low when modulation is detected.
 
-The module is designed to be powered by a 5V supply, however the output voltage has been clamped down to 3V to be compatible with the STM32 GPIO.
+The module is designed to be powered by a 5V supply, however the output voltage has been clamped down to 3V to be compatible with the STM32 GPIO pins.
 
 \subsubsection{Schematic}
 Figure \ref{fig:schematic_voltage_clamp} below shows the schematic for the voltage clamp used to regulate the output of the TSOP382. The \href{https://www.vishay.com/docs/82491/tsop382.pdf}{datasheet} contains a block diagram (shown in figure \ref{fig:tsop382_block_diagram}) which gives a functional overview of the internal circuitry for this IC.
@@ -458,6 +456,7 @@ The values of $R$ and $C$ are determined by the following equation
 
 \[RC = \frac{1}{2\pi f_n f_c}\]
 
+%note the tense change below
 Substituting $f_n$ and $f_c$ we find $RC = 2.6935\times 10^{-6}$. It is good practice to select a resistance value between $10k$ and $100k$, the E12 value of $39k\Omega$ was chosen. The corresponding capacitance value is $69pF$, the closest E12 series capacitance value of $68pF$ was used.
 
 
