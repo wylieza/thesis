@@ -17,7 +17,7 @@ The literature review has been structured such that for each topic a brief intro
 %structure overview
 The review begins with a brief history of optics and the use of optics in digital communication. 
 
-\section{Optics in Communication}
+\section{Optics}
 
 \subsection{Brief History}
 %The branch of physics that deals with the properties and phenomena of visible light (and by extension other forms of electromagnetic radiation), sometimes esp. in relation to sight.
@@ -33,11 +33,6 @@ The use of light for electronic communication only became possible after the adv
 It did not take long for the infrared LED to be integrated into consumer devices such as the television remote and then later into video cameras as a cost effective night vision feature. In more recent decades the number of available licenced bands in the electromagnetic spectrum has become increasingly scarce. As a result there has been a movement to optical wireless communication, a type of wireless communication that uses visible (and near visible) light radiation for shot range, high bandwidth communication links.
 
 With the decrease in costs associated with LEDs, transistors and microcontrollers recreational games such as laser tag become possible and the idea was first patented in 1987 \cite{Carter1986}.
-
-
-
-
-
 
 
 
@@ -88,8 +83,9 @@ In may cases including this investigation, the light coming from an LED may be a
 
 
 
-\subsection{Optical Sensing} %electronic sensing
-%todo: maybe rename this and finnish it
+\subsection{Optical Sensing}
+
+
 \subsubsection{Optical Detectors}
 In his paper on optical detectors, Forrest highlights the three main contenders for converting light to an electrical signal. These are the PIN diode, avalanche photodiode and photoconductor \cite{Forrest1986}.
 
@@ -133,9 +129,94 @@ Many variations of this design exist, each built to achieve different levels of 
 
 %%%%%%%%%%%%%%%%%%
 
-\section{Reliable Communication}
 
-\subsection{Noise \& Interference}
+\section{Optical Communication}
+%\section{IR Radiation}
+%This is where I talk about the section of the EM spectrum that is IR
+
+%
+%% todo: remove this because already covered in optics 
+%\subsection{IR Radiation Detection}
+%Explain how photodiodes and phototransistors work
+
+
+\subsection{Optical Communication Techniques} %todo: better name for this 'catergories of techniques' 
+
+%Optical communication concerns all manors of communicating information from one party to another through the medium of light. This investigation focuses on the use of light as a means of communication between electronic systems, categorized as optical wireless or OW.
+%todo: either expand or remove this
+
+Most light based communication methods are classified as \textit{free-space optical communication} techniques. These techniques do not require a physical medium between the receiver and transmitter. Not all light based communication is performed in free space, fibre optic communication is among the fastest growing communication techniques of our time.
+
+Fibre optic communication uses a physical cable designed to guide a beam of light using the principles of total internal reflection. Fibre optic communication systems may utilize an LED or laser diode to produce a optically encoded digital signal. Recent developments in vertical cavity surface emitting lasers (VCSEL) have resulted in more fibre optic systems turning to this technology.
+
+%todo: finnishe this section
+
+
+
+\subsection{IR Communication}
+%This is where I talk about different IR protocols
+
+IR has is used in many applications, this is because it is cheap, efficient and simple to use. A basic implementation can be done using an IR LED, IR receiver IC and a pair of microcontrollers. The most appropriate band of IR radiation is between 780nm and 950nm, this is as a result of the availability of low cost LEDs and quality photodiodes that operate in this frequency band \cite{Elgala2011}.
+
+Many techniques have been developed optical wireless communication. These range from advanced techniques such as multiple-subcarrier modulation (MSM) to basic techniques such as on-off keying (OOK) and pulse-position modulation (PPM).
+
+Multiple-subcarrier modulation sums numerous sub-carrier signals and uses the result to modulate the light source. As a consequence of using a multiple low frequency sub-carriers it is possible to achieve a high total bit rate with little distortion, removing the need for equalization \cite{Ohtsuki2003}.
+
+Notable tradeoffs for techniques that increase the bit-rate are diminishing range, lower resistance to ambient noise and an increase in system complexity. For the purposes of communicating between a tagger and target in laser tag, a high bandwidth is not required. It is therefore advantageous to utilize a more robust technique with a lower bit-rate such as on-off keying.
+
+OOK is utilized in many systems, for example, in remote control applications. As a result there are several IR communication protocols based around this technique. The following are a few of the popular options
+
+\begin{itemize}
+	\item RC-5
+	\item RC-6
+	\item NEC
+	\item SIRC
+\end{itemize}
+
+Each of these protocols are based on OOK, but differ in how they define symbols. To represent two different states, an IR source is modulated at a chosen carrier frequency (usually around 36kHz). When the light source is modulating the signal is \textit{on} and when the source is not modulating the signal is \textit{off}.  Modulation makes it possible to distinguish between a generated IR signal and ambient IR radiation from noise sources.
+
+Protocols such as Sony's SIRC use a technique known as pulse width encoding. This technique involves modulating the IR LED for a different period of time depending on whether a 1 or 0 is to be transmitted, while maintaining a constant period of time between transmissions.
+
+Protocols such as the NEC protocol by Renesas use pulse distance encoding. This protocol specifies an different off period between on pulses to distinguish between a logical 1 and 0.
+
+The RC-5 protocol and its successor the RC-6 protocol use Manchester Encoding to transfer binary information. Due to its wide adoption and popularity \cite{rudrappa2009}, an adaption the RC-5 protocol will be used in this project. Manchester Encoding is reviewed in section \ref{sec:manchester_encoding} below.
+
+\subsubsection{RC-5 Protocol}
+\label{sec:rc_5_protocol}
+The the RC-5 protocol is illustrated in figure \ref{fig:rc_5_protocol}. The bits are encoded using the IEEE 802.3 convention for Manchester Encoding. The modulation frequency of the carrier is 36kHz and the length of one bit period is 64 cycles or 1.778mS\cite{Perme2007}.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\linewidth]{figures/litreview/rc5_protocol.png}
+	\caption{RC-5 IR Protocol}
+	\label{fig:rc_5_protocol}
+\end{figure}
+
+Every transmission begins with two start bits, these bits always have a value of 1. Following the start bits is the `toggle' bit. In remote control applications it is useful to distinguish between a button which remains depressed and a button being repeatedly pressed. This is achieved through the toggle bit which is flipped each time a button is released. When a button remains depressed, the message is transmitted repeatedly with a 114ms gap between transmissions. Finally the RC-5 protocol data is structured such that it first transmits a 5-bit address followed by a 6-bit command.
+
+
+%\subsection{Materials Interaction}
+%Talk briefly about materials and the interation of different materials with IR. Mention the difficulty of aquiring these resources and therefore the exclusion of them during experiementation
+
+
+\subsection{Communication System Structure}
+%section about the overall design of a comms system, the various blocks required and their purpose.
+
+%talk about blocks that are excluded such as automatic gain control etc. %(and why it was excluded - time, cost and computational power)
+
+
+
+%%%%%%%%%%%%%%%%%%
+
+\section{Reliable Data Transmission}
+
+\subsection{Modulation}
+%Talk about modulation (and demodulation) techniques 
+% no seperate \subsection{Demodulation}
+%Give an overview of demodulating and what techniques exist: Goertzel, DFT, tone-detectors, next sections hilights details
+
+%%Make this into a subsub section and include it under modulation
+\subsubsection{Noise \& Interference}
 %Talk about interference and noise, sources and narrow down to IR in particular... Also note noise in components and power supplies etc.
 
 Optical wireless communication is susceptible to interference and noise produced by most lighting technologies. Light sources such as incandescent light bulbs and the sun produce white noise in the infrared region, while light sources such as the florescent light produce cyclostationary noise due to 
@@ -147,7 +228,6 @@ Optical wireless communication is susceptible to interference and noise produced
 %multi-path distortion for high bit-rate signals
 
 %saturation of receiver and noisy input
-
 
 
 
@@ -213,9 +293,8 @@ Using a parity bit is the most simple means to detect an error in a bit sequence
 
  To use parity as a method to detect errors, the sender and receiver choose to use either even or odd parity. Before transmission, the sender calculates the parity bit for the sequence to be sent, this bit is then appended to the bit-stream. Upon receiving the bit-stream, the same parity calculation is done on the sequence. If the result of this calculation is a 1 it can be said for certain that an error occurred, if the result is zero it can be said that no error occurred or an even number of errors occurred.
 
-%\subsubsection{Hamming Code}
-
-%\fi
+\subsubsection{Hamming Code}
+%talk briefly on Hamming Codes (and why it was excluded)
 
 
 
@@ -230,10 +309,48 @@ Part of the IR decoding process requires detecting the presence of a particular 
 The FFT provides a very efficient means for determining all the DFT coefficients, but in a use case only a few of the coefficients are used and the rest discarded it is not the most efficient technique. By using a less efficient process for calculating individual coefficients of the DFT it is possible to greatly reduce program complexity and processing time relative to an implementation that uses the FFT.
 
 
-\subsection{Modulation}
-%Talk about modulation (and demodulation) techniques 
-% no seperate \subsection{Demodulation}
-%Give an overview of demodulating and what techniques exist: Goertzel, DFT, tone-detectors, next sections hilights details
+\subsubsection{Analog Preprocessing} %Anti-alias Filtering
+%todo: chat a bit about designing an anti-aliassing filter
+
+Any time an analog signal is sampled for the purpose of digital signal processing, it must filtered to remove any frequencies above the Nyquist frequency. If frequencies higher than the Nyquist frequency are present in the sampled waveform, aliasing will occur. Naturally this filtering stage cannot be performed digitally and therefore an analog filter must be implemented.
+
+In addition to filtering, it is sometimes necessary to perform other operations on analog signals before they are sampled, such as rectification or adding a positive offset to ensure the signal is within the input range of the ADC.
+
+\textbf{Low Pass Filtering}\\
+Anti-alias filters are built to suppress high frequencies, many different approaches to filtering high frequencies exist. The most basic filter is a passive RC network as shown in figure \ref{fig:filter_basic_lpf}. Filters with a sharper cut-off can be created by using an operational amplifier, figure \ref{fig:vcvs_filter_lpf} shows a voltage controlled voltage source (VCVS) circuit configured as a 2nd order low pass filter. The circuit in figure \ref{fig:vcvs_filter_lpf} can be found in the book \textit{The art of electronics - 2nd Edition} on page 274, also included in this book is a table of coefficients which may be used to achieve the desired filter response \cite{Horowitz1995}. Finally IC's containing customizable second order filtering stages can be purchased such as the \href{https://www.maximintegrated.com/en/products/analog/analog-filters/MAX275.html/tb_tab0}{MAX275} series by maximum integrated.
+
+\begin{figure}[H]
+	\centering
+	\begin{minipage}{.42\textwidth}
+		\centering
+		\includegraphics[width=.9\linewidth]{figures/litreview/filter_basic.png}
+		\captionof{figure}{Simple RC Network - LPF Configuration}
+		\label{fig:filter_basic_lpf}
+	\end{minipage}%
+	\hfill
+	\begin{minipage}{.54\textwidth}
+		\centering
+		\includegraphics[width=.9\linewidth]{figures/litreview/vcvs_filter.png}
+		\captionof{figure}{Voltage Controlled Voltage Source - LPF Configuration}
+		\label{fig:vcvs_filter_lpf}
+	\end{minipage}
+\end{figure}
+
+Dedicated filtering IC's are useful in precision applications where reproducibility and consistency of filter performance is a priority. They also allow for the construction of digitally controllable analog filters \cite{Huijing2010}. Dedicated filtering IC's are comparably expensive and therefore a trade off between cost and convenience must be considered.
+
+\textbf{Precision Rectification}\\
+Simple, half-wave rectification may be achieved simply by placing a diode in series with the path of a signal. However, due to the forward voltage drop of the diode, any positive portion of the waveform below the forward voltage of the diode will be lost. This non-ideal effect can be mitigated through the use of an operational amplifier.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.6\linewidth]{figures/litreview/precision_rectifier.png}
+	\caption{Precision Rectifier}
+	\label{fig:precision_rectifier}
+\end{figure}
+
+There are various circuit designs which use an operational amplifier to mitigate the effect of the diode forward voltage drop, they are known as precision rectifiers. The circuit shown in figure \ref{fig:precision_rectifier} is one of the more sophisticated designs as the output of the op-amp has a maximum swing of two diode drops. In simpler designs, the operational amplifier might swing more than half the supply rails during operation. The design has been taken from \textit{The art of electronics - 2nd Edition} and may be found on page 188 \cite{Horowitz1995}.
+
+
 
 \subsection{Goertzel Algorithm}
 
@@ -356,126 +473,11 @@ BW < f_{Nyquist}
 \end{equation}
 
 
-\subsubsection{Analog Preprocessing} %Anti-alias Filtering
-%todo: chat a bit about designing an anti-aliassing filter
 
-Any time an analog signal is sampled for the purpose of digital signal processing, it must filtered to remove any frequencies above the Nyquist frequency. If frequencies higher than the Nyquist frequency are present in the sampled waveform, aliasing will occur. Naturally this filtering stage cannot be performed digitally and therefore an analog filter must be implemented.
-
-In addition to filtering, it is sometimes necessary to perform other operations on analog signals before they are sampled, such as rectification or adding a positive offset to ensure the signal is within the input range of the ADC.
-
-\textbf{Low Pass Filtering}\\
-Anti-alias filters are built to suppress high frequencies, many different approaches to filtering high frequencies exist. The most basic filter is a passive RC network as shown in figure \ref{fig:filter_basic_lpf}. Filters with a sharper cut-off can be created by using an operational amplifier, figure \ref{fig:vcvs_filter_lpf} shows a voltage controlled voltage source (VCVS) circuit configured as a 2nd order low pass filter. The circuit in figure \ref{fig:vcvs_filter_lpf} can be found in the book \textit{The art of electronics - 2nd Edition} on page 274, also included in this book is a table of coefficients which may be used to achieve the desired filter response \cite{Horowitz1995}. Finally IC's containing customizable second order filtering stages can be purchased such as the \href{https://www.maximintegrated.com/en/products/analog/analog-filters/MAX275.html/tb_tab0}{MAX275} series by maximum integrated.
-
-\begin{figure}[H]
-	\centering
-	\begin{minipage}{.42\textwidth}
-		\centering
-		\includegraphics[width=.9\linewidth]{figures/litreview/filter_basic.png}
-		\captionof{figure}{Simple RC Network - LPF Configuration}
-		\label{fig:filter_basic_lpf}
-	\end{minipage}%
-	\hfill
-	\begin{minipage}{.54\textwidth}
-		\centering
-		\includegraphics[width=.9\linewidth]{figures/litreview/vcvs_filter.png}
-		\captionof{figure}{Voltage Controlled Voltage Source - LPF Configuration}
-		\label{fig:vcvs_filter_lpf}
-	\end{minipage}
-\end{figure}
-
-Dedicated filtering IC's are useful in precision applications where reproducibility and consistency of filter performance is a priority. They also allow for the construction of digitally controllable analog filters \cite{Huijing2010}. Dedicated filtering IC's are comparably expensive and therefore a trade off between cost and convenience must be considered.
-
-\textbf{Precision Rectification}\\
-Simple, half-wave rectification may be achieved simply by placing a diode in series with the path of a signal. However, due to the forward voltage drop of the diode, any positive portion of the waveform below the forward voltage of the diode will be lost. This non-ideal effect can be mitigated through the use of an operational amplifier.
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.6\linewidth]{figures/litreview/precision_rectifier.png}
-	\caption{Precision Rectifier}
-	\label{fig:precision_rectifier}
-\end{figure}
-
-There are various circuit designs which use an operational amplifier to mitigate the effect of the diode forward voltage drop, they are known as precision rectifiers. The circuit shown in figure \ref{fig:precision_rectifier} is one of the more sophisticated designs as the output of the op-amp has a maximum swing of two diode drops. In simpler designs, the operational amplifier might swing more than half the supply rails during operation. The design has been taken from \textit{The art of electronics - 2nd Edition} and may be found on page 188 \cite{Horowitz1995}.
 
 %%%%%%%%%%%%%%%%%%
 
 
-\section{Optical Communication}
-%\section{IR Radiation}
-%This is where I talk about the section of the EM spectrum that is IR
-
-%
-%% todo: remove this because already covered in optics 
-%\subsection{IR Radiation Detection}
-%Explain how photodiodes and phototransistors work
-
-
-\subsection{Optical Communication Theory} %todo: better name for this 'catergories of techniques' 
-
-%Optical communication concerns all manors of communicating information from one party to another through the medium of light. This investigation focuses on the use of light as a means of communication between electronic systems, categorized as optical wireless or OW.
-%todo: either expand or remove this
-
-Most light based communication methods are classified as \textit{free-space optical communication} techniques. These techniques do not require a physical medium between the receiver and transmitter. Not all light based communication is performed in free space, fibre optic communication is among the fastest growing communication techniques of our time.
-
-Fibre optic communication uses a physical cable designed to guide a beam of light using the principles of total internal reflection. Fibre optic communication systems may utilize an LED or laser diode to produce a optically encoded digital signal. Recent developments in vertical cavity surface emitting lasers (VCSEL) have resulted in more fibre optic systems turning to this technology.
-
-%todo: finnishe this section
-
-
-
-\subsection{IR Communication}
-%This is where I talk about different IR protocols
-
-IR has is used in many applications, this is because it is cheap, efficient and simple to use. A basic implementation can be done using an IR LED, IR receiver IC and a pair of microcontrollers. The most appropriate band of IR radiation is between 780nm and 950nm, this is as a result of the availability of low cost LEDs and quality photodiodes that operate in this frequency band \cite{Elgala2011}.
-
-Many techniques have been developed optical wireless communication. These range from advanced techniques such as multiple-subcarrier modulation (MSM) to basic techniques such as on-off keying (OOK) and pulse-position modulation (PPM).
-
-Multiple-subcarrier modulation sums numerous sub-carrier signals and uses the result to modulate the light source. As a consequence of using a multiple low frequency sub-carriers it is possible to achieve a high total bit rate with little distortion, removing the need for equalization \cite{Ohtsuki2003}.
-
-Notable tradeoffs for techniques that increase the bit-rate are diminishing range, lower resistance to ambient noise and an increase in system complexity. For the purposes of communicating between a tagger and target in laser tag, a high bandwidth is not required. It is therefore advantageous to utilize a more robust technique with a lower bit-rate such as on-off keying.
-
-OOK is utilized in many systems, for example, in remote control applications. As a result there are several IR communication protocols based around this technique. The following are a few of the popular options
-
-\begin{itemize}
-	\item RC-5
-	\item RC-6
-	\item NEC
-	\item SIRC
-\end{itemize}
-
-Each of these protocols are based on OOK, but differ in how they define symbols. To represent two different states, an IR source is modulated at a chosen carrier frequency (usually around 36kHz). When the light source is modulating the signal is \textit{on} and when the source is not modulating the signal is \textit{off}.  Modulation makes it possible to distinguish between a generated IR signal and ambient IR radiation from noise sources.
-
-Protocols such as Sony's SIRC use a technique known as pulse width encoding. This technique involves modulating the IR LED for a different period of time depending on whether a 1 or 0 is to be transmitted, while maintaining a constant period of time between transmissions.
-
-Protocols such as the NEC protocol by Renesas use pulse distance encoding. This protocol specifies an different off period between on pulses to distinguish between a logical 1 and 0.
-
-The RC-5 protocol and its successor the RC-6 protocol use Manchester Encoding to transfer binary information. Due to its wide adoption and popularity \cite{rudrappa2009}, an adaption the RC-5 protocol will be used in this project. Manchester Encoding is reviewed in section \ref{sec:manchester_encoding} below.
-
-\subsubsection{RC-5 Protocol}
-\label{sec:rc_5_protocol}
-The the RC-5 protocol is illustrated in figure \ref{fig:rc_5_protocol}. The bits are encoded using the IEEE 802.3 convention for Manchester Encoding. The modulation frequency of the carrier is 36kHz and the length of one bit period is 64 cycles or 1.778mS\cite{Perme2007}.
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.8\linewidth]{figures/litreview/rc5_protocol.png}
-	\caption{RC-5 IR Protocol}
-	\label{fig:rc_5_protocol}
-\end{figure}
-
-Every transmission begins with two start bits, these bits always have a value of 1. Following the start bits is the `toggle' bit. In remote control applications it is useful to distinguish between a button which remains depressed and a button being repeatedly pressed. This is achieved through the toggle bit which is flipped each time a button is released. When a button remains depressed, the message is transmitted repeatedly with a 114ms gap between transmissions. Finally the RC-5 protocol data is structured such that it first transmits a 5-bit address followed by a 6-bit command.
-
-
-%\subsection{Materials Interaction}
-%Talk briefly about materials and the interation of different materials with IR. Mention the difficulty of aquiring these resources and therefore the exclusion of them during experiementation
-
-
-
-
-\section{TALK ABOUT}
-\begin{itemize}
-	\item Automatic gain control (and why it was excluded - time, cost and computational power)
-	\item Hamming Codes (and why it was excluded)
-\end{itemize}
 
 
 
