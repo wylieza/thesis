@@ -131,34 +131,24 @@ Many variations of this design exist, each built to achieve different levels of 
 
 
 \section{Optical Communication}
-%\section{IR Radiation}
-%This is where I talk about the section of the EM spectrum that is IR
-
-%
-%% todo: remove this because already covered in optics 
-%\subsection{IR Radiation Detection}
-%Explain how photodiodes and phototransistors work
-
+Optical communication concerns all manors of communicating information from one party to another through the medium of light. This investigation focuses on the use of light as a means of communication between electronic systems.
 
 \subsection{Optical Communication Techniques} %todo: better name for this 'catergories of techniques' 
 
-%Optical communication concerns all manors of communicating information from one party to another through the medium of light. This investigation focuses on the use of light as a means of communication between electronic systems, categorized as optical wireless or OW.
-%todo: either expand or remove this
-
-Most light based communication methods are classified as \textit{free-space optical communication} techniques. These techniques do not require a physical medium between the receiver and transmitter. Not all light based communication is performed in free space, fibre optic communication is among the fastest growing communication techniques of our time.
+Most light based communication methods may be classified as \textit{free-space optical communication} techniques. These techniques do not require any physical medium between the receiver and transmitter. Not all light based communication is performed in free space, for example fibre optic communication which is among the fastest growing optical communication techniques of recent times.
 
 Fibre optic communication uses a physical cable designed to guide a beam of light using the principles of total internal reflection. Fibre optic communication systems may utilize an LED or laser diode to produce a optically encoded digital signal. Recent developments in vertical cavity surface emitting lasers (VCSEL) have resulted in more fibre optic systems turning to this technology.
 
-%todo: finnishe this section
+Free-space optical communication uses much the same technology to transmit information through light, however in the field of optical wireless communications the technology is integrated into regular lighting solutions. The result is %todo: fix this paragraph - its too much waffel
 
 
 
 \subsection{IR Communication}
 %This is where I talk about different IR protocols
 
-IR has is used in many applications, this is because it is cheap, efficient and simple to use. A basic implementation can be done using an IR LED, IR receiver IC and a pair of microcontrollers. The most appropriate band of IR radiation is between 780nm and 950nm, this is as a result of the availability of low cost LEDs and quality photodiodes that operate in this frequency band \cite{Elgala2011}.
+IR has is used in many applications, this is because it is cheap, efficient and simple to use. A basic implementation might consist only of an IR LED, IR receiver IC and a pair of microcontrollers. The most commonly used band of IR radiation for communication is between 780nm and 950nm, this is as a result of the availability of low cost LEDs and quality photodiodes that operate in this frequency band \cite{Elgala2011}.
 
-Many techniques have been developed optical wireless communication. These range from advanced techniques such as multiple-subcarrier modulation (MSM) to basic techniques such as on-off keying (OOK) and pulse-position modulation (PPM).
+Many modulation techniques have been developed for the purposes optical wireless communication. These range from advanced techniques such as multiple-subcarrier modulation (MSM) to basic techniques such as on-off keying (OOK) and pulse-position modulation (PPM).
 
 Multiple-subcarrier modulation sums numerous sub-carrier signals and uses the result to modulate the light source. As a consequence of using a multiple low frequency sub-carriers it is possible to achieve a high total bit rate with little distortion, removing the need for equalization \cite{Ohtsuki2003}.
 
@@ -210,13 +200,13 @@ Every transmission begins with two start bits, these bits always have a value of
 
 \section{Reliable Data Transmission}
 
-\subsection{Modulation}
+\subsection{Noise \& Interference}
 %Talk about modulation (and demodulation) techniques 
 % no seperate \subsection{Demodulation}
 %Give an overview of demodulating and what techniques exist: Goertzel, DFT, tone-detectors, next sections hilights details
 
 %%Make this into a subsub section and include it under modulation
-\subsubsection{Noise \& Interference}
+%\subsubsection{}
 %Talk about interference and noise, sources and narrow down to IR in particular... Also note noise in components and power supplies etc.
 
 Optical wireless communication is susceptible to interference and noise produced by most lighting technologies. Light sources such as incandescent light bulbs and the sun produce white noise in the infrared region, while light sources such as the florescent light produce cyclostationary noise due to 
