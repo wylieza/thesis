@@ -476,16 +476,14 @@ The strip-board implementation of the module is shown in figure \ref{fig:module_
 
 
 \subsection{Tone Decoder Module}
-%Missing:
-% - Is a schematic worth the bother?
 
 \subsubsection{Functional Design}
-The tone decoder module is designed to indicate the presence of a target frequency in an incoming signal. The input signal is an analog waveform between 0V and 3.3V with no frequency components above half the filters sampling rate of 144kHz.
+The tone decoder module is designed to indicate the presence of a target frequency in an incoming signal. The input signal is an analog waveform between 0V and 3.3V with no frequency components above half of the filters sampling rate of 144kHz.
 
-The filter achieves this functionality by calculating the DFT coefficient of the frequency bin associated with 36kHz for an incoming signal and outputting a high logic level while the value of the coefficient exceeds a particular threshold.
+The filter achieves this functionality by calculating the DFT coefficient of the frequency bin associated with 36kHz for an incoming signal and outputting a high logic level while the value of the coefficient exceeds a preset threshold.
 
 \subsubsection{Schematic}
-The tone decoder module's hardware consists of an STM32F051C6 breakout PCB which is mounted on a strip-board along with supporting circuity (external crystal and voltage regulation). An over-voltage protection clamp (see figure \ref{fig:schematic_voltage_clamp}) was placed on pin 17, the analog input. Three signal LED's were wired to pins 18, 19 and 20 to act as status indicators. The filters output is produced on pin 19.
+The tone decoder module's hardware consists of an STM32F051C6 breakout PCB which is mounted on a strip-board along with supporting circuity (external crystal and voltage regulation). An over-voltage protection clamp (see figure \ref{fig:schematic_voltage_clamp}) was placed on pin 17, the analog input. Three signal LED's were wired to pins 18, 19 and 20 to act as status indicators. The filter's output is produced on pin 19.
 
 Figure \ref{fig:goertzel_schematic_block_form} summarizes the hardware components of the Goertzel module.
 
