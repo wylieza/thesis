@@ -374,11 +374,38 @@ Any time an analog signal is sampled for the purpose of digital signal processin
 In addition to filtering, it is sometimes necessary to perform other operations on analog signals before they are sampled, such as rectification or adding a positive offset to ensure the signal is within the input range of the ADC.
 
 \textbf{Low Pass Filtering}\\
-Different approaches to filtering exist. The most basic filter is a passive RC network as shown in figure \ref{fig}. Filters with a sharper cut-off can be created by using an operational amplifier as shown in figure \ref{label}. Finally IC's containing customizable second order filtering stages can be purchased such as the \href{https://www.maximintegrated.com/en/products/analog/analog-filters/MAX275.html/tb_tab0}{MAX275} series by maximum integrated.
+Anti-alias filters are built to suppress high frequencies, many different approaches to filtering high frequencies exist. The most basic filter is a passive RC network as shown in figure \ref{fig:filter_basic_lpf}. Filters with a sharper cut-off can be created by using an operational amplifier, figure \ref{fig:vcvs_filter_lpf} shows a voltage controlled voltage source (VCVS) circuit configured as a 2nd order low pass filter. The circuit in figure \ref{fig:vcvs_filter_lpf} can be found in the book \textit{The art of electronics - 2nd Edition} on page 274, also included in this book is a table of coefficients which may be used to achieve the desired filter response \cite{Horowitz1995}. Finally IC's containing customizable second order filtering stages can be purchased such as the \href{https://www.maximintegrated.com/en/products/analog/analog-filters/MAX275.html/tb_tab0}{MAX275} series by maximum integrated.
 
-%todo: figures of the two filters
+\begin{figure}[H]
+	\centering
+	\begin{minipage}{.42\textwidth}
+		\centering
+		\includegraphics[width=.9\linewidth]{figures/litreview/filter_basic.png}
+		\captionof{figure}{Simple RC Network - LPF Configuration}
+		\label{fig:filter_basic_lpf}
+	\end{minipage}%
+	\hfill
+	\begin{minipage}{.54\textwidth}
+		\centering
+		\includegraphics[width=.9\linewidth]{figures/litreview/vcvs_filter.png}
+		\captionof{figure}{Voltage Controlled Voltage Source - LPF Configuration}
+		\label{fig:vcvs_filter_lpf}
+	\end{minipage}
+\end{figure}
 
-Dedicated filtering IC's are useful in precision applications where reproducibility and consistency of filter performance is a priority. They also allow for the construction of digitally controllable analog filters \cite{Huijing2010}.
+Dedicated filtering IC's are useful in precision applications where reproducibility and consistency of filter performance is a priority. They also allow for the construction of digitally controllable analog filters \cite{Huijing2010}. Dedicated filtering IC's are comparably expensive and therefore a trade off between cost and convenience must be considered.
+
+\textbf{Precision Rectification}\\
+Simple, half-wave rectification may be achieved simply by placing a diode in series with the path of a signal. However, due to the forward voltage drop of the diode, any positive portion of the waveform below the forward voltage of the diode will be lost. This non-ideal effect can be mitigated through the use of an operational amplifier.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.6\linewidth]{figures/litreview/precision_rectifier.png}
+	\caption{Precision Rectifier}
+	\label{fig:precision_rectifier}
+\end{figure}
+
+There are various circuit designs which use an operational amplifier to mitigate the effect of the diode forward voltage drop, they are known as precision rectifiers. The circuit shown in figure \ref{fig:precision_rectifier} is one of the more sophisticated designs as the output of the op-amp has a maximum swing of two diode drops. In simpler designs, the operational amplifier might swing more than half the supply rails during operation. The design has been taken from \textit{The art of electronics - 2nd Edition} and may be found on page 188 \cite{Horowitz1995}.
 
 %%%%%%%%%%%%%%%%%%
 
