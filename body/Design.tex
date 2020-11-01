@@ -1,5 +1,6 @@
 \chapter{Design}
 \label{ch_design}
+%todo: check the tense (past present) of sections
 
 This chapter presents the design of the various modules forming the laser tag system. An overview of the entire system is given in the \textit{system overview} section. The following sections, \textit{hardware design} and \textit{software design}, present the design of the modular and software components respectively.
 
@@ -102,7 +103,7 @@ The LED driver modules designed to be controlled by an open-collector, therefore
 The 555 timer operates on the 5V supply connected to the module, therefore transistors were used to convert the 3.3V control signal to a 5V input for the RST pin.
 
 \subsubsection{Schematic}
-Figure \ref{fig:schematic_carrier_generation} below shows the schematic for the module.
+Figure \ref{fig:schematic_carrier_generation} below shows the schematic for this module.
 
 \begin{figure}[H]
 	\centering
@@ -283,17 +284,13 @@ The implementation of the light focus system is shown in figure \ref{fig:module_
 
 
 \subsection{Photodiode IR Detector}
-%Missing:
-% - Schematic and explaination
-% - Talk about MCP6022 and important specs
 
 \subsubsection{Functional Design}
 The photodiode IR detector module is designed to convert fluctuations in infrared radiation into a voltage signal. The circuit is designed to produce an output voltage proportional to changes in the current flowing through the photodiode.
 
 
 \subsubsection{Schematic}
-Figure \ref{fig:schematic_photodiode_transimpedance} below shows the schematic for the module. The circuit is inspired by S. Schrires 'Infrared Radio Link' circuit which is found in the EEE3071 course notes \cite{Schrire2007}.
-
+Figure \ref{fig:schematic_photodiode_transimpedance} below shows the schematic for this module. The circuit is an adaption of S. Schrires 'Infrared Radio Link' receiver circuit which may be found in the EEE3071 course notes \cite{Schrire2007}.
 
 \begin{figure}[H]
 	\centering
@@ -302,8 +299,10 @@ Figure \ref{fig:schematic_photodiode_transimpedance} below shows the schematic f
 	\label{fig:schematic_photodiode_transimpedance}
 \end{figure}
 
-\subsubsection{Trans-impedance Amplifier}
-%todo: this needs to be completed
+\subsubsection{Circuit Design}
+A reverse bias voltage is applied across the photodiode to increase its sensitivity. Amplification of the light induced current is performed through the implementation of a trans-impedance amplifier. A large $1M\Omega$ resistance is used for R2 to maximize the sensitivity and signal to noise ratio.
+
+A second amplification stage is used to further amplify the voltage signal and a decoupling capacitor is used to remove the DC component of the signal before this second stage of amplification.
 
 
 \subsubsection{Module Realization}
@@ -327,8 +326,7 @@ The strip-board implementation of the module is shown in figure \ref{fig:module_
 The phototransistor IR detector module, like the photodiode IR detector module, is designed to convert fluctuation in infrared radiation into a voltage signal. The circuit is designed to produce an output voltage proportional to changes in the current flowing through the phototransistor.
 
 \subsubsection{Schematic}
-Figure \ref{fig:schematic_phototransistor_detector} below shows the schematic for the module.
-
+Figure \ref{fig:schematic_phototransistor_detector} below shows the schematic for this module.
 
 \begin{figure}[H]
 	\centering
@@ -337,8 +335,8 @@ Figure \ref{fig:schematic_phototransistor_detector} below shows the schematic fo
 	\label{fig:schematic_phototransistor_detector}
 \end{figure}
 
-\subsubsection{Trans-impedance Amplifier}
-%todo: this needs to be completed
+\subsubsection{Circuit Design}
+The phototransistor is connected to the positive supply rail in series with a $330\Omega$ resistor. The resulting voltage drop induced across the collector-emitter of the phototransistor is proportional to the intensity of incident IR light. This voltage is connected to a set of amplification stages through a decoupling capacitor to remove the signals DC component. Two inverting amplifiers are used to boost the voltage signal.
 
 
 \subsubsection{Module Realization}
@@ -419,7 +417,7 @@ The output of this module is a signal that can processed by the Goertzel filter.
 This is performed in three steps. The amplitude of the incoming waveform is reduced, the waveform is filtered and finally a precision half-wave rectifier is used to rectify the signal.
 
 \subsubsection{Schematic}
-Figure \ref{fig:schematic_filter_and_rectify} below shows the schematic for the module.
+Figure \ref{fig:schematic_filter_and_rectify} below shows the schematic for this module.
 
 The module can be broken into two stages as indicated by figure \ref{fig:system_overview_hardware}. The first stage of the module performs filtering and amplitude adjustment. The second stage performs precision rectification.
 
