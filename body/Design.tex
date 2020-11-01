@@ -1,7 +1,7 @@
 \chapter{Design}
 \label{ch_design}
 
-This chapter presents the design of the various modules forming the laser tag system. An overview of the entire system is given in the \textit{system overview} section. The following sections, \textit{hardware design} and \textit{software design}, present the design of each module and the software components of the system respectively.
+This chapter presents the design of the various modules forming the laser tag system. An overview of the entire system is given in the \textit{system overview} section. The following sections, \textit{hardware design} and \textit{software design}, present the design of the modular and software components respectively.
 
 %todo: possibly explain why designs are so ellaborate... This investigation is centred on the creation and evaluation of system modules, therefore the design descriptions have been written 
 
@@ -55,7 +55,7 @@ The hardware design section presents the design of each hardware module. For eac
 \subsection{Tagger \& Target MCUs}
 
 \subsubsection{Functional Design}
-The tagger and target microcontroller units handle signal encoding and decoding respectively. In the greater context of laser tag the MCUs must perform many functions, however in keeping with the scope of this investigation these have not been implemented.
+The tagger and target microcontroller units (MCUs) handle signal encoding and decoding respectively. In the greater context of laser tag the MCUs must perform many functions, however in keeping with the scope of this investigation these have not been implemented.
 
 The tagger is triggered by pulling pin 10 low, the Manchester encoded output is generated on pin 21. The target continuously monitors pin 17 for an incoming Manchester sequence.
 
@@ -94,8 +94,6 @@ An image of the UCT development board is shown in figure \ref{fig:module_carrier
 
 
 \subsection{Carrier Frequency Generator}
-%Missing
-% - Calculations and chosen values
 \subsubsection{Functional Design}
 To generate the 36kHz carrier waveform the LM555 timer IC was used. The module is designed to receive a 3.3V control signal. When a high logic level is received, the module switches the output at 36kHz to produce a square waveform.
 
@@ -116,12 +114,11 @@ Figure \ref{fig:schematic_carrier_generation} below shows the schematic for the 
 \subsubsection{Frequency Generation}
 %todo: this needs to be completed
 
-According to the data sheet the period my be calculated as \(T = 0.693 (R_2 + 2R_3) C1\). A capacitor value of 10nF was chosen. Therefore, to generate a waveform with the desired period of $27.7\mu S$ the required theoretical value of $(R_2 + 2R_3)$ is $4k\Omega$.
-%todo: finnish explaining resistor choice
+According to the data sheet, the period of oscillation is governed by the following equation \(T = 0.693\times (R_2 + 2R_3)\times C_1\). The value of $C_1$ was chosen to be 1nF. To achieve the desired oscillation period of $27.7\mu S$, resistances $R_2$ and $R_3$ had to be chosen such that the relationship $(R_2 + 2R_3) = 40k\Omega$ held.
 
-%todo: finnish this paragraph
-%After testing
-The above design was implemented on a breadboard to test the
+Due to a lack of access to resistor values, the circuit was implemented on a breadboard and resistors where combined to set $R_2$ and $R_3$, using the aforementioned relationship to guide the process. An oscilloscope was used to measure the output frequency and confirm the resulting frequency was suitable before implementing the design on strip-board.
+
+The final resistance values chosen were $R_2 = 3.2k\Omega$ and $R_3 = 14.7k\Omega$.
 
 \subsubsection{Module Realization}
 The strip-board implementation of the module is shown in figure \ref{fig:module_carrier_generation} below.
