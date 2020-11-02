@@ -391,7 +391,7 @@ The recorded results are plotted in figure \ref{fig:goertzel_computation_plot} t
 Combining the timeout delay and decoding time gives a maximum period of 33.46ms in the worst case, before a new message may be received.
 
 \subsubsection{Error Handling}
-%todo: comment on this
+Figure \ref{fig:transmission_too_fast} below shows a set of incoming transmissions (blue trace) that arrive faster than the MCU can process them. Any edges that occur while the MCU is processing a previous message (indicated by the red trace being high) are ignored.
 
 \begin{figure}[H]
 	\centering
@@ -400,13 +400,22 @@ Combining the timeout delay and decoding time gives a maximum period of 33.46ms 
 	\label{fig:transmission_too_fast}
 \end{figure}
 
+Figure \ref{fig:transmission_too_many_edges} below shows an incoming stream of transmissions with no delay period separating them (blue trace). The time spent processing incoming transmissions is indicated by a high logic level on channel B (red trace).
+
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=.8\textwidth]{figures/results/receiver_software/transmission_too_many_edges_crop.JPG}
-	\caption{Continuous Transmission Terminated after Maximum Number of Edges}
+	\caption{Continuous Transmission}
 	\label{fig:transmission_too_many_edges}
 \end{figure}
 
+%%%%%%%%%%	DISCUSSION	%%%%%%%%%%
+\textbf{Discussion}\\
+%It seems that the LCD write function is the reson it takes so long to 'process', its not that it is so much drastically longer because its going through all the states.... but its too little too late to change that because soo many experiemnts used that code....
+In the case of the two transmissions that arrived while the processor was busy, errors were detected and no further processing was performed. This is indicated by the short red spike that occurs in each case.
+
+In the case of continuous transmission, the maximum number of edges were recorded. When this occurred the processor immediately attempted to decode the transmission. At the point when the processor detected that the number of decoded bits exceeds 18, the message was discarded and no further processing was performed.
+%%%%%%%%%%	/DISCUSSION	%%%%%%%%%%
 
 
 
