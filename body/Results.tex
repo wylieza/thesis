@@ -1,11 +1,83 @@
 \chapter{Results}
 \label{ch_results}
 
-%These are the results I found from my investigation.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%Present your results in a suitable format using tables and graphs where necessary. Remember to refer to them in text and caption them properly.
+\section{Module Evaluation}
 
-\section{Experimental Results}
+\subsection{Carrier Waveform Generation Performance}
+%todo: this
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+\subsection{Power LED Driver Performance}
+
+The following screenshots shown in figures \ref{fig:pwr_led_6k} through \ref{fig:pwr_led_96k} show the results captured by the oscilloscope. The red trace shows the output of the function generator and the blue trace shows the voltage across the shunt resistor R1\footnote{see schematic in figure \ref{fig:schematic_power_led_driver}}.
+
+\begin{figure}[H]
+	\centering
+	\begin{minipage}{.399\linewidth}
+		\centering
+		\includegraphics[width=\textwidth]{figures/results/power_led_driver/6khz.JPG}
+		\captionof{figure}{6kHz Driving Frequency}
+		\label{fig:pwr_led_6k}
+	\end{minipage}%
+	\hspace{.1\linewidth}
+	\begin{minipage}{.399\linewidth}
+		\centering
+		\includegraphics[width=\textwidth]{figures/results/power_led_driver/36khz.JPG}
+		\captionof{figure}{36kHz Driving Frequency}
+		\label{fig:pwr_led_36k}
+	\end{minipage}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\begin{minipage}{.4\linewidth}
+		\centering
+		\includegraphics[width=\textwidth]{figures/results/power_led_driver/66khz.JPG}
+		\captionof{figure}{66kHz Driving Frequency}
+		\label{fig:pwr_led_66k}
+	\end{minipage}
+	\hspace{.1\linewidth}
+	\begin{minipage}{.4\linewidth}
+		\centering
+		\includegraphics[width=\textwidth]{figures/results/power_led_driver/96khz.JPG}
+		\captionof{figure}{96kHz Driving Frequency}
+		\label{fig:pwr_led_96k}
+	\end{minipage}
+\end{figure}
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{ccc}
+		\hline
+		\textbf{\begin{tabular}[c]{@{}c@{}}Frequency\\ (kHz)\end{tabular}} & \textbf{\begin{tabular}[c]{@{}c@{}}LED Current\\ (mA)\end{tabular}} & \textbf{\begin{tabular}[c]{@{}c@{}}Duty Cycle\\ (\%)\end{tabular}} \\ \hline
+		6 & 908 & 48.2 \\ \hline
+		36 & 908 & 45.5 \\ \hline
+		66 & 908 & 44.7 \\ \hline
+		96 & 908 & 40.8 \\ \hline
+	\end{tabular}
+	\caption{Frequency V.S. Current and Pulse Width}
+	\label{tbl:led_driver_tabulated_results}
+\end{table}
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
 
 \subsection{Light Focus System}
 
@@ -76,52 +148,65 @@ Table \ref{tbl:spot_size_vs_distance} below shows the beam spot size vs distance
 
 
 
-\subsection{Goertzel Filter Benchmark}
 
-The results from the goertzel algorithm optimization experiment are tabulated in table \ref{tbl:goertzel_speed_results}, the adjacent screenshot shown in figure \ref{fig:goertzel_speed_scope_screenshot} illustrates the output recorded by the oscilloscope software during a single iteration of the experiment. 
+\subsection{Directivity of IR Modules}
+
+Figure \ref{fig:vrms_vs_angle_of_incidence} shows the RMS voltage value of the modules output with respect to the angle of incidence. Figure \ref{fig:beam_pattern} shows the normalized RMS voltage value and mirrors the image about the vertical to provide an illustration of the beam pattern.
+
 
 \begin{figure}[H]
 	\centering
-	\begin{minipage}{.4\textwidth}
-		%todo: make image higher quality after zoom
+	\begin{minipage}{.4\linewidth}
 		\centering
-		\includegraphics[width=0.9\linewidth]{figures/results/goertzel_filter_speed/16nu.JPG}
-		\captionof{figure}{Scope Reading for unoptimized goertzel with $N = 16$}
-		\label{fig:goertzel_speed_scope_screenshot}
-	\end{minipage}%
-	\hspace{.1\textwidth}
-	\begin{minipage}{.4\textwidth}
-		\begin{table}[H]
-			\begin{tabular}{ccc}
-				\hline
-				\textbf{N} & \textbf{\begin{tabular}[c]{@{}c@{}}Unoptimized\\ ($\mu S$)\end{tabular}} & \textbf{\begin{tabular}[c]{@{}c@{}}Optimized\\ ($\mu S$)\end{tabular}} \\ \hline
-				4 & 96.46 & 61.15 \\ \hline
-				8 & 160.3 & 98.35 \\ \hline
-				16 & 287.5 & 171.9 \\ \hline
-				32 & 547.2 & 323.9 \\ \hline
-				64 & 1059 & 621.1
-			\end{tabular}
-			\captionof{table}{Compiled results for goertzel speed experiemnt}
-			\label{tbl:goertzel_speed_results}
-		\end{table}
+		\includegraphics[width=\textwidth]{figures/results/vrms_vs_incidence_square.png}
+		\captionof{figure}{Vrms vs Angle of Incidence}
+		\label{fig:vrms_vs_angle_of_incidence}
+	\end{minipage}
+	\hspace{.1\linewidth}
+	\begin{minipage}{.4\linewidth}
+		\centering
+		\includegraphics[width=\textwidth]{figures/results/beam_pattern_square.png}
+		\captionof{figure}{Beam Pattern}
+		\label{fig:beam_pattern}
 	\end{minipage}
 \end{figure}
 
-The recorded results are plotted in figure \ref{fig:goertzel_computation_plot} to provide graphical insight.
+The IR receiver module registered the signal between angles of 0\textdegree and 70\textdegree and registered an absence of a signal for angles greater than 80\textdegree. Between 70\textdegree and 80\textdegree the output would toggle sporadically.
 
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=\linewidth]{figures/results/goertzel_filter_speed/goertzel_computation_time.png}
-	\captionof{figure}{Goertzel computation time versus sample set size}
-	\label{fig:goertzel_computation_plot}
-\end{figure}
-
-%disc. removed
 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+
+
+
+\subsection{Signal Conditioning Performance}
+
+\subsubsection{Anti-alias Filtering}
+%todo: experiment here
+
+\subsubsection{Precision Rectification}
+
+Figure \ref{fig:precision_rectification} below shows the oscilloscope trace of the signal being fed into the precision rectifier (blue) and the resulting rectified signal (red).
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{figures/results/rectification/36kHz.JPG}
+	\captionof{figure}{Osciliscope output showing signal before and after rectification}
+	\label{fig:precision_rectification}
+\end{figure}
+
+\paragraph{Discussion}
+The precision rectifier stage operates as expected. The precision rectification technique can be seen by the complete rectification of half the waveform, with cross-over dead time due to the forward voltage drop of the diode.
+
+It should be noted that the slew-rate of the op-amp and the efficiency in the design of the module results in very little distortion at a frequency of 36kHz. Only a small amount of deformation occurs in the output when the input signal goes negative.
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 
@@ -185,148 +270,60 @@ The following plot in figure \ref{fig:goertzel_filter_response_empirical} show t
 
 
 
-
-\subsection{Carrier Waveform Generation Performance}
-%todo: this
-
-
-
-
-
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Software Evaluation}
 
 
+\subsection{Goertzel Filter Benchmark}
 
-
-
-\subsection{Power LED Driver Performance}
-
-The following screenshots shown in figures \ref{fig:pwr_led_6k} through \ref{fig:pwr_led_96k} show the results captured by the oscilloscope. The red trace shows the output of the function generator and the blue trace shows the voltage across the shunt resistor R1\footnote{see schematic in figure \ref{fig:schematic_power_led_driver}}.
+The results from the goertzel algorithm optimization experiment are tabulated in table \ref{tbl:goertzel_speed_results}, the adjacent screenshot shown in figure \ref{fig:goertzel_speed_scope_screenshot} illustrates the output recorded by the oscilloscope software during a single iteration of the experiment. 
 
 \begin{figure}[H]
 	\centering
-	\begin{minipage}{.399\linewidth}
+	\begin{minipage}{.4\textwidth}
+		%todo: make image higher quality after zoom
 		\centering
-		\includegraphics[width=\textwidth]{figures/results/power_led_driver/6khz.JPG}
-		\captionof{figure}{6kHz Driving Frequency}
-		\label{fig:pwr_led_6k}
+		\includegraphics[width=0.9\linewidth]{figures/results/goertzel_filter_speed/16nu.JPG}
+		\captionof{figure}{Scope Reading for unoptimized goertzel with $N = 16$}
+		\label{fig:goertzel_speed_scope_screenshot}
 	\end{minipage}%
-	\hspace{.1\linewidth}
-	\begin{minipage}{.399\linewidth}
-		\centering
-		\includegraphics[width=\textwidth]{figures/results/power_led_driver/36khz.JPG}
-		\captionof{figure}{36kHz Driving Frequency}
-		\label{fig:pwr_led_36k}
+	\hspace{.1\textwidth}
+	\begin{minipage}{.4\textwidth}
+		\begin{table}[H]
+			\begin{tabular}{ccc}
+				\hline
+				\textbf{N} & \textbf{\begin{tabular}[c]{@{}c@{}}Unoptimized\\ ($\mu S$)\end{tabular}} & \textbf{\begin{tabular}[c]{@{}c@{}}Optimized\\ ($\mu S$)\end{tabular}} \\ \hline
+				4 & 96.46 & 61.15 \\ \hline
+				8 & 160.3 & 98.35 \\ \hline
+				16 & 287.5 & 171.9 \\ \hline
+				32 & 547.2 & 323.9 \\ \hline
+				64 & 1059 & 621.1
+			\end{tabular}
+			\captionof{table}{Compiled results for goertzel speed experiemnt}
+			\label{tbl:goertzel_speed_results}
+		\end{table}
 	\end{minipage}
 \end{figure}
+
+The recorded results are plotted in figure \ref{fig:goertzel_computation_plot} to provide graphical insight.
 
 \begin{figure}[H]
 	\centering
-	\begin{minipage}{.4\linewidth}
-		\centering
-		\includegraphics[width=\textwidth]{figures/results/power_led_driver/66khz.JPG}
-		\captionof{figure}{66kHz Driving Frequency}
-		\label{fig:pwr_led_66k}
-	\end{minipage}
-	\hspace{.1\linewidth}
-	\begin{minipage}{.4\linewidth}
-		\centering
-		\includegraphics[width=\textwidth]{figures/results/power_led_driver/96khz.JPG}
-		\captionof{figure}{96kHz Driving Frequency}
-		\label{fig:pwr_led_96k}
-	\end{minipage}
+	\includegraphics[width=\linewidth]{figures/results/goertzel_filter_speed/goertzel_computation_time.png}
+	\captionof{figure}{Goertzel computation time versus sample set size}
+	\label{fig:goertzel_computation_plot}
 \end{figure}
 
-\begin{table}[H]
-	\centering
-	\begin{tabular}{ccc}
-		\hline
-		\textbf{\begin{tabular}[c]{@{}c@{}}Frequency\\ (kHz)\end{tabular}} & \textbf{\begin{tabular}[c]{@{}c@{}}LED Current\\ (mA)\end{tabular}} & \textbf{\begin{tabular}[c]{@{}c@{}}Duty Cycle\\ (\%)\end{tabular}} \\ \hline
-		6 & 908 & 48.2 \\ \hline
-		36 & 908 & 45.5 \\ \hline
-		66 & 908 & 44.7 \\ \hline
-		96 & 908 & 40.8 \\ \hline
-	\end{tabular}
-	\caption{Frequency V.S. Current and Pulse Width}
-	\label{tbl:led_driver_tabulated_results}
-\end{table}
-
-
+%disc. removed
 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-
-
-
-
-\subsection{Directivity of IR Modules}
-
-Figure \ref{fig:vrms_vs_angle_of_incidence} shows the RMS voltage value of the modules output with respect to the angle of incidence. Figure \ref{fig:beam_pattern} shows the normalized RMS voltage value and mirrors the image about the vertical to provide an illustration of the beam pattern.
-
-
-\begin{figure}[H]
-	\centering
-	\begin{minipage}{.4\linewidth}
-		\centering
-		\includegraphics[width=\textwidth]{figures/results/vrms_vs_incidence_square.png}
-		\captionof{figure}{Vrms vs Angle of Incidence}
-		\label{fig:vrms_vs_angle_of_incidence}
-	\end{minipage}
-	\hspace{.1\linewidth}
-	\begin{minipage}{.4\linewidth}
-		\centering
-		\includegraphics[width=\textwidth]{figures/results/beam_pattern_square.png}
-		\captionof{figure}{Beam Pattern}
-		\label{fig:beam_pattern}
-	\end{minipage}
-\end{figure}
-
-The IR receiver module registered the signal between angles of 0\textdegree and 70\textdegree and registered an absence of a signal for angles greater than 80\textdegree. Between 70\textdegree and 80\textdegree the output would toggle sporadically.
-
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-
-
-
-
-
-\subsection{Signal Conditioning Performance}
-
-\subsubsection{Anti-alias Filtering}
-%todo: experiment here
-
-\subsubsection{Precision Rectification}
-
-Figure \ref{fig:precision_rectification} below shows the oscilloscope trace of the signal being fed into the precision rectifier (blue) and the resulting rectified signal (red).
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=\textwidth]{figures/results/rectification/36kHz.JPG}
-	\captionof{figure}{Osciliscope output showing signal before and after rectification}
-	\label{fig:precision_rectification}
-\end{figure}
-
-\paragraph{Discussion}
-The precision rectifier stage operates as expected. The precision rectification technique can be seen by the complete rectification of half the waveform, with cross-over dead time due to the forward voltage drop of the diode.
-
-It should be noted that the slew-rate of the op-amp and the efficiency in the design of the module results in very little distortion at a frequency of 36kHz. Only a small amount of deformation occurs in the output when the input signal goes negative.
-
-
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
 
 
 
@@ -341,6 +338,10 @@ It should be noted that the slew-rate of the op-amp and the efficiency in the de
 	\label{fig:dszfhb}
 \end{figure}
 
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 
@@ -392,12 +393,13 @@ Combining the timeout delay and decoding time gives a maximum period of 33.46ms 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-
-
-
-\subsection{System Range}
+\section{System Range}
 
 Table \ref{tbl:max_distances_system} below shows the maximum ranges of the system as a consequence of using the different detector modules and the ambient lighting conditions.
 
@@ -467,3 +469,5 @@ These blips only presented themselves when the IR receiver was centred in the in
 
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
