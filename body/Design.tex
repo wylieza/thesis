@@ -401,6 +401,7 @@ The strip-board implementation of the module is shown in figure \ref{fig:module_
 
 
 \subsection{Signal Conditioning Module}
+\label{sec:signal_conditioning_module}
 
 \subsubsection{Functional Design}
 The signal conditioning module is designed to process the output of either the photodiode detector module or phototransistor detector module.
@@ -471,6 +472,7 @@ The strip-board implementation of the module is shown in figure \ref{fig:module_
 
 
 \subsection{Tone Decoder Module}
+\label{sec:tone_decoder_hardware}
 
 \subsubsection{Functional Design}
 The tone decoder module is designed to indicate the presence of a target frequency in an incoming signal. The input signal is an analog waveform between 0V and 3.3V with no frequency components above half of the filters sampling rate of 144kHz.
@@ -506,36 +508,82 @@ The strip-board implementation of the module is shown in figure \ref{fig:module_
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %todo: this next part needs structuring and the like
+%HEREE
 
 \section{Software Design}
 
-\subsection{Tone Decoder Software}
+\subsection{Tone Decoder}
 \label{tone_decoder_software}
 
-In section \ref{sec:goertzel_implementation} the goertzel algorithm is given. The parameters k (the DFT frequency bin) and N (the number of samples per frequency bin coefficient calculation) determine the value of omega which in turn affects the value of 'cosval', 'sinval' and 'coeff'. The value of k is also affected by the ratio of the frequency of the k\textsuperscript{th} DFT frequency bin to the sampling frequency (f\textsubscript{sampling}).
+The tone decoder is a digital signal processing unit, designed to detect the presence of a predefined tone. This is achieved through the implementation of the Goertzel algorithm.
 
-The STM32F0 is designed to be low cost 32-bit microcontroller and utilizes the ARM Cortex-M0 CPU core. To reduce costs, this microcontroller does not contain any dedicated DSP peripherals nor does it contain any hardware dedicated to floating point arithmetic. Therefore careful consideration must be taken during design to optimize the performance of the goertzel filter implementation. The STM32F0 is equipped with several timers, a DMA peripheral and an advanced interrupt controller, these peripherals are indispensable for the implementation of the real-time digital filter. Figure \ref{fig:goertzel_functional_diagram} shows the functional blocks for the goertzel filter, the flow of data and clock signals.
+The Goertzel algorithm is presented in section \ref{sec:goertzel_lit_review} and the hardware description for this module is presented in section \ref{sec:tone_decoder_hardware}.
+
+%todo: finnish this intro after completing the subsection
+The software design for this module is presented in the following way: %improve this sentance
+An overview of the STM32F0 functionality useful for digital signal processing is presented. This is followed by a breakdown of the algorithm parameters and 
+
+\subsubsection{Overview}
+The algorithm is implemented on the STM32F0, a low cost 32-bit microcontroller that utilizes the ARM Cortex-M0 CPU core. This microcontroller does not contain any dedicated DSP peripherals nor does it contain any hardware dedicated to floating point arithmetic. Therefore careful consideration must be taken to optimize the performance of the goertzel filter implementation.
+
+The STM32F0 is equipped with several timers, direct memory access (DMA) and an advanced interrupt controller, these peripherals are indispensable resources for the implementation of the real-time digital filter. Figure \ref{fig:goertzel_functional_diagram} shows the functional blocks for the goertzel filter. The flow of data is indicated with a solid line and the clocking signals are indicated with a dashed line.
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=.8\textwidth]{figures/design/goertzel_filter_functional.png}
-	\caption{Goertzel Filter Functional Block Diagram}
+	\caption{Goertzel Filter Implementation - Functional Block Diagram}
 	\label{fig:goertzel_functional_diagram}
 \end{figure}
 
-\subsubsection{Sampling Frequency Constraints}
+\subsubsection{Parameters and Constraints}
+
+\textbf{Goertzel Algorithm}\\
+The Goertzel algorithm is given in listing \ref{lst:goertzel_algorithm}. Lines 3 and 4 define the following important relationships.
+
+\begin{equation}
+	k = round\{N \times \frac{bin\_frequency}{sampling\_frequency}\}
+	\label{eqn:bin_number}
+\end{equation}
+
+\begin{equation}
+omega = 2\pi \times \frac{k}{N}
+\label{eqn:angle_coefficient}
+\end{equation}
+
+Table \ref{tbl:goertzel_algorithm_parameters} below gives a description for each of the above parameters.
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{cc}
+		\hline
+		\textbf{Parameter} & \textbf{Description} \\ \hline
+		N & Number of samples \\ \hline
+		sampling\_frequency & Sampling frequency \\ \hline
+		bin\_frequency & DFT bin target frequency \\ \hline
+		k & DFT bin index \\ \hline
+		omega & Angle coefficient \\ \hline
+	\end{tabular}
+	\caption{Goertzel Algorithm Parameters}
+	\label{tbl:goertzel_algorithm_parameters}
+\end{table}
+
+The Goertzel filter calculates the value of the k\textsuperscript{th} frequency bin from the DFT transform of N samples. The algorithm is solely dependant on the ratio of $\frac{k}{N}$ as shown in equation \ref{eqn:angle_coefficient}.
+
+Equation \ref{eqn:bin_number} is used only to transform from the continuous frequency domain to the nearest discrete frequency bin of the DFT frequency domain. This relationship is important however, as it specifies the relationship between the ratio $\frac{k}{N}$ and $\frac{bin\_frequency}{sampling\_frequency}$. This relationship is used to optimize the performance of the filter.
+
+
+\textbf{Sampling Constraints}\\
 \label{sec:sampling_frequency_constraints}
-The sampling frequency determines the highest frequency that may be present in the sampled waveform before aliasing will occur. The higher the sampling rate, the wider the bandwidth of the goertzel filter. A higher sampling frequency also results in relaxed requirements for the antialiasing filter.
+The sampling frequency determines the highest frequency that may be sampled before aliasing will occur. A higher sampling rate increases the bandwidth of the Goertzel filter and relaxes the requirements for the anti-aliasing filter (see section \ref{sec:signal_conditioning_module}).
 
-The sampling frequency is limited however by the speed of the microcontroller. This limitation influences the sampling frequency directly by acting as an upper bound to the rate at which the ADC can process and store each analog reading, however more critically, the sampling frequency is directly proportional to the number of samples that must be processed per period. Therefore it is necessary to keep the sampling frequency as low as possible.
+The sampling frequency is limited by the speed of the microcontroller. A hard upper bound to the sampling frequency is set by the physical limitations of the ADC and DMA peripherals. However a soft upper limit is imposed by the rate at which samples can be processed by the CPU. It is therefore desirable to select a lower sampling rate.
 
+%todo: this section is an absolute mess (some part are cut to snippets on overleaf) - come back later
 \subsubsection{Filter Optimization}
 \label{sec:filter_optimization_design}
-As outlined at the beginning of this section, the most critical means of optimization for this filter is the full utilization of available peripherals. After reset, the main processor configures the timer, ADC and DMA to continuously sample the incoming signal and store the conversion results in a circular buffer. After this configuration, the main processor is freed from this process and all processing cycles are dedicated to processing the data being stored in the circular buffer.
+Optimization is achieved in two ways. The first speed up was achieved by configuring the timer, ADC and DMA to continuously sample the incoming signal and store the conversion results in a circular buffer. Without these peripherals, it would not have been possible to perform filtering in real-time.
 
-The second means of optimization was realised after examination of the goertzel algorithm. By carefully engineering the configurable parameters in the goertzel algorithm (listing \ref{lst:goertzel_algorithm}) it is possible to reduce the computation time of the algorithm by removing the multiplication requirement for each new sample (line 13). This is achieved be choosing parameters that result in omega having a value of \(\frac{\pi}{2} + 2\pi m,\; m\epsilon \mathbb{Z}\) and as a consequence make 'cosval' and 'coeff' equal to zero.
-
-It is important to note, this optimization does not improve the time complexity of the algorithm, in both cases the algorithm has a time complexity of O(N). However for real-time algorithms such as in the case of a goertzel filter, every possibly time saving is valuable and can be the difference between a working and failed implementation.
+The second means of optimization was performed through the manipulation of the algorithm parameters to reduce the number of multiplications. By manipulating the value of $omega$ it is possible to 
 
 Line 4 of the algorithm provides the relationship between k, N and $\omega$
 
