@@ -1,8 +1,15 @@
 \chapter{Results}
 \label{ch_results}
 
+%%%%%%%%%%	DISCUSSION	%%%%%%%%%%
+%\textbf{Discussion}\\
+%%%%%%%%%%	/DISCUSSION	%%%%%%%%%%
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
 
 \section{Module Evaluation}
 
@@ -184,7 +191,20 @@ The IR receiver module registered the signal between angles of 0\textdegree and 
 \subsection{Signal Conditioning Performance}
 
 \subsubsection{Anti-alias Filtering}
-%todo: experiment here
+Figure \ref{fig:anti_alias_filtering} below shows the oscilloscope trace of the 36kHz square waveform being generated at the input to the signal conditioning module (blue) and the filtered output waveform (red).
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{figures/results/low_pass_filter/36kHzsquarewavein.JPG}
+	\captionof{figure}{Osciliscope output showing signal before and after filtering}
+	\label{fig:anti_alias_filtering}
+\end{figure}
+
+%%%%%%%%%%	DISCUSSION	%%%%%%%%%%
+%comment: this is lame but not much else to say...
+\textbf{Discussion}\\
+Visual inspection confirms that the anti-alias filter is removing the higher frequency components. The amplitude of the output waveform is less than half the amplitude of the input waveform, this reduction is mostly as a consequence of the voltage divider at the filter's input.
+%%%%%%%%%%	/DISCUSSION	%%%%%%%%%%
 
 \subsubsection{Precision Rectification}
 
@@ -197,11 +217,12 @@ Figure \ref{fig:precision_rectification} below shows the oscilloscope trace of t
 	\label{fig:precision_rectification}
 \end{figure}
 
-\paragraph{Discussion}
-The precision rectifier stage operates as expected. The precision rectification technique can be seen by the complete rectification of half the waveform, with cross-over dead time due to the forward voltage drop of the diode.
+%%%%%%%%%%	DISCUSSION	%%%%%%%%%%
+\textbf{Discussion}\\
+The precision rectifier stage operates as expected, the difference between the amplitude of the input signal and output signal during rectification is 7mV.
 
-It should be noted that the slew-rate of the op-amp and the efficiency in the design of the module results in very little distortion at a frequency of 36kHz. Only a small amount of deformation occurs in the output when the input signal goes negative.
-
+A 765ns cross-over delay can be observed, this is the period of time that elapses between the instant the blue signal becomes negative and the instant the red signal starts to rise. This occurs because the op-amp requires a finite period of time to swing the output voltage such that it exceeds the forward voltages of the two diodes.
+%%%%%%%%%%	/DISCUSSION	%%%%%%%%%%
 
 
 
@@ -215,7 +236,7 @@ It should be noted that the slew-rate of the op-amp and the efficiency in the de
 
 \subsubsection{Simulated Frequency Response}
 
-%disc. removed
+%disc. (discussion) removed
 
 \begin{figure}[H]
 	\centering
