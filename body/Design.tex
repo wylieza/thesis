@@ -100,7 +100,7 @@ To generate the 36kHz carrier waveform the LM555 timer IC was used. The module i
 
 The LED driver modules designed to be controlled by an open-collector, therefore a transistor was used to convert the push-pull output of the 555 timer to an open-collector output.
 
-The 555 timer operates on the 5V supply connected to the module, therefore transistors were used to convert the 3.3V control signal to a 5V input for the RST pin.
+The 555 timer operates on 5V logic, transistors were used to convert the 3.3V control signal of the MCU to a 5V input on the RST pin of the 555 timer chip.
 
 \subsubsection{Schematic}
 Figure \ref{fig:schematic_carrier_generation} below shows the schematic for this module.
@@ -118,7 +118,9 @@ According to the data sheet, the period of oscillation is governed by the follow
 
 Due to a lack of access to resistor values, the circuit was implemented on a breadboard and resistors where combined to set $R_2$ and $R_3$, using the aforementioned relationship to guide the process. An oscilloscope was used to measure the output frequency and confirm the resulting frequency was suitable before implementing the design on strip-board.
 
-The final resistance values chosen were $R_2 = 3.2k\Omega$ and $R_3 = 14.7k\Omega$.
+The resistance values chosen were $R_2 = 3.2k\Omega$ and $R_3 = 14.7k\Omega$. According to the data sheet, these values produce an oscillation period of \(T_{theoretical} = 22.6\mu S\), however the actual period was measured to be \(T_{measured} = 26\mu S\) during burst operation.
+
+The duty cycle is specified by the data sheet to be \(D_{theoretical} = \frac{R_3}{R_2\: +\: 2\times R_3}\), the expected duty cycle for this circuit design is 45\%.
 
 \subsubsection{Module Realization}
 The strip-board implementation of the module is shown in figure \ref{fig:module_carrier_generation} below.
