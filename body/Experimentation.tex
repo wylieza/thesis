@@ -32,7 +32,18 @@ In figures \ref{fig:experiments_overview_module_evaluation} and \ref{fig:experim
 \section{Module Evaluation}
 
 \subsection{Carrier Waveform Generation Performance}
-%todo: present experimental method here
+The carrier waveform module was tested under two conditions. Initially the output was traced for a constant input to evaluate the steady state frequency generation. Following this, the output was traced for an input Manchester transmission.
+
+The output of the carrier waveform generation module is configured as an open-collector, therefore a pull up resistor was used to allow the oscilloscope to distinguish between the high and low output states. An oscilloscope was used to trace both the input and output waveforms. The experimental setup is illustrated in figure \ref{fig:carrier_generation_module_experiment_setup}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=.5\linewidth]{figures/experimentation/carrier_generation_module_experiment.png}
+	\captionof{figure}{Experimental Setup - Carrier Waveform Generation Module}
+	\label{fig:carrier_generation_module_experiment_setup}
+\end{figure}
+
+The steady state response was measured by bringing the input of the module high and tracing the output after approximately 1 second. During the Manchester transmission, the output tone was generated for periods less than 2mS.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -48,7 +59,7 @@ To verify that the power LED driver module operates as expected and to evaluate 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=.9\linewidth]{figures/experimentation/power_led_driver_experimental_setup.png}
-	\captionof{figure}{Power LED Driver Experimental Setup}
+	\captionof{figure}{Experimental Setup - Power LED Driver}
 	\label{fig:power_led_driver_experiemnet_setup}
 \end{figure}
 
