@@ -241,13 +241,9 @@ After the experiment was run for all 5 iterations, the goertzel implementation w
 \subsection{Tagger MCU Performance}
 
 \subsubsection{Manchester Encoding}
-%todo: complete this experiment
+To validate the Manchester encoding functionality of the tagger, an oscilloscope was connected to the GPIO responsible for generating the Manchester waveforms.
 
-An oscilloscope was connected to the output of the tagger MCU. The Manchester encoded waveform produced was traced and evaluated 
-
-
-
-
+The tagger MCU was set to generate transmissions containing the value of a counter which incremented after each transmission. The oscilloscope traces were evaluated to confirm valid encoding and timing according to the design specifications.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
