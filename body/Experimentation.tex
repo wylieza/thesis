@@ -63,7 +63,7 @@ To verify that the power LED driver module operates as expected and to evaluate 
 	\label{fig:power_led_driver_experiemnet_setup}
 \end{figure}
 
-Each test input was generated as a square wave and converted to an open-drain signal before being injected into the driver module. To precisely monitor the LED's state, an oscilloscope was connected across the shunt resistor R1 (see schematic in figure \ref{fig:schematic_power_led_driver}). Monitoring the resistor provided insight into both the state of the LED and the current through the LED. The current through the power LED was calculated using the equation \(I_{led} = \frac{V_{R1}}{0.68\Omega}\).
+Each test input was generated as a square wave using a function generator and converted to an open-collector signal before being injected into the driver module. To monitor the LED's state, an oscilloscope was connected across the shunt resistor R1 (see schematic in figure \ref{fig:schematic_power_led_driver}). Monitoring the resistor provided insight into both the state of the LED and the current through the LED. The current flowing through the power LED was calculated using Ohms law. \(I_{led} = \frac{V_{R1}}{0.68\Omega}\).
 
 
 

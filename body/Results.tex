@@ -60,14 +60,14 @@ The following screenshots shown in figures \ref{fig:pwr_led_6k} through \ref{fig
 	\centering
 	\begin{minipage}{.399\linewidth}
 		\centering
-		\includegraphics[width=\textwidth]{figures/results/power_led_driver/6khz.JPG}
+		\includegraphics[width=\textwidth]{figures/results/power_led_driver/6khz_crop.JPG}
 		\captionof{figure}{6kHz Driving Frequency}
 		\label{fig:pwr_led_6k}
 	\end{minipage}%
 	\hspace{.1\linewidth}
 	\begin{minipage}{.399\linewidth}
 		\centering
-		\includegraphics[width=\textwidth]{figures/results/power_led_driver/36khz.JPG}
+		\includegraphics[width=\textwidth]{figures/results/power_led_driver/36khz_crop.JPG}
 		\captionof{figure}{36kHz Driving Frequency}
 		\label{fig:pwr_led_36k}
 	\end{minipage}
@@ -77,14 +77,14 @@ The following screenshots shown in figures \ref{fig:pwr_led_6k} through \ref{fig
 	\centering
 	\begin{minipage}{.4\linewidth}
 		\centering
-		\includegraphics[width=\textwidth]{figures/results/power_led_driver/66khz.JPG}
+		\includegraphics[width=\textwidth]{figures/results/power_led_driver/66khz_crop.JPG}
 		\captionof{figure}{66kHz Driving Frequency}
 		\label{fig:pwr_led_66k}
 	\end{minipage}
 	\hspace{.1\linewidth}
 	\begin{minipage}{.4\linewidth}
 		\centering
-		\includegraphics[width=\textwidth]{figures/results/power_led_driver/96khz.JPG}
+		\includegraphics[width=\textwidth]{figures/results/power_led_driver/96khz_crop.JPG}
 		\captionof{figure}{96kHz Driving Frequency}
 		\label{fig:pwr_led_96k}
 	\end{minipage}
@@ -107,7 +107,11 @@ The following screenshots shown in figures \ref{fig:pwr_led_6k} through \ref{fig
 
 %%%%%%%%%%	DISCUSSION	%%%%%%%%%%
 \textbf{Discussion}\\
-%todo: discuss these results
+For each test frequency, the power LED driver module regulated the current with a high precision and no noticeable ripple. This encapsulates the advantages of linear regulation.
+
+The design predicted a current limit of 1.02A. These results show that the real current limit is 0.91A. This result predicts that the actual base-emitter voltage drop\footnote{at equilibrium} is closer to 0.62V.
+
+The duty cycle of the LED current decreases for increasing input frequencies. This can be attributed to the rise-time of the current through the LED (the time taken for the current to reach steady state). As the driving frequency increases, this rise-time makes up an increasing portion of the total on-time.
 %%%%%%%%%%	/DISCUSSION	%%%%%%%%%%
 
 
@@ -276,8 +280,6 @@ A 765ns cross-over delay can be observed, this is the period of time that elapse
 
 \subsubsection{Simulated Frequency Response}
 
-%disc. (discussion) removed
-
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\linewidth]{figures/results/goertzel_filter_simulation_wide.png}
@@ -285,7 +287,6 @@ A 765ns cross-over delay can be observed, this is the period of time that elapse
 	\label{fig:goertzel_filter_response_simulated}
 \end{figure}
 
-%disc. removed
 
 
 %%%%%%%%%%	DISCUSSION	%%%%%%%%%%
@@ -407,9 +408,6 @@ The recorded results are plotted in figure \ref{fig:goertzel_computation_plot} t
 \end{figure}
 
 
-
-
-%disc. removed
 %%%%%%%%%%	DISCUSSION	%%%%%%%%%%
 \textbf{Discussion}\\
 Figure \ref{fig:goertzel_computation_plot} provides two important insights to the nature of the goertzel algorithm. The first observation may be found in the linearity of both plots, this confirms that both implementations of the algorithm have a time complexity of O(N) as noted in section \ref{sec:filter_optimization_design}. The practically perfect linearity in the results makes it possible to predict the timing requirements and make accurate theoretical predictions.
