@@ -4,7 +4,7 @@
 
 This chapter presents the design of the various modules forming the laser tag system. An overview of the entire system is given in the \textit{system overview} section. The following sections, \textit{hardware design} and \textit{software design}, present the design of the modular and software components respectively.
 
-%todo: possibly explain why designs are so ellaborate... This investigation is centred on the creation and evaluation of system modules, therefore the design descriptions have been written 
+%todo: possibly explain why designs are so elaborate... This investigation is centred on the creation and evaluation of system modules, therefore the design descriptions have been written 
 
 \section{System Overview}
 The system overview introduces the two main subsystems, the tagger and the target.
@@ -24,14 +24,14 @@ The tagger subsystem is responsible for generating and transmitting data and the
 
 The tagger subsystem comprises a main processor, carrier frequency generation module and two LED driver modules. It also includes the light focus system which is not included in figure \ref{fig:system_overview_hardware}.
 
-The function of the tagger subsystem is to transmit data message via an infrared beam using a modified version of the RC-5 protocol (detailed in section \ref{sec:modified_rc5_protocol}). This operation is performed each time the user presses the designated `fire' button and the details of the transmission are presented on the LCD display.
+The function of the tagger subsystem is to transmit data message via an infrared beam using a modified version of the RC-5 protocol (detailed in section \ref{sec:modified_rc5_protocol}). This operation is performed each time the user presses the designated `fire' button and the details of the transmission are presented on the LCD.
 
 
 \subsubsection{Target Subsystem}
 
 The tagger subsystem comprises a main processor, digital tone decoder, analog signal conditioning module, and three IR detector modules.
 
-The function of the target subsystem is to detect an incoming transmissions encoded in an infrared light beam and decode the message data. While active the system continuously monitors the incoming IR light and in real time updates the LCD with received messages.
+The function of the target subsystem is to detect incoming transmissions encoded in an infrared light beam and decode the message data. While active the system continuously monitors the incoming IR light and in real-time updates the LCD with received messages.
 
 This process can be broken into 4 stages: IR detection and conversion to an analog waveform, conditioning of the analog waveform for digital signal processing, digitally processing the waveform to detect the presence of a carrier and finally decoding and displaying the encoded message. Each stage is implemented on a separate module.
 
@@ -50,13 +50,13 @@ There are three main software components to the overall system.
 
 
 \section{Hardware Design}
-The hardware design section presents the design of each hardware module. For each module the \textit{functional design} header precedes a short overview of the high level functionality of the hardware module, including the inputs and outputs. A design schematic is provided under the \textit{schematic} heading. With reference to this schematic, various design processes are presented under relevant headings. Finally, under the \textit{module realization} header, an image of the final implementation is given.
+The hardware design section presents the design of each hardware module. For each module, the \textit{functional design} header precedes a short overview of the high-level functionality of the hardware module, including the inputs and outputs. A design schematic is provided under the \textit{schematic} heading. Concerning this schematic, various design processes are presented under relevant headings. Finally, under the \textit{module realization} header, an image of the final implementation is given.
 
 
 \subsection{Tagger \& Target MCUs}
 
 \subsubsection{Functional Design}
-The tagger and target microcontroller units (MCUs) handle signal encoding and decoding respectively. In the greater context of laser tag the MCUs must perform many functions, however in keeping with the scope of this investigation these have not been implemented.
+The tagger and target microcontroller units (MCUs) handle signal encoding and decoding respectively. In the greater context of laser tag, the MCUs must perform many functions, however, in keeping with the scope of this investigation these have not been implemented.
 
 The tagger is triggered by pulling pin 10 low, the Manchester encoded output is generated on pin 21. The target continuously monitors pin 17 for an incoming Manchester sequence.
 
@@ -66,7 +66,7 @@ The schematic is available online at \href{https://gofile.io/d/Hldp7z}{https://g
 
 \subsubsection{Notable Features}
 
-The development board provides break-out pins for the microcontroller, 4 input buttons, an array of 8 LEDs, an LCD display and a built-in st-link v2 for debugging and programming the processor.
+The development board provides break-out pins for the microcontroller, 4 input buttons, an array of 8 LEDs, an LCD and a built-in st-link v2 for debugging and programming the processor.
 
 The STM32F051C6 was chosen partly because of its integration into the UCT development board making it easily obtainable at a low price and because of the following features
 
@@ -116,7 +116,7 @@ Figure \ref{fig:schematic_carrier_generation} below shows the schematic for this
 
 According to the data sheet, the period of oscillation is governed by the following equation \(T = 0.693\times (R_2 + 2R_3)\times C_1\). The value of $C_1$ was chosen to be 1nF. To achieve the desired oscillation period of $27.7\mu S$, resistances $R_2$ and $R_3$ had to be chosen such that the relationship $(R_2 + 2R_3) = 40k\Omega$ held.
 
-Due to a lack of access to resistor values, the circuit was implemented on a breadboard and resistors where combined to set $R_2$ and $R_3$, using the aforementioned relationship to guide the process. An oscilloscope was used to measure the output frequency and confirm the resulting frequency was suitable before implementing the design on strip-board.
+Due to a lack of access to resistor values, the circuit was implemented on a breadboard and resistors were combined to set $R_2$ and $R_3$, using the aforementioned relationship to guide the process. An oscilloscope was used to measure the output frequency and confirm the resulting frequency was suitable before implementing the design on strip-board.
 
 The resistance values chosen were $R_2 = 3.2k\Omega$ and $R_3 = 14.7k\Omega$. According to the data sheet, these values produce an oscillation period of \(T_{theoretical} = 22.6\mu S\), however the actual period was measured to be \(T_{measured} = 26\mu S\) during burst operation.
 
@@ -143,10 +143,10 @@ The strip-board implementation of the module is shown in figure \ref{fig:module_
 \subsubsection{Functional Design}
 To operate the 3W high power IR LED a constant current driver must be implemented. The module is designed to be controlled by an open-collector control signal such that when the control signal is pulled low the led is illuminated. The output of this module is a constant current designed to drive a power LED.
 
-The LED is to be modulated at 36kHz, typical LED drivers that utilize a switching regulator are not suitable for regulating the current at such high modulation frequencies. This is because the switching frequency used in commonly available constant current switching regulators is not high enough. Instead a linear regulator was designed using discrete components.
+The LED is to be modulated at 36kHz, typical LED drivers that utilize a switching regulator are not suitable for regulating the current at such high modulation frequencies. This is because the switching frequency used in commonly available constant current switching regulators is not high enough. Instead, a linear regulator was designed using discrete components.
 
 \subsubsection{Schematic}
-Figure \ref{fig:schematic_power_led_driver} shows the design of a high power linear regulator, built around the IRLZ44 enhancement PMOSFET. Heat-sinks where attached to both the high power LED and the IRLZ44 power MOSFET.
+Figure \ref{fig:schematic_power_led_driver} shows the design of a high power linear regulator, built around the IRLZ44 enhancement PMOSFET. Heat-sinks were attached to both the high power LED and the IRLZ44 power MOSFET.
 
 \begin{figure}[H]
 	\centering
@@ -186,7 +186,7 @@ The strip-board implementation of the module is shown in figure \ref{fig:module_
 \subsection{LED Driver}
 
 \subsubsection{Functional Design}
-Due to the high power demands of the 3W IR LED, it is more appropriate to perform test and develop the communication protocol using a low power IR led. A separate low power LED driver module was designed for this specific purpose.
+Due to the high power demands of the 3W IR LED, it is more appropriate to use a low power IR led during the development of the communication protocol. A separate low power LED driver module was designed for this specific purpose.
 
 The module is designed to be pin-to-pin compatible with the power LED driver module, operating on the same input signal produced by an open-collector driven pin. Pulling the input low causes the LED to illuminate.
 
@@ -202,7 +202,7 @@ Figure \ref{fig:schematic_low_power_led_driver} shows the schematic for this dri
 	\label{fig:schematic_low_power_led_driver}
 \end{figure}
 
-A $39\Omega$ resistor is used to regulate the current through the LED. The pair of NPN transistors are used to switch the LED in accordance with a signal generated by an open-collector control signal.
+A $39\Omega$ resistor is used to regulate the current through the LED. The pair of NPN transistors are used to switch the LED per the signal generated by an open-collector control signal.
 
 \subsubsection{Module Realization}
 The strip-board implementation of the module is shown in figure \ref{fig:module_led_driver} below.
@@ -248,8 +248,8 @@ A narrow beam of parallel rays of light may be formed using a point source and i
 The distance between the light source and lens can be calculated according to equation \ref{eqn:tube_length}.
 
 \begin{equation}
-	d_{source-lens} = l_{tube} - l_{lens\_casing} + (l_{lens\_inset\_distance} + l_{lens\_external}) + l_{light\_seal\_thickness}
-	\label{eqn:tube_length}
+d_{source-lens} = l_{tube} - l_{lens\_casing} + (l_{lens\_inset\_distance} + l_{lens\_external}) + l_{light\_seal\_thickness}
+\label{eqn:tube_length}
 \end{equation}
 
 $d_{source-lens}$ is the distance between the light source and the lens. $l_{tube}$ is the length of the tube. $l_{lens\_casing}$ is the length of the magnifying lens casing as illustrated in figure \ref{fig:light_focusing_tube}, $l_{lens\_inset\_distance}$ is the amount by which the lens is in-set inside the casing and $l_{lens\_external}$ is a measure of the length of casing that remains external to the tube. $l_{light\_seal\_thickness}$ is a measure of the thickness of the hard-board used to form the light seal.
@@ -297,7 +297,7 @@ Figure \ref{fig:schematic_photodiode_transimpedance} below shows the schematic f
 \end{figure}
 
 \subsubsection{Circuit Design}
-A reverse bias voltage is applied across the photodiode to increase its sensitivity. Amplification of the light induced current is performed through the implementation of a trans-impedance amplifier. A large $1M\Omega$ resistance is used for R2 to maximize the sensitivity and signal to noise ratio.
+A reverse bias voltage is applied across the photodiode to increase its sensitivity. Amplification of the light-induced current is performed through the implementation of a trans-impedance amplifier. A large $1M\Omega$ resistance is used for R2 to maximize the sensitivity and signal to noise ratio.
 
 A second amplification stage is used to further amplify the voltage signal and a decoupling capacitor is used to remove the DC component of the signal before this second stage of amplification.
 
@@ -359,7 +359,7 @@ The strip-board implementation of the module is shown in figure \ref{fig:module_
 \subsubsection{Functional Design}
 The IR receiver is an 'all in one package' detector IC designed to detect the presence of a carrier signal in the IR light incident on the detector. The output of the module is high when no modulation is detected and pulled low when modulation is detected.
 
-The module is designed to be powered by a 5V supply, however the output voltage has been clamped down to 3V to be compatible with the STM32 GPIO pins.
+The module is designed to be powered from a 5V supply, however, the output voltage has been clamped down to 3V to be compatible with the STM32 GPIO pins.
 
 \subsubsection{Schematic}
 Figure \ref{fig:schematic_voltage_clamp} below shows the schematic for the voltage clamp used to regulate the output of the TSOP382. The \href{https://www.vishay.com/docs/82491/tsop382.pdf}{datasheet} contains a block diagram (shown in figure \ref{fig:tsop382_block_diagram}) which gives a functional overview of the internal circuitry for this IC.
@@ -383,7 +383,7 @@ Figure \ref{fig:schematic_voltage_clamp} below shows the schematic for the volta
 
 \subsubsection{TSOP382}
 
-The TSOP382 IR receiver was chosen due to it's low cost, availability and wide range of angles from which it can detect IR radiation. The purpose of this device is to act as a comparison with which to compare the photodiode and phototransistor IR detector modules.
+The TSOP382 IR receiver was chosen due for its low cost, availability and wide range of angles from which it can detect IR radiation. The purpose of this device is to act as a comparison with which to compare the photodiode and phototransistor IR detector modules.
 
 
 \subsubsection{Module Realization}
@@ -408,9 +408,9 @@ The strip-board implementation of the module is shown in figure \ref{fig:module_
 \subsubsection{Functional Design}
 The signal conditioning module is designed to process the output of either the photodiode detector module or phototransistor detector module.
 
-The output of this module is a signal that can processed by the Goertzel filter. This involves ensuring the output voltage is within the filter's input tolerance and removing any frequencies above the Nyquist sampling rate.
+The output of this module is a signal that can be processed by the Goertzel filter. This involves ensuring the output voltage is within the filter's input tolerance and removing any frequencies above the Nyquist sampling rate.
 
-This is performed in three steps. The amplitude of the incoming waveform is reduced, the waveform is filtered and finally a precision half-wave rectifier is used to rectify the signal.
+This is performed in three steps. The amplitude of the incoming waveform is reduced, the waveform is filtered and finally, a precision half-wave rectifier is used to rectify the signal.
 
 \subsubsection{Schematic}
 Figure \ref{fig:schematic_filter_and_rectify} below shows the schematic for this module.
@@ -426,11 +426,11 @@ To prevent the signal conditioning module from interfering with the detector mod
 	\label{fig:schematic_filter_and_rectify}
 \end{figure}
 
-The filter implemented is a second order voltage controlled voltage source (VCVS) active low pass filter in a Chebyshev configuration\footnote{0.5dB passband ripple}. The Chebyshev configuration was chosen because a sharp roll of is desired and because passband ripple will not affect the ability of the Goertzel filter to detect the target frequency.
+The filter implemented is a second-order voltage-controlled voltage source (VCVS) low pass filter in a Chebyshev configuration\footnote{0.5dB passband ripple}. The Chebyshev configuration was chosen because a sharp roll of is desired and because passband ripple will not affect the ability of the Goertzel filter to detect the target frequency.
 
 
 \subsubsection{Amplitude Adjustment}
-The highest amplitude possible for the incoming signal is a square wave with peak-to-peak value of just under 9V (formed as a result of the amplification stage of the detector module saturating). To ensure the output signal is within the tolerance of the ADC in this worst case, a voltage divider formed by R1 and R2 filter is place prior to the filter. This divider network halves the amplitude of the incoming signal.
+The highest amplitude possible for the incoming signal is a square wave with a peak-to-peak value of just under 9V (formed as a result of the amplification stage of the detector module saturating). To ensure the output signal is within the tolerance of the ADC in this extreme case, a voltage divider formed by R1 and R2 before the filter. This divider network halves the amplitude of the incoming signal.
 
 The amplitude is increased slightly due to the gain stage of the filter and this is accounted for by the voltage divider.
 
@@ -521,14 +521,14 @@ The tone decoder is a digital signal processing unit, designed to detect the pre
 
 The Goertzel algorithm is presented in section \ref{sec:goertzel_lit_review} and the hardware description for this module is presented in section \ref{sec:tone_decoder_hardware}.
 
-%todo: finnish this intro after completing the subsection
-The software design for this module is presented in the following way: %improve this sentance
+%todo: finish this intro after completing the subsection
+The software design for this module is presented in the following way: %improve this sentence
 An overview of the STM32F0 functionality useful for digital signal processing is presented. This is followed by a breakdown of the algorithm parameters and 
 
 \subsubsection{Overview}
-The algorithm is implemented on the STM32F0, a low cost 32-bit microcontroller that utilizes the ARM Cortex-M0 CPU core. This microcontroller does not contain any dedicated DSP peripherals nor does it contain any hardware dedicated to floating point arithmetic. Therefore careful consideration must be taken to optimize the performance of the goertzel filter implementation.
+The algorithm is implemented on the STM32F0, a low-cost 32-bit microcontroller that utilizes the ARM Cortex-M0 CPU core. This microcontroller does not contain any dedicated DSP peripherals nor does it contain any hardware dedicated to floating-point arithmetic. Therefore careful consideration must be taken to optimize the performance of the Goertzel filter implementation.
 
-The STM32F0 is equipped with several timers, direct memory access (DMA) and an advanced interrupt controller, these peripherals are indispensable resources for the implementation of the real-time digital filter. Figure \ref{fig:goertzel_functional_diagram} shows the functional blocks for the goertzel filter. The flow of data is indicated with a solid line and the clocking signals are indicated with a dashed line.
+The STM32F0 is equipped with several timers, direct memory access (DMA) and an advanced interrupt controller, these peripherals are indispensable resources for the implementation of the real-time digital filter. Figure \ref{fig:goertzel_functional_diagram} shows the functional blocks for the Goertzel filter. The flow of data is indicated with a solid line and the clocking signals are indicated with a dashed line.
 
 \begin{figure}[H]
 	\centering
@@ -543,8 +543,8 @@ The STM32F0 is equipped with several timers, direct memory access (DMA) and an a
 The Goertzel algorithm is given in listing \ref{lst:goertzel_algorithm}. Lines 3 and 4 define the following important relationships.
 
 \begin{equation}
-	k = round\{N \times \frac{bin\_frequency}{sampling\_frequency}\}
-	\label{eqn:bin_number}
+k = round\{N \times \frac{bin\_frequency}{sampling\_frequency}\}
+\label{eqn:bin_number}
 \end{equation}
 
 \begin{equation}
@@ -578,7 +578,7 @@ Equation \ref{eqn:bin_number} is used only to transform from the continuous freq
 \label{sec:sampling_frequency_constraints}
 The sampling frequency determines the highest frequency that may be sampled before aliasing will occur. A higher sampling rate increases the bandwidth of the Goertzel filter and relaxes the requirements for the anti-aliasing filter (see section \ref{sec:signal_conditioning_module}).
 
-The sampling frequency is limited by the speed of the microcontroller. A hard upper bound to the sampling frequency is set by the physical limitations of the ADC and DMA peripherals. However a soft upper limit is imposed by the rate at which samples can be processed by the CPU. It is therefore desirable to select a lower sampling rate.
+The sampling frequency is limited by the speed of the microcontroller. A hard upper bound to the sampling frequency is set by the physical limitations of the ADC and DMA peripherals. However, a soft upper limit is imposed by the rate at which samples can be processed by the CPU. It is therefore desirable to select a lower sampling rate.
 
 %todo: this section is an absolute mess (some part are cut to snippets on overleaf) - come back later
 \subsubsection{Filter Optimization}
@@ -590,21 +590,21 @@ The second means of optimization was performed through the manipulation of the a
 Line 4 of the algorithm provides the relationship between k, N and $\omega$
 
 \begin{equation}
-	\omega = \frac{2\pi * k}{N}
+\omega = \frac{2\pi * k}{N}
 \end{equation}
 
 Substituting \(\omega = \frac{\pi}{2} + 2\pi m,\; m\epsilon \mathbb{Z}\) and simplifying shows
 
 \begin{equation}
 \label{eqn:k_N_constraint}
-	\frac{k}{N} = \frac{1+4m}{4},\; m\epsilon \mathbb{Z}
+\frac{k}{N} = \frac{1+4m}{4},\; m\epsilon \mathbb{Z}
 \end{equation}
 
 If only integer values for k, N, $f_{sampling}$ and $f_{bin}$ are considered, line 3 of the algorithm provides the relationship between these parameters which may be expressed by the following equation
 
 \begin{equation}
 \label{eqn:k_N_and_fb_fs}
-	\frac{k}{N} = \frac{f_{bin}}{f_{sampling}}
+\frac{k}{N} = \frac{f_{bin}}{f_{sampling}}
 \end{equation}
 
 
@@ -615,19 +615,19 @@ Equation \ref{eqn:k_N_and_fb_fs} shows that the ratio of $f_{bin}$ to $f_{sampli
 \frac{k}{N} = \frac{f_{bin}}{f_{sampling}} = \frac{1}{4}
 \end{equation}
 
-Even after the above two means of optimizing the goertzel algorithm, the STM32F0 was not fast enough to process every sample. This is because even after optimizing the algorithm, it cannot processing incoming samples faster than the required 144kHz. The solution is to sample more than N samples per interrupt and drop the excess samples. This increases the amount of processing time per sample, but increases the latency between the filter's input and the output. This technique only works if the duration of modulation is much greater than the duration of samples dropped.
+Even after the above two means of optimizing the Goertzel algorithm, the STM32F0 was not fast enough to process every sample. This is because even after optimizing the algorithm, it cannot processing incoming samples faster than the required 144kHz. The solution is to sample more than N samples per interrupt and drop the excess samples. This increases the amount of processing time per sample but increases the latency between the filter's input and the output. This technique only works if the duration of modulation is much greater than the duration of samples dropped.
 
 \subsubsection{Practical Implementation}
 
 The desired bin frequency is 36kHz, according to equation \ref{eqn:k_N_and_fb_fs_ratio} this requires a sampling frequency of 144kHz. This is within the constraints set out in section \ref{sec:sampling_frequency_constraints}.
 
-The ADC conversions are triggered by timer 3, a general purpose 16-bit timer. The timer accepts a pre-scalar and counter period value. The frequency of the timer's output and as a result the sampling frequency is given by \(f_{sampling} = \frac{f_{system\_clock}}{prescaler \times cperiod}\). Substituting our system clock frequency, desired sampling frequency and rearranging the equation we find the product of the pre-scalar and clock period values.
+The ADC conversions are triggered by timer 3, a general-purpose 16-bit timer. The timer accepts a pre-scalar and counter period value. The frequency of the timer's output and as a result the sampling frequency is given by \(f_{sampling} = \frac{f_{system\_clock}}{prescaler \times cperiod}\). Substituting our system clock frequency, desired sampling frequency and rearranging the equation we find the product of the pre-scalar and clock period values.
 
 \[prescaler \times cperiod = \frac{48 \times 10^6}{144 \times 10^3} = 333.\dot{3}\]
 
-The result, $333.\dot{3}$ cannot be formed as the product of two integer values, instead the closest integer value of 333 is used. Because this is well below the maximum value of the 16-bit counter period register, the pre-scalar is set to one. The resulting sampling frequency is $144.\dot{1}4\dot{4}$ kHz. Returning to equation \ref{eqn:k_N_and_fb_fs_ratio}, we see that we must choose $f_{bin} = 36.036$kHz to preserve the ratio required for optimization.
+The result, $333.\dot{3}$ cannot be formed as the product of two integer values, instead, the closest integer value of 333 is used. Because this is well below the maximum value of the 16-bit counter period register, the pre-scalar is set to one. The resulting sampling frequency is $144.\dot{1}4\dot{4}$ kHz. Returning to equation \ref{eqn:k_N_and_fb_fs_ratio}, we see that we must choose $f_{bin} = 36.036$kHz to preserve the ratio required for optimization.
 
-%todo: smitz trigger and such - did i do that yet??
+%todo: Smitz trigger and such - did I do that yet??
 The output of the Goertzel filter module is a digital state indicating the presence or absence of a 36kHz frequency. It was chosen to let a high output indicate the detection of the carrier frequency while a low output would indicate no detection.
 
 A value of $6\times 10^{6}$ was selected as the threshold for the squared magnitude of the DFT bin's coefficient. A Schmitt-trigger was used to prevent oscillations while the squared magnitude of the coefficient is crossing this threshold. The output was configured to activate when the value exceeds the threshold by $2\times 10^{6}$ and deactivate when the value decreased by $2\times 10^{6}$ below the threshold.
@@ -639,7 +639,7 @@ A value of $6\times 10^{6}$ was selected as the threshold for the squared magnit
 	\label{fig:schmit_simulation_wide}
 \end{figure}
 
-Figure \ref{fig:schmit_simulation_wide} illustrates the activation and shut-off boundaries, based on the chosen threshold. The threshold and Schmitt-trigger values were chosen by inspecting the experimental results from the frequency response simulation results (see figure \ref{fig:goertzel_filter_response_simulated}) and selecting values which would allow sensitivity for input signals of differing amplitudes without triggering for side lobes of large amplitude signals.
+Figure \ref{fig:schmit_simulation_wide} illustrates the activation and shut-off boundaries, based on the chosen threshold. The threshold and Schmitt-trigger values were chosen by inspecting the experimental results from the frequency response simulation results (see figure \ref{fig:goertzel_filter_response_simulated}) and selecting values which would allow sensitivity for input signals of differing amplitudes without triggering for the side lobes of large-amplitude signals.
 
 %todo: ensure I mention improvements to this by using automatic gain control and therefore being able to raise the threshold value
 
@@ -652,11 +652,11 @@ Figure \ref{fig:schmit_simulation_wide} illustrates the activation and shut-off 
 
 \subsection{Tagger Software}
 
-For the purposes of this investigation, a tagger needed to be created that can encode a gun ID and possibly some additional bits for other information. It was chosen to use a 16-bit packet size. In this initial implementation a single bit is reserved for error detection, however further development of this system might explore the use of hamming codes which would require an additional four bits to be reserved for error correction.
+For this investigation, a tagger needed to be created that can encode a gun ID and possibly some additional bits for other information. It was chosen to use a 16-bit packet size. In this initial implementation, a single bit is reserved for error detection, however, further development of this system might explore the use of hamming codes which would require an additional four bits to be reserved for error correction.
 
 \subsubsection{Modified RC-5 Protocol}
 \label{sec:modified_rc5_protocol}
-The RC-5 protocol was used as the basis for the design of the modified transmission protocol. A detailed breakdown of the protocol is given in the literature review in section \ref{sec:rc_5_protocol}. In this modified version of the RC-5 protocol, the Manchester Encoding technique and bit-period timing specifications are preserved. However the structure of the bits transmitted has been modified and the period between messages was decreased.
+The RC-5 protocol was used as the basis for the design of the modified transmission protocol. A detailed breakdown of the protocol is given in the literature review in section \ref{sec:rc_5_protocol}. In this modified version of the RC-5 protocol, the Manchester Encoding technique and bit-period timing specifications are preserved. However, the structure of the bits transmitted has been modified and the period between messages was decreased.
 
 \begin{figure}[H]
 	\centering
@@ -667,7 +667,7 @@ The RC-5 protocol was used as the basis for the design of the modified transmiss
 
 Figure \ref{fig:modified_rc_5_protocol} shows the modified structure for a single transmission. The two start bits are preserved. Following this, the toggle bit, address bits and command bits have been merged into a single set of data bits with an additional 4 bits having been included to increase the number of bits to 16. In the modified protocol the bit order of has been reversed. It should be noted that data bit D15 is used for the parity checksum.
 
-The original RC-5 protocol specifies a period of 114mS between transmissions, however this period is longer than necessary as shown in section \ref{sec:processing_time_experiment}. Based on the results, this period was reduced to 50mS.
+The original RC-5 protocol specifies a period of 114mS between transmissions, however, this period is longer than necessary as shown in section \ref{sec:processing_time_experiment}. Based on the results, this period was reduced to 50mS.
 
 \subsubsection{Realization}
 
@@ -676,23 +676,23 @@ The tagger software comprises a set of functions dedicated to the encoding of a 
 The following functions relating to the generation of a Manchester waveform on the pre-defined output GPIO pin were created
 
 \begin{lstlisting}[style=cstyle, caption=Transmission Related Functions\label{transmission_related_functions}]
-	uint8_t get_parity_15(uint16_t packet); //processes a 15-bit long data packet and returns the even parity
-	uint32_t wrap_data_15(uint16_t data); //processes a 15-bit long data packet and returns 18-bit bitstream for transmission
-	generate_manchester(uint32_t buffer, uint8_t num_bits); //starts Manchester encoded output generation on the pre-define GPIO based on the provided bitstream
+uint8_t get_parity_15(uint16_t packet); //processes a 15-bit long data packet and returns the even parity
+uint32_t wrap_data_15(uint16_t data); //processes a 15-bit long data packet and returns 18-bit bitstream for transmission
+generate_manchester(uint32_t buffer, uint8_t num_bits); //starts Manchester encoded output generation on the pre-define GPIO based on the provided bitstream
 \end{lstlisting}
 
 Using one of the dedicated timer peripherals (timer 17) and interrupts for the process of generating the Manchester encoded output required the use of global variables to track the status of an on-going transmission. The following listing shows the global variables along with a brief descriptor comment.
 
 \begin{lstlisting}[style=cstyle, caption=Transmission Status Tracking Variables\label{lst:transmission_status_tracking_variables}]
-	volatile uint32_t bit_stream; //bit-stream to be transmitted
-	volatile int bit_index; //index of bit currently being transmitted
-	volatile int bit_num_transmit; //number of bits from bit-stream to transmit
-	volatile int bit_period; //stores current bit period state (0 - first, 1 - second)
-	volatile int fire_in_progress; //global indicator of a transmission in progress
-	volatile int manchester_timeout_counter; //counts half bit-periods elapsed since last bit was transmitted
+volatile uint32_t bit_stream; //bit-stream to be transmitted
+volatile int bit_index; //index of bit currently being transmitted
+volatile int bit_num_transmit; //number of bits from bit-stream to transmit
+volatile int bit_period; //stores current bit period state (0 - first, 1 - second)
+volatile int fire_in_progress; //global indicator of a transmission in progress
+volatile int manchester_timeout_counter; //counts half bit-periods elapsed since last bit was transmitted
 \end{lstlisting}
 
-Using interrupts and global variables opens up the possibility for the data corruption to occur. Although the STM32F0 is inherently a serial processor, the main-loop process (responsible for, among other things, initiating transmissions) and the transmission process (the timer interrupt routine) from a high level execute as parallel processes. Figure \ref{fig:parallel_process_abstraction} illustrates how the operations during transmission may be abstracted as two parallel processes. Therefore it is critical to provide a mechanism to prevent one process from modifying any of the variable given in list \ref{lst:transmission_status_tracking_variables} while another process is using them.
+Using interrupts and global variables opens the possibility of data corruption. Although the STM32F0 is inherently a serial processor, the main-loop process (responsible for, among other things, initiating transmissions) and the transmission process (the timer interrupt routine) from a high level execute as parallel processes. Figure \ref{fig:parallel_process_abstraction} illustrates how the operations during transmission may be abstracted as two parallel processes. Therefore it is critical to provide a mechanism to prevent one process from modifying any of the variable given in list \ref{lst:transmission_status_tracking_variables} while another process is using them.
 
 \begin{figure}[H]
 	\centering
@@ -703,7 +703,7 @@ Using interrupts and global variables opens up the possibility for the data corr
 
 The purpose of the variable \textit{fire\_in\_progress} is to operate as a synchronization lock. Priority is given to the interrupt process, therefore, in the implementation of the function \textit{generate\_manchester} there is a loop which stalls the processor until any current transmissions complete (see line 4, listing \ref{lst:generate_manchester_implementation}).
 
-Finally, during the transmission process, the logic used to determine the pin state for the purpose of generating the Manchester waveform is given in line 8 of listing \ref{lst:manchester_generate_interrupt_routine}. The pin state for a given half bit-period can be determined as \[pin\_state = \overline{tx\_bit} \;\; \widehat{} \;\; bit\_period\] where tx\_bit is the value of the bit currently being transmitted and bit\_period is as defined in listing \ref{lst:transmission_status_tracking_variables} above.
+Finally, during the transmission process, the logic used to determine the pin state to generate the Manchester waveform is given in line 8 of listing \ref{lst:manchester_generate_interrupt_routine}. The pin state for a given half bit-period can be determined as \[pin\_state = \overline{tx\_bit} \;\; \widehat{} \;\; bit\_period\] where tx\_bit is the value of the bit currently being transmitted and bit\_period is as defined in listing \ref{lst:transmission_status_tracking_variables} above.
 
 
 
@@ -715,7 +715,7 @@ Finally, during the transmission process, the logic used to determine the pin st
 
 \subsection{Target Software}
 
-In laser tag it is optimal to have multiple IR detectors placed on various parts of the player. It is therefore important that the tagger software be extendable to process input from multiple input signals simultaneously. To achieve this, the input capture and output compare functions of the STM32 timer peripherals were used. For the purposes of this investigation, the system was developed to only capture a single incoming signal, however the process may be easily expanded to capture multiple incoming signals with little modification.
+In laser tag, it is optimal to have multiple IR detectors placed on various parts of the player. It is therefore important that the tagger software be extendable to process input from multiple input signals simultaneously. To achieve this, the input capture and output compare functions of the STM32 timer peripherals were used. For this investigation, the system was developed to only capture a single incoming signal, however, the process may be easily expanded to capture multiple incoming signals with little modification.
 
 The target MCU software was separated into four independent processes, these are outlined in figure \ref{fig:target_software_overview} below.
 
@@ -728,26 +728,25 @@ The target MCU software was separated into four independent processes, these are
 
 The main loop process runs continually and may be used to perform routine tasks.
 
-The edge detection is an interrupt based process which monitors continuously for any rising or falling edges on the input GPIO pin. Each edge is recorded as a time stamp which measures the period elapsed since the previous edge was detected. To reduce unnecessary computation, this value was stored in \textit{ticks} rather than converted into seconds.
+The edge detection is an interrupt based process which monitors continuously for any rising or falling edges on the input GPIO pin. Each edge is recorded as a timestamp which measures the period elapsed since the previous edge was detected. To reduce unnecessary computation, this value was stored in \textit{ticks} rather than converted into seconds.
 
-The timeout monitoring process is executed by via an interrupt when the output compare register matches the timer's count value. Each time an edge is registered by the edge detection process, the output compare register value is adjusted to allow up to one timeout period before the interrupt is triggered.
+The timeout monitoring process is executed via an interrupt when the output compare register matches the timer's count value. Each time an edge is registered by the edge detection process, the output compare register value is adjusted to allow up to one timeout period before the interrupt is triggered.
 
-The decoding process is an interrupt triggered processes which may also be triggered by software (when the maximum number of edges are recorded). This process decodes the time stamps recorded by the edge detection process and returns the recovered data. The decoding process uses the state machine approach illustrated in figure \ref{fig:manchesterdecodingfsm}.
+The decoding process is an interrupt triggered processes which may also be triggered by software (when the maximum number of edges are recorded). This process decodes the timestamps recorded by the edge detection process and returns the recovered data. The decoding process uses the state machine approach illustrated in figure \ref{fig:manchesterdecodingfsm}.
 
 During the decoding process, the edge detection process responsible for triggering the process is prevented from recording any further edges until the decoding is finished.
 
 \subsubsection{Decoding Strategy}
 
-The state machine approach does not specify an end of transmission condition, therefore it is necessary to define one. It is not possible to simply count the cumulative number of bits as the input capture stage and decoding stages are independent. Therefore a timeout timer will be implemented to trigger the decoding and reset the \textit{array of edge time} differences. In addition to a timeout a maximum number of edges is defined which will also trigger the start of a decoding sequence and reset the state machine.
+The state machine approach does not specify an end of transmission condition, therefore it is necessary to define one. It is not possible to simply count the cumulative number of bits as the input capture stage and decoding stages are independent. Therefore a timeout timer will be implemented to trigger the decoding and reset the \textit{array of edge time} differences. In addition to a timeout, a maximum number of edges is defined which will also trigger the start of a decoding sequence and reset the state machine.
 
-The timeout period was chosen to be a length of two bit-periods, this was chosen because future inclusion of hamming codes would allow for the correction of a single flipped or missing bit. The timeout period of 3.556ms must be converted into a number of ticks before being used by the output compare functionality of the timer.
+The timeout period was chosen to be a length of two bit-periods, this was chosen because future inclusion of hamming codes would allow for the correction of a single flipped or missing bit. The timeout period of 3.556ms must be converted into ticks before being used by the output compare functionality of the timer.
 
 \[TIMEOUT\_TICKS = f_{timer} \times T_{timeout} = 8 \times 10^6 \times 3.556 \times 10^{-3} = 28448\]
 
 The maximum number of edges in a valid message occurs when all 16-bits are 1's which results in a Manchester sequence containing 36 edges. Therefore the edge detection process will automatically begin the decoding process if 36 edges are recorded.
 
-The implementation of the Manchester decoding algorithm may be found in the appendix, listing \ref{lst:decode_manchester_implementation}. Decoding requires a time period which defines the difference between a long and short period. This is the \textit{THRESHOLD\_TICKS} constant, in addition a second constant \textit{BITMISS\_TICKS} was defined and is used as a threshold to determine if a bit in the message has been was undetected.
-
+The implementation of the Manchester decoding algorithm may be found in the appendix, listing \ref{lst:decode_manchester_implementation}. Decoding requires the definition of a time value to differentiate between a long and short period. This is the \textit{THRESHOLD\_TICKS} constant, a second constant \textit{BITMISS\_TICKS} was also defined and is used as a threshold to determine if a bit in the message has been was undetected.
 
 
 
