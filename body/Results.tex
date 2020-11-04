@@ -460,11 +460,10 @@ The bit period of the waveform matched the expected value of 1.777mS, confirming
 
 \subsubsection{Processing Time}
 
-%todo: further crop these pics
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=.9\textwidth]{figures/results/receiver_software/arbitrary_11111_timing_test_crop.JPG}
-	\caption{Oscilloscope Trace for Transmission of 11111}
+	\includegraphics[width=.9\textwidth]{figures/results/receiver_software/arbitrary_11111_timing_test_crop_crop.JPG}
+	\caption{Transmission of Decimal Number 11111}
 	\label{fig:arbitrary_11111_timing_test}
 \end{figure}
 
@@ -472,19 +471,22 @@ The bit period of the waveform matched the expected value of 1.777mS, confirming
 	\centering
 	\begin{tabular}{cccc}
 		\hline
-		\textbf{\begin{tabular}[c]{@{}c@{}}15-Bit Data\\ (Decimal)\end{tabular}} & \textbf{Number of Edges} & \textbf{\begin{tabular}[c]{@{}c@{}}Timeout Delay\\ (ms)\end{tabular}} & \textbf{\begin{tabular}[c]{@{}c@{}}Decoding Time\\ (ms)\end{tabular}} \\ \hline
+		\textbf{\begin{tabular}[c]{@{}c@{}}15-Bit Data\\ (Decimal)\end{tabular}} & \textbf{Number of Edges} & \textbf{\begin{tabular}[c]{@{}c@{}}Timeout Delay\\ (ms)\end{tabular}} & \textbf{\begin{tabular}[c]{@{}c@{}}Processing Time\\ (ms)\end{tabular}} \\ \hline
 		10922 & 20 & 3.56 & 29.7 \\ \hline
 		11111 & 26 & 3.56 & 29.8 \\ \hline
 		32767 & 36 & 3.56 & 29.9 \\ \hline
 	\end{tabular}
 \end{table}
 
-Combining the timeout delay and decoding time gives a maximum period of 33.46ms in the worst case, before a new message may be received.
+Combining the timeout delay and processing time gives a maximum period of 33.46ms in the worst case, before a new message may be received.
 
 
 %%%%%%%%%%	DISCUSSION	%%%%%%%%%%
 \textbf{Discussion}\\
-%todo: discuss these results
+These results show that the number of edges in a typical transmission have a negligible effect on the total time taken to process the received data. Most of this processing time can be attributed to communication with the LCD..
+
+The original RC-5 standard specifies a 114ms period between transmissions, this is significantly longer than necessary.
+
 %%%%%%%%%%	/DISCUSSION	%%%%%%%%%%
 
 \subsubsection{Error Handling}

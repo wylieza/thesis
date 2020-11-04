@@ -667,8 +667,7 @@ The RC-5 protocol was used as the basis for the design of the modified transmiss
 
 Figure \ref{fig:modified_rc_5_protocol} shows the modified structure for a single transmission. The two start bits are preserved. Following this, the toggle bit, address bits and command bits have been merged into a single set of data bits with an additional 4 bits having been included to increase the number of bits to 16. In the modified protocol the bit order of has been reversed. It should be noted that data bit D15 is used for the parity checksum.
 
-%todo: ref the experiement below
-The original RC-5 protocol specifies a period of 114mS between transmissions, however this gap is longer than necessary and following the experiment performed in section \ref{label} it was determined that this period could be reduced to XXXmS.
+The original RC-5 protocol specifies a period of 114mS between transmissions, however this period is longer than necessary as shown in section \ref{sec:processing_time_experiment}. Based on the results, this period was reduced to 50mS.
 
 \subsubsection{Realization}
 
