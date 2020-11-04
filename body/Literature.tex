@@ -3,7 +3,7 @@
 %todo: touch up this intro part
 
 This chapter concerns a review of the literature in the fields of study related to digital communication systems and optics.
-Each section presents a review of the relevant the theory for a particular field of study. %todo: improve this line
+Each section presents a review of the relevant theory for a particular field of study. %todo: improve this line
 The literature review has been structured such that for each topic a brief introduction to the broader theory is presented after which the details of specific theories and concepts are reviewed.
 
 %todo: update this to include latest sections
@@ -14,23 +14,24 @@ The literature review has been structured such that for each topic a brief intro
 	\label{fig:litreview_overview}
 \end{figure}
 
-%structure overview
+%todo: give a structure overview
 The review begins with a brief history of optics and the use of optics in digital communication. 
 
 \section{Optics}
 
 \subsection{Brief History}
-%The branch of physics that deals with the properties and phenomena of visible light (and by extension other forms of electromagnetic radiation), sometimes esp. in relation to sight.
+%The branch of physics that deals with the properties and phenomena of visible light (and by extension other forms of electromagnetic radiation), sometimes esp. concerning sight.
 
-Optics as defined by the Oxford English Dictionary is ``The scientific study of sight and the behaviour of light, or the properties of transmission and deflection of other forms of radiation" \cite{oroptics2010}.
+Optics, as defined by the Oxford English Dictionary, is ``The scientific study of sight and the behaviour of light, or the properties of transmission and deflection of other forms of radiation" \cite{oroptics2010}.
 
 For most of human history, little was known of the complex phenomena we call light. The first attempts to understand the properties of light were philosophical and history tells us that the Greek philosophers took interest in the subject. Around 300BC Euclid postulated that light propagated in a rectilinear fashion. He also stated the law of reflection. These principles still form part of our understanding of light today. \cite{Vohnsen2004}
 
-Well before any established scientific theories existed, lenses and their optical properties have been used for visual aid both for visually impaired persons and for magnification of objects. It was however only in the 17th century that the first record of telescopes can be found. Galileo is the first to record the use of such devices for the purpose of scientific inquiry.
+%todo: this paragraph could be reworked
+Well before any established scientific theories existed, lenses have been used as visual aids. Only later in the 17th century can the first record of telescopes be found. Galileo was the first to write about the use of such devices for scientific inquiry.
 
-The use of light for electronic communication only became possible after the advances in semiconductor technologies in the 1960s \cite{Huurdeman2003}. Progress in the development of the light emitting diode (LED) made it possible to precisely control a light source at very high frequencies, which is necessary in order to achieve a respectable channel bandwidth.
+The use of light for electronic communication only became possible after the advances in semiconductor technologies in the 1960s \cite{Huurdeman2003}. Progress in the development of the light-emitting diode (LED) made it possible to precisely control a light source at very high frequencies, which is necessary to achieve a respectable channel bandwidth.
 
-It did not take long for the infrared LED to be integrated into consumer devices such as the television remote and then later into video cameras as a cost effective night vision feature. In more recent decades the number of available licenced bands in the electromagnetic spectrum has become increasingly scarce. As a result there has been a movement to optical wireless communication, a type of wireless communication that uses visible (and near visible) light radiation for shot range, high bandwidth communication links.
+It did not take long for the infrared LED to be integrated into consumer devices such as the television remote and then later into video cameras as a cost-effective night vision feature. In more recent decades the number of available licenced bands in the electromagnetic spectrum has become increasingly scarce. As a result, there has been a movement to optical wireless communication, a type of wireless communication that uses visible (and near-visible) light radiation for short-range, high bandwidth communication links.
 
 With the decrease in costs associated with LEDs, transistors and microcontrollers recreational games such as laser tag become possible and the idea was first patented in 1987 \cite{Carter1986}.
 
@@ -39,9 +40,9 @@ With the decrease in costs associated with LEDs, transistors and microcontroller
 \subsection{Lenses}
 \label{sec:lit_lenses}
 %todo: work on the image presentation format (subfigures)
-This projects requires the use of a lens to focus a source of light into a narrow beam. Lenses work on the principle of refraction. When light enters a medium with a different refractive index at an angle offset from the perpendicular (normal), the light is bent toward or away from the normal, behaviour described by Snell's law.
+This project requires the use of a lens to focus a source of light into a narrow beam. Lenses work on the principle of refraction. When light enters a medium with a different refractive index at an angle offset from the perpendicular (normal), the light is bent toward or away from the normal, behaviour described by Snell's law.
 
-When working with lenses, the lens equation may be used to determine how an object might form a real image or virtual image when viewed through a lens \cite{Knight2013}, however for the purposes of our investigation the definition of the focal length is sufficient.
+When working with lenses, the lens equation may be used to determine how an object might form a real image or virtual image when viewed through a lens \cite{Knight2013}, however for this investigation the definition of the focal length is sufficient.
 
 \begin{figure}[H]
 	\centering
@@ -52,7 +53,7 @@ When working with lenses, the lens equation may be used to determine how an obje
 
 Figure \ref{fig:lens_diagram} above shows the near and far focal points for a lens. The diagram illustrates the behaviour of light rays produced by a theoretical parallel light source and passing through a bi-convex lens. The focal point is the common location through which parallel beams of light passing through a lens will pass. The near focal point is the apparent point location from which diverging beams produced by instead passing the parallel beams through a bi-concave lens would appear to have emanated from, should the rays be traced back along the divergent path.
 
-In is in the interest of this investigation to consider the use of a lens to produce a beam of parallel light rays. This is essentially reversing the process illustrated in figure \ref{fig:lens_diagram}.
+It is in the interest of this investigation to consider the use of a lens to produce a beam of parallel light rays. This is essentially reversing the process illustrated in figure \ref{fig:lens_diagram}.
 
 \begin{figure}[H]
 	\centering
@@ -77,10 +78,10 @@ In is in the interest of this investigation to consider the use of a lens to pro
 	\caption*{Images showing the different behaviours of light interacting with a lens}
 \end{figure}
 
-Figures \ref{fig:lens_divergent} to \ref{fig:lens_convergent} illustrate\footnotemark the three behaviours that may be achieved using a single point source of light and an ideal lens. Behaviours in figure \ref{fig:lens_divergent} occurs when a point light source exists between the near focal point and the lens, the resulting beam of light diverges after passing through the lens. Figure \ref{fig:lens_parallel} shows that for a light source placed at the focal point, the rays of light will emerge from the lens parallel. It should be noted that the parallel rays produced in this manner form a beam with a diameter the same size as the lens. Finally \ref{fig:lens_convergent} illustrates that for a point source of light placed further beyond the near focal point (on the opposite side to the lens) results in a beam that initially converges, focusing to some point and then diverges.
+Figures \ref{fig:lens_divergent} to \ref{fig:lens_convergent} illustrate\footnotemark the three behaviours that may be achieved using a single point source of light and an ideal lens. Behaviours in figure \ref{fig:lens_divergent} occurs when a point light source exists between the near focal point and the lens, the resulting beam of light diverges after passing through the lens. Figure \ref{fig:lens_parallel} shows that for a light source placed at the focal point, the rays of light will emerge from the lens parallel. It should be noted that the parallel rays produced in this manner form a beam with a diameter the same size as the lens. Finally, figure \ref{fig:lens_convergent} illustrates that for a point source of light placed further beyond the near focal point (on the opposite side to the lens) results in a beam that initially converges, focusing to some point and then diverges.
 \footnotetext{Created using \href{https://ricktu288.github.io/ray-optics/simulator/}{Ray-Optics Simulator}}
 
-In may cases including this investigation, the light coming from an LED may be approximated as a point source and the lens approximated as ideal.
+In many cases including this investigation, the light coming from an LED may be approximated as a point source and the lens approximated as ideal.
 
 
 
@@ -91,10 +92,10 @@ In may cases including this investigation, the light coming from an LED may be a
 In his paper on optical detectors, Forrest highlights the three main contenders for converting light to an electrical signal. These are the PIN diode, avalanche photodiode and photoconductor \cite{Forrest1986}.
 
 \textbf{Photoconductor}\\
-The photoconductor is a optical sensor constructed from intrinsic semi-conductor material. This un-doped material changes resistance in proportion to incident light of a particular wavelength. Unlike extrinsic semiconductor devices, no current is induced in a photoconductor as the photoelectric effect does not apply. Properties such as the sensitivity to different wavelengths of light depend solely on the semiconducting material of the photoconductor \cite{Kingston2003}.
+The photoconductor is an optical sensor constructed from intrinsic semiconductor material. This un-doped material changes resistance in proportion to incident light of a particular wavelength. Unlike extrinsic semiconductor devices, no current is induced in a photoconductor as the photoelectric effect does not apply. Properties such as the sensitivity to different wavelengths of light depend solely on the semiconducting material of the photoconductor \cite{Kingston2003}.
 
 \textbf{PIN Photodiode}\\
-The PIN diode is constructed out of a semiconductor material with two doped regions. As the name implies PIN diodes are constructed by separating a positively doped (P-region) and negatively doped (N-region) with an intrinsic region.
+The PIN diode is constructed out of semiconductor material with two doped regions. As the name implies PIN diodes are constructed by separating a positively doped (P-region) and negatively doped (N-region) with an intrinsic region.
 
 \begin{figure}[H]
 	\centering
@@ -106,10 +107,10 @@ The PIN diode is constructed out of a semiconductor material with two doped regi
 Figure \ref{fig:pin_diode_diagram} above illustrates the working principle of the PIN photodiode.
 When photons with a high enough energy are absorbed by the depletion region of the diode, an electron is freed. This free electron accelerates due to the electric field which induces a current.
 
-Typically the diode is reverse biased to increase the strength of the electric field between the two doped regions. Under reverse bias conditions a small current flows independent of whether light is shone on the depletion zone, this current is known as dark current.
+Typically the diode is reverse biased to increase the strength of the electric field between the two doped regions. Under reverse bias conditions, a small current flows independent of whether light is shone on the depletion zone, this current is known as dark current.
 
 \textbf{Avalanche Photodiode}\\
-The avalanche photodiode is a modification to the structure of the PIN diode. In the case of the avalanche photodiode an additional P-region is place adjacent to the N-region. This additional P-region forms the avalanche region. The avalanche photodiode can be made sensitive enough to allow the detection of individual photons \cite{Perenzoni2018}.
+The avalanche photodiode is a modification to the structure of the PIN diode. In the case of the avalanche photodiode, an additional P-region is placed adjacent to the N-region. This additional P-region forms the avalanche region. The avalanche photodiode can be made sensitive enough to allow the detection of individual photons \cite{Perenzoni2018}.
 
 \textbf{Phototransistor}\\
 The phototransistor is another component capable of detecting light. The construction of a phototransistor is similar to that of a regular transistor, but rather than use an electrical signal to control the base current, a photodiode is used.
@@ -129,7 +130,7 @@ Circuits which convert small current into voltages are known as trans-impedance 
 
 The most simple design comprises an operational amplifier with a single feedback resistor as illustrated in figure \ref{fig:transimpedance_amplifier}.
 
-Many variations of this design exist, each built to achieve different levels of performance, for example in their paper on developing a lock-in amplifier for optical sensors, Ferreira and Petraglia use a constant current source rather than a fixed reverse bias voltage to minimize the shot noise cause by dark current \cite{Ferreira2017}.
+Many variations of this design exist, each built to achieve different levels of performance, for example in their paper on developing a lock-in amplifier for optical sensors, Ferreira and Petraglia use a constant current source rather than a fixed reverse bias voltage to minimize the shot noise caused by dark current \cite{Ferreira2017}.
 
 
 %%%%%%%%%%%%%%%%%%
@@ -140,26 +141,26 @@ Optical communication concerns all manors of communicating information from one 
 
 \subsection{Optical Communication Techniques} %todo: better name for this 'catergories of techniques' 
 
-Most light based communication methods may be classified as \textit{free-space optical communication} techniques. These techniques do not require any physical medium between the receiver and transmitter. Not all light based communication is performed in free space, for example fibre optic communication which is among the fastest growing optical communication techniques of recent times.
+Most light-based communication methods may be classified as \textit{free-space optical communication} techniques. These techniques do not require any physical medium between the receiver and transmitter. Not all light-based communication is performed in free space, for example, fibre optic communication which is among the fastest-growing optical communication techniques of recent times.
 
-Fibre optic communication uses a physical cable designed to guide a beam of light using the principles of total internal reflection. Fibre optic communication systems may utilize an LED or laser diode to produce a optically encoded digital signal. Recent developments in vertical cavity surface emitting lasers (VCSEL) have resulted in more fibre optic systems turning to this technology.
+Fibre optic communication uses a physical cable designed to guide a beam of light using the principles of total internal reflection. Fibre-optic communication systems may utilize an LED or laser diode to produce an optically encoded digital signal. Recent developments in vertical-cavity surface-emitting lasers (VCSEL) have resulted in more fibre optic systems turning to this technology.
 
-Free-space optical communication uses much the same technology to transmit information through light, however in the field of optical wireless communications the technology is integrated into regular lighting solutions. The result is %todo: fix this paragraph - its too much waffel
+Free-space optical communication uses much the same technology to transmit information through light, however, in the field of optical wireless communications the technology is integrated into regular lighting solutions. The result is %todo: fix this paragraph - its too much waffle
 
 
 
 \subsection{IR Communication}
 %This is where I talk about different IR protocols
 
-IR has is used in many applications, this is because it is cheap, efficient and simple to use. A basic implementation might consist only of an IR LED, IR receiver IC and a pair of microcontrollers. The most commonly used band of IR radiation for communication is between 780nm and 950nm, this is as a result of the availability of low cost LEDs and quality photodiodes that operate in this frequency band \cite{Elgala2011}.
+IR has is used in many applications, this is because it is cheap, efficient and simple to use. A basic implementation might consist only of an IR LED, IR receiver IC and a pair of microcontrollers. The most commonly used band of IR radiation for communication is between 780nm and 950nm, this is as a result of the availability of low-cost LEDs and quality photodiodes that operate in this frequency band \cite{Elgala2011}.
 
-Many modulation techniques have been developed for the purposes optical wireless communication. These range from advanced techniques such as multiple-subcarrier modulation (MSM) to basic techniques such as on-off keying (OOK) and pulse-position modulation (PPM).
+Many modulation techniques have been developed for optical wireless communication. These range from advanced techniques such as multiple-subcarrier modulation (MSM) to basic techniques such as on-off keying (OOK) and pulse position modulation (PPM).
 
-Multiple-subcarrier modulation sums numerous sub-carrier signals and uses the result to modulate the light source. As a consequence of using a multiple low frequency sub-carriers it is possible to achieve a high total bit rate with little distortion, removing the need for equalization \cite{Ohtsuki2003}.
+Multiple-subcarrier modulation sums numerous sub-carrier signals and uses the result to modulate the light source. As a consequence of using multiple low-frequency sub-carriers, it is possible to achieve a high total bit rate with little distortion, removing the need for equalization \cite{Ohtsuki2003}.
 
-Notable tradeoffs for techniques that increase the bit-rate are diminishing range, lower resistance to ambient noise and an increase in system complexity. For the purposes of communicating between a tagger and target in laser tag, a high bandwidth is not required. It is therefore advantageous to utilize a more robust technique with a lower bit-rate such as on-off keying.
+Notable tradeoffs for techniques that increase the bit-rate are diminishing range, lower resistance to ambient noise and an increase in system complexity. To communicate between a tagger and target in laser tag, high bandwidth is not required. It is therefore advantageous to utilize a more robust technique with a lower bit-rate such as on-off keying.
 
-OOK is utilized in many systems, for example, in remote control applications. As a result there are several IR communication protocols based around this technique. The following are a few of the popular options
+OOK is utilized in many systems, for example, in remote control applications. As a result, there are several IR communication protocols based on this technique. The following are a few of the popular options
 
 \begin{itemize}
 	\item RC-5
@@ -168,11 +169,11 @@ OOK is utilized in many systems, for example, in remote control applications. As
 	\item SIRC
 \end{itemize}
 
-Each of these protocols are based on OOK, but differ in how they define symbols. To represent two different states, an IR source is modulated at a chosen carrier frequency (usually around 36kHz). When the light source is modulating the signal is \textit{on} and when the source is not modulating the signal is \textit{off}.  Modulation makes it possible to distinguish between a generated IR signal and ambient IR radiation from noise sources.
+Each of these protocols is based on OOK, but differ in how they define symbols. To represent two different states, an IR source is modulated at a chosen carrier frequency (usually around 36kHz). When the light source is modulating the signal is \textit{on} and when the source is not modulating the signal is \textit{off}.  Modulation makes it possible to distinguish between a generated IR signal and ambient IR radiation from noise sources.
 
-Protocols such as Sony's SIRC use a technique known as pulse width encoding. This technique involves modulating the IR LED for a different period of time depending on whether a 1 or 0 is to be transmitted, while maintaining a constant period of time between transmissions.
+Protocols such as Sony's SIRC use a technique known as pulse width encoding. This technique involves modulating the IR LED for a different period depending on whether a 1 or 0 is to be transmitted while maintaining a constant time between transmissions.
 
-Protocols such as the NEC protocol by Renesas use pulse distance encoding. This protocol specifies an different off period between on pulses to distinguish between a logical 1 and 0.
+Protocols such as the NEC protocol by Renesas use pulse distance encoding. This protocol specifies a different off period between on pulses to distinguish between a logical 1 and 0.
 
 The RC-5 protocol and its successor the RC-6 protocol use Manchester Encoding to transfer binary information. Due to its wide adoption and popularity \cite{rudrappa2009}, an adaption the RC-5 protocol will be used in this project. Manchester Encoding is reviewed in section \ref{sec:manchester_encoding} below.
 
@@ -187,11 +188,11 @@ The the RC-5 protocol is illustrated in figure \ref{fig:rc_5_protocol}. The bits
 	\label{fig:rc_5_protocol}
 \end{figure}
 
-Every transmission begins with two start bits, these bits always have a value of 1. Following the start bits is the `toggle' bit. In remote control applications it is useful to distinguish between a button which remains depressed and a button being repeatedly pressed. This is achieved through the toggle bit which is flipped each time a button is released. When a button remains depressed, the message is transmitted repeatedly with a 114ms gap between transmissions. Finally the RC-5 protocol data is structured such that it first transmits a 5-bit address followed by a 6-bit command.
+Every transmission begins with two start bits, these bits always have a value of 1. Following the two start bits is the `toggle' bit. In remote control applications, it is useful to distinguish between a button which remains depressed and a button being repeatedly pressed. This is achieved through the toggle bit which is flipped each time a button is released. When a button remains depressed, the message is transmitted repeatedly with a 114ms gap between transmissions. Finally, the RC-5 protocol data is structured such that it first transmits a 5-bit address followed by a 6-bit command.
 
 
 %\subsection{Materials Interaction}
-%Talk briefly about materials and the interation of different materials with IR. Mention the difficulty of aquiring these resources and therefore the exclusion of them during experiementation
+%Talk briefly about materials and the interaction of different materials with IR. Mention the difficulty of acquiring these resources and therefore the exclusion of them during experimentation
 
 
 \subsection{Communication System Structure}
@@ -208,13 +209,13 @@ Every transmission begins with two start bits, these bits always have a value of
 \subsection{Noise \& Interference}
 %Talk about modulation (and demodulation) techniques 
 % no seperate \subsection{Demodulation}
-%Give an overview of demodulating and what techniques exist: Goertzel, DFT, tone-detectors, next sections hilights details
+%Give an overview of demodulating and what techniques exist: Goertzel, DFT, tone-detectors, next sections highlights details
 
-%%Make this into a subsub section and include it under modulation
+%%Make this into a sub-sub section and include it under modulation
 %\subsubsection{}
-%Talk about interference and noise, sources and narrow down to IR in particular... Also note noise in components and power supplies etc.
+%Talk about interference and noise, sources and narrow down to IR in particular... Also, note noise in components and power supplies etc.
 
-Optical wireless communication is susceptible to interference and noise produced by most lighting technologies. Light sources such as incandescent light bulbs and the sun produce white noise in the infrared region, while light sources such as the florescent light produce cyclostationary noise due to 
+Optical wireless communication is susceptible to interference and noise produced by most lighting technologies. Light sources such as incandescent light bulbs and the sun produce white noise in the infrared region, while light sources such as the fluorescent light produce cyclostationary noise due to 
 %todo: here
 
 %the sun
@@ -222,7 +223,7 @@ Optical wireless communication is susceptible to interference and noise produced
 %fluoresent (cyclostationary noise)
 %multi-path distortion for high bit-rate signals
 
-%saturation of receiver and noisy input
+%saturation of the receiver and noisy input
 
 
 
@@ -232,9 +233,9 @@ Manchester Code is a type of phase encoding. It is classified as a line code and
 
 Manchester coding, as its name suggests, was developed at the University of Manchester and it was first published in 1949 \cite{Jameel2019}. Manchester encoding is a protocol for integrating the clock and data into a single sequence consisting of only two symbols. It does not require clock synchronization, only that a predefined bit-width is known by both the receiver and transmitter. 
 
-The principle behind Manchester code is to encode the information into transitions between two symbols. This technique makes the encoding scheme particularly useful in communication by means of inductive coupling such as in RFID. Due to its self-clocking property and simplicity it is the standard means of encoding for many IR applications. Perhaps the most common application is in the remote controls we use for various appliances.
+The principle behind Manchester code is to encode the information into transitions between two symbols. This technique makes the encoding scheme particularly useful in communication employing inductive coupling such as in RFID. Due to its self-clocking property and simplicity, it is the standard means of encoding for many IR applications. Perhaps the most common application is in the remote controls we use for various appliances.
 
-Manchester code is a special form of binary phase shift keying (BPSK). A square wave of a particular frequency is chosen as the carrier and binary information is encoding by adjusting the setting a phase off set to either 0\degree or 180\degree s. In figure \ref{fig:manchesterencoding} the process of encoding 10 bits is illustrated. Two conventions exist, their difference lies solely in the definition of which logic values are represented by each of the two transitions. The convention used throughout this investigation is in accordance to the IEEE 802.3 standard which defines a logical 1 as the transition from 0 to 1 and a zero as 1 to 0. The other convention used by inventor G.E. Thomas is the inverse of this and is also widely used.\\
+Manchester code is a special form of binary phase-shift keying (BPSK). A square wave of a particular frequency is chosen as the carrier and binary information is encoding by adjusting the setting a phase offset to either 0\degree or 180\degree s. In figure \ref{fig:manchesterencoding} the process of encoding 10 bits is illustrated. Two conventions exist, their difference lies solely in the definition of which logic values are represented by each of the two transitions. The convention used throughout this investigation is per the IEEE 802.3 standard which defines a logical one as the transition from 0 to 1 and a logical zero as 1 to 0. The other convention used by inventor G.E. Thomas is the inverse of this and is also widely used.\\
 
 \begin{figure}[H]
 	\centering
@@ -245,7 +246,7 @@ Manchester code is a special form of binary phase shift keying (BPSK). A square 
 
 \subsubsection{Encoding Algorithm}
 
-%todo: here breifly go over the simple manchester encoding tecnique
+%todo: here briefly go over the simple manchester encoding technique
 
 
 \subsubsection{Decoding Algorithm}
@@ -258,19 +259,19 @@ Different techniques have been developed to decode Manchester encoded sequences.
 	\label{fig:manchesterdecodingfsm}
 \end{figure}
 
-The state machine approach is particularly useful because it only considers the time period between the current detected edge and the previous edge. It removes the need to track samples saving on memory and reducing processing power requirements, all without introducing additional complexity.
+The state machine approach is particularly useful because it only considers the period between the detected edge and the previous edge. It removes the need to track samples saving on memory and reducing processing power requirements, all without introducing additional complexity.
 
-It should be noted that this FSM assumes the first bit transmitted is always a logical 1. In addition does not detect the end of a sequence, so additional logic is required such as a counter to detect when a certain number of bits have been received or by means of implementing timeout detection.
+It should be noted that this FSM assumes the first bit transmitted is always a logical 1. It also does not detect the end of a sequence, so additional logic is required to detect when a certain number of bits have been received or to implement a timeout timer.
 
 %\iffalse
 \subsection{Error Control}
 
-In information theory, error control is the field of study that concerns issues of detecting errors in digital communications and in certain instances provides the means to corrected these errors. Whenever data is transmitted over some kind of network, there is the possibility that interference can cause a bit to flip resulting in an error. Richard Hamming pioneered in the development of digital error control and is known for (amongst other things) the Hamming code.
+In information theory, error control is the field of study that concerns detecting errors in digital communications and the techniques used to correct those errors. Whenever data is transmitted over some kind of network, there is the possibility that interference can cause a bit to flip resulting in an error. Richard Hamming pioneered in the development of digital error control and is known for (amongst other things) the Hamming code.
 
-Various ways to detect and potentially correct the presence of an error. The most trivial technique known as a 'repetition code' simply involves sending the information three times, making it possible to detect if one of the three data-streams doesn't match the others. Although repetition codes allows for both error detection and correction, it is horribly inefficient. Various techniques have been developed and each technique balances complexity and efficiency.
+Various ways to detect and potentially correct the presence of an error. The most trivial technique known as a 'repetition code' simply involves sending the information three times, making it possible to detect if one of the three data-streams doesn't match the others. Although repetition codes allow for both error detection and correction, it is extremely inefficient. Various techniques have been developed and each technique balances complexity and efficiency.
 
 \subsubsection{Parity}
-Using a parity bit is the most simple means to detect an error in a bit sequence. The parity of a sequence may be defined as the result of a bit wise exclusive or (XOR) operation, this is known as 'even parity' because the parity bit value is chosen such that upon appending it to the bit-sequence there would be an even number of 1s. Conversely 'odd parity' calculates the parity bit such the number of 1s in the generated sequence is odd. Table \ref{tbl:party_examples} below provides example bit sequences and the respective even (given by the XOR operation) and odd parity values.
+Using a parity bit is the most simple means to detect an error in a bit sequence. The parity of a sequence may be defined as the result of a bitwise exclusive or (XOR) operation, this is known as 'even parity' because the parity bit value is chosen such that upon appending it to the bit-sequence there would be an even number of 1s. Conversely 'odd parity' calculates the parity bit such the number of 1s in the generated sequence is odd. Table \ref{tbl:party_examples} below provides example bit sequences and the respective even (given by the XOR operation) and odd parity values.
 
 \begin{table}[H]
 	\centering
@@ -286,7 +287,7 @@ Using a parity bit is the most simple means to detect an error in a bit sequence
 	\label{tbl:party_examples}
 \end{table}
 
- To use parity as a method to detect errors, the sender and receiver choose to use either even or odd parity. Before transmission, the sender calculates the parity bit for the sequence to be sent, this bit is then appended to the bit-stream. Upon receiving the bit-stream, the same parity calculation is done on the sequence. If the result of this calculation is a 1 it can be said for certain that an error occurred, if the result is zero it can be said that no error occurred or an even number of errors occurred.
+To use parity as a method to detect errors, the sender and receiver choose to use either even or odd parity. Before transmission, the sender calculates the parity bit for the sequence to be sent, this bit is then appended to the bit-stream. Upon receiving the bit-stream, the same parity calculation is done on the sequence. If the result of this calculation is a 1 it can be said for certain that an error occurred, if the result is zero it can be said that no error occurred or an even number of errors occurred.
 
 \subsubsection{Hamming Code}
 %talk briefly on Hamming Codes (and why it was excluded)
@@ -297,22 +298,22 @@ Using a parity bit is the most simple means to detect an error in a bit sequence
 
 %%%%%%%%%%%%%%%%%%
 \section{Digital Signal Processing}
-In the age of micro-controllers and micro-processors, in many situations it has become far more effective to use digital signal processing to manipulate and processes signals.
+In the age of microcontrollers and microprocessors, in many situations, it has become far more effective to use digital signal processing to manipulate and processes signals.
 
-Part of the IR decoding process requires detecting the presence of a particular frequency (commonly referred to as a tone). The natural tool to turn to when examining the frequency content of a signal is the discrete Fourier transform (DFT). The DFT is well established and there exist a variety of algorithms which compute its values, perhaps the most well known being the FFT. However, for the purposes of detecting a single tone of a predetermined frequency, the DFT is not the most efficient method, even when optimized algorithms such as the FFT are implemented.
+Part of the IR decoding process requires detecting the presence of a particular frequency (commonly referred to as a tone). The natural tool to turn to when examining the frequency content of a signal is the discrete Fourier transform (DFT). The DFT is well established and there exist a variety of algorithms which compute its values, perhaps the most well known being the FFT. However, to detect a single tone of a predetermined frequency, the DFT is not the most efficient method, even when optimized algorithms such as the FFT are implemented.
 
 The FFT provides a very efficient means for determining all the DFT coefficients, but in a use case only a few of the coefficients are used and the rest discarded it is not the most efficient technique. By using a less efficient process for calculating individual coefficients of the DFT it is possible to greatly reduce program complexity and processing time relative to an implementation that uses the FFT.
 
 
 \subsubsection{Analog Preprocessing} %Anti-alias Filtering
-%todo: chat a bit about designing an anti-aliassing filter
+%todo: chat a bit about designing an anti-aliasing filter
 
-Any time an analog signal is sampled for the purpose of digital signal processing, it must filtered to remove any frequencies above the Nyquist frequency. If frequencies higher than the Nyquist frequency are present in the sampled waveform, aliasing will occur. Naturally this filtering stage cannot be performed digitally and therefore an analog filter must be implemented.
+Any time an analog signal is sampled for digital signal processing, it must be filtered to remove any frequencies above the Nyquist frequency. If frequencies higher than the Nyquist frequency are present in the sampled waveform, aliasing will occur. Naturally, this filtering stage cannot be performed digitally and therefore an analog filter must be implemented.
 
 In addition to filtering, it is sometimes necessary to perform other operations on analog signals before they are sampled, such as rectification or adding a positive offset to ensure the signal is within the input range of the ADC.
 
 \textbf{Low Pass Filtering}\\
-Anti-alias filters are built to suppress high frequencies, many different approaches to filtering high frequencies exist. The most basic filter is a passive RC network as shown in figure \ref{fig:filter_basic_lpf}. Filters with a sharper cut-off can be created by using an operational amplifier, figure \ref{fig:vcvs_filter_lpf} shows a voltage controlled voltage source (VCVS) circuit configured as a 2nd order low pass filter. The circuit in figure \ref{fig:vcvs_filter_lpf} can be found in the book \textit{The art of electronics - 2nd Edition} on page 274, also included in this book is a table of coefficients which may be used to achieve the desired filter response \cite{Horowitz1995}. Finally IC's containing customizable second order filtering stages can be purchased such as the \href{https://www.maximintegrated.com/en/products/analog/analog-filters/MAX275.html/tb_tab0}{MAX275} series by maximum integrated.
+Anti-alias filters are built to suppress high frequencies, many different approaches to filtering high frequencies exist. The most basic filter is a passive RC network as shown in figure \ref{fig:filter_basic_lpf}. Filters with a sharper cut-off can be created by using an operational amplifier, figure \ref{fig:vcvs_filter_lpf} shows a voltage-controlled voltage source (VCVS) circuit configured as a 2nd order low pass filter. The circuit in figure \ref{fig:vcvs_filter_lpf} can be found in the book \textit{The art of electronics - 2nd Edition} on page 274, also included in this book is a table of coefficients which may be used to achieve the desired filter response \cite{Horowitz1995}. Finally, IC's containing customizable second-order filtering stages can be purchased such as the \href{https://www.maximintegrated.com/en/products/analog/analog-filters/MAX275.html/tb_tab0}{MAX275} series by maximum integrated.
 
 \begin{figure}[H]
 	\centering
@@ -331,7 +332,7 @@ Anti-alias filters are built to suppress high frequencies, many different approa
 	\end{minipage}
 \end{figure}
 
-Dedicated filtering IC's are useful in precision applications where reproducibility and consistency of filter performance is a priority. They also allow for the construction of digitally controllable analog filters \cite{Huijing2010}. Dedicated filtering IC's are comparably expensive and therefore a trade off between cost and convenience must be considered.
+Dedicated filtering IC's are useful in precision applications where reproducibility and consistency of filter performance is a priority. They also allow for the construction of digitally controllable analog filters \cite{Huijing2010}. Dedicated filtering IC's are comparably expensive and therefore a trade-off between cost and convenience must be considered.
 
 \textbf{Precision Rectification}\\
 Simple, half-wave rectification may be achieved simply by placing a diode in series with the path of a signal. However, due to the forward voltage drop of the diode, any positive portion of the waveform below the forward voltage of the diode will be lost. This non-ideal effect can be mitigated through the use of an operational amplifier.
@@ -343,7 +344,7 @@ Simple, half-wave rectification may be achieved simply by placing a diode in ser
 	\label{fig:precision_rectifier}
 \end{figure}
 
-There are various circuit designs which use an operational amplifier to mitigate the effect of the diode forward voltage drop, they are known as precision rectifiers. The circuit shown in figure \ref{fig:precision_rectifier} is one of the more sophisticated designs as the output of the op-amp has a maximum swing of two diode drops. In simpler designs, the operational amplifier might swing more than half the supply rails during operation. The design has been taken from \textit{The art of electronics - 2nd Edition} and may be found on page 188 \cite{Horowitz1995}.
+There are various circuit designs which use an operational amplifier to mitigate the effect of the diode forward voltage drop, they are known as precision rectifiers. The circuit in figure \ref{fig:precision_rectifier} is one of the more sophisticated designs as the output of the op-amp has a maximum swing of two diode drops. In simpler designs, the operational amplifier might swing more than half the supply rails during operation. The design has been taken from \textit{The art of electronics - 2nd Edition} and may be found on page 188 \cite{Horowitz1995}.
 
 
 
@@ -351,14 +352,14 @@ There are various circuit designs which use an operational amplifier to mitigate
 \label{sec:goertzel_lit_review}
 
 The algorithm which computes individual DFT coefficients is known as the Goertzel algorithm (or Goertzel Filter) and was developed by G. Goertzel in 1958. \cite{Goertzel1958} A common application of the Goertzel algorithm is in the decoding of DTMF\footnotemark{} signals.
-\footnotetext{Duel Tone Multiple Frequency}
+\footnotetext{Dual Tone Multiple Frequency}
 
 \subsubsection{Derivation}
-The goertzel algorithm may be derived from the formula for the DFT. In the derivation \(W_N = e^{-j\frac{2\pi}{N}}\).
+The Goertzel algorithm may be derived from the formula for the DFT. In the derivation \(W_N = e^{-j\frac{2\pi}{N}}\).
 
 \begin{equation}
-	\label{eqn:dft_defn}
-	X[k] = \sum_{n=0}^{N-1}x[n]W_{N}^{nk}
+\label{eqn:dft_defn}
+X[k] = \sum_{n=0}^{N-1}x[n]W_{N}^{nk}
 \end{equation}
 
 Multipling the right side of equation \ref{eqn:dft_defn} by \(W_{N}^{-Nk} = e^{j\frac{2\pi N k}{N}} = 1\) we get
@@ -377,12 +378,12 @@ X[k] = \sum_{n=0}^{N-1}x[n]W_{N}^{k(n-N)}
 Notice that if we consider the signal \(h_k[l] = W_N^{-kl}u[l]\), then equation \ref{eqn:dft_conv} is the convolution of $h_k[l]$ with $x[l]$. Substituting these signals into equation \ref{eqn:dconv} (formula for discrete convolution) below, we can rearrange the result to arrive at equation \ref{eqn:dconv_sub}.
 
 \begin{equation}
-	\label{eqn:dconv}
-	y_k[l] = \sum_{m=0}^{N-1}x[m]h_k[l - m]
+\label{eqn:dconv}
+y_k[l] = \sum_{m=0}^{N-1}x[m]h_k[l - m]
 \end{equation}
 
 \begin{equation}
-	\label{eqn:dconv_sub}
+\label{eqn:dconv_sub}
 y_k[l] = \sum_{m=0}^{N-1}x[m]W_N^{k(m-l)}
 \end{equation}
 
@@ -397,9 +398,9 @@ X[k] = y_k[N]
 %Now deriving the filter
 %%%%
 
-In their paper on generalizing the Goertzel algorithm for non-integer multiples of the the fundamental frequency, P. Sysel and P. Rajmic show how the function $h_k[n]$ may be transformed to the Z-domain and optimized to reduce the amount of computational power required to compute the DFT coefficient \cite{Sysel2012}. The results are given by the following equations.
+In their paper on generalizing the Goertzel algorithm for non-integer multiples of the fundamental frequency, P. Sysel and P. Rajmic show how the function $h_k[n]$ may be transformed to the Z-domain and optimized to reduce the amount of computational power required to compute the DFT coefficient \cite{Sysel2012}. The results are given by the following equations.
 
-%The following equations are taken from the paper - check if thats okay with Simon...
+%The following equations are taken from the paper - check if that's okay with Simon...
 \[h_k[n] \xRightarrow{\text{Z}} H_k(z)\]
 
 \begin{equation}
@@ -413,18 +414,18 @@ $H_k(z)$ can then be manipulated to give
 H_k(z) = \frac{1 - e^{-j\frac{2\pi k}{N}}z^{-1}}{1 - 2cos(\frac{2\pi k}{N})z^{-1} + z^{-2}}
 \end{equation}
 
-Finally, equation \ref{eqn:g_optimized_ir} can be converted to state variable form to yeild the following
+Finally, equation \ref{eqn:g_optimized_ir} can be converted to state variable form to yield the following
 
 
 \begin{equation}
-	\label{eqn:g_ss}
-	s[n] = x[n]+2cos(\frac{2\pi k}{N})s[n-1]-s[n-2]
+\label{eqn:g_ss}
+s[n] = x[n]+2cos(\frac{2\pi k}{N})s[n-1]-s[n-2]
 \end{equation}
 
 
 \begin{equation}
-	\label{eqn:g_ssoutput}
-	y_k[n] = s[n]-e^{-j\frac{2\pi k}{N}}s[n-1]
+\label{eqn:g_ssoutput}
+y_k[n] = s[n]-e^{-j\frac{2\pi k}{N}}s[n-1]
 \end{equation}
 
 
@@ -436,25 +437,25 @@ Using the state variable equations \ref{eqn:g_ss} and \ref{eqn:g_ssoutput} we ca
 \begin{lstlisting}[caption={Goertzel Algorithm - Octave Implementation\label{lst:goertzel_algorithm}}]
 function magnitudesqd = calculate_goertzel (N, bin_frequency, sampling_frequency, samples)
 
-	k = round(N*bin_frequency/sampling_frequency);
-	omega = (2*pi*k)/N;
-	cosval = cos(omega);
-	sinval = sin(omega);
-	coeff = 2*cosval;
-	
-	s1 = 0;
-	s2 = 0;
-	
-	for i = 1:N
-	s0 = (samples(i) + (coeff*s1) - s2);
-	s2 = s1;
-	s1 = s0;    
-	end
-	
-	realv = (s1 - (s2 * cosval));
-	imgv = (s2 * sinval);  
-	
-	magnitudesqd = realv*realv + imgv*imgv;
+k = round(N*bin_frequency/sampling_frequency);
+omega = (2*pi*k)/N;
+cosval = cos(omega);
+sinval = sin(omega);
+coeff = 2*cosval;
+
+s1 = 0;
+s2 = 0;
+
+for i = 1:N
+s0 = (samples(i) + (coeff*s1) - s2);
+s2 = s1;
+s1 = s0;    
+end
+
+realv = (s1 - (s2 * cosval));
+imgv = (s2 * sinval);  
+
+magnitudesqd = realv*realv + imgv*imgv;
 
 endfunction
 \end{lstlisting}
@@ -472,7 +473,6 @@ BW < f_{Nyquist}
 
 
 %%%%%%%%%%%%%%%%%%
-
 
 
 
