@@ -299,7 +299,7 @@ A 765ns cross-over delay can be observed, this is the period of time that elapse
 \textbf{Discussion}\\
 The simulation results shown in figure \ref{fig:goertzel_filter_response_simulated} reveal the familiar sinc function embedded in the frequency response curves. The form of these curves can be characterised by the $sinc^2(x)$ function which is to be expected because the filter returns the square of the magnitude.
 
-From the plot it can be seen that the filter is highly sensitive to the magnitude of the sampled waveform. A decrease in amplitude by a factor of two results in a four fold decrease in the amplitude of the filters response.
+From the plot it can be seen that the filter is very sensitive to the magnitude of the sampled waveform. A decrease in amplitude by a factor of two results in a four fold decrease in the amplitude of the filters response.
 %%%%%%%%%%	/DISCUSSION	%%%%%%%%%%
 
 
@@ -360,7 +360,7 @@ The green area in figure \ref{fig:goertzel_amplitude_frequency_pairs} represents
 
 %%%%%%%%%%	DISCUSSION	%%%%%%%%%%
 \textbf{Discussion}\\
-%todo: discuss these results
+The area of activation shows that for small input signals, the filter is not able to detect the presence of a carrier frequency. The filter can be made more sensitive to small signals by reducing the trigger value, however this sufficiently broadens the trigger bandwidth. A more appropriate solution might use automatic gain control to amplify small signals.
 %%%%%%%%%%	/DISCUSSION	%%%%%%%%%%
 
 
