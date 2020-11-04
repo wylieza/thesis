@@ -299,7 +299,7 @@ A 765ns cross-over delay can be observed, this is the period of time that elapse
 \textbf{Discussion}\\
 The simulation results shown in figure \ref{fig:goertzel_filter_response_simulated} reveal the familiar sinc function embedded in the frequency response curves. The form of these curves can be characterised by the $sinc^2(x)$ function which is to be expected because the filter returns the square of the magnitude.
 
-It is clear from the plot that the filter is highly sensitive to the magnitude of the sampled waveform. A decrease in amplitude by a factor of two results in a four fold decrease in the amplitude of the filters response.
+From the plot it can be seen that the filter is highly sensitive to the magnitude of the sampled waveform. A decrease in amplitude by a factor of two results in a four fold decrease in the amplitude of the filters response.
 %%%%%%%%%%	/DISCUSSION	%%%%%%%%%%
 
 
@@ -312,20 +312,22 @@ The following plot in figure \ref{fig:goertzel_filter_response_empirical} show t
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\linewidth]{figures/results/goertzel_filter_empirical_wide.png}
-	\caption{Measured Frequency Response - Goertzel Filter}
+	\caption{Measured Frequency Response - Optimized Goertzel Filter}
 	\label{fig:goertzel_filter_response_empirical}
 \end{figure}
 
 
 %%%%%%%%%%	DISCUSSION	%%%%%%%%%%
 \textbf{Discussion}\\
-%todo: discuss these results
+From these results it is clear that the implemented algorithm is operating as expected. The small deviations from the expected response can be attributed to imperfections in the test signal and noise introduced by the ADC.
 %%%%%%%%%%	/DISCUSSION	%%%%%%%%%%
 
 
 
 
 \subsubsection{Trigger Conditions}
+
+For a given waveform amplitude, table \ref{tbl:amplitude_voltage_trigger_pairs} lists the lower and upper frequency bounds between which the tone decoder module outputs a high signal. These results were used to create the plot shown in figure \ref{tbl:amplitude_voltage_trigger_pairs}.
 
 \begin{table}[H]
 	\centering
@@ -342,6 +344,9 @@ The following plot in figure \ref{fig:goertzel_filter_response_empirical} show t
 	\captionof{table}{Amplitude-Voltage Boundry Pairs}
 	\label{tbl:amplitude_voltage_trigger_pairs}
 \end{table}
+
+The green area in figure \ref{fig:goertzel_amplitude_frequency_pairs} represents the set of amplitude-frequency pairs, for amplitudes less than 500mV, which trigger the tone decoder.
+
 
 \begin{figure}[H]
 	\centering
