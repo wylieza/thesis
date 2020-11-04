@@ -9,7 +9,7 @@
 
 \subsection{Carrier Waveform Generation Performance}
 
-Figure \ref{fig:carrier_steady_state} shows the steady state output of the carrier waveform generation module (blue trace) for a constant high logic level at the input (red trace). The frequency of the output waveform was calculated to be 40.2kHz.
+Figure \ref{fig:carrier_steady_state} shows the steady-state output of the carrier waveform generation module (blue trace) for a constant high logic level at the input (red trace). The frequency of the output waveform was calculated to be 40.2kHz.
 
 \begin{figure}[H]
 	\centering
@@ -18,7 +18,7 @@ Figure \ref{fig:carrier_steady_state} shows the steady state output of the carri
 	\label{fig:carrier_steady_state}
 \end{figure}
 
-Figure \ref{fig:carrier_manchester_zoomed_view} presents a zoomed in view of a Manchester transmission (red trace) at the input of the carrier waveform generation module and the corresponding output waveform (blue trace). The frequency of the carrier generated in these short bursts was measured to be 38.4kHz.
+Figure \ref{fig:carrier_manchester_zoomed_view} presents a zoomed-in view of a Manchester transmission (red trace) at the input of the carrier waveform generation module and the corresponding output waveform (blue trace). The frequency of the carrier generated in these short bursts was measured to be 38.4kHz.
 
 \begin{figure}[H]
 	\centering
@@ -100,11 +100,11 @@ The following screenshots shown in figures \ref{fig:pwr_led_6k} through \ref{fig
 
 %%%%%%%%%%	DISCUSSION	%%%%%%%%%%
 \textbf{Discussion}\\
-For each test frequency, the power LED driver module regulated the current with a high precision and no noticeable ripple. This encapsulates the advantages of linear regulation.
+For each test frequency, the power LED driver module regulated the current with high precision and no noticeable ripple. This encapsulates the advantages of linear regulation.
 
 The design predicted a current limit of 1.02A. These results show that the real current limit is 0.91A. This result predicts that the actual base-emitter voltage drop\footnote{at equilibrium} is closer to 0.62V.
 
-The duty cycle of the LED current decreases for increasing input frequencies. This can be attributed to the rise-time of the current through the LED (the time taken for the current to reach steady state). As the driving frequency increases, this rise-time makes up an increasing portion of the total on-time.
+The duty cycle of the LED current decreases for increasing input frequencies. This can be attributed to the rise-time of the current through the LED (the time taken for the current to reach a steady-state). As the driving frequency increases, this rise-time makes up an increasing portion of the total on-time.
 %%%%%%%%%%	/DISCUSSION	%%%%%%%%%%
 
 
@@ -193,7 +193,7 @@ It should be noted that chromatic aberration was not observed while testing with
 
 \subsection{Directivity of IR Modules}
 
-Figure \ref{fig:vrms_vs_angle_of_incidence} shows the RMS voltage value of the modules output with respect to the angle of incidence. Figure \ref{fig:beam_pattern} shows the normalized RMS voltage value and mirrors the image about the vertical to provide an illustration of the beam pattern.
+Figure \ref{fig:vrms_vs_angle_of_incidence} shows the RMS voltage value of the module's output for the angle of incidence. Figure \ref{fig:beam_pattern} shows the normalized RMS voltage value and mirrors the image about the vertical to illustrate the beam pattern.
 
 
 \begin{figure}[H]
@@ -218,7 +218,7 @@ The IR receiver module registered the signal between angles of 0\textdegree and 
 
 %%%%%%%%%%	DISCUSSION	%%%%%%%%%%
 \textbf{Discussion}\\
-These results show that the phototransistor has the larger beam pattern, however even with the larger beam pattern after an angle of 50\textdegree the sensitivity decreases rapidly.
+These results show that the phototransistor has the larger beam pattern, however, even with the larger beam pattern after an angle of 50\textdegree the sensitivity decreases rapidly.
 
 These results do not simply quantify the limitations of the detector modules, they also provide the necessary information required to optimally orientate multiple sensors into arrays to obtain a large effective beam pattern.
 %%%%%%%%%%	/DISCUSSION	%%%%%%%%%%
@@ -264,7 +264,7 @@ Figure \ref{fig:precision_rectification} below shows the oscilloscope trace of t
 \textbf{Discussion}\\
 The precision rectifier stage operates as expected, the difference between the amplitude of the input signal and output signal during rectification is 7mV.
 
-A 765ns cross-over delay can be observed, this is the period of time that elapses between the instant the blue signal becomes negative and the instant the red signal starts to rise. This occurs because the op-amp requires a finite period of time to swing the output voltage such that it exceeds the forward voltages of the two diodes.
+A 765ns cross-over delay can be observed, this is the time that elapses between the instant the blue signal becomes negative and the instant the red signal starts to rise. This occurs because the op-amp requires some time to swing the output voltage such that it exceeds the forward voltages of the two diodes.
 %%%%%%%%%%	/DISCUSSION	%%%%%%%%%%
 
 
@@ -290,9 +290,9 @@ A 765ns cross-over delay can be observed, this is the period of time that elapse
 
 %%%%%%%%%%	DISCUSSION	%%%%%%%%%%
 \textbf{Discussion}\\
-The simulation results shown in figure \ref{fig:goertzel_filter_response_simulated} reveal the familiar sinc function embedded in the frequency response curves. The form of these curves can be characterised by the $sinc^2(x)$ function which is to be expected because the filter returns the square of the magnitude.
+The simulation results in figure \ref{fig:goertzel_filter_response_simulated} reveal the familiar sinc function embedded in the frequency response curves. The form of these curves can be characterised by the $sinc^2(x)$ function which is to be expected because the filter returns the square of the magnitude.
 
-From the plot it can be seen that the filter is very sensitive to the magnitude of the sampled waveform. A decrease in amplitude by a factor of two results in a four fold decrease in the amplitude of the filters response.
+From the plot, it can be seen that the filter is very sensitive to the magnitude of the sampled waveform. A decrease in amplitude by a factor of two results in a four-fold decrease in the amplitude of the filter's response.
 %%%%%%%%%%	/DISCUSSION	%%%%%%%%%%
 
 
@@ -312,7 +312,7 @@ The following plot in figure \ref{fig:goertzel_filter_response_empirical} show t
 
 %%%%%%%%%%	DISCUSSION	%%%%%%%%%%
 \textbf{Discussion}\\
-From these results it is clear that the implemented algorithm is operating as expected. The small deviations from the expected response can be attributed to imperfections in the test signal and noise introduced by the ADC.
+From these results, it is clear that the implemented algorithm is operating as expected. The small deviations from the expected response can be attributed to imperfections in the test signal and noise introduced by the ADC.
 %%%%%%%%%%	/DISCUSSION	%%%%%%%%%%
 
 
@@ -320,7 +320,7 @@ From these results it is clear that the implemented algorithm is operating as ex
 
 \subsubsection{Trigger Conditions}
 
-For a given waveform amplitude, table \ref{tbl:amplitude_voltage_trigger_pairs} lists the lower and upper frequency bounds between which the tone decoder module outputs a high signal. These results were used to create the plot shown in figure \ref{tbl:amplitude_voltage_trigger_pairs}.
+For a given waveform amplitude, table \ref{tbl:amplitude_voltage_trigger_pairs} lists the lower and upper-frequency bounds between which the tone decoder module outputs a high signal. These results were used to create the plot shown in figure \ref{tbl:amplitude_voltage_trigger_pairs}.
 
 \begin{table}[H]
 	\centering
@@ -353,7 +353,7 @@ The green area in figure \ref{fig:goertzel_amplitude_frequency_pairs} represents
 
 %%%%%%%%%%	DISCUSSION	%%%%%%%%%%
 \textbf{Discussion}\\
-The area of activation shows that for small input signals, the filter is not able to detect the presence of a carrier frequency. The filter can be made more sensitive to small signals by reducing the trigger value, however this sufficiently broadens the trigger bandwidth. A more appropriate solution might use automatic gain control to amplify small signals.
+The area of activation shows that for small input signals, the filter is not able to detect the presence of a carrier frequency. The filter can be made more sensitive to small signals by reducing the trigger value, however, this sufficiently broadens the trigger bandwidth. A more appropriate solution might use automatic gain control to amplify small signals.
 %%%%%%%%%%	/DISCUSSION	%%%%%%%%%%
 
 
@@ -416,11 +416,11 @@ The results from table \ref{tbl:goertzel_speed_results} have been plotted in fig
 
 %%%%%%%%%%	DISCUSSION	%%%%%%%%%%
 \textbf{Discussion}\\
-Figure \ref{fig:goertzel_computation_plot} provides two important insights to the nature of the goertzel algorithm. The first observation may be found in the linearity of both plots, this confirms that both implementations of the algorithm have a time complexity of O(N) as noted in section \ref{sec:filter_optimization_design}. The practically perfect linearity in the results makes it possible to predict the timing requirements and make accurate theoretical predictions.
+Figure \ref{fig:goertzel_computation_plot} provides two important insights into the nature of the Goertzel algorithm. The first observation may be found in the linearity of both plots, this confirms that both implementations of the algorithm have a time complexity of O(N) as noted in section \ref{sec:filter_optimization_design}. The practically perfect linearity in the results makes it possible to predict the timing requirements and make accurate theoretical predictions.
 
 The gradient of the unoptimized curve is $16\mu S/sample$ and the gradient of the optimized curve is $9.3\mu S/sample$. The sampling rate used was $f_{sampling} \approx 144$kHz or $6.9\mu S/sample$. This indicates that even after optimizing the algorithm by simplifying out the multiplication step required for each new sample, the processor is still not fast enough to keep up with the rate of incoming samples.
 
-The final observation is that the implemented optimization has two implications for the algorithms performance. The first implication is a small but non-zero constant timer saving, this comes as a result of removing the need for the multiplications to find the real and imaginary components of the k\textsubscript{th} DFT coefficient (see lines 18 and 19 of listing \ref{lst:goertzel_algorithm}). The second implication is a time difference which is directly proportional to the number of samples N, as indicated by the different gradients highlighted in the above paragraph.
+The final observation is that the implemented optimization has two implications for the performance of the algorithm. The first implication is a small but non-zero constant timer saving, this comes as a result of removing the need for the multiplications to find the real and imaginary components of the k\textsubscript{th} DFT coefficient (see lines 18 and 19 of listing \ref{lst:goertzel_algorithm}). The second implication is a time difference which is directly proportional to the number of samples N, as indicated by the different gradients highlighted in the above paragraph.
 %%%%%%%%%%	/DISCUSSION	%%%%%%%%%%
 
 
@@ -431,7 +431,7 @@ The final observation is that the implemented optimization has two implications 
 \subsection{Tagger MCU Performance}
 
 \subsubsection{Manchester Encoding}
-The oscilloscope trace shown in figure \ref{fig:manchester_sequence_141_decoded} shows the Manchester encoded waveform generated by the tagger, transmitting the number 141.
+The oscilloscope trace in figure \ref{fig:manchester_sequence_141_decoded} shows the Manchester encoded waveform generated by the tagger, transmitting the number 141.
 
 \begin{figure}[H]
 	\centering
@@ -445,7 +445,7 @@ The bit period was measured to be 1.777mS, figure \ref{fig:delta_bit_period} in 
 
 %%%%%%%%%%	DISCUSSION	%%%%%%%%%%
 \textbf{Discussion}\\
-Inspecting the decoded binary sequence (drawn above the waveform), the two start bits are present followed by the binary for the number 141 (in reverse). The 18\textsubscript{th} bit is a zero, which is the correct parity for the data being transmitted.
+Inspecting the decoded binary sequence (inserted above the waveform), the two start bits are seen, followed by the binary representation of the number 141 (in reverse). The 18\textsubscript{th} bit is a zero, which is the correct parity for the data being transmitted.
 
 The bit period of the waveform matched the expected value of 1.777mS, confirming the functionality of the module and demonstrating the high precision that may be achieved through the use of interrupts and timers.
 %%%%%%%%%%	/DISCUSSION	%%%%%%%%%%
@@ -483,7 +483,7 @@ Combining the timeout delay and processing time gives a maximum period of 33.46m
 
 %%%%%%%%%%	DISCUSSION	%%%%%%%%%%
 \textbf{Discussion}\\
-These results show that the number of edges in a typical transmission have a negligible effect on the total time taken to process the received data. Most of this processing time can be attributed to communication with the LCD..
+These results show that the number of edges in a typical transmission has a negligible effect on the total time taken to process the received data. Most of this processing time can be attributed to communication with the LCD.
 
 The original RC-5 standard specifies a 114ms period between transmissions, this is significantly longer than necessary.
 
@@ -510,7 +510,7 @@ Figure \ref{fig:transmission_too_many_edges} below shows an incoming stream of t
 
 %%%%%%%%%%	DISCUSSION	%%%%%%%%%%
 \textbf{Discussion}\\
-%It seems that the LCD write function is the reson it takes so long to 'process', its not that it is so much drastically longer because its going through all the states.... but its too little too late to change that because soo many experiemnts used that code....
+%It seems that the LCD write function is the reason it takes so long to 'process', it's not that it is so much drastically longer because it's going through all the states.... but its too little too late to change that because soo many experiments used that code...
 In the case of the two transmissions that arrived while the processor was busy, errors were detected and no further processing was performed. This is indicated by the short red spike that occurs in each case.
 
 In the case of continuous transmission, the maximum number of edges were recorded. When this occurred the processor immediately attempted to decode the transmission. At the point when the processor detected that the number of decoded bits exceeds 18, the message was discarded and no further processing was performed.
@@ -551,14 +551,14 @@ The results show that the IR receiver module outperformed both the phototransist
 
 In the photodiode detector module saturated in the bright environment, this was due to the design of the transimpedance amplifier which only performed decoupling after the first amplification stage.
 
-Interestingly, in the dark environment both the phototransistor and photodiode modules achieved a similar range despite using different circuit designs to detect the incoming light.
+Interestingly, in the dark environment, both the phototransistor and photodiode modules achieved a similar range despite using different circuit designs to detect the incoming light.
 
 The range of the phototransistor detector during the day was more than twice the range recorded at night. This is was contrary to expectations, as it was assumed that the module would perform more poorly in a bright environment due to the excessive ambient IR generated by the sun.
-It might be possible that the ambient IR light caused the phototransistor to operate at a higher sensitivity, however it is more plausible that environmental factors (for example a fine mist forming in the evening) caused the decrease in system range.
+It might be possible that the ambient IR light caused the phototransistor to operate at a higher sensitivity, however, it is more plausible that environmental factors (for example a fine mist forming in the evening) caused the decrease in system range.
 
 Both the photodiode and phototransistor modules were particularly sensitive to the strength of the IR beam. Adjusting the beam to be more than a couple of degrees off centre prevented the target system from detecting incoming transmissions. This is in contrast to the IR receiver module which was much less sensitive to beam intensity.
 
-The following screenshots present further observations that were made during the course of testing the system range. %todo: complete these further observations
+The following screenshots present further observations that were made while testing the system range. %todo: complete these further observations
 %%%%%%%%%%	/DISCUSSION	%%%%%%%%%%
 
 
@@ -589,7 +589,7 @@ The following screenshots present further observations that were made during the
 
 \begin{figure}[H]
 	\centering
-%	\includegraphics[width=.9\textwidth]{figures/results/drak_system_test/phototransistor1}
+	%	\includegraphics[width=.9\textwidth]{figures/results/drak_system_test/phototransistor1}
 	\caption{Oscilloscope trace showing undetected bits at a range of ?m - Phototransistor Detector in a ? environment}
 	\label{fig:phototransistor1}
 \end{figure}
@@ -597,7 +597,7 @@ The following screenshots present further observations that were made during the
 
 \begin{figure}[H]
 	\centering
-%	\includegraphics[width=.9\textwidth]{figures/results/drak_system_test/phototransistor2}
+	%	\includegraphics[width=.9\textwidth]{figures/results/drak_system_test/phototransistor2}
 	\caption{Oscilloscope trace showing input of Goertzel filter at a range of ?m - Phototransistor Detector in a ? environment}
 	\label{fig:phototransistor2}
 \end{figure}
@@ -621,7 +621,7 @@ The following screenshots present further observations that were made during the
 %%%%%%%%%%	DISCUSSION	%%%%%%%%%%
 During the day time range test, it was observed that the output of the IR receiver contained blips. It can be seen in figure \ref{fig:36m_phototranaistoroutput_vs_receiveroutput} that while the incident IR radiation was modulating the output of the IR receiver would occasionally indicate for a brief period that no incident radiation was present. These blips produced errors in the decoded bit-stream.
 
-These blips only presented themselves when the IR receiver was centred in the incoming beam, if the beam was slightly off centre the behaviour ceased.
+These blips only presented themselves when the IR receiver was centred in the incoming beam, this behaviour ceased whenever the beam was set off centre.
 %%%%%%%%%%	/DISCUSSION	%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
