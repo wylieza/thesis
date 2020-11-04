@@ -375,18 +375,20 @@ The following plot in figure \ref{fig:goertzel_filter_response_empirical} show t
 
 \subsection{Goertzel Filter Benchmark}
 
-The results from the goertzel algorithm optimization experiment are tabulated in table \ref{tbl:goertzel_speed_results}, the adjacent screenshot shown in figure \ref{fig:goertzel_speed_scope_screenshot} illustrates the output recorded by the oscilloscope software during a single iteration of the experiment. 
+Figure \ref{fig:goertzel_speed_scope_screenshot} illustrates the output traced by the oscilloscope during an iteration of the experiment. For both traces, a high logic level indicates the callback function is currently processing a portion of the circular buffer. The two traces distinguish between the different halves of the buffer.
+
+For each iteration, a built-in oscilloscope function was used to calculate the average processing time, the results are tabulated in table \ref{tbl:goertzel_speed_results}.
 
 \begin{figure}[H]
 	\centering
-	\begin{minipage}{.4\textwidth}
+	\begin{minipage}{.45\textwidth}
 		%todo: make image higher quality after zoom
 		\centering
-		\includegraphics[width=0.9\linewidth]{figures/results/goertzel_filter_speed/16nu.JPG}
-		\captionof{figure}{Scope Reading for unoptimized goertzel with $N = 16$}
+		\includegraphics[width=0.9\linewidth]{figures/results/goertzel_filter_speed/16nu_crop.JPG}
+		\captionof{figure}{Unoptimized Goertzel Algorithm with $N = 16$}
 		\label{fig:goertzel_speed_scope_screenshot}
 	\end{minipage}%
-	\hspace{.1\textwidth}
+	\hspace{.05\textwidth}
 	\begin{minipage}{.4\textwidth}
 		\begin{table}[H]
 			\begin{tabular}{ccc}
@@ -404,7 +406,7 @@ The results from the goertzel algorithm optimization experiment are tabulated in
 	\end{minipage}
 \end{figure}
 
-The recorded results are plotted in figure \ref{fig:goertzel_computation_plot} to provide graphical insight.
+The results from table \ref{tbl:goertzel_speed_results} have been plotted in figure \ref{fig:goertzel_computation_plot}.
 
 \begin{figure}[H]
 	\centering
@@ -494,7 +496,7 @@ Figure \ref{fig:transmission_too_fast} below shows a set of incoming transmissio
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=.8\textwidth]{figures/results/receiver_software/transmission_too_fast_crop.JPG}
+	\includegraphics[width=.8\textwidth]{figures/results/receiver_software/transmission_too_fast_crop_crop.JPG}
 	\caption{Incoming Transmission During Decoding}
 	\label{fig:transmission_too_fast}
 \end{figure}
@@ -503,7 +505,7 @@ Figure \ref{fig:transmission_too_many_edges} below shows an incoming stream of t
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=.8\textwidth]{figures/results/receiver_software/transmission_too_many_edges_crop.JPG}
+	\includegraphics[width=.8\textwidth]{figures/results/receiver_software/transmission_too_many_edges_crop_crop.JPG}
 	\caption{Continuous Transmission}
 	\label{fig:transmission_too_many_edges}
 \end{figure}
