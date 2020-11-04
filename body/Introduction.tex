@@ -1,30 +1,30 @@
 \chapter{Introduction}
 \label{ch_introduction}
 
-This research project aims to decompose, prototype and analyse the fundamental components of the laser tag system, with a focus on the tagger-target engineering problem. Decomposition involves reducing the high-level system into individual sub-systems. Prototyping involves development of hardware and software modules for each sub-system. Analysis will involve evaluating the performance of these modules.
+This research project aims to decompose, prototype and analyse the fundamental components of the laser tag system, with a focus on the tagger-target engineering problem. Decomposition involves reducing the high-level system into individual sub-systems. Prototyping involves the development of hardware and software modules for each sub-system. The analysis will involve evaluating the performance of these modules.
 
-This study hopes to provide insight into the fundamental elements of the laser tag system not exclusively through the design of modules but by thorough analysis of these modules and identification of performance bottle necks in the designed system.
+This study hopes to provide insight into the fundamental elements of the laser tag system not exclusively through the design of modules but by a thorough analysis of these modules and identification of performance bottlenecks in the designed system.
 
-It is intended for the knowledge generated throughout this research endeavour to contribute toward the development a more sophisticated laser tag system which utilizes the advances in current technology to produce a high performing system which is cost effective.
+It is intended for the knowledge generated throughout this research endeavour to contribute toward the development of a more sophisticated laser tag system which utilizes the advances in current technology to produce a high performing system which is cost-effective.
 
 \section{Background to the study}
-%A very brief background to your area of research. Start off with a general introduction to the area and
+%A very brief background in your area of research. Start with a general introduction to the area and
 %then narrow it down to your focus area. Used to set the scene \cite{Knight2013}.
-Since the discovery of infrared (IR) light by William Herschel in the 1800s \cite{Rowan-Robinson2013}, it has found application in technologies ranging from military grade night vision equipment to the humble television remote.
+Since the discovery of infrared (IR) light by William Herschel in the 1800s \cite{Rowan-Robinson2013}, it has found application in technologies ranging from military-grade night vision equipment to the humble television remote.
 
 Inspired by star wars, the recreational sport of laser tag is said to have been invented by George Carter who founded Photon and patented his idea\cite{Carter1986}.
 
-In the sport of laser tag, there are both commercial grade equipment that one may find at laser tag facilities and lower cost consumer grade laser tag toys. When one considers the consumer market there is a noticeable differences between the more sophisticated commercial equipment and the cheaper laser tag toys available on the market. Consumer grade equipment allows for more immersive play by housing a multitude of target sensors and incorporating a higher quality scoring system when compared to typical laser tag toys. However consumer equipment is bulky and has not seen much improvement over the decades despite new technologies.
+In the sport of laser tag, there is both commercial grade equipment that one may find at laser tag facilities and lower-cost consumer-grade laser tag toys. When one considers the consumer market there is a noticeable difference between the more sophisticated commercial equipment and the cheaper laser tag toys available on the market. Consumer-grade equipment allows for more immersive play by housing a multitude of target sensors and incorporating a higher quality scoring system when compared to typical laser tag toys. However, consumer equipment is bulky and has not seen much improvement over the decades despite new technologies.
 
 This study aims to explore the problem of laser tag by exploring the engineering techniques involved in the construction of such a system. A full laser tag system is very elaborate, therefore this study will try to focus on the tagger-target relationship.
 
 \section{Objectives of this study}
 
-The primary objective of this study is to develop the modules for a uni-directional data link (UDDL) between a tagger and a target in a laser tag system. There are a vast number of techniques that could be employed to achieve this goal. This study aims to select a few appropriate techniques and implement these for the purpose of empirically analysing their performance. This study aims to serve as a platform for further research by performing an initial investigation into a UDDL system in the context of laser tag.
+The primary objective of this study is to develop the modules for a uni-directional data link (UDDL) between a tagger and a target in a laser tag system. There are a vast number of techniques that could be employed to achieve this goal. This study aims to select a few appropriate techniques and implement these to empirically analyse their performance. This study aims to serve as a platform for further research by performing an initial investigation into a UDDL system in the context of laser tag.
 
-The uni-directional data link system is complex, comprising of many independent functional components. For the purposes of this investigation, these functional components will be separated into modules. Modular design allows for more fine grained testing and experimentation which in turn allows the performance of individual components to be evaluated.
+The uni-directional data link system is complex, comprising of many independent functional components. For this investigation, these functional components will be separated into modules. Modular design allows for more fine-grained testing and experimentation which in turn allows the performance of individual components to be evaluated.
 
-In addition to the primary objective, which is to develop a practical data link in the context of laser tag. This study also aims to compare the effectiveness of different substitute modules. Specifically, this study aims to compare the use of a photodiode and phototransistor for the purposes of detecting IR light.
+In addition to the primary objective, which is to develop a practical data link in the context of laser tag. This study also aims to compare the effectiveness of different substitute modules. Specifically, this study aims to compare the use of a photodiode and phototransistor to detect IR light.
 
 Finally, there exist IR receiver chips (used in standard IR remote control applications) which perform a large portion of the work done by the receiver side of such a laser tag system inside a single package. As a control for the investigation, this study will use one of these as a golden measure with which to compare the full system.
 
@@ -35,9 +35,9 @@ At the highest abstraction level, the first step of this investigation is to det
 
 After the system has been effectively sub-divided into appropriate functional blocks, techniques for implementing each block in the form of an independent module must be decided. The technique used to implement the functional block is determined based on the available equipment and resources and should be in line with standard practices.
 
-Once a module has been designed and implemented, various tests specific to that modules function should be performed to determine that the module is able to perform its function and to test the limits to the modules functionality.
+Once a module has been designed and implemented, various tests specific to the function of that module should be performed to determine that the module can perform its function and to test the limits to the functionality of the module.
 
-As hilighted in the objectives of this study, certain modules with the same function will be designed to provide a comparison between the performance of a photodiode and a phototransistor for the purposes of incident IR light measurements.
+As highlighted in the objectives of this study, certain modules with the same function will be designed to provide a comparison between the performance of a photodiode and a phototransistor for incident IR light measurements.
 
 This investigation may be summarised through the following questions:
 
@@ -48,13 +48,13 @@ This investigation may be summarised through the following questions:
 	\item What is the measured performance of the individual modules and how does the system perform as a whole?
 	\item How do the different modules for the detection of incident IR light compare?
 	\item How does this system compare to all in one IR receiver devices
-	\item How might the RC-5 protocol be adapted for the purposes of laser tag?
-
-%	
-%	\item What techniques are exist for the generation of narrow beam IR radiation?
-%	\item What is a suitable protocol for the tagger/target system to utilize for detecting and identifying shots fired by opponents?
-%	\item What light detection technology is the most appropriate in the context of laser tag?
-%	\item What kind of performance does one expect from such a system?
+	\item How might the RC-5 protocol be adapted for laser tag?
+	
+	%	
+	%	\item What techniques exist for the generation of narrow beam IR radiation?
+	%	\item What is a suitable protocol for the tagger/target system to utilize for detecting and identifying shots fired by opponents?
+	%	\item What light detection technology is the most appropriate in the context of laser tag?
+	%	\item What kind of performance does one expect from such a system?
 \end{itemize}
 
 
@@ -62,15 +62,15 @@ This investigation may be summarised through the following questions:
 %Give the significance of investigating these problems. It must be obvious why you are doing this study
 %and why it is relevant.
 
-%The purpose of this study is therefore to investigate the critical components of such a system, with the goal of providing a comprehensive understanding of how the various block of such a system can be most efficiently brought together and optimized.
+%The purpose of this study is therefore to investigate the critical components of such a system, to provide a comprehensive understanding of how the various block of such a system can be most efficiently brought together and optimized.
 
 %------------------
 
-The purpose of this study is to investigate the design and construction of a uni-directional data link in the context of laser tag system. This investigation will attempt to determine the effectiveness and measure performance of different key components from which the tagger and target units comprise.
+The purpose of this study is to investigate the design and construction of a uni-directional data link in the context of a laser tag system. This investigation will attempt to determine the effectiveness and measure performance of different key components from which the tagger and target units comprise.
 
 In doing so this study aims to make available insightful information in the context of laser tag systems. Because of the niche nature of this system in the field of recreational electronics, there are very few sources of information available that formally document the development of a recreational laser tag system.
 
-By performing a detailed investigation into the performance of the individual modules of the UDDL system, this study hopes to provide a foundation for further research into the individual modules and over-all system in an effort to overcome any short-comings and improve on the results obtained in this study.
+By performing a detailed investigation into the performance of the individual modules of the UDDL system, this study hopes to provide a foundation for further research into the individual modules and over-all system to overcome any shortcomings and improve on the results obtained in this study.
 
 In summary, this study aims to achieve the following:
 
@@ -88,9 +88,9 @@ In summary, this study aims to achieve the following:
 
 This investigation approaches the problems to be investigated at a functional level and therefore does not concern the design of any casing or aesthetic assembly. This limitation is to ensure the study remains focused. As highlighted in the previous section, the purpose is to gain an understanding of the key modules and their respective performance, not to design or create 'ready to play' laser tag equipment.
 
-The completion of this project will involve the design and realization of a tagger and target module for the purposes of performing tests. All final implementations will be done on strip-board as opposed to PCB, this is due to the Covid-19 pandemic which has made global markets less accessible and time constraints do not allow for the possibility of unpredictable delays.
+The completion of this project will involve the design and realization of a tagger and target module to perform tests. All final implementations will be done on strip-board as opposed to PCB, this is due to the Covid-19 pandemic which has made global markets less accessible and time constraints do not allow for the possibility of unpredictable delays.
 
-Although no time will be allocated to the design aesthetics or 'form' component of the laser tag system that this investigation is focused around. Consideration will be taken with regard to the constraints such a system puts on the engineering design decisions. That is to say that all modules will be designed with size, weight and power constraints in mind, even though such constraints do not directly influence what is possible during the course of this investigation.
+Although no time will be allocated to the design aesthetics or 'form' component of the laser tag system that this investigation is focused around. Consideration of the contextual design constraints will be made. That is to say that all modules will be designed with size, weight and power constraints in mind, even though such constraints do not directly influence what is possible during the course of this investigation.
 
 This project has a budget of R1500 for the procurement of components. In addition to the limited amount of time allocated to this investigation, this constraint has limited the number of components that can be compared. This limitation has also ruled out the use of IR laser diodes, which although in themselves fit within the budget, would require a myriad of personal protective equipment and specialized lenses which is beyond the budget of this investigation.
 
