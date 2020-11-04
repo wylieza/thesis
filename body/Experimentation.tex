@@ -1,9 +1,9 @@
 \chapter{Experimentation}
 \label{ch_experimentation}
-%This is a chapter added into the template because Dr. Winberg's example reports have it.
-The following experiments were developed to evaluate the laser tag system. The objective of these experiments is to asses the performance and characteristics of the modules and software developed during the design phase.
+%This is a chapter added into the template because Dr Winberg's example reports have it.
+The following experiments were developed to evaluate the laser tag system. The objective of these experiments is to assess the performance and characteristics of the modules and software developed during the design phase.
 
-The experiments may be separated into two groups, those evaluating specific modules and those evaluating software algorithms. Outside these two groups is the system performance experiment which evaluates the combined behaviour of all the modules and software based on a range test.
+The experiments may be separated into two categories, those evaluating specific modules and those evaluating software algorithms. Outside these categories is the system performance experiment which evaluates the combined behaviour of all the modules and software based on a range test.
 
 \begin{figure}[H]
 	\centering
@@ -32,9 +32,9 @@ In figures \ref{fig:experiments_overview_module_evaluation} and \ref{fig:experim
 \section{Module Evaluation}
 
 \subsection{Carrier Waveform Generation Performance}
-The carrier waveform module was tested under two conditions. Initially the output was traced for a constant input to evaluate the steady state frequency generation. Following this, the output was traced for an input Manchester transmission.
+The carrier waveform module was tested under two conditions. Initially, the output was traced for a constant input signal to evaluate the steady-state frequency generation. Following this, the output was traced for an input Manchester transmission.
 
-The output of the carrier waveform generation module is configured as an open-collector, therefore a pull up resistor was used to allow the oscilloscope to distinguish between the high and low output states. An oscilloscope was used to trace both the input and output waveforms. The experimental setup is illustrated in figure \ref{fig:carrier_generation_module_experiment_setup}
+The output of the carrier waveform generation module is configured as an open-collector, therefore a pull-up resistor was used to allow the oscilloscope to distinguish between the high and low output states. An oscilloscope was used to trace both the input and output waveforms. The experimental setup is illustrated in figure \ref{fig:carrier_generation_module_experiment_setup}
 
 \begin{figure}[H]
 	\centering
@@ -43,7 +43,7 @@ The output of the carrier waveform generation module is configured as an open-co
 	\label{fig:carrier_generation_module_experiment_setup}
 \end{figure}
 
-The steady state response was measured by bringing the input of the module high and tracing the output after approximately 1 second. During the Manchester transmission, the output tone was generated for periods less than 2mS.
+The steady-state response was measured by bringing the input of the module high and tracing the output after approximately 1 second. During the Manchester transmission, the output tone was generated for periods less than 2mS.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -54,7 +54,7 @@ The steady state response was measured by bringing the input of the module high 
 
 The LED driver module must be capable of modulating a high-power IR led at a frequency of 36kHz.
 
-To verify that the power LED driver module operates as expected and to evaluate the modules performance, a set of test input frequencies were injected and the response recorded. Figure \ref{fig:power_led_driver_experiemnet_setup} illustrates the experimental setup.
+To verify that the power LED driver module operates as expected and to evaluate the module's performance, a set of test input frequencies were injected and the response recorded. Figure \ref{fig:power_led_driver_experiemnet_setup} illustrates the experimental setup.
 
 \begin{figure}[H]
 	\centering
@@ -90,7 +90,7 @@ After setting up the experiment, the lens was slowly adjusted along the vertical
 
 \subsubsection{Beam Dispersion}
 
-To evaluate the light focusing tube, two different power LEDs where used, a 3W white (visible light) power LED and a 3W IR power LED. Performing the experiment with a white LED allowed a set of measurements to be taken without the use of a intermediary tool, as was necessary when measuring the IR beam spot diameter.
+To evaluate the light focusing tube, two different power LEDs where used, a 3W white (visible light) power LED and a 3W IR power LED. Experimenting with a white LED allowed a set of measurements to be taken without the use of an intermediary tool, as was necessary when measuring the IR beam spot diameter.
 
 \begin{figure}[H]
 	\centering
@@ -101,7 +101,7 @@ To evaluate the light focusing tube, two different power LEDs where used, a 3W w
 
 Figure \ref{fig:focus_system_experiemnt} above shows the experimental setup.
 
-In both cases, the focus system was setup some distance from a flat surface. The light was powered and after marking the edge of the beam spot the diameter was measured. Each diameter was recorded along with the beam distance. A video camera in 'night shot' mode was used to find and mark the edge of the beam spot.
+In both cases, the focus system was set up some distance from a flat surface. The light was powered and after marking the edge of the beam spot the diameter was measured. Each diameter was recorded along with the beam distance. A video camera in 'night shot' mode was used to find and mark the edge of the beam spot.
 
 
 
@@ -123,11 +123,11 @@ The light focus system was connected to the LED driver module which was modulate
 
 The IR beam was positioned off centre so that when the module was adjusted to have an indecent angle of 0\textdegree the output of the sensor module was only just saturating, this ensured the sensitivity could be accurately tracked.
 
-Starting with an incidence angle of 0\textdegree, the module was incrementally rotated until a the angle of incidence was equal to 90\textdegree. Each increment involved performing a 10\textdegree rotation and following the rotation the output waveform was exported for processing in Octave.
+Starting with an incidence angle of 0\textdegree, the module was incrementally rotated until the angle of incidence was equal to 90\textdegree. Each increment involved performing a 10\textdegree rotation and following the rotation the output waveform was exported for processing in Octave.
 
 Octave was used to calculate the RMS\footnote{root mean square} voltages for the recorded output waveforms. The RMS values were normalized and plotted to visualize each modules directivity.
 
-The IR receiver module was tested following the above experimental method, however the output of this module is a logic level so only the binary state was tracked.
+The IR receiver module was tested following the above experimental method, however, the output of this module is a logic level so only the binary state was tracked.
 
 
 
@@ -151,7 +151,7 @@ To evaluate the precision rectifier, a function generator was used to inject a 3
 
 \subsection{Goertzel Filter Performance}
 
-To evaluate the performance of the goertzel filter the following experiments where performed.
+To evaluate the performance of the Goertzel filter the following experiments where performed.
 
 \begin{itemize}
 	\item Simulated Frequency Response
@@ -161,12 +161,12 @@ To evaluate the performance of the goertzel filter the following experiments whe
 
 \subsubsection{Simulated Frequency Response}
 The expected frequency response was determined using the Octave\footnote{Open-source alternative to Matlab} environment. This was achieved by implementing in Octave the same optimized algorithm as the one implemented on the STM32.
-%todo: this next paragraph is bloated and maybe unessesary?
+%todo: this next paragraph is bloated and maybe unnecessary?
 The octave Goertzel function is given in listing \ref{lst:optimized_goertzel_algorithm}. This function is optimized according to the design outlined in section \ref{sec:filter_optimization_design} and the value returned by the function is the magnitude of the DFT coefficient squared.
 
 An Octave script was written to find the filter response (see listing \ref{lst:frequency_response_script}). This script generated a range of frequencies in the form of sampled sin waves over the range of 0Hz to 71.7kHz with an interval of 100Hz. The test frequencies were scaled, off-set and sampled to match the expected conversion values returned by the ADC.
 %todo: this next part is bloated
-After generating each frequency, the above mentioned octave implementation of the Goertzel filter was called and the computation result stored. An example, 36kHz waveform is given in the appendix, figure \ref{fig:sampled_36khz_sinusoid}.
+After generating each frequency, the above-mentioned Octave implementation of the Goertzel filter was called and the computation result stored. An example, 36kHz waveform is given in the appendix, figure \ref{fig:sampled_36khz_sinusoid}.
 
 The frequency response was plotted to provide an insight into the expected performance of the digital filter. The frequency response was tested with sinusoids of amplitude 1V and again with sinusoids of amplitude 500mV.
 
@@ -174,22 +174,22 @@ The frequency response was plotted to provide an insight into the expected perfo
 %todo: rework this methodology wording
 The next experiment involved testing the Goertzel filter to check that the filter implementation was working as expected. This was done by generating a sinusoid waveform at the input to the ADC and using the serial communication port to transfer the value of the Goertzel filtering result. 
 
-The experimentation was performed on the STM32 development board. This process involved manually configuring the function generator for each individual frequency and then pushing a button on the development board to transfer the most recent filter result.
+The experimentation was performed on the STM32 development board. This process involved manually configuring the function generator for each frequency and then pushing a button on the development board to transfer the most recent filter result.
 
 The first frequency tested was 1kHz, this frequency was incremented by 3kHz per reading until a frequency of 70kHz was reached. The results were processed by Octave to generate a plot and compare the empirical results with the simulated response.
 
 
 \subsubsection{Trigger Conditions}
 %todo: consider more concise wording
-To evaluate the high-level functionality of the Goertzel, an experiment was performed to determine the amplitude and frequency boundary pairs which cause the goertzel filter to trigger.
+To evaluate the high-level functionality of the Goertzel, an experiment was performed to determine the amplitude and frequency boundary pairs which cause the Goertzel filter to trigger.
 
-Because no automatic gain control has been implemented in the Goertzel algorithm, there is a minimum signal  amplitude required to trigger the output. This provides insight into this minimum amplitude and how that amplitude changes as the frequency moves away from the centre frequency of 36kHz.
+Because no automatic gain control has been implemented in the Goertzel algorithm, there is a minimum signal amplitude required to trigger the output. This provides insight into this minimum amplitude and how that amplitude changes as the frequency moves away from the centre frequency of 36kHz.
 
-A function generator was connected to the input of the Goertzel filter module and an oscilloscope was connected to the output and also used to monitor the generated waveform. Throughout the experiment the generated sinusoidal waveform was offset by 1V to ensure the input voltage remained positive.
+A function generator was connected to the input of the Goertzel filter module and an oscilloscope was connected to the output and also used to monitor the generated waveform. Throughout the experiment, the generated sinusoidal waveform was offset by 1V to ensure the input voltage remained positive.
 
-By way of manually adjusting the amplitude, the function generator was used to determine the approximate voltage which would trigger the Goertzel filter for an input frequency of 36kHz. This occurs at around 297mV. For the purposes of experimentation this value was rounded to 300mV.
+By way of manually adjusting the amplitude, the function generator was used to determine the approximate voltage which would trigger the Goertzel filter for an input frequency of 36kHz. This occurs at around 297mV.
 
-Starting from 300mV and increasing in increments of 50mV, the amplitude of the generated sinusoid was set. Each time the amplitude was set, the function generator was configured to sweep though all frequencies between 28kHz and 44kHz. The oscilloscope was used to find the frequencies which caused the output of the Goertzel filter to go high. For each amplitude value there are two boundaries, a lower and upper frequency.
+Starting from 300mV and increasing in increments of 50mV, the amplitude of the generated sinusoid was set. Each time the amplitude was set, the function generator was configured to sweep though all frequencies between 28kHz and 44kHz. The oscilloscope was used to find the frequencies which caused the output of the Goertzel filter to go high. For each amplitude value, there are two boundaries, a lower and upper frequency.
 
 These results were then tabulated and plotted using Octave.
 
@@ -219,9 +219,9 @@ These results were then tabulated and plotted using Octave.
 %todo: this can surely be made shorter
 To understand the benefits to be gained from optimization and to understand the effectiveness of the two optimization methods the following experiment were performed to give insight into the effect of increasing the number of samples (N) and optimizing the algorithm by reducing the number of multiplications.
 
-First, the goertzel algorithm as given in listing \ref{lst:goertzel_algorithm} was converted to C and implemented inside the circular buffer's callback functions. This implementation is referred to as the unoptimized algorithm. As a consequence of using a circular buffer with two segments, there are two callback functions. The goertzel implementation inside both callback functions were the same, with the only exception being the location in the buffer from which samples were read.
+First, the Goertzel algorithm as given in listing \ref{lst:goertzel_algorithm} was converted to C and implemented inside the circular buffer's callback functions. This implementation is referred to as the unoptimized algorithm. As a consequence of using a circular buffer with two segments, there are two callback functions. The Goertzel implementation inside both callback functions was the same, with the only exception being the location in the buffer from which samples were read.
 
-The timing was measured externally using an oscilloscope, to achieve this, just before the goertzel algorithm began executing an LED was turned on using one of the GPIO pins. This LED was turned off as soon as the algorithm finished calculating the result. Each of the two callback functions used a unique GPIO pin to toggle separate LEDs. Figure \ref{fig:goertzel_optimization_experiemnt} below illustrates the experimental setup in the form of a block diagram.
+The timing was measured externally using an oscilloscope, to achieve this, just before the Goertzel algorithm began executing an LED was turned on using one of the GPIO pins. This LED was turned off as soon as the algorithm finished calculating the result. Each of the two callback functions used a unique GPIO pin to toggle separate LEDs. Figure \ref{fig:goertzel_optimization_experiemnt} below illustrates the experimental setup in the form of a block diagram.
 
 \begin{figure}[H]
 	\centering
@@ -230,7 +230,7 @@ The timing was measured externally using an oscilloscope, to achieve this, just 
 	\label{fig:goertzel_optimization_experiemnt}
 \end{figure}
 
-A signal generator was used to produce a 36kHz sine waveform with an amplitude of 1V and an offset of 1V. Using a signal generator ensured that a known waveform was present at the input to the goertzel filter, in addition, by using a 36kHz waveform the filter is forced to deal large sample values which gives insight into performance under the most demanding circumstances.
+A signal generator was used to produce a 36kHz sine waveform with an amplitude of 1V and an offset of 1V. Using a signal generator ensured that a known waveform was present at the input to the Goertzel filter. By using a 36kHz waveform the filter was forced to compute large values which provided insight into performance under the most demanding circumstances.
 
 The experiment was broken into iterations, each iteration began by setting N to the desired number of samples, following this the code was compiled and executed on the development board. The signal generator was attached and enabled and the scope probes were attached to the GPIO pins responsible for indicating timing. The scope was then adjusted so that between 20 and 30 pulses could be seen. 
 
@@ -238,9 +238,9 @@ The independent variable N (number of samples to process) was set to 4 for the f
 
 Using the measurement tools built into the Picoscope software the 'high pulse width' for both GPIO pin outputs was measured, along with the duty cycle of those waveforms. The average of all pulses was recorded.
 
-For the purposes of this experiment only the 'high pulse width' of the callback responsible for the first half of the circular buffer being full was necessary to draw conclusions regarding the algorithms performance. The timing for the second half of the buffer being full was used only as a sanity check, both the callback functions should run for the same amount of time as each is executing the same algorithm therefore the average high pulse width for each should be the same.
+For this experiment, only the 'high pulse width' of the callback responsible for the first half of the circular buffer being full was necessary to conclude the performance of the algorithm. The timing for the second half of the buffer being full was used only as a sanity check, both the callback functions should run for the same amount of time as each is executing the same algorithm, therefore, the average high pulse width for each should be the same.
 
-After the experiment was run for all 5 iterations, the goertzel implementation was modified by removing the unnecessary multiplications (as discussed in section \ref{sec:filter_optimization_design}) and the above experiment repeated following the same method.
+After the experiment was run for all 5 iterations, the Goertzel implementation was modified by removing the unnecessary multiplications (as discussed in section \ref{sec:filter_optimization_design}) and the above experiment repeated following the same method.
 
 
 
@@ -269,7 +269,7 @@ In both of the following experiments, the receiver's code was modified to set a 
 %todo: consider more concise
 The processing time taken by the state machine to decode Manchester waveforms is affected by the contents of the transmission, this is because the number of transitions depends on the encoded bit-stream. The following experiment set out to measure the varying computation times of the state machine.
 
-Three data packets were chosen, based on the corresponding number of edges in the Manchester encoded sequence. The lowest possible number of edges in a valid message is 20 while the highest is 36. The message with the data value 11111 was chosen arbitrarily and contains a number of edges in between the limits.
+Three data packets were chosen, based on the corresponding number of edges in the Manchester encoded sequence. The lowest possible number of edges in a valid message is 20 while the highest is 36. The message with the data value 11111 was chosen arbitrarily as a transmission with a third test case.
 
 \begin{table}[H]
 	\centering
@@ -282,10 +282,10 @@ Three data packets were chosen, based on the corresponding number of edges in th
 	\end{tabular}
 \end{table}
 
-An oscilloscope was used to trace the state of the GPIO being toggled before and after the processing function. In addition, a second probe was used to trace the incoming Manchester waveform, this allowed the length of the timeout period to be measured in addition to the computation time.
+An oscilloscope was used to trace the state of the GPIO being toggled before and after the processing function. A second probe was used to trace the incoming Manchester waveform, this allowed the length of the timeout period to be measured in addition to the computation time.
 
 \subsubsection{Error Handling}
-To validate the error handling capabilities of the target, two different error conditions where simulated. In each case the Manchester coded input sequence and the GPIO pin (used to indicate when the processor was decoding) were traced by an oscilloscope.
+To validate the error handling capabilities of the target, two different error conditions where simulated. In each case, the Manchester coded input sequence and the GPIO pin (used to indicate when the processor was decoding) were traced by an oscilloscope.
 
 The first error condition was generated by transmitting Manchester encoded messages with a short enough delay between transmissions that some edges would go undetected as a result of the processor still decoding a previous transmission. The second error condition was generated by continuously transmitting messages without any period between them.
 
@@ -302,7 +302,7 @@ The first error condition was generated by transmitting Manchester encoded messa
 
 \section{System Range}
 
-To determine the range of the laser tag system, the system was setup on a large open space. The tagger and target were setup on two small tables. The target subsystem was moved relative to the tagger subsystem to adjust the transmission range. To measure the impact of ambient lighting  on the system the experiment was performed during the afternoon several hours before sunset and several hours after sunset.
+To determine the range of the laser tag system, the system was set up on a large open space. The tagger and target were set up on two small tables. The target subsystem was moved relative to the tagger subsystem to adjust the transmission range. To measure the impact of ambient lighting on the system the experiment was performed during the afternoon several hours before sunset and several hours after sunset.
 
 \begin{figure}[H]
 	\centering
@@ -327,7 +327,7 @@ The range of the system was determined by moving the target subsystem away from 
 
 The target MCU provided a breakdown of each received transmission and an indicator LED which turned on whenever a transmission was being decoded. When a transmission contained an error the LED indicator would light up but no new transmission data would be displayed. The maximum distance was defined to be the point at which errors would occur, regardless of attempts to align the detector module with the IR beam.
 
-A portable oscilloscope was used to capture waveforms at different locations of the target subsystem. These waveforms where used to determine investigate the behaviour of the subsystem at the maximum transmission distance.
+A portable oscilloscope was used to capture waveforms at different locations of the target subsystem. These waveforms were used to investigate the behaviour of the subsystem at the maximum transmission distance.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
