@@ -195,7 +195,8 @@ Every transmission begins with two start bits, these bits always have a value of
 %Talk briefly about materials and the interaction of different materials with IR. Mention the difficulty of acquiring these resources and therefore the exclusion of them during experimentation
 
 
-\subsection{Communication System Structure}
+\subsection{Communication System Structure} 
+%todo: this
 %section about the overall design of a comms system, the various blocks required and their purpose.
 
 %talk about blocks that are excluded such as automatic gain control etc. %(and why it was excluded - time, cost and computational power)
@@ -246,7 +247,14 @@ Manchester code is a special form of binary phase-shift keying (BPSK). A square 
 
 \subsubsection{Encoding Algorithm}
 
-%todo: here briefly go over the simple manchester encoding technique
+Using a timer to toggle a boolean 180\textdegree{} out of phase with the carrier frequency, it is possible to determine the current output state of the Manchester waveform using the XOR operation as shown in equation \ref{eqn:manchesterencode}.
+
+\begin{equation}
+	\label{eqn:manchesterencode}
+	manchester\_out = bit\_period \oplus tx\_bit
+\end{equation}
+
+$bit\_period$ is 180\textdegree{} out of phase with the carrier waveform. $tx\_bit$ is the binary value being encoded and $manchester\_out$ is the logical value of the Manchester output waveform.
 
 
 \subsubsection{Decoding Algorithm}
@@ -305,8 +313,7 @@ Part of the IR decoding process requires detecting the presence of a particular 
 The FFT provides a very efficient means for determining all the DFT coefficients, but in a use case only a few of the coefficients are used and the rest discarded it is not the most efficient technique. By using a less efficient process for calculating individual coefficients of the DFT it is possible to greatly reduce program complexity and processing time relative to an implementation that uses the FFT.
 
 
-\subsubsection{Analog Preprocessing} %Anti-alias Filtering
-%todo: chat a bit about designing an anti-aliasing filter
+\subsubsection{Analog Preprocessing}
 
 Any time an analog signal is sampled for digital signal processing, it must be filtered to remove any frequencies above the Nyquist frequency. If frequencies higher than the Nyquist frequency are present in the sampled waveform, aliasing will occur. Naturally, this filtering stage cannot be performed digitally and therefore an analog filter must be implemented.
 
