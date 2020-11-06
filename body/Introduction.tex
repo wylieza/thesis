@@ -20,42 +20,28 @@ Technology for generating and sensing infrared light has seen steady improvement
 
 \section{Objectives of this study}
 
-The primary objective of this study is to provide knowledge of the core components of a tagger-target system in the context of laser tag and through the development and implementation of such a system, provide insight into the potential for laser tag equipment to work over longer distances and in brighter ambient conditions.
-
-
-To achieve this a set of modules must be developed which together form an infrared uni-directional data link (UDDL). These modules should be design around current technology and employ digital signal processing techniques.
-
-Through the development, realization and analysis of these modules, this study will document a set of designs and the performance of those designs. This will highlight some of the areas in which innovation is possible and provide insight into some of the limitations of such a system.
-
-
 \subsection{Problems to be investigated}
 %Description of the main questions to be investigated in this study...
 
-At the highest abstraction level, the first step of this investigation is to determine what modules are required to develop the UDDL. This will require a breakdown of the fundamental system requirements into functional blocks.
+At the highest level of abstraction, this investigation is centred on the design and implementation of an infrared based uni-directional data link (UDDL). The problems being investigated are centred on the decomposition of this system into a set of modules, each of which must be designed, implemented and evaluated.
 
-After the system has been effectively sub-divided into appropriate functional blocks, techniques for implementing each block in the form of an independent module must be decided. The technique used to implement the functional block is determined based on the available equipment and resources and should be in line with standard practices.
+Techniques for implementing each module must be determined, base on the available resources and the relevant literature. Once a module has been designed and implemented, experiments must be performed to evaluate the performance and limitations of that module.
 
-Once a module has been designed and implemented, various tests specific to the function of that module should be performed to determine that the module can perform its function and to test the limits to the functionality of the module.
-
-As highlighted in the objectives of this study, certain modules with the same function will be designed to provide a comparison between the performance of a photodiode and a phototransistor for incident IR light measurements.
-
-This investigation may be summarised through the following questions:
-
+In this study four main problems are investigated, one of which is investigated as two separate problems. These problems are listed below:
 \begin{itemize}
-	\item What fundamental blocks are required to implement the tagger-target data link system?
-	\item How might these fundamental blocks be realized?
-	\item What is the predicted performance of these designs?
-	\item What is the measured performance of the individual modules and how does the system perform as a whole?
-	\item How do the different modules for the detection of incident IR light compare?
-	\item How does this system compare to all in one IR receiver devices
-	\item How might the RC-5 protocol be adapted for laser tag?
-	
-	%	
-	%	\item What techniques exist for the generation of narrow beam IR radiation?
-	%	\item What is a suitable protocol for the tagger/target system to utilize for detecting and identifying shots fired by opponents?
-	%	\item What light detection technology is the most appropriate in the context of laser tag?
-	%	\item What kind of performance does one expect from such a system?
+	\item The encoding of information into a beam of light
+	\item The generation of a narrow infrared beam
+	\item The detection of a modulating infrared beam
+	\begin{itemize}
+		\item Conversion of light intensity to a voltage waveform
+		\item Digital processing to detect modulation
+	\end{itemize}	
+	\item The decoding of information contained in a beam of light
 \end{itemize}
+
+
+
+
 
 
 \subsection{Purpose of the study}
@@ -64,21 +50,17 @@ This investigation may be summarised through the following questions:
 
 %The purpose of this study is therefore to investigate the critical components of such a system, to provide a comprehensive understanding of how the various block of such a system can be most efficiently brought together and optimized.
 
-%------------------
+%%%%%%%%%%%%%%%%%
 
-The purpose of this study is to investigate the design and construction of a uni-directional data link in the context of a laser tag system. This investigation will attempt to determine the effectiveness and measure performance of different key components from which the tagger and target units comprise.
+The primary objective of this study is to investigate the core components of a tagger-target system in the context of laser tag. Through the development and implementation of such a system, this study aims to provide insight into the potential of laser tag equipment to work over longer distances and in brighter ambient conditions.
 
-In doing so this study aims to make available insightful information in the context of laser tag systems. Because of the niche nature of this system in the field of recreational electronics, there are very few sources of information available that formally document the development of a recreational laser tag system.
+To achieve this, a set of modules must be developed which in combination form an infrared uni-directional data link (UDDL). These modules should be design around current technology and employ digital signal processing techniques.
 
-By performing a detailed investigation into the performance of the individual modules of the UDDL system, this study hopes to provide a foundation for further research into the individual modules and over-all system to overcome any shortcomings and improve on the results obtained in this study.
+Through the development, realization and analysis of these modules, this study will document a set of designs and the performance of those designs. This will highlight some of the areas in which innovation is possible and provide insight into some of the limitations of such a system.
 
-In summary, this study aims to achieve the following:
+This study hopes to provide a foundation for further research into the development of UDDL systems in the context of laser tag.
 
-\begin{itemize}
-	\item Demonstrate how one might create the uni-directional data link in the context of a laser tag system
-	\item Provide insight into the complications and limitations of such a system
-	\item Provide a foundation for further research and development of such a system or particular subsystems.
-\end{itemize}
+%%%%%%%%%%%%%%%%%
 
 
 \section{Scope and Limitations}
