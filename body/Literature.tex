@@ -324,9 +324,9 @@ To use parity as a method to detect errors, the sender and receiver choose to us
 \section{Digital Signal Processing}
 In the age of microcontrollers and microprocessors, in many situations, it has become far more effective to use digital signal processing to manipulate and processes signals.
 
-Part of the IR decoding process requires detecting the presence of a particular frequency (commonly referred to as a tone). The natural tool to turn to when examining the frequency content of a signal is the discrete Fourier transform (DFT). The DFT is well established and there exist a variety of algorithms which compute its values, perhaps the most well known being the FFT. However, to detect a single tone of a predetermined frequency, the DFT is not the most efficient method, even when optimized algorithms such as the FFT are implemented.
+Part of the IR decoding process requires detecting the presence of a particular frequency (also known as a tone). The natural tool to turn to when examining the frequency content of a signal is the discrete Fourier transform (DFT). The DFT is well established and there exist a variety of algorithms which compute its values, perhaps the most well known being the FFT. However, to detect a single tone of a predetermined frequency, the DFT is not the most efficient method, even when optimized algorithms such as the FFT are implemented.
 
-The FFT provides a very efficient means for determining all the DFT coefficients, but in a use case only a few of the coefficients are used and the rest discarded it is not the most efficient technique. By using a less efficient process for calculating individual coefficients of the DFT it is possible to greatly reduce program complexity and processing time relative to an implementation that uses the FFT.
+The FFT provides a very efficient means for determining all the DFT coefficients, but in a use case where only a few of the coefficients are used and the rest discarded it is not the most efficient technique. In such a scenario, by using a less efficient algorithm (known as the Goertzel algorithm) to calculate individual coefficients of the DFT it is possible to greatly reduce program complexity and processing time relative to an implementation that performs a DFT.
 
 
 \subsubsection{Analog Preprocessing}
@@ -363,7 +363,7 @@ Anti-alias filters are built to suppress high frequencies, many different approa
 	\end{minipage}
 \end{figure}
 
-Dedicated filtering IC's are useful in precision applications where reproducibility and consistency of filter performance is a priority. They also allow for the construction of digitally controllable analog filters \cite{Huijing2010}. Dedicated filtering IC's are comparably expensive and therefore a trade-off between cost and convenience must be considered.
+Dedicated filtering IC's are useful in precision applications where reproducibility and consistency of filter performance is a priority. They also allow for the construction of digitally controllable analog filters \cite{Huijing2010}. However dedicated filtering IC's are comparably expensive and therefore a trade-off between cost and convenience must be considered.
 
 \textbf{Precision Rectification}\\
 Simple, half-wave rectification may be achieved simply by placing a diode in series with the path of a signal. However, due to the forward voltage drop of the diode, any positive portion of the waveform below the forward voltage of the diode will be lost. This non-ideal effect can be mitigated through the use of an operational amplifier.
@@ -375,14 +375,14 @@ Simple, half-wave rectification may be achieved simply by placing a diode in ser
 	\label{fig:precision_rectifier}
 \end{figure}
 
-There are various circuit designs which use an operational amplifier to mitigate the effect of the diode forward voltage drop, they are known as precision rectifiers. The circuit in figure \ref{fig:precision_rectifier} is one of the more sophisticated designs as the output of the op-amp has a maximum swing of two diode drops. In simpler designs, the operational amplifier might swing more than half the supply rails during operation. The design has been taken from \textit{The art of electronics - 2nd Edition} and may be found on page 188 \cite{Horowitz1995}.
+There are various circuit designs which use an operational amplifier to mitigate the effect of the diode forward voltage drop, such circuits are known as precision rectifiers. The circuit in figure \ref{fig:precision_rectifier} is one of the more sophisticated designs as the output of the op-amp has a maximum swing of two diode drops. In simpler designs, the operational amplifier might swing more than half the supply rails during operation. The design has been taken from \textit{The art of electronics - 2nd Edition} and may be found on page 188 \cite{Horowitz1995}.
 
 
 
 \subsection{Goertzel Algorithm}
 \label{sec:goertzel_lit_review}
 
-The algorithm which computes individual DFT coefficients is known as the Goertzel algorithm (or Goertzel Filter) and was developed by G. Goertzel in 1958. \cite{Goertzel1958} A common application of the Goertzel algorithm is in the decoding of DTMF\footnotemark{} signals.
+The algorithm which computes individual DFT coefficients is known as the Goertzel algorithm (or Goertzel filter) and was developed by G. Goertzel in 1958. \cite{Goertzel1958} A common application of the Goertzel algorithm is in the decoding of DTMF\footnotemark{} signals.
 \footnotetext{Dual Tone Multiple Frequency}
 
 \subsubsection{Derivation}
@@ -418,7 +418,7 @@ y_k[l] = \sum_{m=0}^{N-1}x[m]h_k[l - m]
 y_k[l] = \sum_{m=0}^{N-1}x[m]W_N^{k(m-l)}
 \end{equation}
 
-Comparing equation \ref{eqn:dft_conv} with equation \ref{eqn:dconv_sub}, it becomes clear that from the convolution $y_k[n] = x[n] * h_k[n]$ we can find the value of $X[k]$ by substituding N into $y_k[n]$. Thus the following relationship exists
+Comparing equation \ref{eqn:dft_conv} with equation \ref{eqn:dconv_sub}, it becomes clear that from the convolution $y_k[n] = x[n] * h_k[n]$ we can find the value of $X[k]$ by substituting N into $y_k[n]$. Thus the following relationship exists
 
 \begin{equation}
 \label{eqn:goertzel_relationship}
