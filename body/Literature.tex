@@ -336,7 +336,15 @@ The FFT provides a very efficient means for determining all the DFT coefficients
 
 \subsubsection{Analog Preprocessing}
 
-Any time an analog signal is sampled for digital signal processing, it must be filtered to remove any frequencies above the Nyquist frequency. If frequencies higher than the Nyquist frequency are present in the sampled waveform, aliasing will occur. Naturally, this filtering stage cannot be performed digitally and therefore an analog filter must be implemented.
+Any time an analog signal is sampled for digital signal processing, it must be filtered to remove any frequencies above the Nyquist frequency. The Nyquist frequency is defined in equation \ref{eqn:nyquist}. If frequencies higher than the Nyquist frequency are present in the sampled waveform, aliasing will occur. Naturally, this filtering stage cannot be performed digitally and therefore an analog filter must be implemented.
+
+%%%%%%%%%%%%%
+\begin{equation}
+	f_{Nyquist} = \frac{f_{sampling}}{2}
+	\label{eqn:nyquist}
+\end{equation}
+
+%%%%%%%%%%%%%
 
 In addition to filtering, it is sometimes necessary to perform other operations on analog signals before they are sampled, such as rectification or adding a positive offset to ensure the signal is within the input range of the ADC.
 
@@ -487,18 +495,6 @@ magnitudesqd = realv*realv + imgv*imgv;
 
 endfunction
 \end{lstlisting}
-
-\subsubsection{Nyquist-Shannon}
-
-\[f_{Nyquist} = \frac{f_{sampling}}{2}\]
-
-\begin{equation}
-\label{eqn:sampling_frequency}
-BW < f_{Nyquist}
-\end{equation}
-
-
-
 
 %%%%%%%%%%%%%%%%%%
 
