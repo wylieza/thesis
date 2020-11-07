@@ -4,3 +4,42 @@
 %These are the conclusions from the investivation and how the investigation changes things in this field or contributes to current knowledge...
 
 %Draw suitable and intelligent conclusions from your results and subsequent discussion.
+
+The core objective of this study was to develop a modular tagger-target system for the purposes of providing insight into the potential for more advanced laser tag systems that are robust to ambient lighting conditions and work over longer distances. In addition to this high level objective, this investigation set out to design and evaluate each module in the full system to provide a foundation for further research.
+
+\section{Review of Modules}
+Following the design, implementation and evaluation of the various modules, they have been categorized into two categories based on their performance. %Those categorized as having excellent performance are those that 
+
+\subsection{Excellent Performance}
+
+\textbf{Light Focus System}\\
+The light focus system produced an optimal beam in the context of laser tag. The beam spot diameter at short distances less than 30m was less that 1m. This beam angle is the ideal size as it ensures some skill is required to aim the tagger while ensuring it isn't so challenging that it is impossible to make a single shot.
+
+It was noted during the system test that for distances greater than 30m, the diameter of light detectable by the IR detectors was less than the the size predicted by the beam dispersion experiment. This effect worked to prevent the tagger from being too easy to aim at distant targets.
+
+\textbf{Power LED Driver}\\
+The power LED driver module had great performance. The linear current regulation resulted in very precise control over the timing and introduced very little noise into the system. In addition, by using a supply with a voltage close to that of the LED, very little heat was dissipated by the driving circuitry.
+
+\textbf{IR Phototransistor Detector}\\
+The IR phototransistor detector outperformed the photodiode detector because the amplification stage was robust to saturation caused by a large DC offset.
+
+\textbf{IR Receiver}\\
+The all in one package IR receiver outperformed the other IR detector modules, this was likely due to the built-in automatic gain control stage.
+
+\textbf{Goertzel Filter}\\ %todo: I want to talk about speed of detection, but didn't do an experiemnt!!!
+The digital tone decoder module exhibited exemplary performance. %todo: finnish this
+
+\subsection{Adequate Performance}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%
+
+\section{Recommendations}
+
+%recomend using a slightly larger lens
+
+%implementing automatic gain control
+
+%a superior microcontroller with DSP capabilities
