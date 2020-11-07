@@ -141,9 +141,7 @@ Most light-based communication methods may be classified as \textit{free-space o
 
 Fibre optic communication uses a physical cable designed to guide a beam of light using the principles of total internal reflection. Fibre-optic communication systems may utilize an LED or laser diode to produce an optically encoded digital signal. Recent developments in vertical-cavity surface-emitting lasers (VCSEL) have resulted in more fibre optic systems turning to this technology.
 
-Free-space optical communication uses much the same technology to transmit information through light, however, in the field of optical wireless communications the technology is integrated into regular lighting solutions. The result is %todo: fix this paragraph - its too much waffle
-
-
+Free-space optical communication uses essentially the same technology to transmit information through light, however, in the field of optical wireless communications the technology is often integrated with regular lighting.
 
 \subsection{IR Communication}
 %This is where I talk about different IR protocols
@@ -152,11 +150,11 @@ IR has is used in many applications, this is because it is cheap, efficient and 
 
 Many modulation techniques have been developed for optical wireless communication. These range from advanced techniques such as multiple-subcarrier modulation (MSM) to basic techniques such as on-off keying (OOK) and pulse position modulation (PPM).
 
-Multiple-subcarrier modulation sums numerous sub-carrier signals and uses the result to modulate the light source. As a consequence of using multiple low-frequency sub-carriers, it is possible to achieve a high total bit rate with little distortion, removing the need for equalization \cite{Ohtsuki2003}.
+In multiple-subcarrier modulation numerous sub-carrier signals are summed and the result is used to modulate a light source. As a consequence of using multiple low-frequency sub-carriers, it is possible to achieve a high total bit rate with little distortion, removing the need for equalization \cite{Ohtsuki2003}.
 
 Notable tradeoffs for techniques that increase the bit-rate are diminishing range, lower resistance to ambient noise and an increase in system complexity. To communicate between a tagger and target in laser tag, high bandwidth is not required. It is therefore advantageous to utilize a more robust technique with a lower bit-rate such as on-off keying.
 
-OOK is utilized in many systems, for example, in remote control applications. As a result, there are several IR communication protocols based on this technique. The following are a few of the popular options
+OOK is utilized in many systems, for example, in remote control applications. As a result, there are several IR communication protocols based on this technique. The following are well established:
 
 \begin{itemize}
 	\item RC-5
@@ -165,9 +163,9 @@ OOK is utilized in many systems, for example, in remote control applications. As
 	\item SIRC
 \end{itemize}
 
-Each of these protocols is based on OOK, but differ in how they define symbols. To represent two different states, an IR source is modulated at a chosen carrier frequency (usually around 36kHz). When the light source is modulating the signal is \textit{on} and when the source is not modulating the signal is \textit{off}.  Modulation makes it possible to distinguish between a generated IR signal and ambient IR radiation from noise sources.
+Each of these protocols are based on OOK, but they differ in how they define symbols. To represent two different states, an IR source is modulated at a chosen carrier frequency (usually around 36kHz). When the light source is modulating the signal is \textit{on} and when the source is not modulating the signal is \textit{off}.  Modulation makes it possible to distinguish between a generated IR signal and ambient IR radiation from noise sources.
 
-Protocols such as Sony's SIRC use a technique known as pulse width encoding. This technique involves modulating the IR LED for a different period depending on whether a 1 or 0 is to be transmitted while maintaining a constant time between transmissions.
+Protocols such as Sony's SIRC use a technique known as pulse width encoding. This technique involves modulating the IR LED for a different period depending on whether a 1 or 0 is to be transmitted while maintaining a constant period between each bit.
 
 Protocols such as the NEC protocol by Renesas use pulse distance encoding. This protocol specifies a different off period between on pulses to distinguish between a logical 1 and 0.
 
@@ -246,11 +244,12 @@ In addition to noise and interference, saturation can also disrupt a transmissio
 
 \subsection{Manchester Encoding}
 \label{sec:manchester_encoding}
-Manchester Code is a type of phase encoding. It is classified as a line code and is produced by generating patterns through some measurable phenomena. The commonly used mediums to represent a Manchester encoded signal would be voltage, current and light (electromagnetic radiation).
+%Manchester Code is a type of phase encoding. It is classified as a line code and is produced by generating patterns through some measurable phenomena. The commonly used mediums to represent a Manchester encoded signal would be voltage, current and light (electromagnetic radiation).
 
 Manchester coding, as its name suggests, was developed at the University of Manchester and it was first published in 1949 \cite{Jameel2019}. Manchester encoding is a protocol for integrating the clock and data into a single sequence consisting of only two symbols. It does not require clock synchronization, only that a predefined bit-width is known by both the receiver and transmitter. 
 
-The principle behind Manchester code is to encode the information into transitions between two symbols. This technique makes the encoding scheme particularly useful in communication employing inductive coupling such as in RFID. Due to its self-clocking property and simplicity, it is the standard means of encoding for many IR applications. Perhaps the most common application is in the remote controls we use for various appliances.
+The principle behind Manchester code is to encode the information into transitions between two symbols. This technique makes the encoding scheme particularly useful in communication employing inductive coupling such as in RFID. Due to its self-clocking property and simplicity, it is the standard means of encoding for many IR applications.
+%Perhaps the most common application is in the remote controls we use for various appliances.
 
 Manchester code is a special form of binary phase-shift keying (BPSK). A square wave of a particular frequency is chosen as the carrier and binary information is encoding by adjusting the setting a phase offset to either 0\degree or 180\degree s. In figure \ref{fig:manchesterencoding} the process of encoding 10 bits is illustrated. Two conventions exist, their difference lies solely in the definition of which logic values are represented by each of the two transitions. The convention used throughout this investigation is per the IEEE 802.3 standard which defines a logical one as the transition from 0 to 1 and a logical zero as 1 to 0. The other convention used by inventor G.E. Thomas is the inverse of this and is also widely used.\\
 
@@ -283,19 +282,19 @@ Different techniques have been developed to decode Manchester encoded sequences.
 	\label{fig:manchesterdecodingfsm}
 \end{figure}
 
-The state machine approach is particularly useful because it only considers the period between the detected edge and the previous edge. It removes the need to track samples saving on memory and reducing processing power requirements, all without introducing additional complexity.
+The state machine approach is particularly useful because it only considers the period between the detected edge and the previous edge. It removes the need to track samples, saving memory and requiring fewer processor cycles, all without introducing additional complexity.
 
 It should be noted that this FSM assumes the first bit transmitted is always a logical 1. It also does not detect the end of a sequence, so additional logic is required to detect when a certain number of bits have been received or to implement a timeout timer.
 
 %\iffalse
 \subsection{Error Control}
 
-In information theory, error control is the field of study that concerns detecting errors in digital communications and the techniques used to correct those errors. Whenever data is transmitted over some kind of network, there is the possibility that interference can cause a bit to flip resulting in an error. Richard Hamming pioneered in the development of digital error control and is known for (amongst other things) the Hamming code.
+In information theory, error control is the field of study that concerns detecting errors in digital communications and the techniques used to correct those errors. Whenever data is transmitted over some kind of network, there is the possibility that interference can cause a bit to flip resulting in an error. Richard Hamming pioneered in the development of digital error control and is known for (amongst other things) Hamming code.
 
-Various ways to detect and potentially correct the presence of an error. The most trivial technique known as a 'repetition code' simply involves sending the information three times, making it possible to detect if one of the three data-streams doesn't match the others. Although repetition codes allow for both error detection and correction, it is extremely inefficient. Various techniques have been developed and each technique balances complexity and efficiency.
+Various ways to detect and potentially correct the presence of an error exist. The most trivial technique known as a 'repetition code' simply involves sending the information three times, making it possible to detect if one of the three data-streams doesn't match the others. Although repetition codes allow for both error detection and correction, it is extremely inefficient. Various techniques have been developed and each technique balances complexity and efficiency.
 
 \subsubsection{Parity}
-Using a parity bit is possibly the most simple method to detect an error in a bit sequence. The parity of a sequence may be defined as the result of a bitwise exclusive or (XOR) operation, this is known as 'even parity' because the parity bit value is chosen such that upon appending it to the bit-sequence there would be an even number of 1s. Conversely 'odd parity' calculates the parity bit such the number of 1s in the generated sequence is odd. Table \ref{tbl:party_examples} below provides example bit sequences and the respective even (given by the XOR operation) and odd parity values.
+Using a parity bit is possibly the most simple method to detect an error in a bit sequence. The parity of a sequence may be defined as the result of a bitwise exclusive or (XOR) operation, this is known as 'even parity' because the parity bit is such that after appending it to the bit-sequence, the sequence contains an even number of 1s. Conversely 'odd parity' calculates the parity bit such the number of 1s in the generated sequence is odd. Table \ref{tbl:party_examples} below provides example bit sequences and the respective even (given by the XOR operation) and odd parity values.
 
 \begin{table}[H]
 	\centering
