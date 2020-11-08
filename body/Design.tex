@@ -681,12 +681,10 @@ Finally, during the transmission process, the logic used to determine the pin st
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%todo: HERE with proof reading
-
 
 \subsection{Target Software}
 
-In laser tag, it is optimal to have multiple IR detectors placed on various parts of the player. It is therefore important that the tagger software be extendable to process input from multiple input signals simultaneously. To achieve this, the input capture and output compare functions of the STM32 timer peripherals were used. For this investigation, the system was developed to only capture a single incoming signal, however, the process may be easily expanded to capture multiple incoming signals with little modification.
+In laser tag, it is optimal to have multiple IR detectors placed in various locations on the player. It is therefore important that the target software could be made capable of processing transmissions from multiple inputs simultaneously. This is achieved through the use of the input capture and output compare channels of the STM32's timer peripherals. For this investigation, the system is designed to monitor a single target, however, the process is easily expanded to capture signals from multiple targets.
 
 The target MCU software was separated into four independent processes, these are outlined in figure \ref{fig:target_software_overview} below.
 
@@ -699,25 +697,26 @@ The target MCU software was separated into four independent processes, these are
 
 The main loop process runs continually and may be used to perform routine tasks.
 
-The edge detection is an interrupt based process which monitors continuously for any rising or falling edges on the input GPIO pin. Each edge is recorded as a timestamp which measures the period elapsed since the previous edge was detected. To reduce unnecessary computation, this value was stored in \textit{ticks} rather than converted into seconds.
+The edge detection process is an interrupt based process which monitors continuously for any rising or falling edges on the input GPIO pin. Each edge is recorded as a timestamp which measures the period elapsed since the previous edge was detected. To avoid performing unnecessary conversions, this value is stored as \textit{ticks} instead of seconds.
 
-The timeout monitoring process is executed via an interrupt when the output compare register matches the timer's count value. Each time an edge is registered by the edge detection process, the output compare register value is adjusted to allow up to one timeout period before the interrupt is triggered.
+The timeout monitoring process is executed by an interrupt whenever the output compare register matches the timer's count value. Each time an edge is registered by the edge detection process, the output compare register value is adjusted to allow up to one timeout period before the interrupt is triggered.
 
-The decoding process is an interrupt triggered processes which may also be triggered by software (when the maximum number of edges are recorded). This process decodes the timestamps recorded by the edge detection process and returns the recovered data. The decoding process uses the state machine approach illustrated in figure \ref{fig:manchesterdecodingfsm}.
+The decoding process is also interrupt driven, however this process can also be triggered by software. A software trigger occurs when the maximum number of edges are recorded. The decoding process follows the state machine approach illustrated in figure \ref{fig:manchesterdecodingfsm} and uses the timestamps recorded by the edge detection process to decode incoming transmissions.
 
-During the decoding process, the edge detection process responsible for triggering the process is prevented from recording any further edges until the decoding is finished.
+During the decoding process, the edge detection process is disabled.
 
 \subsubsection{Decoding Strategy}
 
-The state machine approach does not specify an end of transmission condition, therefore it is necessary to define one. It is not possible to simply count the cumulative number of bits as the input capture stage and decoding stages are independent. Therefore a timeout timer will be implemented to trigger the decoding and reset the \textit{array of edge time} differences. In addition to a timeout, a maximum number of edges is defined which will also trigger the start of a decoding sequence and reset the state machine.
+The state machine approach does not specify an end of transmission condition, therefore it is necessary to define one. It is not possible to simply count the number of bits received as the input capture stage and decoding stages operate independently. Therefore a timeout timer is used to trigger the decoding stage and reset the array of \textit{edge-time differences}. In addition to a timeout, if the maximum number of edges are recorded, the decoding process is automatically triggered by software.
 
-The timeout period was chosen to be a length of two bit-periods, this was chosen because future inclusion of hamming codes would allow for the correction of a single flipped or missing bit. The timeout period of 3.556ms must be converted into ticks before being used by the output compare functionality of the timer.
+%this needs more explaining but i cant...no time!!!
+The timeout period is two bit-periods in duration. This is chosen because future inclusion of hamming codes would allow for the correction of a single flipped or missing bit. The timeout period of 3.556ms must be converted into ticks before being used by the output compare functionality of the timer.
 
 \[TIMEOUT\_TICKS = f_{timer} \times T_{timeout} = 8 \times 10^6 \times 3.556 \times 10^{-3} = 28448\]
 
-The maximum number of edges in a valid message occurs when all 16-bits are 1's which results in a Manchester sequence containing 36 edges. Therefore the edge detection process will automatically begin the decoding process if 36 edges are recorded.
+The maximum number of edges in a valid message occurs when all 16-bits are 1's which results in a Manchester sequence containing 36 edges. Therefore the edge detection process will automatically trigger the decoding process after 36 edges are recorded.
 
-The implementation of the Manchester decoding algorithm may be found in the appendix, listing \ref{lst:decode_manchester_implementation}. Decoding requires the definition of a time value to differentiate between a long and short period. This is the \textit{THRESHOLD\_TICKS} constant, a second constant \textit{BITMISS\_TICKS} was also defined and is used as a threshold to determine if a bit in the message has been was undetected.
+The implementation of the Manchester decoding algorithm may be found in the appendix, listing \ref{lst:decode_manchester_implementation}. Decoding requires the definition of a threshold duration to differentiate between long and short periods. This is the \textit{THRESHOLD\_TICKS} constant. A second constant \textit{BITMISS\_TICKS} is also defined, this threshold is used to detect when a bit in the received transmission goes undetected.
 
 
 
