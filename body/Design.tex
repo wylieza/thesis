@@ -537,9 +537,16 @@ The STM32F0 is equipped with several timers, direct memory access (DMA) and an a
 	\label{fig:goertzel_functional_diagram}
 \end{figure}
 
-\subsubsection{Implementation}
 
-\textbf{Sampling Constraints}\\
+\subsubsection{Filter Optimization}
+\label{sec:filter_optimization_design}
+The Goertzel filter is optimized in two different ways. The first optimization involves configuring the timer, ADC and DMA to continuously sample the incoming signal and store the conversion results in a circular buffer. Without these peripherals, it would not be possible to perform filtering in real-time.
+
+The second means of optimization requires manipulating the algorithm's parameters to reduce the number of multiplications. Section \ref{sec:goertzel_parameters} presents these parameters. By manipulating $omega$ to equal $\frac{\pi}{2}$, the algorithm constants $cosval$ and $sinval$ can be made equal to zero and one respectively. Thus reducing line 13 of listing \ref{lst:goertzel_algorithm} to $s0 = samples(i) - s2$. 
+
+Even after these optimizations the STM32F0 is not fast enough to process every sample. This is solved by sampling twice as many samples, but only using the first N samples to calculate the DFT coefficient. This works because the sections of waveform that go unprocessed are much shorter than the tone duration.
+
+\subsubsection{Sampling}
 \label{sec:sampling_frequency_constraints}
 The sampling frequency determines the highest frequency component that may be present in a sampled waveform before aliasing will occur.
 
@@ -547,20 +554,9 @@ A higher sampling rate increases the bandwidth of the Goertzel filter and relaxe
 A hard upper limit is imposed by the physical limitations of the ADC and DMA peripherals and a soft upper limit is imposed by the rate at which samples can be processed by the CPU.
 %It is therefore desirable to select a lower sampling rate.
 
-In addition to the sampling frequency, the number of samples (N) processed by the Goertzel algorithm determines the frequency response of the filter. For a constant sampling rate, decreasing N increases the bandwidth of each frequency bin causing the tone detector to trigger on a wider band of frequencies, however increasing N causes the time taken to collect and process the samples to increase. For the filter to be effective, the processing period must be significantly short than the duration of the tone being detected.
+In addition to the sampling frequency, the number of samples (N) processed by the Goertzel algorithm determines the frequency response of the filter. For a constant sampling rate, decreasing N lowers the resolution of each frequency bin causing the tone detector to trigger on a wider band of frequencies, however increasing N causes the time taken to collect and process the samples to increase. For the filter to be effective, the processing period must be significantly short than the duration of the tone being detected.
 
-
-%todo: this section is an absolute mess (some part are cut to snippets on overleaf) - come back later
-\subsubsection{Filter Optimization}
-\label{sec:filter_optimization_design}
-The Goertzel filter is optimized in two different ways. The first speed up is achieved by configuring the timer, ADC and DMA to continuously sample the incoming signal and store the conversion results in a circular buffer. Without these peripherals, it would not have been possible to perform filtering in real-time.
-
-The second means of optimization is performed through the manipulation of algorithm parameters to reduce the number of multiplications. By manipulating $omega$ to equal $\frac{\pi}{2}$, the algorithm constants $cosval$ and $sinval$ are equal to zero and one respectively (see listing \ref{lst:goertzel_algorithm}). This manipulation reduces instruction on line 13 to $s0 = samples(i) - s2$.
-
-Even after these optimizations the STM32F0 is not fast enough to process every sample. This is solved by sampling twice as many samples, but only using the first N samples to calculate the DFT coefficient. This solution works because the sections of waveform that go unprocessed are much shorter than the modulation period.
-%todo: replace goertzel value with DFT coefficent
-
-\textbf{Selecting the Sampling Frequency}\\
+\textbf{Sampling Frequency}\\
 The value of omega cannot be set directly, rather it's relationship to the target bin frequency and sampling frequency must be established so that by carefully choosing these, the value of omega can be indirectly manipulated.
 
 Line 4 of the algorithm in listing \ref{lst:goertzel_algorithm} provides the relationship between k, N and $\omega$
@@ -583,7 +579,7 @@ If only integer values for k, N, $f_{sampling}$ and $f_{bin}$ are considered, li
 \frac{k}{N} = \frac{f_{bin}}{f_{sampling}}
 \end{equation}
 
-Equation \ref{eqn:k_N_and_fb_fs} shows that the ratio of $f_{bin}$ to $f_{sampling}$ must be equal to that of k to N. This relationship reveals that the only realisable value for m is zero. Any value of m greater than zero requires a sampling frequency lower than the bin frequency which violates the Nyquist criteria and a negative value of m would require (for $f_{bin} \approx 36kHz$) a negative sampling frequency which is nonsensical. Therefore the final relationship between the ratios may be summarised in the following equation
+Equation \ref{eqn:k_N_and_fb_fs} shows that the ratio of $f_{bin}$ to $f_{sampling}$ must be equal to that of k to N. This relationship reveals that the only realisable value for m is zero. Any value of m greater than zero requires a sampling frequency lower than the bin frequency which violates the Nyquist criteria and a negative value of m would require (for $f_{bin} \approx 36kHz$) a negative sampling frequency which is nonsensical. The final relationship between the ratios is summarised in equation \ref{eqn:k_N_and_fb_fs_ratio}.
 
 \begin{equation}
 \label{eqn:k_N_and_fb_fs_ratio}
