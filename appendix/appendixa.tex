@@ -23,7 +23,7 @@
 	\label{fig:delta_bit_period}
 \end{figure}
 
-\begin{lstlisting}[style=cstyle, caption=Timer Interrupt Handler Implementation\label{lst:manchester_generate_interrupt_routine}]
+\begin{lstlisting}[style=cstyle, caption=Timer Interrupt Handler Implementation, label=lst:manchester_generate_interrupt_routine]
 	if(htim == &htim17){
 	
 		if(bit_index == bit_num_transmit){
@@ -51,7 +51,7 @@
 
 
 
-\begin{lstlisting}[style=cstyle, caption=Generate Manchester Function Implementation\label{lst:generate_manchester_implementation}]
+\begin{lstlisting}[style=cstyle, caption=Generate Manchester Function Implementation, label=lst:generate_manchester_implementation]
 	generate_manchester(uint32_t buffer, uint8_t num_bits){
 		//generates a manchester waveform on pin PB10 according to the bits in the buffer
 		
@@ -69,7 +69,7 @@
 \end{lstlisting}
 
 
-\begin{lstlisting}[style=cstyle, caption=Manchester Decoding - State Machine Implemenation\label{lst:decode_manchester_implementation}]
+\begin{lstlisting}[style=cstyle, caption=Manchester Decoding - State Machine Implemenation, label=lst:decode_manchester_implementation]
 static uint16_t manchester_decode(uint32_t* edges, int num_edges){
 
 	uint32_t decoding_buffer;

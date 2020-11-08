@@ -621,11 +621,11 @@ Figure \ref{fig:schmit_simulation_wide} illustrates the Schmitt-trigger's activa
 
 \subsection{Tagger Software}
 
-For this investigation, a tagger needed to be created that can encode a gun ID and possibly some additional bits for other information. It was chosen to use a 16-bit packet size. In this initial implementation, a single bit is reserved for error detection, however, further development of this system might explore the use of hamming codes which would require an additional four bits to be reserved for error correction.
+For this investigation, a tagger is created that can encode 16 bits of information. In this initial implementation, a single bit is reserved for error detection, however, further development of this system might explore the use of hamming codes which would require an additional four bits to be reserved for error correction.
 
 \subsubsection{Modified RC-5 Protocol}
 \label{sec:modified_rc5_protocol}
-The RC-5 protocol was used as the basis for the design of the modified transmission protocol. A detailed breakdown of the protocol is given in the literature review in section \ref{sec:rc_5_protocol}. In this modified version of the RC-5 protocol, the Manchester Encoding technique and bit-period timing specifications are preserved. However, the structure of the bits transmitted has been modified and the period between messages was decreased.
+The RC-5 protocol is used as the basis for the transmission protocol. A detailed breakdown of the protocol is given in the literature review in section \ref{sec:rc_5_protocol}. In this modified version of the RC-5 protocol, the Manchester encoding technique and bit-period timing specifications are preserved. However, the structure of the bits transmitted is modified and the period between messages is decreased.
 
 \begin{figure}[H]
 	\centering
@@ -634,15 +634,15 @@ The RC-5 protocol was used as the basis for the design of the modified transmiss
 	\label{fig:modified_rc_5_protocol}
 \end{figure}
 
-Figure \ref{fig:modified_rc_5_protocol} shows the modified structure for a single transmission. The two start bits are preserved. Following this, the toggle bit, address bits and command bits have been merged into a single set of data bits with an additional 4 bits having been included to increase the number of bits to 16. In the modified protocol the bit order of has been reversed. It should be noted that data bit D15 is used for the parity checksum.
+Figure \ref{fig:modified_rc_5_protocol} shows the modified structure for a single transmission. The two start bits are preserved. The toggle bit, address bits and command bits are merged into a single set of data bits with an additional 4 bits added to increase the data packet size to 16 bits. In the modified protocol the bit order is reversed. It should be noted that data bit D15 is reserved for the parity checksum.
 
-The original RC-5 protocol specifies a period of 114mS between transmissions, however, this period is longer than necessary as shown in section \ref{sec:processing_time_experiment}. Based on the results, this period was reduced to 50mS.
+The original RC-5 protocol specifies a period of 114mS between transmissions. This period is longer than necessary and was reduced to 50mS based on the results recorded in section \ref{sec:processing_time_experiment}.
 
 \subsubsection{Realization}
 
-The tagger software comprises a set of functions dedicated to the encoding of a 15-bit data packet. Implementation of the Manchester Encoding is done purely using timers and interrupts ensuring precise timing and freeing the main processor loop for handling lower priority tasks such as managing player data.
+The tagger software comprises a set of functions dedicated to encoding a 15-bit data packet. The Manchester encoding is implemented using timers and interrupts to ensure precise timing and free the main processor for other tasks.
 
-The following functions relating to the generation of a Manchester waveform on the pre-defined output GPIO pin were created
+The following functions used in the generation of a Manchester waveform were created
 
 \begin{lstlisting}[style=cstyle, caption=Transmission Related Functions\label{transmission_related_functions}]
 uint8_t get_parity_15(uint16_t packet); //processes a 15-bit long data packet and returns the even parity
@@ -650,9 +650,11 @@ uint32_t wrap_data_15(uint16_t data); //processes a 15-bit long data packet and 
 generate_manchester(uint32_t buffer, uint8_t num_bits); //starts Manchester encoded output generation on the pre-define GPIO based on the provided bitstream
 \end{lstlisting}
 
-Using one of the dedicated timer peripherals (timer 17) and interrupts for the process of generating the Manchester encoded output required the use of global variables to track the status of an on-going transmission. The following listing shows the global variables along with a brief descriptor comment.
+%Using one of the dedicated timer peripherals (timer 17) and interrupts for the process of generating the Manchester encoded output required the use of global variables to track the status of an on-going transmission. The following listing shows the global variables along with a brief descriptor comment.
 
-\begin{lstlisting}[style=cstyle, caption=Transmission Status Tracking Variables\label{lst:transmission_status_tracking_variables}]
+To track information between interrupt callback routines, a set of global variables are used. The code excerpt in listing \ref{lst:transmission_status_tracking_variables} shows these global variables and provides a brief description.
+
+\begin{lstlisting}[style=cstyle, caption=Transmission Status Tracking Variables, label=lst:transmission_status_tracking_variables]
 volatile uint32_t bit_stream; //bit-stream to be transmitted
 volatile int bit_index; //index of bit currently being transmitted
 volatile int bit_num_transmit; //number of bits from bit-stream to transmit
@@ -661,7 +663,7 @@ volatile int fire_in_progress; //global indicator of a transmission in progress
 volatile int manchester_timeout_counter; //counts half bit-periods elapsed since last bit was transmitted
 \end{lstlisting}
 
-Using interrupts and global variables opens the possibility of data corruption. Although the STM32F0 is inherently a serial processor, the main-loop process (responsible for, among other things, initiating transmissions) and the transmission process (the timer interrupt routine) from a high level execute as parallel processes. Figure \ref{fig:parallel_process_abstraction} illustrates how the operations during transmission may be abstracted as two parallel processes. Therefore it is critical to provide a mechanism to prevent one process from modifying any of the variable given in list \ref{lst:transmission_status_tracking_variables} while another process is using them.
+Interrupts and global variables open the possibility for data corruption. Although the STM32F0 is inherently a serial processor, the main-loop process (responsible for, among other things, initiating transmissions) and the transmission process share some properties with parallel processes. Figure \ref{fig:parallel_process_abstraction} illustrates how the operations performed during transmission can be abstracted as two parallel processes. It is necessary therefore, to provide a mechanism to prevent one process from modifying any of the shared variables (given in list \ref{lst:transmission_status_tracking_variables}) while the other is using them.
 
 \begin{figure}[H]
 	\centering
@@ -670,9 +672,9 @@ Using interrupts and global variables opens the possibility of data corruption. 
 	\label{fig:parallel_process_abstraction}
 \end{figure}
 
-The purpose of the variable \textit{fire\_in\_progress} is to operate as a synchronization lock. Priority is given to the interrupt process, therefore, in the implementation of the function \textit{generate\_manchester} there is a loop which stalls the processor until any current transmissions complete (see line 4, listing \ref{lst:generate_manchester_implementation}).
+The variable \textit{fire\_in\_progress} operates as a synchronization lock. As priority is given to the interrupt process, in the implementation of the function \textit{generate\_manchester} there is a loop which stalls the processor until any current transmissions complete, as indicated by this lock (see line 4, listing \ref{lst:generate_manchester_implementation}).
 
-Finally, during the transmission process, the logic used to determine the pin state to generate the Manchester waveform is given in line 8 of listing \ref{lst:manchester_generate_interrupt_routine}. The pin state for a given half bit-period can be determined as \[pin\_state = \overline{tx\_bit} \;\; \widehat{} \;\; bit\_period\] where tx\_bit is the value of the bit currently being transmitted and bit\_period is as defined in listing \ref{lst:transmission_status_tracking_variables} above.
+Finally, during the transmission process, the logic used to determine the pin state to generate the Manchester waveform is given in line 8 of listing \ref{lst:manchester_generate_interrupt_routine}. The pin state for each half bit-period is determined as follows: \[pin\_state = \overline{tx\_bit} \;\; \widehat{} \;\; bit\_period\] Where tx\_bit is the value of the bit currently being transmitted and bit\_period is as defined in listing \ref{lst:transmission_status_tracking_variables} above.
 
 
 
