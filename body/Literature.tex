@@ -85,7 +85,7 @@ Figures \ref{fig:lens_divergent} to \ref{fig:lens_convergent} illustrate the thr
 \label{sec:optical_sensing}
 
 \subsubsection{Optical Detectors}
-In his paper on optical detectors, Forrest highlights the three main contenders for converting light to an electrical signal. These are the PIN diode, avalanche photodiode and photoconductor \cite{Forrest1986}.
+In his paper on optical detectors, Forrest highlights the three main contenders for converting light to an electrical signal. These are the photoconductor, PIN diode and avalanche photodiode \cite{Forrest1986}.
 
 \textbf{Photoconductor}\\
 The photoconductor is an optical sensor constructed from intrinsic semiconductor material. This un-doped material changes resistance in proportion to incident light of a particular wavelength. Unlike extrinsic semiconductor devices, no current is induced in a photoconductor as the photoelectric effect does not apply. Properties such as the sensitivity to different wavelengths of light depend solely on the semiconducting material of the photoconductor \cite{Kingston2003}.
@@ -146,13 +146,13 @@ Free-space optical communication uses essentially the same technology to transmi
 \subsection{IR Communication}
 %This is where I talk about different IR protocols
 
-IR has is used in many applications, this is because it is cheap, efficient and simple to use. A basic implementation might consist only of an IR LED, IR receiver IC and a pair of microcontrollers. The most commonly used band of IR radiation for communication is between 780nm and 950nm, this is as a result of the availability of low-cost LEDs and quality photodiodes that operate in this frequency band \cite{Elgala2011}.
+IR has many applications, this is because it is cheap, efficient and simple to use. A basic implementation might consist only of an IR LED, IR receiver IC and a pair of microcontrollers. The most commonly used band of IR radiation for communication is between 780nm and 950nm, this is as a result of the availability of low-cost LEDs and quality photodiodes that operate in this frequency band \cite{Elgala2011}.
 
 Many modulation techniques have been developed for optical wireless communication. These range from advanced techniques such as multiple-subcarrier modulation (MSM) to basic techniques such as on-off keying (OOK) and pulse position modulation (PPM).
 
-In multiple-subcarrier modulation numerous sub-carrier signals are summed and the result is used to modulate a light source. As a consequence of using multiple low-frequency sub-carriers, it is possible to achieve a high total bit rate with little distortion, removing the need for equalization \cite{Ohtsuki2003}.
+In multiple-subcarrier modulation numerous sub-carrier signals are summed and the result is used to modulate a light source. As a consequence of using multiple low-frequency sub-carriers, it is possible to achieve a high total bit-rate with little distortion, removing the need for equalization \cite{Ohtsuki2003}.
 
-Notable tradeoffs for techniques that increase the bit-rate are diminishing range, lower resistance to ambient noise and an increase in system complexity. To communicate between a tagger and target in laser tag, high bandwidth is not required. It is therefore advantageous to utilize a more robust technique with a lower bit-rate such as on-off keying.
+Notable tradeoffs for techniques that increase the bit-rate are diminishing range, lower resistance to ambient noise and an increase in system complexity. To communicate between a tagger and target in laser tag, high bandwidth is not required. It is therefore advantageous to utilize a more robust technique with a lower bit-rate such as OOK.
 
 OOK is utilized in many systems, for example, in remote control applications. As a result, there are several IR communication protocols based on this technique. The following are well established:
 
@@ -191,7 +191,7 @@ Every transmission begins with two start bits, these bits always have a value of
 
 \subsection{Communication System Structure} 
 
-In the book \textit{Principles of LED Light Communications}, Dimitrov and Harald present the generalized system setup for an optical wireless communication system. Figure \ref{fig:system_configuartion_lit} below is a recreation of the system building blocks diagram shown on page 14 \cite{Dimitrov2015}.
+In the book \textit{Principles of LED Light Communications}, Dimitrov and Harald present the generalized system setup for an optical wireless communication system \cite{Dimitrov2015}. Figure \ref{fig:system_configuartion_lit} below is a recreation of the system building blocks diagram shown on page 14.
 
 \begin{figure}[H]
 	\centering
@@ -251,7 +251,7 @@ Manchester coding, as its name suggests, was developed at the University of Manc
 The principle behind Manchester code is to encode the information into transitions between two symbols. This technique makes the encoding scheme particularly useful in communication employing inductive coupling such as in RFID. Due to its self-clocking property and simplicity, it is the standard means of encoding for many IR applications.
 %Perhaps the most common application is in the remote controls we use for various appliances.
 
-Manchester code is a special form of binary phase-shift keying (BPSK). A square wave of a particular frequency is chosen as the carrier and binary information is encoding by adjusting the setting a phase offset to either 0\degree or 180\degree s. In figure \ref{fig:manchesterencoding} the process of encoding 10 bits is illustrated. Two conventions exist, their difference lies solely in the definition of which logic values are represented by each of the two transitions. The convention used throughout this investigation is per the IEEE 802.3 standard which defines a logical one as the transition from 0 to 1 and a logical zero as 1 to 0. The other convention used by inventor G.E. Thomas is the inverse of this and is also widely used.\\
+Manchester code is a special form of binary phase-shift keying (BPSK). A square wave of a particular frequency is chosen as the carrier and binary information is encoded by setting the phase offset to either 0\degree{} or 180\degree{}. In figure \ref{fig:manchesterencoding} the process of encoding 10 bits is illustrated. Two conventions exist, their difference lies solely in the definition of which logic values are represented by each of the two transitions. The convention used throughout this investigation is per the IEEE 802.3 standard which defines a logical one as the transition from 0 to 1 and a logical zero as 1 to 0. The other convention used by inventor G.E. Thomas is the inverse of this and is also widely used.\\
 
 \begin{figure}[H]
 	\centering
@@ -294,7 +294,7 @@ In information theory, error control is the field of study that concerns detecti
 Various ways to detect and potentially correct the presence of an error exist. The most trivial technique known as a 'repetition code' simply involves sending the information three times, making it possible to detect if one of the three data-streams doesn't match the others. Although repetition codes allow for both error detection and correction, it is extremely inefficient. Various techniques have been developed and each technique balances complexity and efficiency.
 
 \subsubsection{Parity}
-Using a parity bit is possibly the most simple method to detect an error in a bit sequence. The parity of a sequence may be defined as the result of a bitwise exclusive or (XOR) operation, this is known as 'even parity' because the parity bit is such that after appending it to the bit-sequence, the sequence contains an even number of 1s. Conversely 'odd parity' calculates the parity bit such the number of 1s in the generated sequence is odd. Table \ref{tbl:party_examples} below provides example bit sequences and the respective even (given by the XOR operation) and odd parity values.
+Using a parity bit is possibly the most simple method to detect an error in a bit sequence. The parity of a sequence may be defined as the result of a bitwise exclusive or (XOR) operation, this is known as 'even parity' because the parity bit is such that after appending it to the bit-sequence, the sequence contains an even number of 1s. Conversely for `odd parity' the parity bit is such that the number of 1s in the final bit-sequence is odd. Table \ref{tbl:party_examples} below provides example bit sequences and the respective even (given by the XOR operation) and odd parity values.
 
 \begin{table}[H]
 	\centering
@@ -463,7 +463,7 @@ y_k[n] = s[n]-e^{-j\frac{2\pi k}{N}}s[n-1]
 
 \subsubsection{Implementation}
 \label{sec:goertzel_implementation}
-Using the state variable equations \ref{eqn:g_ss} and \ref{eqn:g_ssoutput} we can implement the goertzel filter digitally. The following code in listing \ref{lst:goertzel_algorithm} shows a Goertzel filter implemented in the Octave environment.
+Using the state variable equations \ref{eqn:g_ss} and \ref{eqn:g_ssoutput} we can implement the Goertzel filter digitally. The following code in listing \ref{lst:goertzel_algorithm} shows a Goertzel filter implemented in the Octave environment.
 
 \begin{lstlisting}[caption={Goertzel Algorithm - Octave Implementation\label{lst:goertzel_algorithm}}]
 function magnitudesqd = calculate_goertzel (N, bin_frequency, sampling_frequency, samples)
