@@ -382,7 +382,7 @@ There are various circuit designs which use an operational amplifier to mitigate
 \subsection{Goertzel Algorithm}
 \label{sec:goertzel_lit_review}
 
-The algorithm which computes individual DFT coefficients is known as the Goertzel algorithm (or Goertzel filter) and was developed by G. Goertzel in 1958. \cite{Goertzel1958} A common application of the Goertzel algorithm is in the decoding of DTMF\footnotemark{} signals.
+The Goertzel algorithm computes individual DFT coefficients and was developed by G. Goertzel in 1958. \cite{Goertzel1958} A common application of the Goertzel algorithm is in the decoding of DTMF\footnotemark{} signals.
 \footnotetext{Dual Tone Multiple Frequency}
 
 \subsubsection{Derivation}
@@ -490,6 +490,42 @@ magnitudesqd = realv*realv + imgv*imgv;
 
 endfunction
 \end{lstlisting}
+
+
+\subsubsection{Parameters}
+\label{sec:goertzel_parameters}
+Table \ref{tbl:goertzel_algorithm_parameters} gives a description of the algorithm's parameters and equations \ref{eqn:bin_number} and \ref{eqn:angle_coefficient} describe two important relationships that exist between these parameters. Understanding of these parameters can be used to optimize the algorithm under certain conditions.
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{cc}
+		\hline
+		\textbf{Parameter} & \textbf{Description} \\ \hline
+		N & Number of samples \\ \hline
+		sampling\_frequency & Sampling frequency \\ \hline
+		bin\_frequency & DFT bin target frequency \\ \hline
+		k & DFT bin index \\ \hline
+		omega & Angle coefficient \\ \hline
+	\end{tabular}
+	\caption{Goertzel Algorithm Parameters}
+	\label{tbl:goertzel_algorithm_parameters}
+\end{table}
+
+\begin{equation}
+k = round\{N \times \frac{bin\_frequency}{sampling\_frequency}\}
+\label{eqn:bin_number}
+\end{equation}
+
+\begin{equation}
+omega = 2\pi \times \frac{k}{N}
+\label{eqn:angle_coefficient}
+\end{equation}
+
+%The Goertzel filter calculates the k\textsuperscript{th} frequency bin for a DFT transform of N samples.
+
+During operation, the algorithm is depends solely on a set of N samples and the value $omega$ which is given by equation \ref{eqn:angle_coefficient}.
+
+Equation \ref{eqn:bin_number} provides a means to transform from the continuous frequency domain to the nearest discrete frequency bin of the DFT. This equation specifies the relationship between the ratios $\frac{k}{N}$ and $\frac{bin\_frequency}{sampling\_frequency}$.
 
 %%%%%%%%%%%%%%%%%%
 

@@ -517,13 +517,13 @@ The strip-board implementation of the module is shown in figure \ref{fig:module_
 \subsection{Tone Decoder}
 \label{tone_decoder_software}
 
-The tone decoder is a digital signal processing unit, designed to detect the presence of a predefined tone. This is achieved through the implementation of the Goertzel algorithm.
+The tone decoder is designed to detect the presence of a predefined tone. This is achieved digitally through the implementation of the Goertzel algorithm.
 
 The Goertzel algorithm is presented in section \ref{sec:goertzel_lit_review} and the hardware description for this module is presented in section \ref{sec:tone_decoder_hardware}.
 
 %todo: finish this intro after completing the subsection
-The software design for this module is presented in the following way: %improve this sentence
-An overview of the STM32F0 functionality useful for digital signal processing is presented. This is followed by a breakdown of the algorithm parameters and 
+The software design for this module is presented in the following way:
+An overview of the STM32F0 functionality useful for digital signal processing is presented. This is followed by a breakdown of the algorithm parameters and %todo: finnish this sentence
 
 \subsubsection{Overview}
 The algorithm is implemented on the STM32F0, a low-cost 32-bit microcontroller that utilizes the ARM Cortex-M0 CPU core. This microcontroller does not contain any dedicated DSP peripherals nor does it contain any hardware dedicated to floating-point arithmetic. Therefore careful consideration must be taken to optimize the performance of the Goertzel filter implementation.
@@ -539,48 +539,15 @@ The STM32F0 is equipped with several timers, direct memory access (DMA) and an a
 
 \subsubsection{Implementation}
 
-\textbf{Goertzel Algorithm}\\
-The Goertzel algorithm is given in listing \ref{lst:goertzel_algorithm}. Lines 3 and 4 define the following important relationships.
-
-\begin{equation}
-k = round\{N \times \frac{bin\_frequency}{sampling\_frequency}\}
-\label{eqn:bin_number}
-\end{equation}
-
-\begin{equation}
-omega = 2\pi \times \frac{k}{N}
-\label{eqn:angle_coefficient}
-\end{equation}
-
-Table \ref{tbl:goertzel_algorithm_parameters} below gives a description for each of the above parameters.
-
-\begin{table}[H]
-	\centering
-	\begin{tabular}{cc}
-		\hline
-		\textbf{Parameter} & \textbf{Description} \\ \hline
-		N & Number of samples \\ \hline
-		sampling\_frequency & Sampling frequency \\ \hline
-		bin\_frequency & DFT bin target frequency \\ \hline
-		k & DFT bin index \\ \hline
-		omega & Angle coefficient \\ \hline
-	\end{tabular}
-	\caption{Goertzel Algorithm Parameters}
-	\label{tbl:goertzel_algorithm_parameters}
-\end{table}
-
-The Goertzel filter calculates the value of the k\textsuperscript{th} frequency bin from the DFT transform of N samples. The algorithm is solely dependant on the ratio of $\frac{k}{N}$ as shown in equation \ref{eqn:angle_coefficient}.
-
-Equation \ref{eqn:bin_number} is used only to transform from the continuous frequency domain to the nearest discrete frequency bin of the DFT frequency domain. This relationship is important however, as it specifies the relationship between the ratio $\frac{k}{N}$ and $\frac{bin\_frequency}{sampling\_frequency}$. This relationship is used to optimize the performance of the filter.
-
-
 \textbf{Sampling Constraints}\\
 \label{sec:sampling_frequency_constraints}
-The sampling frequency determines the highest frequency that may be sampled before aliasing will occur. A higher sampling rate increases the bandwidth of the Goertzel filter and relaxes the requirements for the anti-aliasing filter (see section \ref{sec:signal_conditioning_module}).
+The sampling frequency determines the highest frequency component that may be present in a sampled waveform before aliasing will occur.
 
-The sampling frequency is limited by the speed of the microcontroller. A hard upper bound to the sampling frequency is set by the physical limitations of the ADC and DMA peripherals. However, a soft upper limit is imposed by the rate at which samples can be processed by the CPU. It is therefore desirable to select a lower sampling rate.
+A higher sampling rate increases the bandwidth of the Goertzel filter and relaxes the requirements for the anti-aliasing filter (see section \ref{sec:signal_conditioning_module}), however the sampling frequency is limited by the speed of the microcontroller.
+A hard upper limit is imposed by the physical limitations of the ADC and DMA peripherals and a soft upper limit is imposed by the rate at which samples can be processed by the CPU.
+%It is therefore desirable to select a lower sampling rate.
 
-In addition to the sampling frequency, the number of samples (N) processed by the Goertzel algorithm determines the frequency response of the filter. For decreasing N, the bandwidth of each frequency bin increases which causes the tone detector to trigger for a wider band of frequencies. For increasing N, the time taken to collect and process the samples increases. In order for the filter to be effective, the processing period must be significantly short than the modulation period.
+In addition to the sampling frequency, the number of samples (N) processed by the Goertzel algorithm determines the frequency response of the filter. For a constant sampling rate, decreasing N increases the bandwidth of each frequency bin causing the tone detector to trigger on a wider band of frequencies, however increasing N causes the time taken to collect and process the samples to increase. For the filter to be effective, the processing period must be significantly short than the duration of the tone being detected.
 
 
 %todo: this section is an absolute mess (some part are cut to snippets on overleaf) - come back later
