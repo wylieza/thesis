@@ -556,7 +556,7 @@ A hard upper limit is imposed by the physical limitations of the ADC and DMA per
 
 In addition to the sampling frequency, the number of samples (N) processed by the Goertzel algorithm determines the frequency response of the filter. For a constant sampling rate, decreasing N lowers the resolution of each frequency bin causing the tone detector to trigger on a wider band of frequencies, however increasing N causes the time taken to collect and process the samples to increase. For the filter to be effective, the processing period must be significantly short than the duration of the tone being detected.
 
-\textbf{Sampling Frequency}\\
+\textbf{Omega Value}\\
 The value of omega cannot be set directly, rather it's relationship to the target bin frequency and sampling frequency must be established so that by carefully choosing these, the value of omega can be indirectly manipulated.
 
 Line 4 of the algorithm in listing \ref{lst:goertzel_algorithm} provides the relationship between k, N and $\omega$
@@ -579,7 +579,7 @@ If only integer values for k, N, $f_{sampling}$ and $f_{bin}$ are considered, li
 \frac{k}{N} = \frac{f_{bin}}{f_{sampling}}
 \end{equation}
 
-Equation \ref{eqn:k_N_and_fb_fs} shows that the ratio of $f_{bin}$ to $f_{sampling}$ must be equal to that of k to N. This relationship reveals that the only realisable value for m is zero. Any value of m greater than zero requires a sampling frequency lower than the bin frequency which violates the Nyquist criteria and a negative value of m would require (for $f_{bin} \approx 36kHz$) a negative sampling frequency which is nonsensical. The final relationship between the ratios is summarised in equation \ref{eqn:k_N_and_fb_fs_ratio}.
+Equation \ref{eqn:k_N_and_fb_fs} shows that the ratio of $f_{bin}$ to $f_{sampling}$ must be equal to that of k to N. This relationship indicates that the only realisable value for m is zero. Any value of m greater than zero requires a sampling frequency lower than the bin frequency which violates the Nyquist criteria and a negative value of m would require (for $f_{bin} \approx 36kHz$) a negative sampling frequency which is nonsensical. The final relationship between the ratios is summarised in equation \ref{eqn:k_N_and_fb_fs_ratio}.
 
 \begin{equation}
 \label{eqn:k_N_and_fb_fs_ratio}
@@ -590,20 +590,19 @@ Equation \ref{eqn:k_N_and_fb_fs} shows that the ratio of $f_{bin}$ to $f_{sampli
 \textbf{Sampling Frequency}\\
 The desired bin frequency is 36kHz, according to equation \ref{eqn:k_N_and_fb_fs_ratio} this requires a sampling frequency of 144kHz. This is within the constraints set out in section \ref{sec:sampling_frequency_constraints}.
 
-The ADC conversions are triggered by timer 3, a general-purpose 16-bit timer. The timer accepts a pre-scalar and counter period value. The frequency of the timer's output and as a result the sampling frequency is given by \(f_{sampling} = \frac{f_{system\_clock}}{prescaler \times cperiod}\). Substituting our system clock frequency, desired sampling frequency and rearranging the equation we find the product of the pre-scalar and clock period values.
+The ADC conversions are triggered by timer 3, a general-purpose 16-bit timer. The timer uses a pre-scalar and counter period value. The frequency of the timer's output and as a result the sampling frequency is given by \(f_{sampling} = \frac{f_{system\_clock}}{prescaler \times cperiod}\). Substituting our system clock frequency, desired sampling frequency and rearranging the equation we find the product of the pre-scalar and clock period values.
 
 \[prescaler \times cperiod = \frac{48 \times 10^6}{144 \times 10^3} = 333.\dot{3}\]
 
-The result, $333.\dot{3}$ cannot be formed as the product of two integer values, instead, the closest integer value of 333 is used. Because this is well below the maximum value of the 16-bit counter period register, the pre-scalar is set to one. The resulting sampling frequency is $144.\dot{1}4\dot{4}$ kHz. Returning to equation \ref{eqn:k_N_and_fb_fs_ratio}, we see that we must choose $f_{bin} = 36.036$kHz to preserve the ratio required for optimization.
+The result, $333.\dot{3}$ is irrational, therefore the closest integer value of 333 is used. The resulting sampling frequency is $144.\dot{1}4\dot{4}$ kHz. Revisiting equation \ref{eqn:k_N_and_fb_fs_ratio}, we see that we require $f_{bin} = 36.036$kHz to preserve the ratio required for optimization.
 
 \textbf{Number of Samples - N}\\
-Each Goertzel calculation used a total of 16 samples. This number of samples provided a good balance between the bandwidth of the DFT frequency bin and the processing delay.
-
+Each Goertzel calculation is performed on 16 samples. This number of samples provides a good balance between the bandwidth of the DFT frequency bin and the processing delay.
 
 \textbf{Schmitt-Trigger}\\
-The output of the Goertzel filter module is a digital state indicating the presence or absence of a 36kHz frequency. It was chosen to let a high output indicate the detection of the carrier frequency while a low output would indicate no detection.
+The output of the Goertzel filter module is a binary state indicating the presence or absence of a 36kHz frequency. A high output indicates the presence of the specified tone in the sampled waveform.
 
-A value of $6\times 10^{6}$ was selected as the threshold for the squared magnitude of the DFT bin's coefficient. A Schmitt-trigger was used to prevent oscillations while the squared magnitude of the coefficient is crossing this threshold. The output was configured to activate when the value exceeds the threshold by $2\times 10^{6}$ and deactivate when the value decreased by $2\times 10^{6}$ below the threshold.
+Based on the simulations performed (see section \ref{sec:results_frequency_response}), the value $6\times 10^{6}$ is selected as the threshold for the squared magnitude of the DFT bin's coefficient. A Schmitt-trigger is implemented to prevent oscillations whenever the squared magnitude of the coefficient is close to the threshold. The output is configured to activate when the value exceeds the threshold by $2\times 10^{6}$ and deactivate when the value is $2\times 10^{6}$ below the threshold.
 
 \begin{figure}[H]
 	\centering
@@ -612,10 +611,7 @@ A value of $6\times 10^{6}$ was selected as the threshold for the squared magnit
 	\label{fig:schmit_simulation_wide}
 \end{figure}
 
-Figure \ref{fig:schmit_simulation_wide} illustrates the activation and shut-off boundaries, based on the chosen threshold. The threshold and Schmitt-trigger values were chosen by inspecting the experimental results from the frequency response simulation results (see figure \ref{fig:goertzel_filter_response_simulated}) and selecting values which would allow sensitivity for input signals of differing amplitudes without triggering for the side lobes of large-amplitude signals.
-
-%todo: ensure I mention improvements to this by using automatic gain control and therefore being able to raise the threshold value
-
+Figure \ref{fig:schmit_simulation_wide} illustrates the Schmitt-trigger's activation and shut-off boundaries. The threshold and Schmitt-trigger values were chosen by inspecting the results from the frequency response experiment (see figure \ref{fig:goertzel_filter_response_simulated}) and selecting values which enable tone detection to work for signals of varying amplitudes.
 
 
 
