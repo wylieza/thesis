@@ -513,11 +513,11 @@ The strip-board implementation of the module is shown in figure \ref{fig:module_
 \subsection{Tone Decoder}
 \label{tone_decoder_software}
 
-The tone decoder is designed to detect the presence of a predefined tone. This is achieved digitally through an implementation of the Goertzel algorithm.
+The tone decoder is designed to detect the presence of a predefined tone. This is achieved digitally through the implementation of the Goertzel algorithm.
 
 The Goertzel algorithm is presented in section \ref{sec:goertzel_lit_review} and the hardware description for this module is presented in section \ref{sec:tone_decoder_hardware}.
 
-The software design of this module is complex and has been structured in the following way. An overview of the STM32F0 MCU is given to highlight the important features utilized by the tone decoder. Following this is a description of how the Goertzel algorithm is optimized. A section on sampling then presents the constraints associated with the sampling rate and the number of samples required by the algorithm. Finally the practical implementation is documented.
+The software design of this module is complex and has been structured in the following way. An overview of the STM32F0 MCU is given to highlight the important features utilized by the tone decoder. Following this is a description of how the Goertzel algorithm is optimized. A section on sampling then presents the constraints associated with the sampling rate and the number of samples required by the algorithm. Finally, the practical implementation is documented.
 
 
 \subsubsection{Overview}
@@ -539,20 +539,20 @@ The Goertzel filter is optimized in two different ways. The first optimization i
 
 The second means of optimization requires manipulating the algorithm's parameters to reduce the number of multiplications. Section \ref{sec:goertzel_parameters} presents these parameters. By manipulating $omega$ to equal $\frac{\pi}{2}$, the algorithm constants $cosval$ and $sinval$ can be made equal to zero and one respectively. Thus reducing line 13 of listing \ref{lst:goertzel_algorithm} to $s0 = samples(i) - s2$. 
 
-Even after these optimizations the STM32F0 is not fast enough to process every sample. This is solved by sampling twice as many samples, but only using the first N samples to calculate the DFT coefficient. This works because the sections of waveform that go unprocessed are much shorter than the tone duration.
+Even after these optimizations, the STM32F0 is not fast enough to process every sample. This is solved by sampling twice as many samples, but only using the first N samples to calculate the DFT coefficient. This works because the sections of the waveform that go unprocessed are much shorter than the tone duration.
 
 \subsubsection{Sampling}
 \label{sec:sampling_frequency_constraints}
 The sampling frequency determines the highest frequency component that may be present in a sampled waveform before aliasing will occur.
 
-A higher sampling rate increases the bandwidth of the Goertzel filter and relaxes the requirements for the anti-aliasing filter (see section \ref{sec:signal_conditioning_module}), however the sampling frequency is limited by the speed of the microcontroller.
+A higher sampling rate increases the bandwidth of the Goertzel filter and relaxes the requirements for the anti-aliasing filter (see section \ref{sec:signal_conditioning_module}), however, the sampling frequency is limited by the speed of the microcontroller.
 A hard upper limit is imposed by the physical limitations of the ADC and DMA peripherals and a soft upper limit is imposed by the rate at which samples can be processed by the CPU.
 %It is therefore desirable to select a lower sampling rate.
 
-In addition to the sampling frequency, the number of samples (N) processed by the Goertzel algorithm determines the frequency response of the filter. For a constant sampling rate, decreasing N lowers the resolution of each frequency bin causing the tone detector to trigger on a wider band of frequencies, however increasing N causes the time taken to collect and process the samples to increase. For the filter to be effective, the processing period must be significantly short than the duration of the tone being detected.
+In addition to the sampling frequency, the number of samples (N) processed by the Goertzel algorithm determines the frequency response of the filter. For a constant sampling rate, decreasing N lowers the resolution of each frequency bin causing the tone detector to trigger on a wider band of frequencies, however, increasing N causes the time taken to collect and process the samples to increase. For the filter to be effective, the processing period must be significantly short than the duration of the tone being detected.
 
 \textbf{Omega Value}\\
-The value of omega cannot be set directly, rather it's relationship to the target bin frequency and sampling frequency must be established so that by carefully choosing these, the value of omega can be indirectly manipulated.
+The value of omega cannot be set directly, rather its relationship to the target bin frequency and sampling frequency must be established so that by carefully choosing these, the value of omega can be indirectly manipulated.
 
 Line 4 of the algorithm in listing \ref{lst:goertzel_algorithm} provides the relationship between k, N and $\omega$
 
@@ -658,7 +658,7 @@ volatile int fire_in_progress; //global indicator of a transmission in progress
 volatile int manchester_timeout_counter; //counts half bit-periods elapsed since last bit was transmitted
 \end{lstlisting}
 
-Interrupts and global variables open the possibility for data corruption. Although the STM32F0 is inherently a serial processor, the main-loop process (responsible for, among other things, initiating transmissions) and the transmission process share some properties with parallel processes. Figure \ref{fig:parallel_process_abstraction} illustrates how the operations performed during transmission can be abstracted as two parallel processes. It is necessary therefore, to provide a mechanism to prevent one process from modifying any of the shared variables (given in list \ref{lst:transmission_status_tracking_variables}) while the other is using them.
+Interrupts and global variables open the possibility of data corruption. Although the STM32F0 is inherently a serial processor, the main-loop process (responsible for, among other things, initiating transmissions) and the transmission process share some properties with parallel processes. Figure \ref{fig:parallel_process_abstraction} illustrates how the operations performed during transmission can be abstracted as two parallel processes. Therefore it is necessary to provide a mechanism to prevent one process from modifying any of the shared variables (given in list \ref{lst:transmission_status_tracking_variables}) while the other is using them.
 
 \begin{figure}[H]
 	\centering
@@ -696,7 +696,7 @@ The edge detection process is an interrupt based process which monitors continuo
 
 The timeout monitoring process is executed by an interrupt whenever the output compare register matches the timer's count value. Each time an edge is registered by the edge detection process, the output compare register value is adjusted to allow up to one timeout period before the interrupt is triggered.
 
-The decoding process is also interrupt driven, however this process can also be triggered by software. A software trigger occurs when the maximum number of edges are recorded. The decoding process follows the state machine approach illustrated in figure \ref{fig:manchesterdecodingfsm} and uses the timestamps recorded by the edge detection process to decode incoming transmissions.
+The decoding process is also interrupt-driven, however, this process can also be triggered by software. A software trigger occurs when the maximum number of edges are recorded. The decoding process follows the state machine approach illustrated in figure \ref{fig:manchesterdecodingfsm} and uses the timestamps recorded by the edge detection process to decode incoming transmissions.
 
 During the decoding process, the edge detection process is disabled.
 
@@ -704,7 +704,7 @@ During the decoding process, the edge detection process is disabled.
 
 The state machine approach does not specify an end of transmission condition, therefore it is necessary to define one. It is not possible to simply count the number of bits received as the input capture stage and decoding stages operate independently. Therefore a timeout timer is used to trigger the decoding stage and reset the array of \textit{edge-time differences}. In addition to a timeout, if the maximum number of edges are recorded, the decoding process is automatically triggered by software.
 
-%this needs more explaining but i cant...no time!!!
+%this needs more explaining but I cant...no time!!!
 The timeout period is two bit-periods in duration. This is chosen because future inclusion of hamming codes would allow for the correction of a single flipped or missing bit. The timeout period of 3.556ms must be converted into ticks before being used by the output compare functionality of the timer.
 
 \[TIMEOUT\_TICKS = f_{timer} \times T_{timeout} = 8 \times 10^6 \times 3.556 \times 10^{-3} = 28448\]
@@ -712,7 +712,6 @@ The timeout period is two bit-periods in duration. This is chosen because future
 The maximum number of edges in a valid message occurs when all 16-bits are 1's which results in a Manchester sequence containing 36 edges. Therefore the edge detection process will automatically trigger the decoding process after 36 edges are recorded.
 
 The implementation of the Manchester decoding algorithm may be found in the appendix, listing \ref{lst:decode_manchester_implementation}. Decoding requires the definition of a threshold duration to differentiate between long and short periods. This is the \textit{THRESHOLD\_TICKS} constant. A second constant \textit{BITMISS\_TICKS} is also defined, this threshold is used to detect when a bit in the received transmission goes undetected.
-
 
 
 
