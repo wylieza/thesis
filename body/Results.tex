@@ -578,10 +578,8 @@ The following screenshots present further observations that were made while test
 	\label{fig:photodiode_range_4770cm}
 \end{figure}
 
-%todo: here with proof reading
-
 %%%%%%%%%%	DISCUSSION	%%%%%%%%%%
-Figure \ref{fig:photodiode_bit_error} shows the waveform at the input to the signal conditioning module (blue trace). Despite an exceptionally high signal to noise ration, the Goertzel filter fails to detect two periods of modulation because the magnitude of the incoming signal is not great enough. The inability to adjust the gain of the waveform prior to the Goertzel filter is the biggest short-coming of the receiver system.  This problem can be easily resolved through the use of an automatic gain control.
+Figure \ref{fig:photodiode_bit_error} shows the waveform at the input to the signal conditioning module (blue trace). Despite an exceptionally high signal to noise ration, the tone decoder fails to detect two modulation periods because the magnitude of the incoming signal is not great enough. The inability to adjust the gain of the waveform prior to the Goertzel filter is the biggest short-coming of the receiver system.  This problem can be solved through the use of an automatic gain control.
 
 The potential for improvement is highlighted in figure \ref{fig:photodiode_range_4770cm} which shows the input to the signal conditioning module at a distance of 47m. Once again, despite the small signal amplitude there is a clear distinction between the modulating light signal and noise floor.
 %%%%%%%%%%	/DISCUSSION	%%%%%%%%%%
@@ -592,13 +590,13 @@ The potential for improvement is highlighted in figure \ref{fig:photodiode_range
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=.9\textwidth]{figures/results/system_test/36m_phototranaistoroutput.JPG}
-	\caption{ at a range of 36m - Phototransistor Detector in a bright environment}
+	\caption{Phototransistor Detector in a bright environment at a range of 36m}
 	\label{fig:phototransistor1}
 \end{figure}
 
-
+%todo: here with the proof reading
 %%%%%%%%%%	DISCUSSION	%%%%%%%%%%
-Figure \ref{fig:phototransistor1} above shows the input to the Goertzel filter at the maximum system range for the transistor receiver in a bright environment. Once again, the signal to noise ratio is very high, even at a distance of 36m.
+Figure \ref{fig:phototransistor1} above shows the input to the tone decoder (blue trace) and the output of the tone decoder module (red trace) at the maximum range for the phototransistor receiver in a bright environment. Once again, the signal to noise ratio is very high, even at a distance of 36m.
 %%%%%%%%%%	/DISCUSSION	%%%%%%%%%%
 
 
@@ -612,9 +610,9 @@ Figure \ref{fig:phototransistor1} above shows the input to the Goertzel filter a
 \end{figure}
 
 %%%%%%%%%%	DISCUSSION	%%%%%%%%%%
-While testing the IR receiver in the bright environment, it was observed that the receiver's output contained blips. These are shown in figure \ref{fig:36m_phototranaistoroutput_vs_receiveroutput} which shows the output of the IR receiver (red trace) and the conditioned waveform originating from the phototransistor detector (blue trace). These blips produced errors in the decoded bit-stream as they caused invalid edges to be recorded.
+While testing the IR receiver in the bright environment blips could be observed. These are shown in figure \ref{fig:36m_phototranaistoroutput_vs_receiveroutput}, which shows the output of the IR receiver (red trace) and the output of the signal conditioning module (blue trace) which is coupled to the phototransistor detector. These blips were only observed while the IR receiver was centred on the incoming beam and would cease to occur if the receiver was moved slightly off-centre.
 
-This behaviour was only observed while the IR receiver was centred on the incoming beam. These blips are possibly an artefact of the automatic gain control stage operating in a bright environment.
+These blips produced errors in the decoded bit-stream by causing the target MCU to register invalid edges. The cause of these blips is unknown, they are possibly an artefact of the automatic gain control stage.
 %%%%%%%%%%	/DISCUSSION	%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
