@@ -437,14 +437,14 @@ The oscilloscope trace in figure \ref{fig:manchester_sequence_141_decoded} shows
 	\label{fig:manchester_sequence_141_decoded}
 \end{figure}
 
-The bit period was measured to be 1.777mS, figure \ref{fig:delta_bit_period} in the appendix shows this measurement.
+The bit period was measured to be 1.777ms, figure \ref{fig:delta_bit_period} in the appendix shows this measurement.
 
 
 %%%%%%%%%%	DISCUSSION	%%%%%%%%%%
 \textbf{Discussion}\\
-Inspecting the decoded binary sequence (inserted above the waveform), the two start bits are seen, followed by the binary representation of the number 141 (in reverse). The 18\textsubscript{th} bit is a zero, which is the correct parity for the data being transmitted.
+Inspecting the decoded binary sequence (inserted above the waveform), the two start bits are seen, followed by the binary representation of the number 141 (in reverse). The 18\textsubscript{th} bit is a zero, which is the expected parity value for the data being transmitted.
 
-The bit period of the waveform matched the expected value of 1.777mS, confirming the functionality of the module and demonstrating the high precision that may be achieved through the use of interrupts and timers.
+The bit period of the waveform matched the expected value of 1.777ms, confirming the functionality of the module and demonstrating the high precision that may be achieved through the use of interrupts and timers.
 %%%%%%%%%%	/DISCUSSION	%%%%%%%%%%
 
 
@@ -475,7 +475,7 @@ The bit period of the waveform matched the expected value of 1.777mS, confirming
 	\end{tabular}
 \end{table}
 
-Combining the timeout delay and processing time gives a maximum period of 33.46ms in the worst case, before a new message may be received.
+Combining the timeout delay and processing time gives a maximum period of 33.46ms in the worst case, before a new message can be received.
 
 
 %%%%%%%%%%	DISCUSSION	%%%%%%%%%%
@@ -508,9 +508,11 @@ Figure \ref{fig:transmission_too_many_edges} below shows an incoming stream of t
 %%%%%%%%%%	DISCUSSION	%%%%%%%%%%
 \textbf{Discussion}\\
 %It seems that the LCD write function is the reason it takes so long to 'process', it's not that it is so much drastically longer because it's going through all the states.... but its too little too late to change that because soo many experiments used that code...
-In the case of the two transmissions that arrived while the processor was busy, errors were detected and no further processing was performed. This is indicated by the short red spike that occurs in each case.
+In the case of the two transmissions that arrived while the processor was busy, errors were detected and no further processing was performed. This is indicated by the short processing spike that occurs in each case (figure \ref{fig:transmission_too_fast}).
 
-In the case of continuous transmission, the maximum number of edges were recorded. When this occurred the processor immediately attempted to decode the transmission. At the point when the processor detected that the number of decoded bits exceeds 18, the message was discarded and no further processing was performed.
+In the case of continuous transmission, the maximum number of edges were recorded. When this occurred the processor immediately attempted to decode the transmission. At the point when the number of decoded bits exceeded 18, the message was discarded and no further processing was performed (figure \ref{fig:transmission_too_many_edges}).
+
+Both cases show that the error handling functionality is successful in the identification of errors.
 %%%%%%%%%%	/DISCUSSION	%%%%%%%%%%
 
 
@@ -527,7 +529,7 @@ In the case of continuous transmission, the maximum number of edges were recorde
 
 \section{System Range}
 
-Table \ref{tbl:max_distances_system} below shows the maximum ranges of the system as a consequence of using the different detector modules and the ambient lighting conditions.
+Table \ref{tbl:max_distances_system} below records the maximum range of the system under different ambient lighting conditions and records how that range changes as consequence of using the different detector modules.
 
 \begin{table}[H]
 	\centering
@@ -544,13 +546,13 @@ Table \ref{tbl:max_distances_system} below shows the maximum ranges of the syste
 
 %%%%%%%%%%	DISCUSSION	%%%%%%%%%%
 \textbf{Discussion}\\
-The results show that the IR receiver module outperformed both the phototransistor and photodiode detector modules. The range of the IR receiver exceeded the maximum distance available in the test environment.
+The results show that the IR receiver module outperformed both the phototransistor and photodiode detector modules. The range of the IR receiver exceeded the length of the test environment.
 
-In the photodiode detector module saturated in the bright environment, this was due to the design of the transimpedance amplifier which only performed decoupling after the first amplification stage.
+The photodiode detector module saturated in the bright environment, this was as a consequence of the transimpedance amplifier design which only performed decoupling after the first amplification stage.
 
-Interestingly, in the dark environment, both the phototransistor and photodiode modules achieved a similar range despite using different circuit designs to detect the incoming light.
+In the dark environment, both the phototransistor and photodiode modules achieved a similar range despite using different circuit designs to detect the incoming light.
 
-The range of the phototransistor detector during the day was more than twice the range recorded at night. This is was contrary to expectations, as it was assumed that the module would perform more poorly in a bright environment due to the excessive ambient IR generated by the sun.
+The range of the phototransistor detector during the day was more than twice that of the range observed at night. This was contrary to expectations, it was assumed that the module would perform poorly in a bright environment due to the excessive ambient IR generated by the sun.
 It might be possible that the ambient IR light caused the phototransistor to operate at a higher sensitivity, however, it is more plausible that environmental factors (for example a fine mist forming in the evening) caused the decrease in system range.
 
 Both the photodiode and phototransistor modules were particularly sensitive to the strength of the IR beam. Adjusting the beam to be more than a couple of degrees off centre prevented the target system from detecting incoming transmissions. This is in contrast to the IR receiver module which was much less sensitive to beam intensity.
@@ -564,7 +566,7 @@ The following screenshots present further observations that were made while test
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=.9\textwidth]{figures/results/drak_system_test/photodiode1750cm_missed_bits.jpg}
-	\caption{Undetected bits at a range of 17.5m - Photodiode Detector in a dark environment}
+	\caption{Undetected bits in a dark environment at a range of 17.5m}
 	\label{fig:photodiode_bit_error}
 \end{figure}
 
@@ -572,9 +574,11 @@ The following screenshots present further observations that were made while test
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=.9\textwidth]{figures/results/drak_system_test/photodiode4770cm.jpg}
-	\caption{Input to signal conditioning module at a range of 47m - Photodiode Detector in a dark environment}
+	\caption{Photodiode detector module's output in a dark environment at a range of 47m}
 	\label{fig:photodiode_range_4770cm}
 \end{figure}
+
+%todo: here with proof reading
 
 %%%%%%%%%%	DISCUSSION	%%%%%%%%%%
 Figure \ref{fig:photodiode_bit_error} shows the waveform at the input to the signal conditioning module (blue trace). Despite an exceptionally high signal to noise ration, the Goertzel filter fails to detect two periods of modulation because the magnitude of the incoming signal is not great enough. The inability to adjust the gain of the waveform prior to the Goertzel filter is the biggest short-coming of the receiver system.  This problem can be easily resolved through the use of an automatic gain control.
