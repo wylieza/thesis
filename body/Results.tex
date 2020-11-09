@@ -259,7 +259,7 @@ Figure \ref{fig:precision_rectification} below shows the oscilloscope trace of t
 \textbf{Discussion}\\
 The precision rectification stage operates as expected, the difference between the amplitude of the input signal and output signal during rectification is 7mV.
 
-A 765ns cross-over delay can be observed, this is the time that elapses between the instant the input becomes negative and the instant the output starts to rise. This occurs because the op-amp requires some time to swing the output the combined forward voltage of the two diodes.
+A 765nS cross-over delay can be observed, this is the time that elapses between the instant the input becomes negative and the instant the output starts to rise. This occurs because the op-amp requires some time to swing the output the combined forward voltage of the two diodes.
 %%%%%%%%%%	/DISCUSSION	%%%%%%%%%%
 
 
@@ -286,7 +286,7 @@ A 765ns cross-over delay can be observed, this is the time that elapses between 
 
 %%%%%%%%%%	DISCUSSION	%%%%%%%%%%
 \textbf{Discussion}\\
-The simulation results in figure \ref{fig:goertzel_filter_response_simulated} reveal the familiar sinc function embedded in the frequency response curves. The form of these curves can be characterised by the $sinc^2(x)$ function which is to be expected because the filter returns the square of the magnitude.
+The simulation results in figure \ref{fig:goertzel_filter_response_simulated} reveal the familiar sinc like curve engrained in the frequency responses. More accurately the form of these curves is the $sinc^2(x)$ function which is expected because the filter returns the square of the magnitude.
 
 From the plot, it can be seen that the filter is very sensitive to the magnitude of the sampled waveform. A decrease in amplitude by a factor of two results in a four-fold decrease in the amplitude of the filter's response.
 %%%%%%%%%%	/DISCUSSION	%%%%%%%%%%
@@ -349,7 +349,7 @@ The green area in figure \ref{fig:goertzel_amplitude_frequency_pairs} represents
 
 %%%%%%%%%%	DISCUSSION	%%%%%%%%%%
 \textbf{Discussion}\\
-The area of activation shows that for small input signals, the filter is not able to detect the presence of a carrier frequency. The filter can be made more sensitive to small signals by reducing the trigger value, however, this sufficiently broadens the trigger bandwidth. A more appropriate solution might use automatic gain control to amplify small signals.
+The area of activation shows that for small input signals, the filter is not able to detect the presence of a carrier frequency. The filter could be made more sensitive to small signals by reducing the trigger value, however, this sufficiently broadens the trigger bandwidth. A more appropriate solution would be the inclusion of an automatic gain control stage to amplify small signals.
 %%%%%%%%%%	/DISCUSSION	%%%%%%%%%%
 
 
