@@ -164,14 +164,10 @@ The expected frequency response was simulated using the Octave\footnote{Open-sou
 %This function is optimized according to the design outlined in section \ref{sec:filter_optimization_design} and the value returned by the function is the magnitude of the DFT coefficient squared.
 
 A second Octave script was written to find the filter response (see listing \ref{lst:frequency_response_script}). This script generated a range of frequencies in the form of sampled sin waves over the range of 0Hz to 71.7kHz with an interval of 100Hz. The test tones were scaled, off-set and sampled to match the conversion values that would be returned by the ADC onboard the STM32F0. Each generated tone was processed by the Octave Goertzel filter.
-%todo: this next part is bloated
-%After generating each frequency, the above-mentioned Octave implementation of the Goertzel filter was called and the computation result stored. An example, 36kHz waveform is given in the appendix, figure \ref{fig:sampled_36khz_sinusoid}.
 
 After passing each tone through the filter, the results were plotted to reveal the frequency response of the algorithm. The frequency response was simulated for tones with an amplitude of both 500mV and 1V.
 
 \subsubsection{Measured Frequency Response}
-%todo: rework this methodology wording
-%The next experiment involved testing the Goertzel filter to check that the filter implementation was working as expected. This was done by generating a sinusoid waveform at the input to the ADC and using the serial communication port to transfer the value of the Goertzel filtering result.
 
 To test the actual frequency response of the tone decoder module, a set of tones were generated using a function generator and placed at the input to the tone decoder module. A serial communication channel was used transfer the processed results for analysis.
 
@@ -181,8 +177,6 @@ The first tone generated was 1kHz, the frequency was then incremented in 3kHz st
 
 
 \subsubsection{Trigger Conditions}
-%todo: consider more concise wording
-%To evaluate the high-level functionality of the Goertzel, an experiment was performed to determine the amplitude and frequency boundary pairs which cause the Goertzel filter to trigger.
 
 No automatic gain control is integrated into the Goertzel algorithm, there is therefore a minimum signal amplitude required to trigger the output. This experiment was performed to gain insight into this minimum amplitude and how that amplitude changes as the frequency moves away from the centre frequency of 36kHz.
 
@@ -217,8 +211,8 @@ These results were plotted using Octave.
 
 
 \subsection{Goertzel Filter Benchmark}
-%todo: this can surely be made shorter
-The following experiment was performed to give insight into the effects of increasing the number of samples (N) and optimizing the algorithm by reducing the number of multiplications. %This was done to measure the benefits to be gained from the two optimization methods and the effectiveness of these methods.
+
+The following experiment was performed to give insight into the effects of increasing the number of samples (N) and optimizing the algorithm by reducing the number of multiplications.
 
 To measure the unoptimized performance, the Goertzel algorithm (see listing \ref{lst:goertzel_algorithm}) was implemented inside the circular buffer's callback functions. This implementation will be referred to as the unoptimized algorithm. As a consequence of using a circular buffer with two segments, there are two callback functions. The Goertzel implementations used inside both callback functions are identical, with the only exception being the location in the buffer from which samples are read.
 
@@ -267,7 +261,6 @@ In both of the following experiments, the receiver's code was modified to set a 
 
 \subsubsection{Processing Time}
 \label{sec:processing_time_experiment}
-%todo: consider more concise
 The processing time taken by the state machine to decode Manchester waveforms is affected by the contents of the transmission, this is because the number of transitions depends on the encoded bit-stream. The following experiment set out to measure the varying computation times of the decoding process.
 
 Three data packets were chosen, based on the corresponding number of edges in the Manchester encoded sequence. The lowest possible number of edges in a valid message is 20 while the highest is 36. The middle message with the data value 11111 was chosen arbitrarily as a third test case.
