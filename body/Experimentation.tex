@@ -171,11 +171,13 @@ After passing each tone through the filter, the results were plotted to reveal t
 
 \subsubsection{Measured Frequency Response}
 %todo: rework this methodology wording
-The next experiment involved testing the Goertzel filter to check that the filter implementation was working as expected. This was done by generating a sinusoid waveform at the input to the ADC and using the serial communication port to transfer the value of the Goertzel filtering result. 
+%The next experiment involved testing the Goertzel filter to check that the filter implementation was working as expected. This was done by generating a sinusoid waveform at the input to the ADC and using the serial communication port to transfer the value of the Goertzel filtering result.
 
-The experimentation was performed on the STM32 development board. This process involved manually configuring the function generator for each frequency and then pushing a button on the development board to transfer the most recent filter result.
+To test the actual frequency response of the tone decoder module, a set of tones were generated using a function generator and placed at the input to the tone decoder module. A serial communication channel was used transfer the processed results for analysis.
 
-The first frequency tested was 1kHz, this frequency was incremented by 3kHz per reading until a frequency of 70kHz was reached. The results were processed by Octave to generate a plot and compare the empirical results with the simulated response.
+The function generator was manually configured for each test frequency and a button was used to initiate each transfer of the algorithm's output.
+
+The first tone generated was 1kHz, the frequency was then incremented in 3kHz steps until a tone of 70kHz was reached. The results were processed by Octave to generate a plot and compare the empirical and simulated responses.
 
 
 \subsubsection{Trigger Conditions}
