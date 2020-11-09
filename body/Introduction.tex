@@ -3,7 +3,7 @@
 
 This research project aims to investigate the tagger-target engineering problem in the context of laser tag.  This involves decomposing high-level systems into sub-systems, developing hardware and software modules for these sub-systems and finally evaluating the performance of these sub-systems.
 
-In this study, the relevant literature is used to develop a tagger-target system within the time and budget constraints. Throughout this investigation a variety of engineering problems are encountered and addressed.
+In this study, the relevant literature is used to develop a tagger-target system within time and budget constraints. Throughout this investigation, a variety of engineering problems are encountered and addressed.
 
 It is intended for the knowledge generated throughout this investigation to contribute toward the further development of laser tag systems.
 
@@ -14,7 +14,7 @@ Since the discovery of infrared (IR) light by William Herschel in the 1800s \cit
 
 Inspired by star wars, the recreational sport of laser tag was allegedly invented by George Carter who patented his idea in the 1980s\cite{Carter1986}. In laser tag, each player is equipped with a tagger which may be used to fire a beam of infrared light at an opponent wearing a set of infrared sensing targets which are positioned around the body to register incoming shots.
 
-Although laser tag equipment has been used in commercial arenas for many decades, the equipment is still bulky, restricted to low-light conditions and only operational over short ranges. Laser tag toys have also been available for several decades. Although these are not as cumbersome they are less sophisticated when compared to their commercial grade counterparts.
+Although laser tag equipment has been used in commercial arenas for many decades, the equipment is still bulky, restricted to low-light conditions and only operational over short ranges. Laser tag toys have also been available for several decades. Although these are not as cumbersome they are less sophisticated when compared to their commercial-grade counterparts.
 
 Technology for generating and sensing infrared light has seen steady improvements over the decades and the cost of analog and digital signal processing devices has steadily declined. This study investigates the potential improvement of laser tag systems through these technological advancements.
 
@@ -23,7 +23,7 @@ Technology for generating and sensing infrared light has seen steady improvement
 \subsection{Problems to be investigated}
 %Description of the main questions to be investigated in this study...
 
-At the highest level of abstraction, this investigation is centred on the design and implementation of an infrared based uni-directional data link (UDDL). The problems being investigated are based on the decomposition of this system into a set of modules, each of which must be designed, implemented and evaluated.
+At the highest level of abstraction, this investigation is centred on the design and implementation of an infrared-based uni-directional data link (UDDL). The problems being investigated are based on the decomposition of this system into a set of modules, each of which must be designed, implemented and evaluated.
 
 Techniques for implementing each module must be determined, base on the available resources and the relevant literature. Once a module has been designed and implemented, experiments must be performed to evaluate the performance and limitations of that module.
 
@@ -72,15 +72,15 @@ This study hopes to provide a foundation for further research into the developme
 
 This investigation involves the design and implementation of a set of hardware modules. Several of these modules require software to operate, this software will also be developed.
 
-A system enclosure will not be developed nor will spacial constraints be enforced with regard to module realization. This is because the objectives of this study are focused on the functional implementation of modules and not the aesthetic of a polished system.
+A system enclosure will not be developed nor will spacial constraints be enforced concerning module realization. This is because the objectives of this study are focused on the functional implementation of modules and not the aesthetic of a polished system.
 
 Contextual design constraints will be taken into consideration, to this extent, each module will have a design that would be practical to integrate into a wearable laser tag system. All components will be limited to those of reasonable size, weight and power within this context.
 
 Modules will be implemented on strip-board as opposed to printed circuit boards (PCBs), this is because the Covid-19 pandemic has made global markets less accessible and the time constraints of this investigation do not allow for unpredictable delays.
 
-A shoestring budget of R1500 is available for this investigation, as a consequence more expensive components will not be considered when designing the modules. To reduce costs, all digital processing stages will be implemented using the STM32F0 microcontroller as these are cheap and available from the University of Cape Town (UCT).
+A shoestring budget of R1500 is available for this investigation, as a consequence more expensive components will not be considered when designing the modules. To reduce costs, all the digital processing stages will be implemented using the STM32F0 microcontroller as these are cheap and available from the University of Cape Town (UCT).
 
-To reduce the complexity of the tagger-target system, only functionality that is essential for the transmission of information is considered. No automatic gain control or error correction is considered, however basic error detection will be implemented.
+To reduce the complexity of the tagger-target system, only the functionality that is essential for the transmission of information is considered. No automatic gain control or error correction is considered, however basic error detection will be implemented.
 
 
 
