@@ -10,7 +10,7 @@ This chapter concerns a review of the literature in the fields of study related 
 	\label{fig:litreview_overview}
 \end{figure}
 
-%todo: give a structure overview
+%todo: give a structured overview
 Figure \ref{fig:litreview_overview} provides an overview of the structure of the literature review.
 
 \section{Optics}
@@ -145,7 +145,7 @@ IR has many applications, this is because it is cheap, efficient and simple to u
 
 Many modulation techniques have been developed for optical wireless communication. These range from advanced techniques such as multiple-subcarrier modulation (MSM) to basic techniques such as on-off keying (OOK) and pulse position modulation (PPM).
 
-In multiple-subcarrier modulation numerous sub-carrier signals are summed and the result is used to modulate a light source. As a consequence of using multiple low-frequency sub-carriers, it is possible to achieve a high total bit-rate with little distortion, removing the need for equalization \cite{Ohtsuki2003}.
+In multiple-subcarrier modulation, numerous sub-carrier signals are summed and the result is used to modulate a light source. As a consequence of using multiple low-frequency sub-carriers, it is possible to achieve a high total bit-rate with little distortion, removing the need for equalization \cite{Ohtsuki2003}.
 
 Notable tradeoffs for techniques that increase the bit-rate are diminishing range, lower resistance to ambient noise and an increase in system complexity. To communicate between a tagger and target in laser tag, high bandwidth is not required. It is therefore advantageous to utilize a more robust technique with a lower bit-rate such as OOK.
 
@@ -158,7 +158,7 @@ OOK is utilized in many systems, for example, in remote control applications. As
 	\item SIRC
 \end{itemize}
 
-Each of these protocols are based on OOK, but they differ in how they define symbols. To represent two different states, an IR source is modulated at a chosen carrier frequency (usually around 36kHz). When the light source is modulating the signal is \textit{on} and when the source is not modulating the signal is \textit{off}.  Modulation makes it possible to distinguish between a generated IR signal and ambient IR radiation from noise sources.
+All of these protocols are based on OOK, but they differ in how they define symbols. To represent two different states, an IR source is modulated at a chosen carrier frequency (usually around 36kHz). When the light source is modulating the signal is \textit{on} and when the source is not modulating the signal is \textit{off}.  Modulation makes it possible to distinguish between a generated IR signal and ambient IR radiation from noise sources.
 
 Protocols such as Sony's SIRC use a technique known as pulse width encoding. This technique involves modulating the IR LED for a different period depending on whether a 1 or 0 is to be transmitted while maintaining a constant period between each bit.
 
@@ -260,8 +260,8 @@ Manchester code is a special form of binary phase-shift keying (BPSK). A square 
 Using a timer to toggle a boolean 180\textdegree{} out of phase with the carrier frequency, it is possible to determine the current output state of the Manchester waveform using the XOR operation as shown in equation \ref{eqn:manchesterencode}.
 
 \begin{equation}
-	\label{eqn:manchesterencode}
-	manchester\_out = bit\_period \oplus tx\_bit
+\label{eqn:manchesterencode}
+manchester\_out = bit\_period \oplus tx\_bit
 \end{equation}
 
 $bit\_period$ is 180\textdegree{} out of phase with the carrier waveform. $tx\_bit$ is the binary value being encoded and $manchester\_out$ is the logical value of the Manchester output waveform.
@@ -330,8 +330,8 @@ Any time an analog signal is sampled for digital signal processing, it must be f
 
 %%%%%%%%%%%%%
 \begin{equation}
-	f_{Nyquist} = \frac{f_{sampling}}{2}
-	\label{eqn:nyquist}
+f_{Nyquist} = \frac{f_{sampling}}{2}
+\label{eqn:nyquist}
 \end{equation}
 
 %%%%%%%%%%%%%
@@ -358,7 +358,7 @@ Anti-alias filters are built to suppress high frequencies, many different approa
 	\end{minipage}
 \end{figure}
 
-Dedicated filtering IC's are useful in precision applications where reproducibility and consistency of filter performance is a priority. They also allow for the construction of digitally controllable analog filters \cite{Huijing2010}. However dedicated filtering IC's are comparably expensive and therefore a trade-off between cost and convenience must be considered.
+Dedicated filtering IC's are useful in precision applications where reproducibility and consistency of filter performance is a priority. They also allow for the construction of digitally controllable analog filters \cite{Huijing2010}. However, dedicated filtering IC's are comparably expensive and therefore a trade-off between cost and convenience must be considered.
 
 \textbf{Precision Rectification}\\
 Simple, half-wave rectification may be achieved simply by placing a diode in series with the path of a signal. However, due to the forward voltage drop of the diode, any positive portion of the waveform below the forward voltage of the diode will be lost. This non-ideal effect can be mitigated through the use of an operational amplifier.
@@ -518,12 +518,11 @@ omega = 2\pi \times \frac{k}{N}
 
 %The Goertzel filter calculates the k\textsuperscript{th} frequency bin for a DFT transform of N samples.
 
-During operation, the algorithm is depends solely on a set of N samples and the value $omega$ which is given by equation \ref{eqn:angle_coefficient}.
+During operation, the algorithm depends solely on a set of N samples and the value $omega$ which is given by equation \ref{eqn:angle_coefficient}.
 
 Equation \ref{eqn:bin_number} provides a means to transform from the continuous frequency domain to the nearest discrete frequency bin of the DFT. This equation specifies the relationship between the ratios $\frac{k}{N}$ and $\frac{bin\_frequency}{sampling\_frequency}$.
 
 %%%%%%%%%%%%%%%%%%
-
 
 
 
