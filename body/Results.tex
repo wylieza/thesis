@@ -173,7 +173,7 @@ Table \ref{tbl:spot_size_vs_distance} below shows the beam spot size vs distance
 
 %%%%%%%%%%	DISCUSSION	%%%%%%%%%%
 \textbf{Discussion}\\
-The diameter of the beam of parallel light rays produced by the light focus system is 22mm as this is the diameter of the lens. This experiment reveals however that not all the light leaves the lens parallel to the normal. This is probably as a consequence of the LED's size relative to the lens and to a lesser extent as a result of imperfect positioning of the light relative to the lens.
+The diameter of the beam of parallel light rays produced by the light focus system is 22mm as this is the diameter of the lens. This experiment reveals however that not all the light leaves the lens parallel to the normal. This is probably as a consequence of the LED's size relative to the lens and a lesser extent as a result of imperfect positioning of the light relative to the lens.
 
 The large discrepancy between the beam angles of the IR and visible light is possibly an artefact from using a camera to trace the edge of the IR beam sport. The camera converts the detected light into a digital representation which might explain the non-linearities in figure \ref{tbl:spot_size_vs_distance}.
 
@@ -475,7 +475,7 @@ The bit period of the waveform matched the expected value of 1.777ms, confirming
 	\end{tabular}
 \end{table}
 
-Combining the timeout delay and processing time gives a maximum period of 33.46ms in the worst case, before a new message can be received.
+Combining the timeout delay and processing time gives a maximum period of 33.46ms in the worst case before a new message can be received.
 
 
 %%%%%%%%%%	DISCUSSION	%%%%%%%%%%
@@ -529,7 +529,7 @@ Both cases show that the error handling functionality is successful in the ident
 
 \section{System Range}
 
-Table \ref{tbl:max_distances_system} below records the maximum range of the system under different ambient lighting conditions and records how that range changes as consequence of using the different detector modules.
+Table \ref{tbl:max_distances_system} below records the maximum range of the system under different ambient lighting conditions and records how that range changes as a consequence of using the different detector modules.
 
 \begin{table}[H]
 	\centering
@@ -579,9 +579,9 @@ The following screenshots present further observations that were made while test
 \end{figure}
 
 %%%%%%%%%%	DISCUSSION	%%%%%%%%%%
-Figure \ref{fig:photodiode_bit_error} shows the waveform at the input to the signal conditioning module (blue trace). Despite an exceptionally high signal to noise ration, the tone decoder fails to detect two modulation periods because the magnitude of the incoming signal is not great enough. The inability to adjust the gain of the waveform prior to the Goertzel filter is the biggest short-coming of the receiver system.  This problem can be solved through the use of an automatic gain control.
+Figure \ref{fig:photodiode_bit_error} shows the waveform at the input to the signal conditioning module (blue trace). Despite an exceptionally high signal to noise ration, the tone decoder fails to detect two modulation periods because the magnitude of the incoming signal is not great enough. The inability to adjust the gain of the waveform before the Goertzel filter is the biggest shortcoming of the receiver system.  This problem can be solved through the use of automatic gain control.
 
-The potential for improvement is highlighted in figure \ref{fig:photodiode_range_4770cm} which shows the input to the signal conditioning module at a distance of 47m. Once again, despite the small signal amplitude there is a clear distinction between the modulating light signal and noise floor.
+The potential for improvement is highlighted in figure \ref{fig:photodiode_range_4770cm} which shows the input to the signal conditioning module at a distance of 47m. Once again, despite the small signal amplitude, there is a clear distinction between the modulating light signal and noise floor.
 %%%%%%%%%%	/DISCUSSION	%%%%%%%%%%
 
 
