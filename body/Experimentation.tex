@@ -218,11 +218,11 @@ These results were plotted using Octave.
 
 \subsection{Goertzel Filter Benchmark}
 %todo: this can surely be made shorter
-To understand the benefits to be gained from optimization and to understand the effectiveness of the two optimization methods the following experiment were performed to give insight into the effect of increasing the number of samples (N) and optimizing the algorithm by reducing the number of multiplications.
+The following experiment was performed to give insight into the effects of increasing the number of samples (N) and optimizing the algorithm by reducing the number of multiplications. %This was done to measure the benefits to be gained from the two optimization methods and the effectiveness of these methods.
 
-First, the Goertzel algorithm as given in listing \ref{lst:goertzel_algorithm} was converted to C and implemented inside the circular buffer's callback functions. This implementation is referred to as the unoptimized algorithm. As a consequence of using a circular buffer with two segments, there are two callback functions. The Goertzel implementation inside both callback functions was the same, with the only exception being the location in the buffer from which samples were read.
+To measure the unoptimized performance, the Goertzel algorithm (see listing \ref{lst:goertzel_algorithm}) was implemented inside the circular buffer's callback functions. This implementation will be referred to as the unoptimized algorithm. As a consequence of using a circular buffer with two segments, there are two callback functions. The Goertzel implementations used inside both callback functions are identical, with the only exception being the location in the buffer from which samples are read.
 
-The timing was measured externally using an oscilloscope, to achieve this, just before the Goertzel algorithm began executing an LED was turned on using one of the GPIO pins. This LED was turned off as soon as the algorithm finished calculating the result. Each of the two callback functions used a unique GPIO pin to toggle separate LEDs. Figure \ref{fig:goertzel_optimization_experiemnt} below illustrates the experimental setup in the form of a block diagram.
+The timing was measured externally using an oscilloscope. Just before the Goertzel algorithm began executing an LED was turned on using one of the GPIO pins. This LED was turned off as soon as the algorithm finished executing. Each of the two callback functions used a unique GPIO pin to toggle separate LEDs. Figure \ref{fig:goertzel_optimization_experiemnt} below illustrates the experimental setup in the form of a block diagram.
 
 \begin{figure}[H]
 	\centering
@@ -231,17 +231,17 @@ The timing was measured externally using an oscilloscope, to achieve this, just 
 	\label{fig:goertzel_optimization_experiemnt}
 \end{figure}
 
-A signal generator was used to produce a 36kHz sine waveform with an amplitude of 1V and an offset of 1V. Using a signal generator ensured that a known waveform was present at the input to the Goertzel filter. By using a 36kHz waveform the filter was forced to compute large values which provided insight into performance under the most demanding circumstances.
+A signal generator was used to produce a 36kHz tone with an amplitude of 1V and an offset of 1V. Using a 36kHz waveform ensured that the filter had to compute large multiplications, providing insight into performance under the most demanding circumstances.
 
-The experiment was broken into iterations, each iteration began by setting N to the desired number of samples, following this the code was compiled and executed on the development board. The signal generator was attached and enabled and the scope probes were attached to the GPIO pins responsible for indicating timing. The scope was then adjusted so that between 20 and 30 pulses could be seen. 
+The experiment was broken into iterations, each iteration began by setting N to the desired number of samples, following this the code was compiled and executed on the development board. The signal generator was attached and enabled and the scope probes were attached to the GPIO pins responsible for timing. The scope was adjusted so that between 20 and 30 pulses were traced. 
 
-The independent variable N (number of samples to process) was set to 4 for the first iteration and doubled for each consecutive iteration until a value of 64 was reached. These five values of N were chosen because they preserve the ratio given in equation \ref{eqn:k_N_and_fb_fs_ratio} which is a requirement for the optimization to work.
+The independent variable N (number of samples to process) was set to 4 for the first iteration and doubled for each consecutive iteration until a value of 64 was reached. These five values of N all preserve the integer ratio required by equation \ref{eqn:k_N_and_fb_fs_ratio}.
 
-Using the measurement tools built into the Picoscope software the 'high pulse width' for both GPIO pin outputs was measured, along with the duty cycle of those waveforms. The average of all pulses was recorded.
+Using the measurement tools built into the Picoscope software the 'high pulse width' for the GPIO pin outputs were averaged, along with the average duty cycle of those waveforms. Only the results from the timing of the first callback function were recorded, the results from the second callback timing waveform was used as a sanity check to ensure both waveforms were practically identical.
 
-For this experiment, only the 'high pulse width' of the callback responsible for the first half of the circular buffer being full was necessary to conclude the performance of the algorithm. The timing for the second half of the buffer being full was used only as a sanity check, both the callback functions should run for the same amount of time as each is executing the same algorithm, therefore, the average high pulse width for each should be the same.
+%For this experiment, only the trace of the callback responsible for the first half of the circular buffer being full was recorded. The timing for the second half of the buffer being full was used only as a sanity check, both the callback functions should run for the same amount of time as each is executing the same algorithm, therefore, the average high pulse width for each should be the same.
 
-After the experiment was run for all 5 iterations, the Goertzel implementation was modified by removing the unnecessary multiplications (as discussed in section \ref{sec:filter_optimization_design}) and the above experiment repeated following the same method.
+After the experiment was run for all 5 iterations, the unnecessary multiplications (as discussed in section \ref{sec:filter_optimization_design}) were removed from the Goertzel implementation and the above experimental process repeated with the optimized algorithm.
 
 
 
