@@ -369,9 +369,9 @@ The area of activation shows that for small input signals, the filter is not abl
 
 \subsection{Goertzel Filter Benchmark}
 
-Figure \ref{fig:goertzel_speed_scope_screenshot} illustrates the output traced by the oscilloscope during an iteration of the experiment. For both traces, a high logic level indicates the callback function is currently processing a portion of the circular buffer. The two traces distinguish between the different halves of the buffer.
+Figure \ref{fig:goertzel_speed_scope_screenshot} shows the output traced by the oscilloscope during an iteration of this experiment. For both traces, a high logic level indicates the callback function is currently processing a portion of the circular buffer. The two traces distinguish between the different halves of the buffer.
 
-For each iteration, a built-in oscilloscope function was used to calculate the average processing time, the results are tabulated in table \ref{tbl:goertzel_speed_results}.
+For each iteration, the oscilloscope software was used to calculate the average processing time. The results are tabulated in table \ref{tbl:goertzel_speed_results}.
 
 \begin{figure}[H]
 	\centering
@@ -399,23 +399,25 @@ For each iteration, a built-in oscilloscope function was used to calculate the a
 	\end{minipage}
 \end{figure}
 
-The results from table \ref{tbl:goertzel_speed_results} have been plotted in figure \ref{fig:goertzel_computation_plot}.
+Figure \ref{fig:goertzel_computation_plot} visualizes the results from table \ref{tbl:goertzel_speed_results} in a plot.
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\linewidth]{figures/results/goertzel_filter_speed/goertzel_computation_time.png}
-	\captionof{figure}{Goertzel computation time versus sample set size}
+	\captionof{figure}{Computation time versus the number of samples}
 	\label{fig:goertzel_computation_plot}
 \end{figure}
 
 
 %%%%%%%%%%	DISCUSSION	%%%%%%%%%%
 \textbf{Discussion}\\
-Figure \ref{fig:goertzel_computation_plot} provides two important insights into the nature of the Goertzel algorithm. The first observation may be found in the linearity of both plots, this confirms that both implementations of the algorithm have a time complexity of O(N) as noted in section \ref{sec:filter_optimization_design}. The practically perfect linearity in the results makes it possible to predict the timing requirements and make accurate theoretical predictions.
+Figure \ref{fig:goertzel_computation_plot} provides two important insights into the nature of the Goertzel algorithm.
 
-The gradient of the unoptimized curve is $16\mu S/sample$ and the gradient of the optimized curve is $9.3\mu S/sample$. The sampling rate used was $f_{sampling} \approx 144$kHz or $6.9\mu S/sample$. This indicates that even after optimizing the algorithm by simplifying out the multiplication step required for each new sample, the processor is still not fast enough to keep up with the rate of incoming samples.
+The first observation may be found in the linearity of both plots, this confirms that both implementations of the algorithm have a time complexity of O(N) as noted in section \ref{sec:filter_optimization_design}. The essentially perfect linearity in the results makes it possible to predict timing requirements and make accurate theoretical predictions.
 
-The final observation is that the implemented optimization has two implications for the performance of the algorithm. The first implication is a small but non-zero constant timer saving, this comes as a result of removing the need for the multiplications to find the real and imaginary components of the k\textsubscript{th} DFT coefficient (see lines 18 and 19 of listing \ref{lst:goertzel_algorithm}). The second implication is a time difference which is directly proportional to the number of samples N, as indicated by the different gradients highlighted in the above paragraph.
+The gradient of the unoptimized curve is $16\mu S/sample$ and the gradient of the optimized curve is $9.3\mu S/sample$. The sampling rate used was $f_{sampling} \approx 144$kHz which translates to $T_{sampling} = 6.9\mu S/sample$. This indicates that even after optimizing the algorithm through the removal of unnecessary multiplications, the processor is still not fast enough to keep up with the rate of incoming samples.
+
+The second observation is that the optimization has two performance implications. The first implication is a small but non-zero constant time saving, this comes by way of removing the two multiplications originally required to find the real and imaginary components of the k\textsubscript{th} DFT coefficient (see lines 18 and 19 of listing \ref{lst:goertzel_algorithm}). The second implication is a time difference which is directly proportional to the number of samples N, as indicated by the different gradients seen in figure \ref{fig:goertzel_computation_plot}.
 %%%%%%%%%%	/DISCUSSION	%%%%%%%%%%
 
 
