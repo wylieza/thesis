@@ -3,7 +3,7 @@
 %This is a chapter added into the template because Dr Winberg's example reports have it.
 The following experiments were developed to evaluate the laser tag system. The objective of these experiments is to assess the performance and characteristics of the modules and software developed during the design phase.
 
-The experiments may be separated into two categories, those evaluating specific modules and those evaluating software algorithms. Outside these categories is the system performance experiment which evaluates the combined behaviour of all the modules and software based on a range test.
+The experiments may be separated into two categories, those evaluating specific modules and those evaluating software algorithms. Outside these categories is the system performance experiment which evaluates the combined behaviour of the modules and software by means of a range test.
 
 \begin{figure}[H]
 	\centering
@@ -32,9 +32,9 @@ In figures \ref{fig:experiments_overview_module_evaluation} and \ref{fig:experim
 \section{Module Evaluation}
 
 \subsection{Carrier Waveform Generation Performance}
-The carrier waveform module was tested under two conditions. Initially, the output was traced for a constant input signal to evaluate the steady-state frequency generation. Following this, the output was traced for an input Manchester transmission.
+The carrier waveform module was tested under two conditions. Initially a constant high logic signal was presented at the input to evaluate the steady-state frequency generation. Following this a Manchester transmission was presented at the input and the output waveform was traced.
 
-The output of the carrier waveform generation module is configured as an open-collector, therefore a pull-up resistor was used to allow the oscilloscope to distinguish between the high and low output states. An oscilloscope was used to trace both the input and output waveforms. The experimental setup is illustrated in figure \ref{fig:carrier_generation_module_experiment_setup}
+The output of the carrier waveform generation module is an open-collector, thus a pull-up resistor was used to allow the oscilloscope to distinguish between the output states. An oscilloscope was used to trace both the input and output waveforms. The experimental setup is illustrated in figure \ref{fig:carrier_generation_module_experiment_setup}
 
 \begin{figure}[H]
 	\centering
@@ -43,7 +43,7 @@ The output of the carrier waveform generation module is configured as an open-co
 	\label{fig:carrier_generation_module_experiment_setup}
 \end{figure}
 
-The steady-state response was measured by bringing the input of the module high and tracing the output after approximately 1 second. During the Manchester transmission, the output tone was generated for periods less than 2mS.
+The steady-state response was measured after the input had been brought high for approximately 1 second. During the Manchester transmission, tones were generated for periods less than 2mS.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -101,7 +101,7 @@ To evaluate the light focusing tube, two different power LEDs where used, a 3W w
 
 Figure \ref{fig:focus_system_experiemnt} above shows the experimental setup.
 
-In both cases, the focus system was set up some distance from a flat surface. The light was powered and after marking the edge of the beam spot the diameter was measured. Each diameter was recorded along with the beam distance. A video camera in 'night shot' mode was used to find and mark the edge of the beam spot.
+In both cases, the focus system was set up some distance from a flat surface. The light was powered and after marking the edge of the beam spot the diameter was measured. Each diameter was recorded along with the beam distance. A video camera in 'night shot' mode was used to find and mark the edge of the IR beam spot.
 
 
 
@@ -121,13 +121,13 @@ To characterise the directivity of the photodiode and phototransistor detector m
 
 The light focus system was connected to the LED driver module which was modulated at 36kHz by the carrier waveform generator module. The modulated beam was then aimed at the sensor module, placed 230cm away. The output of the detector module was connected to an oscilloscope to trace the output waveform.
 
-The IR beam was positioned off centre so that when the module was adjusted to have an indecent angle of 0\textdegree the output of the sensor module was only just saturating, this ensured the sensitivity could be accurately tracked.
+The IR beam was positioned off centre so that when the module was adjusted to have an indecent angle of 0\textdegree{} the output of the sensor module was only just saturating, this ensured the sensitivity could be accurately tracked.
 
-Starting with an incidence angle of 0\textdegree, the module was incrementally rotated until the angle of incidence was equal to 90\textdegree. Each increment involved performing a 10\textdegree rotation and following the rotation the output waveform was exported for processing in Octave.
+Starting with a 0\textdegree{} angle of incidence, the module was rotated in increments of 10\textdegree{} until the angle of incidence was equal to 90\textdegree. After each increment the output waveform was exported for processing in Octave.
 
-Octave was used to calculate the RMS\footnote{root mean square} voltages for the recorded output waveforms. The RMS values were normalized and plotted to visualize each modules directivity.
+Octave was used to calculate the RMS\footnote{root mean square} voltages for the recorded output waveforms. The RMS values were normalized and plotted to visualize each module's directivity.
 
-The IR receiver module was tested following the above experimental method, however, the output of this module is a logic level so only the binary state was tracked.
+The IR receiver module was tested following the same experimental method, however, because the output of this module is a logic level, sensitivity cannot be measured.
 
 
 
@@ -160,15 +160,14 @@ To evaluate the performance of the Goertzel filter the following experiments whe
 \end{itemize}
 
 \subsubsection{Simulated Frequency Response}
-The expected frequency response was determined using the Octave\footnote{Open-source alternative to Matlab} environment. This was achieved by implementing in Octave the same optimized algorithm as the one implemented on the STM32.
-%todo: this next paragraph is bloated and maybe unnecessary?
-The octave Goertzel function is given in listing \ref{lst:optimized_goertzel_algorithm}. This function is optimized according to the design outlined in section \ref{sec:filter_optimization_design} and the value returned by the function is the magnitude of the DFT coefficient squared.
+The expected frequency response was simulated using the Octave\footnote{Open-source alternative to Matlab} environment. This was achieved by implementing an identical algorithm as the one implemented on the STM32. This optimized implementation of the Goertzel algorithm is presented in listing \ref{lst:optimized_goertzel_algorithm}.
+%This function is optimized according to the design outlined in section \ref{sec:filter_optimization_design} and the value returned by the function is the magnitude of the DFT coefficient squared.
 
-An Octave script was written to find the filter response (see listing \ref{lst:frequency_response_script}). This script generated a range of frequencies in the form of sampled sin waves over the range of 0Hz to 71.7kHz with an interval of 100Hz. The test frequencies were scaled, off-set and sampled to match the expected conversion values returned by the ADC.
+A second Octave script was written to find the filter response (see listing \ref{lst:frequency_response_script}). This script generated a range of frequencies in the form of sampled sin waves over the range of 0Hz to 71.7kHz with an interval of 100Hz. The test tones were scaled, off-set and sampled to match the conversion values that would be returned by the ADC onboard the STM32F0. Each generated tone was processed by the Octave Goertzel filter.
 %todo: this next part is bloated
-After generating each frequency, the above-mentioned Octave implementation of the Goertzel filter was called and the computation result stored. An example, 36kHz waveform is given in the appendix, figure \ref{fig:sampled_36khz_sinusoid}.
+%After generating each frequency, the above-mentioned Octave implementation of the Goertzel filter was called and the computation result stored. An example, 36kHz waveform is given in the appendix, figure \ref{fig:sampled_36khz_sinusoid}.
 
-The frequency response was plotted to provide an insight into the expected performance of the digital filter. The frequency response was tested with sinusoids of amplitude 1V and again with sinusoids of amplitude 500mV.
+After passing each tone through the filter, the results were plotted to reveal the frequency response of the algorithm. The frequency response was simulated for tones with an amplitude of both 500mV and 1V.
 
 \subsubsection{Measured Frequency Response}
 %todo: rework this methodology wording
