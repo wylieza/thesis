@@ -3,7 +3,7 @@
 %This is a chapter added into the template because Dr Winberg's example reports have it.
 The following experiments were developed to evaluate the laser tag system. The objective of these experiments is to assess the performance and characteristics of the modules and software developed during the design phase.
 
-The experiments may be separated into two categories, those evaluating specific modules and those evaluating software algorithms. Outside these categories is the system performance experiment which evaluates the combined behaviour of the modules and software by means of a range test.
+The experiments may be separated into two categories, those evaluating specific modules and those evaluating software algorithms. Outside these categories is the system performance experiment which evaluates the combined behaviour of the modules and software through a range test.
 
 \begin{figure}[H]
 	\centering
@@ -32,7 +32,7 @@ In figures \ref{fig:experiments_overview_module_evaluation} and \ref{fig:experim
 \section{Module Evaluation}
 
 \subsection{Carrier Waveform Generation Performance}
-The carrier waveform module was tested under two conditions. Initially a constant high logic signal was presented at the input to evaluate the steady-state frequency generation. Following this a Manchester transmission was presented at the input and the output waveform was traced.
+The carrier waveform module was tested under two conditions. Initially, a constant high logic signal was presented at the input to evaluate the steady-state frequency generation. Following this, a Manchester transmission was presented at the input and the output waveform was traced.
 
 The output of the carrier waveform generation module is an open-collector, thus a pull-up resistor was used to allow the oscilloscope to distinguish between the output states. An oscilloscope was used to trace both the input and output waveforms. The experimental setup is illustrated in figure \ref{fig:carrier_generation_module_experiment_setup}
 
@@ -123,7 +123,7 @@ The light focus system was connected to the LED driver module which was modulate
 
 The IR beam was positioned off centre so that when the module was adjusted to have an indecent angle of 0\textdegree{} the output of the sensor module was only just saturating, this ensured the sensitivity could be accurately tracked.
 
-Starting with a 0\textdegree{} angle of incidence, the module was rotated in increments of 10\textdegree{} until the angle of incidence was equal to 90\textdegree. After each increment the output waveform was exported for processing in Octave.
+Starting with a 0\textdegree{} angle of incidence, the module was rotated in increments of 10\textdegree{} until the angle of incidence was equal to 90\textdegree. After each increment, the output waveform was exported for processing in Octave.
 
 Octave was used to calculate the RMS\footnote{root mean square} voltages for the recorded output waveforms. The RMS values were normalized and plotted to visualize each module's directivity.
 
@@ -169,7 +169,7 @@ After passing each tone through the filter, the results were plotted to reveal t
 
 \subsubsection{Measured Frequency Response}
 
-To test the actual frequency response of the tone decoder module, a set of tones were generated using a function generator and placed at the input to the tone decoder module. A serial communication channel was used transfer the processed results for analysis.
+To test the actual frequency response of the tone decoder module, a set of tones were generated using a function generator and placed at the input to the tone decoder module. A serial communication channel was used to transfer the processed results for analysis.
 
 The function generator was manually configured for each test frequency and a button was used to initiate each transfer of the algorithm's output.
 
@@ -182,7 +182,7 @@ No automatic gain control is integrated into the Goertzel algorithm, there is th
 
 A function generator was connected to the input of the Goertzel filter module and an oscilloscope used to monitor both the input and output waveforms. Throughout the experiment, the generated sinusoidal waveform was offset by 1V to ensure the input voltage remained positive.
 
-Initially the amplitude of a 36kHz tone was manually adjusted to determine the smallest amplitude at which the Goertzel filter would trigger. This occurs at around 297mV.
+Initially, the amplitude of a 36kHz tone was manually adjusted to determine the smallest amplitude at which the Goertzel filter would trigger. This occurs at around 297mV.
 
 The amplitude of the generated input tone was initially set to 300mV and then increased in  50mV increments to 500mV. For each amplitude, the function generator was configured to sweep though all frequencies between 28kHz and 44kHz. The oscilloscope was then used to find the frequencies which caused the output of the Goertzel filter to trigger. For every amplitude value, both the upper and lower frequency boundaries were recorded.
 
@@ -231,7 +231,7 @@ The experiment was broken into iterations, each iteration began by setting N to 
 
 The independent variable N (number of samples to process) was set to 4 for the first iteration and doubled for each consecutive iteration until a value of 64 was reached. These five values of N all preserve the integer ratio required by equation \ref{eqn:k_N_and_fb_fs_ratio}.
 
-Using the measurement tools built into the Picoscope software the 'high pulse width' for the GPIO pin outputs were averaged, along with the average duty cycle of those waveforms. Only the results from the timing of the first callback function were recorded, the results from the second callback timing waveform was used as a sanity check to ensure both waveforms were practically identical.
+Using the measurement tools built into the Picoscope software the 'high pulse width' for the GPIO pin outputs were averaged, along with the average duty cycle of those waveforms. Only the results from the timing of the first callback function were recorded, the results from the second callback timing waveform were used as a sanity check to ensure both waveforms were practically identical.
 
 %For this experiment, only the trace of the callback responsible for the first half of the circular buffer being full was recorded. The timing for the second half of the buffer being full was used only as a sanity check, both the callback functions should run for the same amount of time as each is executing the same algorithm, therefore, the average high pulse width for each should be the same.
 
@@ -276,7 +276,7 @@ Three data packets were chosen, based on the corresponding number of edges in th
 	\end{tabular}
 \end{table}
 
-An oscilloscope was used to trace the state of the GPIO pin used to indicate the when the decoding function was executing. A second probe was used to trace the incoming Manchester waveform, this allowed the length of the timeout period to be measured as well.
+An oscilloscope was used to trace the state of the GPIO pin used to indicate when the decoding function was executing. A second probe was used to trace the incoming Manchester waveform, this allowed the length of the timeout period to be measured as well.
 
 \subsubsection{Error Handling}
 To validate the error handling capabilities of the target, two different error conditions where simulated. In each case, the Manchester input sequence and the GPIO pin (used to indicate when the decoding function was executing) were traced by an oscilloscope.
