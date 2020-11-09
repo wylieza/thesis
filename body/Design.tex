@@ -1,10 +1,10 @@
 \chapter{Design}
 \label{ch_design}
-%todo: check the tense (past present) of sections
+%maybe: recheck the tense (past present) of sections
 
 This chapter presents the design of the various modules forming the laser tag system. An overview of the entire system is given in the \textit{system overview} section. The following sections, \textit{hardware design} and \textit{software design}, present the design of the modular and software components respectively.
 
-%todo: possibly explain why designs are so elaborate... This investigation is centred on the creation and evaluation of system modules, therefore the design descriptions have been written 
+%maybe: possibly explain why designs are so elaborate... This investigation is centred on the creation and evaluation of system modules, therefore the design descriptions have been written 
 
 \section{System Overview}
 The system overview introduces the two main subsystems, the tagger and the target.
@@ -508,22 +508,17 @@ The strip-board implementation of the module is shown in figure \ref{fig:module_
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%todo: this next part needs structuring and the like
-%HEREE
-
 \section{Software Design}
 
 \subsection{Tone Decoder}
 \label{tone_decoder_software}
 
-The tone decoder is designed to detect the presence of a predefined tone. This is achieved digitally through the implementation of the Goertzel algorithm.
+The tone decoder is designed to detect the presence of a predefined tone. This is achieved digitally through an implementation of the Goertzel algorithm.
 
 The Goertzel algorithm is presented in section \ref{sec:goertzel_lit_review} and the hardware description for this module is presented in section \ref{sec:tone_decoder_hardware}.
 
-%todo: finish this intro after completing the subsection
-The software design for this module is presented in the following way:
-An overview of the STM32F0 functionality useful for digital signal processing is presented. This is followed by a breakdown of the algorithm parameters and %todo: finnish this sentence
+The software design of this module is complex and has been structured in the following way. An overview of the STM32F0 MCU is given to highlight the important features utilized by the tone decoder. Following this is a description of how the Goertzel algorithm is optimized. A section on sampling then presents the constraints associated with the sampling rate and the number of samples required by the algorithm. Finally the practical implementation is documented.
+
 
 \subsubsection{Overview}
 The algorithm is implemented on the STM32F0, a low-cost 32-bit microcontroller that utilizes the ARM Cortex-M0 CPU core. This microcontroller does not contain any dedicated DSP peripherals nor does it contain any hardware dedicated to floating-point arithmetic. Therefore careful consideration must be taken to optimize the performance of the Goertzel filter implementation.

@@ -1,12 +1,8 @@
 \chapter{Literature Review}
 \label{ch_literature}
-%todo: touch up this intro part
 
-This chapter concerns a review of the literature in the fields of study related to digital communication systems and optics.
-Each section presents a review of the relevant theory for a particular field of study. %todo: improve this line
-The literature review has been structured such that for each topic a brief introduction to the broader theory is presented after which the details of specific theories and concepts are reviewed.
+This chapter concerns a review of the literature in the fields of study related to digital communication systems and optics. Each section presents a review of the relevant theory for a particular field of study. The literature review has been structured such that for each topic a brief introduction to the broader theory is presented after which the details of specific theories and concepts are reviewed.
 
-%todo: update this to include latest sections
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\linewidth]{figures/litreview/litreview_overview.png}
@@ -15,7 +11,7 @@ The literature review has been structured such that for each topic a brief intro
 \end{figure}
 
 %todo: give a structure overview
-The review begins with a brief history of optics and the use of optics in digital communication. 
+Figure \ref{fig:litreview_overview} provides an overview of the structure of the literature review.
 
 \section{Optics}
 
@@ -38,7 +34,6 @@ With the decrease in costs associated with LEDs, transistors and microcontroller
 
 \subsection{Lenses}
 \label{sec:lit_lenses}
-%todo: work on the image presentation format (subfigures)
 This project requires the use of a lens to focus a source of light into a narrow beam. Lenses work on the principle of refraction. When light enters a medium with a different refractive index at an angle offset from the perpendicular (normal), the light is bent toward or away from the normal, behaviour described by Snell's law.
 
 When working with lenses, the lens equation may be used to determine how an object might form a real image or virtual image when viewed through a lens \cite{Knight2013}, however for this investigation the definition of the focal length is sufficient.
@@ -135,7 +130,7 @@ Many variations of this design exist, each built to achieve different levels of 
 \section{Optical Communication}
 Optical communication concerns all manors of communicating information from one party to another through the medium of light. This investigation focuses on the use of light as a means of communication between electronic systems.
 
-\subsection{Optical Communication Techniques} %todo: better name for this 'catergories of techniques' 
+\subsection{Optical Communication Techniques}
 
 Most light-based communication methods may be classified as \textit{free-space optical communication} techniques. These techniques do not require any physical medium between the receiver and transmitter. Not all light-based communication is performed in free space, for example, fibre optic communication which is among the fastest-growing optical communication techniques of recent times.
 
@@ -329,7 +324,7 @@ Part of the IR decoding process requires detecting the presence of a particular 
 The FFT provides a very efficient means for determining all the DFT coefficients, but in a use case where only a few of the coefficients are used and the rest discarded it is not the most efficient technique. In such a scenario, by using a less efficient algorithm (known as the Goertzel algorithm) to calculate individual coefficients of the DFT it is possible to greatly reduce program complexity and processing time relative to an implementation that performs a DFT.
 
 
-\subsubsection{Analog Preprocessing}
+\subsection{Analog Preprocessing}
 
 Any time an analog signal is sampled for digital signal processing, it must be filtered to remove any frequencies above the Nyquist frequency. The Nyquist frequency is defined in equation \ref{eqn:nyquist}. If frequencies higher than the Nyquist frequency are present in the sampled waveform, aliasing will occur. Naturally, this filtering stage cannot be performed digitally and therefore an analog filter must be implemented.
 
