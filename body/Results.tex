@@ -188,7 +188,7 @@ It should be noted that no chromatic aberration was observed while testing with 
 
 \subsection{Directivity of IR Modules}
 
-Figure \ref{fig:vrms_vs_angle_of_incidence} shows the RMS voltage value of the module's output for the angle of incidence. Figure \ref{fig:beam_pattern} shows the normalized RMS voltage value and mirrors the image about the vertical to illustrate the beam pattern.
+Figure \ref{fig:vrms_vs_angle_of_incidence} shows the root mean square (RMS) voltage value of the module's output versus the angle of incidence. Figure \ref{fig:beam_pattern} shows the normalized RMS voltage value and mirrors the image about the vertical to illustrate the beam pattern.
 
 
 \begin{figure}[H]
@@ -208,7 +208,7 @@ Figure \ref{fig:vrms_vs_angle_of_incidence} shows the RMS voltage value of the m
 	\end{minipage}
 \end{figure}
 
-The IR receiver module registered the signal between angles of 0\textdegree and 70\textdegree and registered an absence of a signal for angles greater than 80\textdegree. Between 70\textdegree and 80\textdegree the output would toggle sporadically.
+The IR receiver module registered the signal between angles of 0\textdegree{} and 70\textdegree{} and failed to register a signal for angles greater than 80\textdegree. Between 70\textdegree{} and 80\textdegree{} the output would toggle sporadically.
 
 
 %%%%%%%%%%	DISCUSSION	%%%%%%%%%%
@@ -241,12 +241,12 @@ Figure \ref{fig:anti_alias_filtering} below shows the oscilloscope trace of the 
 %%%%%%%%%%	DISCUSSION	%%%%%%%%%%
 %comment: this is lame but not much else to say...
 \textbf{Discussion}\\
-Visual inspection confirms that the anti-alias filter is removing the higher frequency components. The amplitude of the output waveform is less than half the amplitude of the input waveform, this reduction is mostly as a consequence of the voltage divider at the filter's input.
+Visual inspection confirms that the anti-alias filter is removing the higher frequency components by virtue of the smoothed waveform at the output. The amplitude of the output waveform is less than half the amplitude of the input waveform, this reduction is mostly as a consequence of the voltage divider at the filter's input.
 %%%%%%%%%%	/DISCUSSION	%%%%%%%%%%
 
 \subsubsection{Precision Rectification}
 
-Figure \ref{fig:precision_rectification} below shows the oscilloscope trace of the signal being fed into the precision rectifier (blue) and the resulting rectified signal (red).
+Figure \ref{fig:precision_rectification} below shows the oscilloscope trace of the signal being fed into the precision rectifier (blue trace) and the resulting rectified signal (red trace).
 
 \begin{figure}[H]
 	\centering
@@ -257,9 +257,9 @@ Figure \ref{fig:precision_rectification} below shows the oscilloscope trace of t
 
 %%%%%%%%%%	DISCUSSION	%%%%%%%%%%
 \textbf{Discussion}\\
-The precision rectifier stage operates as expected, the difference between the amplitude of the input signal and output signal during rectification is 7mV.
+The precision rectification stage operates as expected, the difference between the amplitude of the input signal and output signal during rectification is 7mV.
 
-A 765ns cross-over delay can be observed, this is the time that elapses between the instant the blue signal becomes negative and the instant the red signal starts to rise. This occurs because the op-amp requires some time to swing the output voltage such that it exceeds the forward voltages of the two diodes.
+A 765ns cross-over delay can be observed, this is the time that elapses between the instant the input becomes negative and the instant the output starts to rise. This occurs because the op-amp requires some time to swing the output the combined forward voltage of the two diodes.
 %%%%%%%%%%	/DISCUSSION	%%%%%%%%%%
 
 
