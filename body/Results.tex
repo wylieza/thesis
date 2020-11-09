@@ -9,7 +9,7 @@
 
 \subsection{Carrier Waveform Generation Performance}
 
-Figure \ref{fig:carrier_steady_state} shows the steady-state output of the carrier waveform generation module (blue trace) for a constant high logic level at the input (red trace). The frequency of the output waveform was calculated to be 40.2kHz.
+Figure \ref{fig:carrier_steady_state} shows the steady-state output of the carrier waveform generation module (blue trace) and the constant high logic level at the input (red trace). The frequency of the output waveform was calculated to be 40.2kHz.
 
 \begin{figure}[H]
 	\centering
@@ -102,9 +102,9 @@ The following screenshots shown in figures \ref{fig:pwr_led_6k} through \ref{fig
 \textbf{Discussion}\\
 For each test frequency, the power LED driver module regulated the current with high precision and no noticeable ripple. This encapsulates the advantages of linear regulation.
 
-The design predicted a current limit of 1.02A. These results show that the real current limit is 0.91A. This result predicts that the actual base-emitter voltage drop\footnote{at equilibrium} is closer to 0.62V.
+The design predicted a current limit of 1.02A. These results show that the actual current limit is 0.91A. This result predicts that the real base-emitter voltage drop\footnote{at equilibrium} is closer to 0.62V.
 
-The duty cycle of the LED current decreases for increasing input frequencies. This can be attributed to the rise-time of the current through the LED (the time taken for the current to reach a steady-state). As the driving frequency increases, this rise-time makes up an increasing portion of the total on-time.
+The duty cycle of the LED current decreases for increasing input frequencies. This can be attributed to the rise-time of the current through the LED (the time taken for the current to reach a steady-state). As the driving frequency increases, this rise-time makes up an increasing proportion of the total on-time.
 %%%%%%%%%%	/DISCUSSION	%%%%%%%%%%
 
 
@@ -118,7 +118,7 @@ The duty cycle of the LED current decreases for increasing input frequencies. Th
 
 \subsubsection{Focal Length of Lens}
 
-The measured focal length of the lens was measured to be 53mm. Figure \ref{fig:focal_length_experiemnt_result} shows the focused point formed after adjusting the lens to 5.3cm above the working surface.
+The focal length of the lens was measured to be 53mm. Figure \ref{fig:focal_length_experiemnt_result} shows the point formed after positioning the lens to one focal length above the working surface.
 
 \begin{figure}[H]
 	\centering
@@ -139,7 +139,7 @@ The measured focal length of the lens was measured to be 53mm. Figure \ref{fig:f
 
 
 
-Table \ref{tbl:spot_size_vs_distance} below shows the beam spot size vs distance for the IR and white power LEDs.
+Table \ref{tbl:spot_size_vs_distance} below shows the beam spot size vs distance for the IR and visible light power LEDs.
 
 \begin{figure}[H]
 	\centering
@@ -173,11 +173,11 @@ Table \ref{tbl:spot_size_vs_distance} below shows the beam spot size vs distance
 
 %%%%%%%%%%	DISCUSSION	%%%%%%%%%%
 \textbf{Discussion}\\
-The diameter of the beam of parallel light rays produced by the light focus system is 22mm as this is the diameter of the lens. This experiment reveals that not all the light leaves the lens along the perpendicular. This is likely a consequence of the LED's size compared to the lens and to a lesser extent imperfect positioning of the light relative to the lens.
+The diameter of the beam of parallel light rays produced by the light focus system is 22mm as this is the diameter of the lens. This experiment reveals however that not all the light leaves the lens parallel to the normal. This is probably as a consequence of the LED's size relative to the lens and to a lesser extent as a result of imperfect positioning of the light relative to the lens.
 
-The large discrepancy between the beam angles is possibly an artefact from using a camera to trace the edge of the IR beam sport. The camera converts the detected light into a digital representation which might explain the non-linearities in figure \ref{tbl:spot_size_vs_distance}.
+The large discrepancy between the beam angles of the IR and visible light is possibly an artefact from using a camera to trace the edge of the IR beam sport. The camera converts the detected light into a digital representation which might explain the non-linearities in figure \ref{tbl:spot_size_vs_distance}.
 
-It should be noted that chromatic aberration was not observed while testing with a white LED, this suggests that any effects arising from the slightly longer wavelength of IR\footnote{940nm wavelength} light were negligible.
+It should be noted that no chromatic aberration was observed while testing with the visible light LED, this suggests that any effects arising from the slightly longer wavelength of IR\footnote{940nm wavelength} light were negligible.
 %%%%%%%%%%	/DISCUSSION	%%%%%%%%%%
 
 
