@@ -10,14 +10,16 @@ In addition to the core objective, this investigation set out to design and eval
 
 \section{Review of System}
 
-Through the course of this investigation, a fully functional laser tag system was successfully implemented. The design for each module has been documented and various experiments have allowed the performance of these modules to be evaluated.
+%Through the course of this investigation, a fully functional laser tag system was successfully implemented. The design for each module has been documented and various experiments have allowed the performance of these modules to be evaluated.
 
-The four main problems presented in the introduction to this study have been addressed through the successful development and implementation of this modular tagger-target system. 
+The four main problems set out in the introduction to this study have been addressed through the successful development and implementation of a modular tagger-target system.
 
-This study has shown that there is great potential for long-range laser tag systems which are capable of functioning in harsh lighting conditions. The range achieved using the system in its current state was only marginally better than that of commercial laser tag systems. However, the shortcomings of the system have been identified and the range could be drastically improved by following the recommendations presented at the end of this report.
+A technique for encoding information and transmitting it through a directional link has been developed. The problem of generating a narrow beam of infrared light was addressed through the light focus system. Different hardware modules for detecting and processing a modulated infrared beam were developed and analysed. Finally a module capable of decoding incoming transmissions was implemented and documented.
+
+This study has shown that there is great potential for long-range laser tag systems which are capable of functioning in harsh lighting conditions. The range achieved using the system in its current state was only marginally better than that of commercial laser tag systems. However, the shortcomings of the system have been identified and the range can be dramatically improved through the addition or modification of modules. The details of these improvements are documented in the recommendations chapter at the end of this report.
 
 \section{Review of Modules}
-This following section provides an overview of the performance for each module within the greater context of the whole system. To do this the modules have been categorized into one of two categories.
+The following section reviews the performance for each module within the greater context of the whole system. The modules have been categorized as either exhibiting excellent performance or adequate performance.
 
 %Those categorized as having excellent performance 
 
@@ -28,23 +30,23 @@ This following section provides an overview of the performance for each module w
 \textbf{Light Focus System}\\
 The light focus system produced an optimal beam in the context of laser tag. The beam spot diameter at short distances (less than 30m) was less than 1m. This beam angle is the ideal size as it ensures some skill is required to aim the tagger while ensuring it isn't so challenging that it is impossible to make a single shot.
 
-It was noted during the system test that for distances greater than 30m, the diameter of light detectable by the IR detectors was less than the size predicted by the beam dispersion experiment. This effect worked to prevent the tagger from being too easy to aim at distant targets.
+It was noted during the system test that for distances greater than 30m, the diameter of light detectable by the IR detectors was less than the size predicted by the beam dispersion experiment. This actually worked to prevent the tagger from being too easy to aim at distant targets.
 
 \textbf{Power LED Driver}\\
-The power LED driver module exhibited great performance. The linear current regulation resulted in very precise control over the timing and introduced very little noise into the system. Also, by using a supply with a voltage close to that of the LED, very little heat was dissipated by the driving circuitry.
+The power LED driver module exhibited great performance. The linear current regulation resulted in very precise control over the timing and introduced very little noise into the system. Also, by using a supply with a voltage close to that of the LED, very little heat was dissipated by the linear current regulation circuitry.
 
 \textbf{IR Phototransistor Detector}\\
-The IR phototransistor detector outperformed the photodiode detector because the amplification stage was robust to saturation caused by a large DC offset.
+The IR phototransistor detector outperformed the photodiode detector because the amplification stage was configured to only amplify changes in the current through the phototransistor. This prevented the first amplification stage from saturating in bright ambient conditions.
 
 \textbf{IR Receiver}\\
-The all in one package IR receiver outperformed the other IR detector modules, this was likely due to the built-in automatic gain control stage.
+The all in one package IR receiver outperformed the other IR detector modules. This can be attributed to the built-in automatic gain control stage which is gives this module an inherent advantage.
 
 \textbf{Tone Decoder}\\ %todo: I want to talk about the speed of detection, but didn't write about the experiment!!! - perhaps if there is the time in the end...
-The digital tone decoder module exhibited exemplary performance despite the absence of dedicated DSP hardware units. The STM32F0 posed several challenges that had to be overcome before a working solution could be implemented, however once implemented the module was very effective.
+The digital tone decoder module exhibited exemplary performance despite the absence of any dedicated DSP hardware. The STM32F0 posed several challenges that had to be overcome before a working solution could be implemented, however once implemented the module was very effective.
 
 The Goertzel algorithm was very quick to detect the presence of a tone and the Schmitt-trigger ensured the output was stable. This high performance was only possible through the optimization of the Goertzel algorithm.
 
-The tone decoder did not handle small amplitude signals well, however, this is due to the absence of some form of gain control and not a problem with the tone decoder's algorithm.
+The tone decoder did not handle small amplitude signals well, however, this is due to the absence of any kind of gain control and not a problem with the tone decoder's algorithm.
 
 \subsection{Adequate Performance}
 
