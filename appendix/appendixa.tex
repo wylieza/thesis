@@ -4,10 +4,13 @@
 %Add any information here that you would like to have in your project but is not necessary in the main
 %text. Remember to refer to it in the main text. Separate your appendices based on what they are for
 %example. Equation derivations in Appendix A and code in Appendix B etc.
+\section{Octave Code}
 
 \lstinputlisting[caption={Optimized Goertzel Algorithm - Octave Function\label{lst:optimized_goertzel_algorithm}}]{../goertzel/hc_calculate_goertzel.m}
 
 \lstinputlisting[caption={Frequency Response Test - Octave Script\label{lst:frequency_response_script}}]{../goertzel/test_goertzel.m}
+
+\section{Additional Results}
 
 \begin{figure}[H]
 	\centering
@@ -22,6 +25,8 @@
 	\caption{Manchester Waveform - Bit Period Measurement}
 	\label{fig:delta_bit_period}
 \end{figure}
+
+\section{C Code}
 
 \begin{lstlisting}[style=cstyle, caption=Timer Interrupt Handler Implementation, label=lst:manchester_generate_interrupt_routine]
 	if(htim == &htim17){
