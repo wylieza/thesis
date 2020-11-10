@@ -121,7 +121,7 @@ To characterise the directivity of the photodiode and phototransistor detector m
 
 The light focus system was connected to the LED driver module which was modulated at 36kHz by the carrier waveform generator module. The modulated beam was then aimed at the sensor module, placed 230cm away. The output of the detector module was connected to an oscilloscope to trace the output waveform.
 
-The IR beam was positioned off centre so that when the module was adjusted to have an indecent angle of 0\textdegree{} the output of the sensor module was only just saturating, this ensured the sensitivity could be accurately tracked.
+The IR beam was positioned off centre so that when the module was adjusted to have an indecent angle of 0\textdegree{}, the output of the sensor module was only just saturating. This ensured the sensitivity could be accurately tracked.
 
 Starting with a 0\textdegree{} angle of incidence, the module was rotated in increments of 10\textdegree{} until the angle of incidence was equal to 90\textdegree. After each increment, the output waveform was exported for processing in Octave.
 
@@ -227,7 +227,7 @@ The timing was measured externally using an oscilloscope. Just before the Goertz
 
 A signal generator was used to produce a 36kHz tone with an amplitude of 1V and an offset of 1V. Using a 36kHz waveform ensured that the filter had to compute large multiplications, providing insight into performance under the most demanding circumstances.
 
-The experiment was broken into iterations, each iteration began by setting N to the desired number of samples, following this the code was compiled and executed on the development board. The signal generator was attached and enabled and the scope probes were attached to the GPIO pins responsible for timing. The scope was adjusted so that between 20 and 30 pulses were traced. 
+The experiment was divided into iterations. With each iteration, N was adjusted to change the number of samples accumulated by the Goertzel algorithm. Following this the code was compiled and executed on the development board. The signal generator was attached and enabled and the scope probes were attached to the GPIO pins responsible for timing. The scope was adjusted so that between 20 and 30 pulses were traced. 
 
 The independent variable N (number of samples to process) was set to 4 for the first iteration and doubled for each consecutive iteration until a value of 64 was reached. These five values of N all preserve the integer ratio required by equation \ref{eqn:k_N_and_fb_fs_ratio}.
 

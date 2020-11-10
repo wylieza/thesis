@@ -667,7 +667,7 @@ Interrupts and global variables open the possibility of data corruption. Althoug
 	\label{fig:parallel_process_abstraction}
 \end{figure}
 
-The variable \textit{fire\_in\_progress} operates as a synchronization lock. As priority is given to the interrupt process, in the implementation of the function \textit{generate\_manchester} there is a loop which stalls the processor until any current transmissions complete, as indicated by this lock (see line 4, listing \ref{lst:generate_manchester_implementation}).
+The variable \textit{fire\_in\_progress} operates as a synchronization lock. As priority is given to the interrupt process, there is a loop in the implementation of the function \textit{generate\_manchester} which stalls the processor until any current transmissions complete, as indicated by this lock (see line 4, listing \ref{lst:generate_manchester_implementation}).
 
 Finally, during the transmission process, the logic used to determine the pin state to generate the Manchester waveform is given in line 8 of listing \ref{lst:manchester_generate_interrupt_routine}. The pin state for each half bit-period is determined as follows: \[pin\_state = \overline{tx\_bit} \;\; \widehat{} \;\; bit\_period\] Where tx\_bit is the value of the bit currently being transmitted and bit\_period is as defined in listing \ref{lst:transmission_status_tracking_variables} above.
 
@@ -679,7 +679,7 @@ Finally, during the transmission process, the logic used to determine the pin st
 
 \subsection{Target Software}
 
-In laser tag, it is optimal to have multiple IR detectors placed in various locations on the player. It is therefore important that the target software could be made capable of processing transmissions from multiple inputs simultaneously. This is achieved through the use of the input capture and output compare channels of the STM32's timer peripherals. For this investigation, the system is designed to monitor a single target, however, the process is easily expanded to capture signals from multiple targets.
+In laser tag, it is optimal to have multiple IR detectors placed in various locations on the player. It is therefore important that the target software has the capacity to process transmissions from multiple inputs simultaneously. This is achieved through the use of the input capture and output compare channels of the STM32's timer peripherals. For this investigation, the system is designed to monitor a single target, however, the process is easily expanded to capture signals from multiple targets.
 
 The target MCU software was separated into four independent processes, these are outlined in figure \ref{fig:target_software_overview} below.
 

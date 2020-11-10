@@ -20,7 +20,7 @@ Figure \ref{fig:litreview_overview} provides an overview of the structure of the
 
 Optics, as defined by the Oxford English Dictionary, is ``The scientific study of sight and the behaviour of light, or the properties of transmission and deflection of other forms of radiation" \cite{oroptics2010}.
 
-For most of human history, little was known of the complex phenomena we call light. The first attempts to understand the properties of light were philosophical and history tells us that the Greek philosophers took interest in the subject. Around 300BC Euclid postulated that light propagated in a rectilinear fashion. He also stated the law of reflection. These principles still form part of our understanding of light today. \cite{Vohnsen2004}
+For most of human history, little was known of the complex phenomena we call light. The first attempts to understand the properties of light were philosophical and history tells us that the Greek philosophers took an interest in the subject. Around 300BC Euclid postulated that light propagated in a rectilinear fashion. He also stated the law of reflection. These principles still form part of our understanding of light today. \cite{Vohnsen2004}
 
 %Well before any established scientific theories existed, lenses have been used as visual aids. Only later in the 17th century can the first record of telescopes be found. Galileo was the first to write about the use of such devices for scientific inquiry.
 
@@ -128,7 +128,7 @@ Many variations of this design exist, each built to achieve different levels of 
 
 
 \section{Optical Communication}
-Optical communication concerns all manors of communicating information from one party to another through the medium of light. This investigation focuses on the use of light as a means of communication between electronic systems.
+Optical communication concerns all manners of communicating information from one party to another through the medium of light. This investigation focuses on the use of light as a means of communication between electronic systems.
 
 \subsection{Optical Communication Techniques}
 
@@ -141,7 +141,7 @@ Free-space optical communication uses essentially the same technology to transmi
 \subsection{IR Communication}
 %This is where I talk about different IR protocols
 
-IR has many applications, this is because it is cheap, efficient and simple to use. A basic implementation might consist only of an IR LED, IR receiver IC and a pair of microcontrollers. The most commonly used band of IR radiation for communication is between 780nm and 950nm, this is as a result of the availability of low-cost LEDs and quality photodiodes that operate in this frequency band \cite{Elgala2011}.
+IR has many applications, as it is cheap, efficient and simple to use. A basic implementation might consist only of an IR LED, IR receiver IC and a pair of microcontrollers. The most commonly used band of IR radiation for communication is between 780nm and 950nm. This is as a result of the availability of low-cost LEDs and quality photodiodes that operate in this frequency band \cite{Elgala2011}.
 
 Many modulation techniques have been developed for optical wireless communication. These range from advanced techniques such as multiple-subcarrier modulation (MSM) to basic techniques such as on-off keying (OOK) and pulse position modulation (PPM).
 
@@ -177,7 +177,7 @@ The the RC-5 protocol is illustrated in figure \ref{fig:rc_5_protocol}. The bits
 	\label{fig:rc_5_protocol}
 \end{figure}
 
-Every transmission begins with two start bits, these bits always have a value of 1. Following the two start bits is the `toggle' bit. In remote control applications, it is useful to distinguish between a button which remains depressed and a button being repeatedly pressed. This is achieved through the toggle bit which is flipped each time a button is released. When a button remains depressed, the message is transmitted repeatedly with a 114ms gap between transmissions. Finally, the RC-5 protocol data is structured such that it first transmits a 5-bit address followed by a 6-bit command.
+Every transmission begins with two start bits. These bits always have a value of 1. Following the two start bits is the `toggle' bit. In remote control applications, it is useful to distinguish between a button which remains depressed and a button being repeatedly pressed. This is achieved through the toggle bit which is flipped each time a button is released. When a button remains depressed, the message is transmitted repeatedly with a 114ms gap between transmissions. Finally, the RC-5 protocol data is structured such that it first transmits a 5-bit address followed by a 6-bit command.
 
 
 %\subsection{Materials Interaction}
@@ -186,7 +186,7 @@ Every transmission begins with two start bits, these bits always have a value of
 
 \subsection{Communication System Structure} 
 
-In the book \textit{Principles of LED Light Communications}, Dimitrov and Harald present the generalized system setup for an optical wireless communication system \cite{Dimitrov2015}. Figure \ref{fig:system_configuartion_lit} below is a recreation of the system building blocks diagram shown on page 14.
+In their book \textit{Principles of LED Light Communications}, Dimitrov and Harald present the generalized system setup for an optical wireless communication system \cite{Dimitrov2015}. Figure \ref{fig:system_configuartion_lit} below is a recreation of the system building blocks diagram shown on page 14.
 
 \begin{figure}[H]
 	\centering
@@ -388,13 +388,13 @@ The Goertzel algorithm may be derived from the formula for the DFT. In the deriv
 X[k] = \sum_{n=0}^{N-1}x[n]W_{N}^{nk}
 \end{equation}
 
-Multipling the right side of equation \ref{eqn:dft_defn} by \(W_{N}^{-Nk} = e^{j\frac{2\pi N k}{N}} = 1\) we get
+Multipling the right side of equation \ref{eqn:dft_defn} by \(W_{N}^{-Nk} = e^{j\frac{2\pi N k}{N}} = 1\) yields
 
 \begin{equation}
 X[k] = W_{N}^{-Nk}\sum_{n=0}^{N-1}x[n]W_{N}^{nk}
 \end{equation}
 
-Rearranging we get
+After rearranging, it becomes
 
 \begin{equation}
 \label{eqn:dft_conv}
