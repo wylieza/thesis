@@ -26,8 +26,10 @@ The IR phototransistor detector outperformed the photodiode detector because the
 \textbf{IR Receiver}\\
 The all in one package IR receiver outperformed the other IR detector modules, this was likely due to the built-in automatic gain control stage.
 
-\textbf{Goertzel Filter}\\ %todo: I want to talk about the speed of detection, but didn't write about the experiment!!!
-The digital tone decoder module exhibited exemplary performance. %todo: Finnish this
+\textbf{Tone Decoder}\\ %todo: I want to talk about the speed of detection, but didn't write about the experiment!!! - perhaps if there is time at the end...
+The digital tone decoder module exhibited exemplary performance. The high performance was made possible through the optimized implementation of the Goertzel algorithm. The tone decoder was very quick to detect the presence of a tone and because of the Schmitt-trigger, it provided a stable output.
+
+The tone decoder did not handle small amplitude signals well, however this is due to the absence of some form of gain control and not a problem with the tone decoder's algorithm.
 
 \subsection{Adequate Performance}
 
