@@ -51,20 +51,20 @@ The tone decoder did not handle small amplitude signals well, however, this is d
 \subsection{Adequate Performance}
 
 \textbf{Tagger and Target MCUs}\\
-The STM32F0 MCU was able to comfortably encode and decode Manchester transmissions. However, because the MCU did not feature a hardware floating-point unit or other hardware units useful for DSP, the tone decoding had to be implemented on a separate microcontroller. The use of two separate microcontrollers in the receiver is a sub-optimal solution.
+The STM32F0 MCU was able to comfortably encode and decode Manchester transmissions. However, because the MCU does not feature a floating-point unit or any other DSP specific hardware, the tone decoding had to be implemented on a dedicated STM32F0 MCU. The use of two separate microcontrollers in the receiver is a sub-optimal solution.
 
 %Similarly, the tagger MCU could not be configured to generate the 36kHz waveform in addition to performing the Manchester encoding. Therefore the implementation of a separate carrier waveform generation module was required.
 
 \textbf{Carrier Waveform Generator}\\
-The carrier waveform generation module was able to generate a high-frequency tone with a negligible delay in response to an input. However, the module did exhibit some undesirable behaviours.
+The carrier waveform generation module was able to generate a high-frequency tone. There was negligible delay between the control signal and the generated output waveform. However, the module did exhibit some undesirable behaviours.
 
-During prolonged operation the 555 timer would heat up significantly, this was not a cause for serious concern however as the IC is usually only operated in short bursts during transmissions. It was noted that the frequency of the generated tone was sensitive to the temperature of the IC. This effect, undesirable, did not impact the performance of the overall system because the tone decoder had a large frequency tolerance. 
+During prolonged operation the 555 timer would heat up significantly. This heating did not present any risk of catastrophic failure because the IC was only operated in short bursts. It was however noted that the frequency of the generated tone was sensitive to the temperature of the IC. This effect, although undesirable, did not impact the performance of the overall system because the tone decoder has a large frequency tolerance. 
 
-\textbf{Photodiode Detector}
-The photodiode detector performed well in low light conditions, however, the transimpedance amplifier would saturate in bright ambient conditions. The photodiode has a slightly smaller angle of sensitivity when compared the photodiode.
+\textbf{Photodiode Detector}\\
+The photodiode detector performed well in low light conditions, however, the transimpedance amplifier would saturate in bright ambient conditions. The directivity experiment revealed that the photodiode has a slightly smaller angle of sensitivity than the phototransistor.
 
-\textbf{Signal Conditioning Modules}
-The anti-aliasing filter performed sufficiently well and very little aliasing was observed. The precision rectifier introduces only a small amount of distortion into the rectified waveform.
+\textbf{Signal Conditioning Modules}\\
+The anti-aliasing filter performed sufficiently well and very little aliasing was observed. The precision rectifier introduced only a small amount of distortion into the rectified waveform.
 
 %%%%%%%%%%%%%%%%%%%%
 
