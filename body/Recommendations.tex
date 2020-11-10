@@ -1,6 +1,34 @@
-%\chapter{Recommendations}
-%\label{ch_recommendations}
+\chapter{Recommendations}
+\label{ch_recommendations}
 
 %Make sensible recommendations for further work.
 
 %MOVED INTO CONCLUSIONS CHAPTER
+
+The following chapter presents a set of recommendations for future work. These are derived from those areas, as determined by this study, that have the most potential to enhance the performance of the tagger-target system.
+
+\section{Future Work}
+
+%recomend using a slightly larger lens
+\textbf{Lens Geometry}\\
+The size of the lens is the limiting factor on the diameter of the main beam of parallel light rays. In this project, only one size of lens was investigated. The use of a slightly larger lens should be explored, this would not only increase the diameter of the beam but also increase the amount of light that is captured thereby making the focus system more efficient.
+
+%implementing automatic gain control
+\textbf{Automatic Gain Control}\\
+This investigation demonstrates the ability to detect a modulated IR light beam over longer distances and in brighter conditions than those in a typical laser tag setup. However, the major shortcoming of the overall system is the absence of any form of gain control. The maximum range detected by the system could be increased dramatically by including an automatic gain control stage. It is recommended that either an analog or digital gain control stage be investigated.
+
+%a superior microcontroller with DSP capabilities
+\textbf{Alternative MCUs}\\
+The STM32F0 MCU was not powerful enough to perform the digital signal processing and Manchester decoding stages on a single MCU. It is recommended that the benefits available from a more powerful microcontroller be investigated. For example, the STM32F4 which includes additional hardware such as a dedicated floating-point unit (FPU). This would allow the tone decoder to be integrated with the receiver MCU reducing the hardware complexity of the system.
+
+%frequency generation
+\textbf{Frequency Generation}\\
+The STM32F0 reference manual suggests that one of the GPIO pins could be configured to perform the carrier frequency generation module's functionality independently to the main processor. The time constraints of this investigation did not allow for this option to be fully explored and it is recommended that this functionality be investigated.
+
+It is also recommended that the 555 timer heating phenomenon be investigated and a different technique for tone generation be considered if necessary.
+
+\textbf{Transimpedance Amplifier Saturation}\\
+In the bright environment the transimpedance amplifier circuit saturated, it is recommended that an improved circuit be designed that is less susceptible to saturating.
+
+\textbf{Operational Amplifier}\\
+The MCP6022 operational amplifier was used across all the circuit designs. Careful consideration had to be taken during design to ensure that the device did not become unstable, this limited the amount of gain that could be achieved. It was not within the budget of this investigation to consider different operational amplifiers. Further investigation into suitable op-amps could allow for higher gain and improved precision rectification.
