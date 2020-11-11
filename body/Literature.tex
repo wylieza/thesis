@@ -199,7 +199,7 @@ The digital signal processing stage of the transmitter is responsible for encodi
 
 The channel is the optical free-space path through which the light reaches the receiver. This path depends on the directionality of the receiver and transmitter and the relative orientation of the two systems. In the context of laser tag, the transmitter optics are highly directional while the receiver optics, in the ideal case, are omnidirectional. Because of the directionality of the transmitter, this is referred to as a line of sight (LOS) link configuration.
 
-It should be noted that an anti-alias filtering stage is implicit in the path between the output of transimpedance amplifier and the input to the digital signal processing stage of the receiver.
+It should be noted that an anti-alias filtering stage is implicit in the path between the output of the transimpedance amplifier and the input to the digital signal processing stage of the receiver.
 
 
 %%%%%%%%%%%%%%%%%%
@@ -284,7 +284,7 @@ It should be noted that this FSM assumes the first bit transmitted is always a l
 %\iffalse
 \subsection{Error Control}
 
-Error control coding is the field of study that concerns detecting errors in digital communications and the techniques used to correct those errors \cite{Litwin2001}. Whenever data is transmitted over some kind of network, there is the possibility that interference can cause a bit to flip resulting in an error. Richard Hamming pioneered in the development of digital error control and is known for (amongst other things) Hamming code \cite{Robertson1968}.
+Error control coding is the field of study that concerns the detection of errors in digital communications and the techniques used to correct those errors \cite{Litwin2001}. Whenever data is transmitted over some kind of network, there is the possibility that interference can cause a bit to flip resulting in an error. Richard Hamming pioneered in the development of digital error control and is known for (amongst other things) Hamming code \cite{Robertson1968}.
 
 Various ways to detect and potentially correct the presence of an error exist. The most trivial technique known as a 'repetition code' simply involves sending the information three or more times, making it possible to detect if one of the three data-streams doesn't match the others \cite{Torres2018}. Although repetition codes allow for both error detection and correction, it is inherently inefficient. Various techniques have been developed and each technique balances complexity and efficiency.
 
@@ -523,7 +523,6 @@ During operation, the algorithm depends solely on a set of N samples and the val
 Equation \ref{eqn:bin_number} provides a means to transform from the continuous frequency domain to the nearest discrete frequency bin of the DFT. This equation specifies the relationship between the ratios $\frac{k}{N}$ and $\frac{bin\_frequency}{sampling\_frequency}$.
 
 %%%%%%%%%%%%%%%%%%
-
 
 
 
