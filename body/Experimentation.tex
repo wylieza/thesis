@@ -227,7 +227,7 @@ The timing was measured externally using an oscilloscope. Just before the Goertz
 
 A signal generator was used to produce a 36kHz tone with an amplitude of 1V and an offset of 1V. Using a 36kHz waveform ensured that the filter had to compute large multiplications, providing insight into performance under the most demanding circumstances.
 
-The experiment was divided into iterations. With each iteration, N was adjusted to change the number of samples accumulated by the Goertzel algorithm. Following this the code was compiled and executed on the development board. The signal generator was attached and enabled and the scope probes were attached to the GPIO pins responsible for timing. The scope was adjusted so that between 20 and 30 pulses were traced. 
+The experiment was divided into iterations. With each iteration, N was adjusted to change the number of samples accumulated by the Goertzel algorithm. Following this, the code was compiled and executed on the development board. The signal generator was attached and enabled and the scope probes were attached to the GPIO pins responsible for timing. The scope was adjusted so that between 20 and 30 pulses were traced. 
 
 The independent variable N (number of samples to process) was set to 4 for the first iteration and doubled for each consecutive iteration until a value of 64 was reached. These five values of N all preserve the integer ratio required by equation \ref{eqn:k_N_and_fb_fs_ratio}.
 
