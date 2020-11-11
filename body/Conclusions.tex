@@ -6,7 +6,7 @@
 %Draw suitable and intelligent conclusions from your results and subsequent discussion.
 
 The core objective of this study is the development and investigation of a modular tagger-target system. Through the process of accomplishing this objective, insights into the potential for laser tag systems which work over longer distances and are tolerant to ambient lighting conditions have been revealed.
-In addition to the core objective, this investigation set out to design and evaluate each module in the full system to provide a foundation for further research. This has also been achieved. The following chapter concludes the investigation with several closing remarks pertaining to the system as a whole as well as the various modules it comprises.
+In addition to the core objective, this investigation set out to design and evaluate each module in the full system to provide a foundation for further research. This has also been achieved. The following chapter concludes the investigation with several closing remarks on the system as a whole as well as the various modules it comprises.
 
 \section{Review of System}
 
@@ -14,7 +14,7 @@ In addition to the core objective, this investigation set out to design and eval
 
 The four main problems set out in the introduction to this study have been addressed through the successful development and implementation of a modular tagger-target system.
 
-A technique for encoding information and transmitting it through a directional link has been developed. The problem of generating a narrow beam of infrared light was addressed through the light focus system. Different hardware modules for detecting and processing a modulated infrared beam were developed and analysed. Finally a module capable of decoding incoming transmissions was implemented and documented.
+A technique for encoding information and transmitting it through a directional link has been developed. The problem of generating a narrow beam of infrared light was addressed through the light focus system. Different hardware modules for detecting and processing a modulated infrared beam were developed and analysed. Finally, a module capable of decoding incoming transmissions was implemented and documented.
 
 This study has shown that there is great potential for long-range laser tag systems which are capable of functioning in harsh lighting conditions. The range achieved using the system in its current state was only marginally better than that of commercial laser tag systems. However, the shortcomings of the system have been identified and the range can be dramatically improved through the addition or modification of modules. The details of these improvements are documented in the recommendations chapter at the end of this report.
 
@@ -30,7 +30,7 @@ The following section reviews the performance for each module within the greater
 \textbf{Light Focus System}\\
 The light focus system produced an optimal beam in the context of laser tag. The beam spot diameter at short distances (less than 30m) was less than 1m. This beam angle is the ideal size as it ensures some skill is required to aim the tagger while ensuring it isn't so challenging that it is impossible to make a single shot.
 
-It was noted during the system test that for distances greater than 30m, the diameter of light detectable by the IR detectors was less than the size predicted by the beam dispersion experiment. This actually worked to prevent the tagger from being too easy to aim at distant targets.
+It was noted during the system test that for distances greater than 30m, the diameter of light detectable by the IR detectors was less than the size predicted by the beam dispersion experiment. This prevented the tagger from being too easy to aim at distant targets.
 
 \textbf{Power LED Driver}\\
 The power LED driver module exhibited great performance. The linear current regulation resulted in very precise control over the timing and introduced very little noise into the system. Also, by using a supply with a voltage close to that of the LED, very little heat was dissipated by the linear current regulation circuitry.
@@ -39,7 +39,7 @@ The power LED driver module exhibited great performance. The linear current regu
 The IR phototransistor detector outperformed the photodiode detector because the amplification stage was configured to only amplify changes in the current through the phototransistor. This prevented the first amplification stage from saturating in bright ambient conditions.
 
 \textbf{IR Receiver}\\
-The all in one package IR receiver outperformed the other IR detector modules. This can be attributed to the built-in automatic gain control stage which is gives this module an inherent advantage.
+The all in one package IR receiver outperformed the other IR detector modules. This can be attributed to the built-in automatic gain control stage which gives this module an inherent advantage.
 
 \textbf{Tone Decoder}\\ %todo: I want to talk about the speed of detection, but didn't write about the experiment!!! - perhaps if there is the time in the end...
 The digital tone decoder module exhibited exemplary performance despite the absence of any dedicated DSP hardware. The STM32F0 posed several challenges that had to be overcome before a working solution could be implemented, however once implemented the module was very effective.
@@ -56,9 +56,9 @@ The STM32F0 MCU was able to comfortably encode and decode Manchester transmissio
 %Similarly, the tagger MCU could not be configured to generate the 36kHz waveform in addition to performing the Manchester encoding. Therefore the implementation of a separate carrier waveform generation module was required.
 
 \textbf{Carrier Waveform Generator}\\
-The carrier waveform generation module was able to generate a high-frequency tone. There was negligible delay between the control signal and the generated output waveform. However, the module did exhibit some undesirable behaviours.
+The carrier waveform generation module was able to generate a high-frequency tone. There was a negligible delay between the control signal and the generated output waveform. However, the module did exhibit some undesirable behaviours.
 
-During prolonged operation the 555 timer would heat up significantly. This heating did not present any risk of catastrophic failure because the IC was only operated in short bursts. It was however noted that the frequency of the generated tone was sensitive to the temperature of the IC. This effect, although undesirable, did not impact the performance of the overall system because the tone decoder has a large frequency tolerance. 
+During prolonged operation, the 555 timer would heat up significantly. This heating did not present any risk of catastrophic failure because the IC was only operated in short bursts. It was however noted that the frequency of the generated tone was sensitive to the temperature of the IC. This effect, although undesirable, did not impact the performance of the overall system because the tone decoder has a large frequency tolerance. 
 
 \textbf{Photodiode Detector}\\
 The photodiode detector performed well in low light conditions, however, the transimpedance amplifier would saturate in bright ambient conditions. The directivity experiment revealed that the photodiode has a slightly smaller angle of sensitivity than the phototransistor.
@@ -67,7 +67,6 @@ The photodiode detector performed well in low light conditions, however, the tra
 The anti-aliasing filter performed sufficiently well and very little aliasing was observed. The precision rectifier introduced only a small amount of distortion into the rectified waveform.
 
 %%%%%%%%%%%%%%%%%%%%
-
 
 
 
