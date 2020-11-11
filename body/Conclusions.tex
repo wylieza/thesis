@@ -30,7 +30,7 @@ The following section reviews the performance for each module within the greater
 \textbf{Light Focus System}\\
 The light focus system produced an optimal beam in the context of laser tag. The beam spot diameter at short distances (less than 30m) was less than 1m. This beam angle is the ideal size as it ensures some skill is required to aim the tagger while ensuring it isn't so challenging that it is impossible to make a single shot.
 
-It was noted during the system test that for distances greater than 30m, the diameter of light detectable by the IR detectors was less than the size predicted by the beam dispersion experiment. This prevented the tagger from being too easy to aim at distant targets.
+It was noted during the system test that, for distances greater than 30m, the diameter of light detectable by the IR detectors was less than the size predicted by the beam dispersion experiment. This prevented the tagger from being too easy to aim at distant targets.
 
 \textbf{Power LED Driver}\\
 The power LED driver module exhibited great performance. The linear current regulation resulted in very precise control over the timing and introduced very little noise into the system. Also, by using a supply with a voltage close to that of the LED, very little heat was dissipated by the linear current regulation circuitry.
@@ -42,11 +42,11 @@ The IR phototransistor detector outperformed the photodiode detector because the
 The all in one package IR receiver outperformed the other IR detector modules. This can be attributed to the built-in automatic gain control stage which gives this module an inherent advantage.
 
 \textbf{Tone Decoder}\\ %todo: I want to talk about the speed of detection, but didn't write about the experiment!!! - perhaps if there is the time in the end...
-The digital tone decoder module exhibited exemplary performance despite the absence of any dedicated DSP hardware. The STM32F0 posed several challenges that had to be overcome before a working solution could be implemented, however once implemented the module was very effective.
+The digital tone decoder module exhibited exemplary performance despite the absence of any dedicated DSP hardware. The STM32F0 posed several challenges that had to be overcome before a working solution could be implemented. However once implemented the module was very effective.
 
 The Goertzel algorithm was very quick to detect the presence of a tone and the Schmitt-trigger ensured the output was stable. This high performance was only possible through the optimization of the Goertzel algorithm.
 
-The tone decoder did not handle small amplitude signals well, however, this is due to the absence of any kind of gain control and not a problem with the tone decoder's algorithm.
+The tone decoder did not handle small amplitude signals well, however, this is due to the absence of any kind of gain control and not a flaw in the tone decoder's algorithm.
 
 \subsection{Adequate Performance}
 
